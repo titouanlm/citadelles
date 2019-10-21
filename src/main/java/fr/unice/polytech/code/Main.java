@@ -1,7 +1,6 @@
-package fr.unice.polytech.startingpoint;
+package fr.unice.polytech.code;
 
 public class Main {
-
 
     public static String hello() {
         return "Hello World!";

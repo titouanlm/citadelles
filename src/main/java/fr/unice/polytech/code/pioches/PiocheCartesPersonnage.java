@@ -1,4 +1,6 @@
-package fr.unice.polytech.code;
+package fr.unice.polytech.code.pioches;
+
+import fr.unice.polytech.code.Personnage;
 
 import java.util.ArrayList;
 import java.util.Collections;
