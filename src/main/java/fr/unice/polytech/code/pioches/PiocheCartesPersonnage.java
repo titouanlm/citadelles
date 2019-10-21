@@ -16,7 +16,7 @@ public class PiocheCartesPersonnage {
         return piocheCP;
     }
 
-    void setPiocheCP(Personnage cp) {
+    void ajouterCartePersonnage(Personnage cp) {
         this.piocheCP.add(cp);
     }
 

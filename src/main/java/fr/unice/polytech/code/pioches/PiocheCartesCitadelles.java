@@ -16,7 +16,7 @@ class PiocheCartesCitadelles {
         return piocheCC;
     }
 
-    void setPiocheCC(CarteCitadelles cc) {
+    void ajouterCarteCitadelles(CarteCitadelles cc) {
         this.piocheCC.add(cc);
     }
 
