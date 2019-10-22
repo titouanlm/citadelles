@@ -4,7 +4,7 @@ import fr.unice.polytech.code.Personnage;
 
 public class Marchand extends Personnage {
 
-    Marchand(){
+    public Marchand(){
         this.numero =6;
     }
 

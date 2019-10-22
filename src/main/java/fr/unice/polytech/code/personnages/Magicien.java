@@ -4,7 +4,7 @@ import fr.unice.polytech.code.Personnage;
 
 public class Magicien extends Personnage {
 
-    Magicien(){
+    public Magicien(){
         this.numero = 3;
     }
     @Override

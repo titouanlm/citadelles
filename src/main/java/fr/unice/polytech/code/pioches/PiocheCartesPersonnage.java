@@ -8,7 +8,7 @@ import java.util.Collections;
 public class PiocheCartesPersonnage {
     private ArrayList<Personnage> piocheCP;
 
-    PiocheCartesPersonnage() {
+    public PiocheCartesPersonnage() {
         this.piocheCP = new ArrayList<>();
     }
 
@@ -16,11 +16,11 @@ public class PiocheCartesPersonnage {
         return piocheCP;
     }
 
-    void ajouterCartePersonnage(Personnage cp) {
+    public void ajouterCartePersonnage(Personnage cp) {
         this.piocheCP.add(cp);
     }
 
-    void melanger(){
+    public void melanger(){
         Collections.shuffle(this.piocheCP);
     }
 }

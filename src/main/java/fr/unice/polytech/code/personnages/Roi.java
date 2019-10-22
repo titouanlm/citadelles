@@ -4,7 +4,7 @@ import fr.unice.polytech.code.Personnage;
 
 public class Roi extends Personnage {
 
-    Roi(){
+    public Roi(){
         this.numero =4;
     }
 

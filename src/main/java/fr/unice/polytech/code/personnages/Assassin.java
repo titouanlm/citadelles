@@ -4,7 +4,7 @@ import fr.unice.polytech.code.Personnage;
 
 public class Assassin extends Personnage {
 
-    Assassin(){
+    public Assassin(){
         this.numero =1;
     }
 

@@ -4,7 +4,7 @@ import fr.unice.polytech.code.Personnage;
 
 public class Architecte extends Personnage {
 
-    Architecte(){
+    public Architecte(){
         this.numero = 7;
     }
 

@@ -5,10 +5,10 @@ import fr.unice.polytech.code.CarteCitadelles;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class PiocheCartesCitadelles {
+public class PiocheCartesCitadelles {
     private ArrayList<CarteCitadelles> piocheCC;
 
-    PiocheCartesCitadelles() {
+    public PiocheCartesCitadelles() {
         this.piocheCC = new ArrayList<>();
     }
 
@@ -16,12 +16,18 @@ class PiocheCartesCitadelles {
         return piocheCC;
     }
 
-    void ajouterCarteCitadelles(CarteCitadelles cc) {
+    public void ajouterCarteCitadelles(CarteCitadelles cc) {
         this.piocheCC.add(cc);
     }
 
-    void melanger(){
+    public void melanger(){
         Collections.shuffle(this.piocheCC);
+    }
+
+    public CarteCitadelles piocher(){
+        CarteCitadelles cartePiochee = piocheCC.get(0);
+        piocheCC.remove(0);
+        return cartePiochee;
     }
 
 }

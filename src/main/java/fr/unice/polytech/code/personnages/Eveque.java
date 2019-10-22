@@ -4,7 +4,7 @@ import fr.unice.polytech.code.Personnage;
 
 public class Eveque extends Personnage {
 
-    Eveque(){
+    public Eveque(){
         this.numero =5;
     }
 
