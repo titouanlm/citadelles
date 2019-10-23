@@ -23,4 +23,11 @@ public class PiocheCartesPersonnage {
     public void melanger(){
         Collections.shuffle(this.piocheCP);
     }
+
+    public Personnage piocherPersonnageAleatoire(){
+        int indicePersonnageAleatoire = (int)(Math.random()*8);
+        Personnage personnageAleatoire = this.piocheCP.get(indicePersonnageAleatoire);
+        this.piocheCP.remove(indicePersonnageAleatoire);
+        return personnageAleatoire;
+    }
 }

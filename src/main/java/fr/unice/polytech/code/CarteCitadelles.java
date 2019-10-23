@@ -25,6 +25,7 @@ public class CarteCitadelles {
     public String getNom() {
         return nom;
     }
+
     public int getPoint() {
         return point;
     }

@@ -9,6 +9,11 @@ public class Architecte extends Personnage {
     }
 
     @Override
+    public int getNumero() {
+        return numero;
+    }
+
+    @Override
     public void effectuerSpecialite() {
         System.out.println("Spécialité de l'architecte");
     }

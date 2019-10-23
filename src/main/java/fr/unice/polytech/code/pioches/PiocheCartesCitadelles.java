@@ -12,7 +12,7 @@ public class PiocheCartesCitadelles {
         this.piocheCC = new ArrayList<>();
     }
 
-    ArrayList<CarteCitadelles> getPiocheCC() {
+    public ArrayList<CarteCitadelles> getPiocheCC() {
         return piocheCC;
     }
 

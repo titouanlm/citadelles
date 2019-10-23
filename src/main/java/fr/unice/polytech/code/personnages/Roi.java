@@ -9,6 +9,11 @@ public class Roi extends Personnage {
     }
 
     @Override
+    public int getNumero() {
+        return numero;
+    }
+
+    @Override
     public void effectuerSpecialite() {
         System.out.println("Spécialité du roi");
     }

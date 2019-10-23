@@ -69,22 +69,20 @@ public class Bot {
         this.possedeCouronne = possedeCouronne;
     }
 
-    public void achatBatiment(){
-        for (int i = 0; i< cartesCitadellesEnMain.size(); i++) {
-
-            if (nbPiece >= cartesCitadellesEnMain.get(i).getPoint()){ //regarde pour acheter
-
-                retirerPiece(cartesCitadellesEnMain.get(i).getPoint()); //on retire les pieces
-
-                villeDuBot.construireBatiment(cartesCitadellesEnMain.get(i)); //on ajoute la carte dans la ville
-
-                cartesCitadellesEnMain.remove(cartesCitadellesEnMain.get(i)); //on retire la carte de la main
-
+    public void strategieConstruitDesQuilPeut() {
+        boolean aConstruit =false;
+        for (CarteCitadelles carteEnMain : cartesCitadellesEnMain) {
+            if (nbPiece >= carteEnMain.getPoint() && aConstruit==false){ //regarde pour acheter
+                retirerPiece(carteEnMain.getPoint()); //on retire les pieces
+                villeDuBot.construireBatiment(carteEnMain); //on ajoute la carte dans la ville
+                System.out.println(this.nom + " a construit le batiment " + carteEnMain.getNom() + " dans sa ville.");
+                cartesCitadellesEnMain.remove(carteEnMain); //on retire la carte de la main
+                aConstruit = true;
             }
         }
-    }
-
-    public void godstrat() {
-        achatBatiment();
+        if(aConstruit==false){
+            System.out.println(this.nom + " n'a pas pu construire.");
+        }
+        this.getPersonnageACeTour().effectuerSpecialite();
     }
 }

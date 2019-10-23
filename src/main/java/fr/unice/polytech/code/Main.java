@@ -11,8 +11,8 @@ public class Main {
         listeJoueurs.add(bot1);
         listeJoueurs.add(bot2);
 
-        Moteur moteurJeu = new Moteur();
-        moteurJeu.lancerUnePartie(listeJoueurs);
+        Moteur moteurJeu = new Moteur(listeJoueurs);
+        moteurJeu.lancerUnePartie();
 
         Arbitre arbitre = new Arbitre();
         arbitre.compteLesPoints(listeJoueurs);
