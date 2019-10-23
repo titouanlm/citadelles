@@ -1,5 +1,7 @@
 package fr.unice.polytech.code;
 
+/** La stratégie des bots pour l'instant est de construire le plus vite possible */
+
 import java.util.ArrayList;
 
 public class Bot {
@@ -37,7 +39,7 @@ public class Bot {
         }else{
             this.nbPiece-=nbPiece;
         }
-    }
+     }
 
     public Ville getVilleDuBot() {
         return villeDuBot;
@@ -65,5 +67,24 @@ public class Bot {
 
     public void setPossedeCouronne(boolean possedeCouronne) {
         this.possedeCouronne = possedeCouronne;
+    }
+
+    public void achatBatiment(){
+        for (int i = 0; i< cartesCitadellesEnMain.size(); i++) {
+
+            if (nbPiece >= cartesCitadellesEnMain.get(i).getPoint()){ //regarde pour acheter
+
+                retirerPiece(cartesCitadellesEnMain.get(i).getPoint()); //on retire les pieces
+
+                villeDuBot.construireBatiment(cartesCitadellesEnMain.get(i)); //on ajoute la carte dans la ville
+
+                cartesCitadellesEnMain.remove(cartesCitadellesEnMain.get(i)); //on retire la carte de la main
+
+            }
+        }
+    }
+
+    public void godstrat() {
+        achatBatiment();
     }
 }
