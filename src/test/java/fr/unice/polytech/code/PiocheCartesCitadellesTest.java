@@ -2,13 +2,10 @@
 package fr.unice.polytech.code;
 
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public class PiocheCartesCitadellesTest {
     PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();

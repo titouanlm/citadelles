@@ -21,11 +21,11 @@ public class Bot {
         this.possedeCouronne = false;
     }
 
-    public Bot(String nom,int nbPiece,ArrayList<CarteCitadelles>cartesCitadellesEnMain,Ville villeDuBot, Personnage personnageACeTour, boolean possedeCouronne) {
+    public Bot(String nom, Ville villeDuBot) {
         this.nom = nom;
         this.nbPiece = 0;
         this.cartesCitadellesEnMain = new ArrayList<>();
-        this.villeDuBot = new Ville();
+        this.villeDuBot = villeDuBot;
         this.personnageACeTour = null;
         this.possedeCouronne = false;
     }
