@@ -13,7 +13,7 @@ public class PiocheCartesPersonnage {
         this.piocheCP = new ArrayList<>();
     }
 
-    ArrayList<Personnage> getPiocheCP() {
+    public ArrayList<Personnage> getPiocheCP() {
         return piocheCP;
     }
 
