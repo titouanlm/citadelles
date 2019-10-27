@@ -1,6 +1,6 @@
 package fr.unice.polytech.code;
 
-enum CouleurCarteCitadelles {
+public enum CouleurCarteCitadelles {
     BLEU,
     JAUNE,
     VERT,

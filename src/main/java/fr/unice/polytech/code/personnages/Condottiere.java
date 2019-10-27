@@ -15,7 +15,7 @@ public class Condottiere extends Personnage {
 
     @Override
     public void effectuerSpecialite() {
-        System.out.println("Spécialité du condottiere");
+        System.out.println("Le condottière effectue sa spécialité ! \n");
     }
 
 }

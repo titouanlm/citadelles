@@ -31,4 +31,12 @@ public class Ville {
         return nbTotalPoint;
     }
 
+    public boolean contient(String nomBatiment) {
+        for(CarteCitadelles batiment: batimentsConstruits){
+            if(batiment.getNom().equals(nomBatiment)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

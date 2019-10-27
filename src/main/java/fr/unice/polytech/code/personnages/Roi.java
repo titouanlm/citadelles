@@ -15,6 +15,6 @@ public class Roi extends Personnage {
 
     @Override
     public void effectuerSpecialite() {
-        System.out.println("Spécialité du roi");
+        System.out.println("Le roi effectue sa spécialité ! \n");
     }
 }

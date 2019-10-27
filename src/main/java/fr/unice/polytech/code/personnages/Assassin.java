@@ -15,6 +15,6 @@ public class Assassin extends Personnage {
 
     @Override
     public void effectuerSpecialite() {
-        System.out.println("Spécialité du assassin");
+        System.out.println("L'assassin effectue sa spécialité ! \n");
     }
 }

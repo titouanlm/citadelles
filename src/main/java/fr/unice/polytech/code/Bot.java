@@ -81,12 +81,13 @@ public class Bot {
     public void strategieConstruitDesQuilPeut() {
         boolean aConstruit =false;
         for (CarteCitadelles carteEnMain : cartesCitadellesEnMain) {
-            if (nbPiece >= carteEnMain.getPoint() && aConstruit==false){ //regarde pour acheter
+            if (nbPiece >= carteEnMain.getPoint() && !villeDuBot.contient(carteEnMain.getNom())){ //regarde pour acheter
                 retirerPiece(carteEnMain.getPoint()); //on retire les pieces
                 villeDuBot.construireBatiment(carteEnMain); //on ajoute la carte dans la ville
                 System.out.println(this.nom + " a construit le batiment " + carteEnMain.getNom() + " dans sa ville.");
                 cartesCitadellesEnMain.remove(carteEnMain); //on retire la carte de la main
                 aConstruit = true;
+                break;
             }
         }
         if(aConstruit==false){

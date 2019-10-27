@@ -15,6 +15,6 @@ public class Magicien extends Personnage {
 
     @Override
     public void effectuerSpecialite() {
-        System.out.println("Spécialité du magicien");
+        System.out.println("Le magicien effectue sa spécialité ! \n");
     }
 }

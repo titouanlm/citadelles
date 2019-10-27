@@ -15,6 +15,6 @@ public class Marchand extends Personnage {
 
     @Override
     public void effectuerSpecialite() {
-        System.out.println("Spécialité du marchand");
+        System.out.println("Le marchand effectue sa spécialité ! \n");
     }
 }

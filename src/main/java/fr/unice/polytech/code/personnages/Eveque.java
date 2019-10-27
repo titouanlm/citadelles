@@ -15,6 +15,6 @@ public class Eveque extends Personnage {
 
     @Override
     public void effectuerSpecialite() {
-        System.out.println("Spécialité de l'évèque");
+        System.out.println("L'évèque effectue sa spécialité ! \n");
     }
 }

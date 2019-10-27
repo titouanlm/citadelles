@@ -15,6 +15,6 @@ public class Architecte extends Personnage {
 
     @Override
     public void effectuerSpecialite() {
-        System.out.println("Spécialité de l'architecte");
+        System.out.println("L'architecte effectue sa spécialité ! \n");
     }
 }

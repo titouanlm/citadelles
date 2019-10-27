@@ -15,6 +15,6 @@ public class Voleur extends Personnage {
 
     @Override
     public void effectuerSpecialite() {
-        System.out.println("Spécialité du voleur");
+        System.out.println("Le voleur effectue sa spécialité ! \n");
     }
 }
