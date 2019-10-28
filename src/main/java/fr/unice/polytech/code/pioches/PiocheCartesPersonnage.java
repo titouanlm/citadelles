@@ -51,5 +51,6 @@ public class PiocheCartesPersonnage {
         for (int i = 0; i < 8; i++) {
             this.ajouterCartePersonnage(cp[i]);
         }
+        this.melanger();
     }
 }

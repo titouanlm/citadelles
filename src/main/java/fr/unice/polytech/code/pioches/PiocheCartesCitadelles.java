@@ -104,7 +104,7 @@ public class PiocheCartesCitadelles {
         cc[60] = new CarteCitadelles(61,CouleurCarteCitadelles.VIOLET, "Cimitière", 5 );
         cc[61] = new CarteCitadelles(62,CouleurCarteCitadelles.VIOLET, "Bibliothèque", 6 );
         cc[62] = new CarteCitadelles(63,CouleurCarteCitadelles.VIOLET, "École de magie", 6 );
-        cc[63] = new CarteCitadelles(64,CouleurCarteCitadelles.VIOLET, "Universitè", 8 );
+        cc[63] = new CarteCitadelles(64,CouleurCarteCitadelles.VIOLET, "Université", 8 );
         cc[64] = new CarteCitadelles(65,CouleurCarteCitadelles.VIOLET, "Dracopert", 8 );
 
         for(int i=0; i<65;i++){

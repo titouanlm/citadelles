@@ -6,11 +6,17 @@ public class Marchand extends Personnage {
 
     public Marchand(){
         this.numero =6;
+        this.nom = "Marchand";
     }
 
     @Override
     public int getNumero() {
         return numero;
+    }
+
+    @Override
+    public String getNom() {
+        return nom;
     }
 
     @Override

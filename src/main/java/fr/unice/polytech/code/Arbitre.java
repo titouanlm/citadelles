@@ -40,7 +40,6 @@ class Arbitre {
 
 
             }
-            System.out.println(couleurs.size());
             if(couleurs.size()==0){
                 points=points+3;
             }

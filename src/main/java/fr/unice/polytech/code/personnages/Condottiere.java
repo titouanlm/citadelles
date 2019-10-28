@@ -6,11 +6,17 @@ public class Condottiere extends Personnage {
 
     public Condottiere(){
         this.numero =8;
+        this.nom = "Condottiere";
     }
 
     @Override
     public int getNumero() {
         return numero;
+    }
+
+    @Override
+    public String getNom() {
+        return nom;
     }
 
     @Override

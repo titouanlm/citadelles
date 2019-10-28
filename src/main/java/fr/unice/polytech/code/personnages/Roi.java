@@ -6,11 +6,17 @@ public class Roi extends Personnage {
 
     public Roi(){
         this.numero =4;
+        this.nom = "Roi";
     }
 
     @Override
     public int getNumero() {
         return numero;
+    }
+
+    @Override
+    public String getNom() {
+        return null;
     }
 
     @Override

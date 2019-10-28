@@ -182,7 +182,7 @@ public class ArbitreTest {
     @Test
     void testCompteLesPointsBonus(){
         Arbitre arbitre= new Arbitre();
-        
+
 
 
 
@@ -213,12 +213,20 @@ public class ArbitreTest {
         bot2.ajouterCartesCitadellesDansMain(cc[11]);
         bot2.ajouterCartesCitadellesDansMain(cc[20]);
         bot2.ajouterCartesCitadellesDansMain(cc[40]);
-        bot2.ajouterCartesCitadellesDansMain(cc[53]);
+        bot2.ajouterCartesCitadellesDansMain(cc[23]);
+        bot2.ajouterCartesCitadellesDansMain(cc[45]);
+        bot2.ajouterCartesCitadellesDansMain(cc[33]);
+        bot2.ajouterCartesCitadellesDansMain(cc[6]);
+        bot2.ajouterCartesCitadellesDansMain(cc[29]);
 
         v2.construireBatiment(cc[11]);
         v2.construireBatiment(cc[20]);
         v2.construireBatiment(cc[40]);
-        v2.construireBatiment(cc[53]);
+        v2.construireBatiment(cc[23]);
+        v2.construireBatiment(cc[45]);
+        v2.construireBatiment(cc[33]);
+        v2.construireBatiment(cc[6]);
+        v2.construireBatiment(cc[29]);
 
 
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
@@ -228,7 +236,7 @@ public class ArbitreTest {
 
         arbitre.determineJoueurGagnant(listeJoueurs);
         arbitre.compteLespointsFinal(listeJoueurs);
-        assertEquals(23, bot1.getVilleDuBot().getNbTotalPoint());
+        assertEquals(23, bot1.getVilleDuBot().getNbTotalPoint());//Le score final est bot1 : 30 points et bot2 : 23 points
 
 
 
