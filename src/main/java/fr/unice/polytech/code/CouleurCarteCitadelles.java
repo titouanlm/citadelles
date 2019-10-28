@@ -1,9 +1,18 @@
 package fr.unice.polytech.code;
 
 public enum CouleurCarteCitadelles {
-    BLEU,
-    JAUNE,
-    VERT,
-    ROUGE,
-    VIOLET;
+    BLEU("BLEU"),
+    JAUNE("JAUNE"),
+    VERT("VERT"),
+    ROUGE("ROUGE"),
+    VIOLET("VIOLET");
+
+    private String couleur="";
+
+    CouleurCarteCitadelles(String couleur){
+        this.couleur=couleur;
+    }
+    public String toString(){
+        return couleur;
+    }
 }

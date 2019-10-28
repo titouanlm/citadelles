@@ -17,6 +17,7 @@ public class Main {
         Arbitre arbitre = new Arbitre();
         arbitre.compteLesPoints(listeJoueurs);
         arbitre.determineJoueurGagnant(listeJoueurs);
+        arbitre.compteLespointsFinal(listeJoueurs);
         System.out.println(arbitre); //Affichage du vainqueur
     }
 }

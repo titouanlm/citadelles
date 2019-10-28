@@ -179,5 +179,66 @@ public class ArbitreTest {
 
     }
 
+    @Test
+    void testCompteLesPointsBonus(){
+        Arbitre arbitre= new Arbitre();
+        
+
+
+
+        Ville v1 = new Ville();
+        Ville v2 = new Ville();
+
+        Bot bot1 = new Bot("Bot1",v1);
+        bot1.ajouterCartesCitadellesDansMain(cc[0]);
+        bot1.ajouterCartesCitadellesDansMain(cc[12]);
+        bot1.ajouterCartesCitadellesDansMain(cc[25]);
+        bot1.ajouterCartesCitadellesDansMain(cc[46]);
+        bot1.ajouterCartesCitadellesDansMain(cc[58]);
+        bot1.ajouterCartesCitadellesDansMain(cc[32]);
+        bot1.ajouterCartesCitadellesDansMain(cc[61]);
+        bot1.ajouterCartesCitadellesDansMain(cc[7]);
+
+        v1.construireBatiment(cc[0]);
+        v1.construireBatiment(cc[12]);
+        v1.construireBatiment(cc[25]);
+        v1.construireBatiment(cc[46]);
+        v1.construireBatiment(cc[58]);
+        v1.construireBatiment(cc[32]);
+        v1.construireBatiment(cc[61]);
+        v1.construireBatiment(cc[7]);
+
+
+        Bot bot2 = new Bot("Bot2",v2);
+        bot2.ajouterCartesCitadellesDansMain(cc[11]);
+        bot2.ajouterCartesCitadellesDansMain(cc[20]);
+        bot2.ajouterCartesCitadellesDansMain(cc[40]);
+        bot2.ajouterCartesCitadellesDansMain(cc[53]);
+
+        v2.construireBatiment(cc[11]);
+        v2.construireBatiment(cc[20]);
+        v2.construireBatiment(cc[40]);
+        v2.construireBatiment(cc[53]);
+
+
+        ArrayList<Bot> listeJoueurs = new ArrayList<>();
+        listeJoueurs.add(bot1);
+        listeJoueurs.add(bot2);
+
+
+        arbitre.determineJoueurGagnant(listeJoueurs);
+        arbitre.compteLespointsFinal(listeJoueurs);
+        assertEquals(23, bot1.getVilleDuBot().getNbTotalPoint());
+
+
+
+
+
+
+
+
+
+    }
+
 }
 

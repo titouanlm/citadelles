@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Ville {
 
-    private ArrayList<CarteCitadelles> batimentsConstruits = new ArrayList<>();
+    public ArrayList<CarteCitadelles> batimentsConstruits = new ArrayList<>();
     private int nbBatimentsConstruits;
     private int nbTotalPoint;
 
