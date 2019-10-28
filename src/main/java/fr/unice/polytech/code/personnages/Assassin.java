@@ -6,11 +6,17 @@ public class Assassin extends Personnage {
 
     public Assassin(){
         this.numero =1;
+        this.nom = "Assassin";
     }
 
     @Override
     public int getNumero() {
         return numero;
+    }
+
+    @Override
+    public String getNom() {
+        return nom;
     }
 
     @Override

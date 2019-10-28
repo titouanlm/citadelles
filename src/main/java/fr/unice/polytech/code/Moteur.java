@@ -37,15 +37,24 @@ public class Moteur {
         }
     }
 
-    void commencerPartie() {
-        boolean finPartie=false;
+    private void commencerPartie() {
         long choix;
         int cptTour=1;
+        boolean roiPresent=false;
+        Bot joueurRoi=null;
 
         while (true) {
             System.out.println("******** Tour " + cptTour + " ********");
-            this.attributionCarteCouronne();
-            int indiceJoueurPossedantCouronne = this.obtenirIndiceJoueurCourrone();
+            int indiceJoueurPossedantCouronne = this.obtenirIndiceJoueurPossedantCourrone();
+
+            piocheCartesPersonnage.piocherPersonnageAleatoire();
+            Personnage personnageDefausseVisible= piocheCartesPersonnage.piocherPersonnageAleatoire();
+            while(personnageDefausseVisible.getNumero()==4){
+                piocheCartesPersonnage.ajouterCartePersonnage(personnageDefausseVisible);
+                personnageDefausseVisible = piocheCartesPersonnage.piocherPersonnageAleatoire();
+            }
+            System.out.println(personnageDefausseVisible.getNom() + " ne peut être choisit pour ce tour.\n");
+
             this.attributionPersonnageAChaqueJoueur(indiceJoueurPossedantCouronne);
 
                 for (int i=1; i < 9 ; i++) {
@@ -58,46 +67,52 @@ public class Moteur {
 
                     for (Bot joueur : listeJoueurs) {
                         if(joueur.getPersonnageACeTour().getNumero()==i) {
-                            if (choix==1){
+                            if (choix == 1) {
                                 joueur.ajouterPiece(2);
-                            }else{
+                            } else {
                                 joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
                             }
-                            System.out.println(joueur.getNom() +" possède " + joueur.getNbPiece() + " pièces.");
+                            System.out.println(joueur.getNom() + " possède " + joueur.getNbPiece() + " pièces.");
+                            String cartesEnMain = "";
+                            for (CarteCitadelles carteEnMain : joueur.getCartesCitadellesEnMain()) {
+                                cartesEnMain += carteEnMain.getNom() + ", ";
+                            }
+                            System.out.println(joueur.getNom() + " possède les cartes " + cartesEnMain + " dans sa main.");
                             joueur.strategieConstruitDesQuilPeut();
+                            if(i==4){
+                                joueurRoi=joueur;
+                                roiPresent=true;
+                            }
                         }
                     }
                 }
 
-                for (Bot joueur : listeJoueurs) {
-                    if (joueur.getVilleDuBot().getNbBatimentsConstruits() == 8) {
-                        finPartie = true;
-                        break;
-                    }
-                }
-
-                if (finPartie){
+                if (this.verifierFinPartie()){
                     break;
                 }else{
                     piocheCartesPersonnage.reinitialiser();
                     piocheCartesPersonnage.melanger();
+                    listeJoueurs.get(indiceJoueurPossedantCouronne).setPossedeCouronne(false);
+                    if(roiPresent){
+                        joueurRoi.setPossedeCouronne(true);
+                        roiPresent=false;
+                    }
                     cptTour++;
                 }
             }
         }
 
-    private void attributionCarteCouronne() {
-        int indiceJoueurPossedantCouronne = (int)(Math.random()*(listeJoueurs.size()));
-        listeJoueurs.get(indiceJoueurPossedantCouronne).setPossedeCouronne(true);
-    }
-
-    private int obtenirIndiceJoueurCourrone() {
-        int indiceJoueurPossedantCouronne = 0;
+    private int obtenirIndiceJoueurPossedantCourrone() {
+        int indiceJoueurPossedantCouronne = 10;
         for(int i= 0; i<listeJoueurs.size(); i++){
             if(listeJoueurs.get(i).possedeCouronne()){
                 indiceJoueurPossedantCouronne=i;
                 break;
             }
+        }
+        if(indiceJoueurPossedantCouronne==10){
+            indiceJoueurPossedantCouronne = (int)(Math.random()*(listeJoueurs.size()));
+            listeJoueurs.get(indiceJoueurPossedantCouronne).setPossedeCouronne(true);
         }
         return indiceJoueurPossedantCouronne;
     }
@@ -109,6 +124,15 @@ public class Moteur {
         for(int i=0; i<indiceJoueurPossedantCouronne; i++){
             listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoire());
         }
+    }
+
+    private boolean verifierFinPartie() {
+        for (Bot joueur : listeJoueurs) {
+            if (joueur.getVilleDuBot().getNbBatimentsConstruits() == 8) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -6,11 +6,17 @@ public class Magicien extends Personnage {
 
     public Magicien(){
         this.numero = 3;
+        this.nom = "Magicien";
     }
 
     @Override
     public int getNumero() {
         return numero;
+    }
+
+    @Override
+    public String getNom() {
+        return nom;
     }
 
     @Override
