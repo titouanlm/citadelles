@@ -25,15 +25,6 @@ public class Bot {
         this.couleur = couleur;
     }
 
-    public Bot(String nom, Ville villeDuBot) {
-        this.nom = nom;
-        this.nbPiece = 0;
-        this.cartesCitadellesEnMain = new ArrayList<>();
-        this.villeDuBot = villeDuBot;
-        this.personnageACeTour = null;
-        this.possedeCouronne = false;
-    }
-
     public String getNom() {
         return nom;
     }

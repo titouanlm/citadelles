@@ -4,10 +4,7 @@ import fr.unice.polytech.code.personnages.Condottiere;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BotTest {
     CarteCitadelles[] cc = new CarteCitadelles[65];
@@ -96,64 +93,93 @@ public class BotTest {
     @Test
     void testAjouterPiece(){
         Bot bot1=new Bot("Bot1","\033[35m");
+        assertEquals(0,bot1.getNbPiece());
         bot1.ajouterPiece(2);
         assertEquals(2,bot1.getNbPiece());
-        assertNotEquals(0,bot1.getNbPiece());
+        bot1.ajouterPiece(2);
+        assertEquals(4,bot1.getNbPiece());
+    }
+
+
+    @Test
+    void retirerPieceTest(){
+        Bot bot1=new Bot("Bot1","\033[35m");
+        assertEquals(0,bot1.getNbPiece());
+        bot1.ajouterPiece(4);
+        assertEquals(4,bot1.getNbPiece());
+        bot1.retirerPiece(2);
+        assertEquals(2,bot1.getNbPiece());
+        bot1.retirerPiece(100);
+        assertEquals(0,bot1.getNbPiece());
     }
 
     @Test
     void testAjouterCartesCitadellesDansMain(){
         Bot bot1 = new Bot("Bot1","\033[35m");
+        assertEquals(0,bot1.getCartesCitadellesEnMain().size());
         bot1.ajouterCartesCitadellesDansMain(cc[0]);
         bot1.ajouterCartesCitadellesDansMain(cc[2]);
         bot1.ajouterCartesCitadellesDansMain(cc[25]);
         bot1.ajouterCartesCitadellesDansMain(cc[60]);
         assertEquals(4,bot1.getCartesCitadellesEnMain().size());
         assertEquals(cc[2],bot1.getCartesCitadellesEnMain().get(1));
-
+        assertEquals(cc[60],bot1.getCartesCitadellesEnMain().get(3));
     }
+
     @Test
     void testSetNbPoint(){
         Bot bot1 = new Bot("Bot1","\033[35m");
+        assertEquals(0,bot1.getNbPoint());
         bot1.setNbPoint(2);
         assertEquals(2,bot1.getNbPoint());
+        bot1.setNbPoint(2);
+        assertEquals(4,bot1.getNbPoint());
     }
 
     @Test
     void testSetPremierJoueurAFinir(){
         Bot bot1 = new Bot("Bot1","\033[35m");
+        assertFalse(bot1.estPremierJoueurAFinir());
         bot1.setPremierJoueurAFinir(true);
-        assertNotEquals(false,bot1.estPremierJoueurAFinir());
+        assertTrue(bot1.estPremierJoueurAFinir());
     }
+
     @Test
     void testSetPersonnageACeTour(){
         Bot bot1 = new Bot("Bot1","\033[35m");
         Condottiere condottiere=new Condottiere();
+        assertNull(bot1.getPersonnageACeTour());
         bot1.setPersonnageACeTour(condottiere);
         assertEquals(condottiere,bot1.getPersonnageACeTour());
     }
+
     @Test
     void testSetPossedeCouronne(){
         Bot bot1 = new Bot("Bot1","\033[35m");
-        assertEquals(false,bot1.possedeCouronne());
+        assertFalse(bot1.possedeCouronne());
         bot1.setPossedeCouronne(true);
-        assertEquals(true,bot1.possedeCouronne());
+        assertTrue(bot1.possedeCouronne());
     }
+
     @Test
     void testStrategieConstruitDesQuilPeut(){
-        Ville v1 = new Ville();
-        Bot bot1 = new Bot("Bot1",v1);
+        Bot bot1 = new Bot("Bot1","\033[35m");
         Condottiere condottiere=new Condottiere();
         bot1.setPersonnageACeTour(condottiere);
         bot1.ajouterCartesCitadellesDansMain(cc[0]);
         bot1.ajouterCartesCitadellesDansMain(cc[2]);
         bot1.ajouterCartesCitadellesDansMain(cc[25]);
         bot1.ajouterCartesCitadellesDansMain(cc[6]);
-        bot1.ajouterPiece(7);
-        v1.construireBatiment(cc[25]);
+
+        bot1.ajouterPiece(1);
         bot1.strategieConstruitDesQuilPeut();
-        assertEquals(2,v1.getBatimentsConstruits().size());
+        assertEquals(1,bot1.getVilleDuBot().getBatimentsConstruits().size());
 
+        bot1.strategieConstruitDesQuilPeut();
+        assertEquals(1,bot1.getVilleDuBot().getBatimentsConstruits().size());
 
+        bot1.ajouterPiece(5);
+        bot1.strategieConstruitDesQuilPeut();
+        assertEquals(2,bot1.getVilleDuBot().getBatimentsConstruits().size());
     }
 }

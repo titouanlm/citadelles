@@ -18,6 +18,14 @@ public class Moteur {
         piocheCartesPersonnage.implementerCartesPersonnage();
     }
 
+    public PiocheCartesCitadelles getPiocheCartesCitadelles() {
+        return piocheCartesCitadelles;
+    }
+
+    public PiocheCartesPersonnage getPiocheCartesPersonnage() {
+        return piocheCartesPersonnage;
+    }
+
     void lancerUnePartie() {
         this.initialiserPartie();
         this.commencerPartie();
@@ -33,36 +41,23 @@ public class Moteur {
     }
 
     private void commencerPartie() {
-        long choix;
         int cptTour=1;
         boolean roiPresent=false;
         Bot joueurRoi=null;
 
         while (true) {
+
             System.out.println("\033[0m" + "******** Tour " + cptTour + " ********");
+
             int indiceJoueurPossedantCouronne = this.obtenirIndiceJoueurPossedantCourrone();
-
-            piocheCartesPersonnage.piocherPersonnageAleatoire();
-            Personnage personnageDefausseVisible= piocheCartesPersonnage.piocherPersonnageAleatoire();
-            while(personnageDefausseVisible.getNumero()==4){
-                piocheCartesPersonnage.ajouterCartePersonnage(personnageDefausseVisible);
-                personnageDefausseVisible = piocheCartesPersonnage.piocherPersonnageAleatoire();
-            }
-            System.out.println(personnageDefausseVisible.getNom() + " ne peut être choisit pour ce tour.\n");
-
+            Personnage personnageDefausseVisible = this.defausserCartesPersonnagePourLeTour();
             this.attributionPersonnageAChaqueJoueur(indiceJoueurPossedantCouronne);
 
+
                 for (int i=1; i < 9 ; i++) {
-
-                    if (piocheCartesCitadelles.nbCartesRestantes()>0){
-                        choix = Math.round(Math.random());
-                    }else{
-                        choix=1;
-                    }
-
                     for (Bot joueur : listeJoueurs) {
                         if(joueur.getPersonnageACeTour().getNumero()==i) {
-                            if (choix == 1) {
+                            if (this.determinerChoixPiocherOuPiece() == 1) {
                                 joueur.ajouterPiece(2);
                             } else {
                                 joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher()); /* ***/
@@ -81,6 +76,7 @@ public class Moteur {
                                 joueurRoi=joueur;
                                 roiPresent=true;
                             }
+                            break;
                         }
                     }
                 }
@@ -114,6 +110,27 @@ public class Moteur {
             listeJoueurs.get(indiceJoueurPossedantCouronne).setPossedeCouronne(true);
         }
         return indiceJoueurPossedantCouronne;
+    }
+
+    public Personnage defausserCartesPersonnagePourLeTour() {
+        piocheCartesPersonnage.piocherPersonnageAleatoire();
+        Personnage personnageDefausseVisible= piocheCartesPersonnage.piocherPersonnageAleatoire();
+
+        while(personnageDefausseVisible.getNumero()==4){
+            piocheCartesPersonnage.ajouterCartePersonnage(personnageDefausseVisible);
+            personnageDefausseVisible = piocheCartesPersonnage.piocherPersonnageAleatoire();
+        }
+
+        System.out.println(personnageDefausseVisible.getNom() + " ne peut être choisit pour ce tour.\n");
+        return personnageDefausseVisible;
+    }
+
+    public int determinerChoixPiocherOuPiece() {
+        if (piocheCartesCitadelles.nbCartesRestantes()>0){
+            return (int) Math.round(Math.random());
+        }else{
+            return 1;
+        }
     }
 
     public void attributionPersonnageAChaqueJoueur(int indiceJoueurPossedantCouronne) {

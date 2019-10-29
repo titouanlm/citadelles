@@ -48,6 +48,31 @@ public class MoteurTest {
     }
 
     @Test
+    void defausserCartesPersonnagePourLeTourTest(){
+        ArrayList<Bot> listeJoueurs = new ArrayList<>();
+        listeJoueurs.add(bot1);
+        listeJoueurs.add(bot2);
+        listeJoueurs.add(bot3);
+        Moteur moteurJeu = new Moteur(listeJoueurs);
+
+        assertNotEquals(4, moteurJeu.defausserCartesPersonnagePourLeTour().getNumero());
+        assertEquals(6,moteurJeu.getPiocheCartesPersonnage().getPiocheCP().size());
+    }
+
+    @Test
+    void determinerChoixPiocherOuPieceTest(){
+        ArrayList<Bot> listeJoueurs = new ArrayList<>();
+        listeJoueurs.add(bot1);
+        listeJoueurs.add(bot2);
+        listeJoueurs.add(bot3);
+        Moteur moteurJeu = new Moteur(listeJoueurs);
+        for(int i=0; i<65; i++){
+            moteurJeu.getPiocheCartesCitadelles().piocher();
+        }
+        assertEquals(1,moteurJeu.determinerChoixPiocherOuPiece());
+    }
+
+    @Test
     void attributionPersonnageAChaqueJoueurTest(){
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
         listeJoueurs.add(bot1);

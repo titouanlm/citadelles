@@ -1,14 +1,11 @@
 package fr.unice.polytech.code;
 
-import fr.unice.polytech.code.personnages.Architecte;
-import fr.unice.polytech.code.personnages.Condottiere;
-import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ArbitreTest {
     CarteCitadelles[] cc = new CarteCitadelles[65];
@@ -86,110 +83,121 @@ public class ArbitreTest {
         cc[64] = new CarteCitadelles(65, CouleurCarteCitadelles.VIOLET, "Dracopert", 8);
     }
 
+
     @Test
-    void testCompteLesPoints(){
-        Arbitre arbitre= new Arbitre();
-
-        Ville v1 = new Ville();
-        Ville v2 = new Ville();
-
-        Bot bot1 = new Bot("Bot1",v1);
-        bot1.ajouterCartesCitadellesDansMain(cc[0]);
-        bot1.ajouterCartesCitadellesDansMain(cc[2]);
-        bot1.ajouterCartesCitadellesDansMain(cc[25]);
-        bot1.ajouterCartesCitadellesDansMain(cc[6]);
-        bot1.ajouterPiece(2);
-        bot1.setPossedeCouronne(true);
-        Architecte architecte=new Architecte();
-        bot1.setPersonnageACeTour(architecte);
-
-        Bot bot2 = new Bot("Bot2",v2);
-        bot2.ajouterCartesCitadellesDansMain(cc[11]);
-        bot2.ajouterCartesCitadellesDansMain(cc[20]);
-        bot2.ajouterCartesCitadellesDansMain(cc[40]);
-        bot2.ajouterCartesCitadellesDansMain(cc[53]);
-        bot2.ajouterPiece(2);
-        Condottiere condottiere=new Condottiere();
-        bot2.setPersonnageACeTour(condottiere);
-
+    void compteLesPointsTest(){
+        Arbitre arbitre = new Arbitre();
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
-        listeJoueurs.add(bot1);
-        listeJoueurs.add(bot2);
+        listeJoueurs.add(new Bot("Bot1","\033[36m"));
+        listeJoueurs.add(new Bot("Bot2","\033[36m"));
+        listeJoueurs.add(new Bot("Bot3","\033[36m"));
 
-      // 1er tour
-        bot1.ajouterPiece(2);
-        v1.construireBatiment(cc[0]);
-        bot1.retirerPiece(1);
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(cc[0]);
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(cc[12]);
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(cc[23]);
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(cc[43]);
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(cc[44]);
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(cc[1]);
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(cc[13]);
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(cc[25]);
+        listeJoueurs.get(0).setPremierJoueurAFinir(true);
 
-        PiocheCartesCitadelles piocheCartesCitadelles1 = new PiocheCartesCitadelles();
-        piocheCartesCitadelles1.ajouterCarteCitadelles(cc[10]);
-        piocheCartesCitadelles1.ajouterCarteCitadelles(cc[1]);
-        bot2.ajouterCartesCitadellesDansMain(piocheCartesCitadelles1.piocher());
+        listeJoueurs.get(1).getVilleDuBot().construireBatiment(cc[2]);
+        listeJoueurs.get(1).getVilleDuBot().construireBatiment(cc[14]);
+        listeJoueurs.get(1).getVilleDuBot().construireBatiment(cc[24]);
+        listeJoueurs.get(1).getVilleDuBot().construireBatiment(cc[45]);
+        listeJoueurs.get(1).getVilleDuBot().construireBatiment(cc[55]);
+        listeJoueurs.get(1).getVilleDuBot().construireBatiment(cc[6]);
+        listeJoueurs.get(1).getVilleDuBot().construireBatiment(cc[17]);
 
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(cc[7]);
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(cc[8]);
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(cc[9]);
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(cc[10]);
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(cc[11]);
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(cc[60]);
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(cc[61]);
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(cc[5]);
 
-        //arbitre.compteLesPoints(listeJoueurs);
-        assertEquals(1, bot1.getVilleDuBot().getNbTotalPoint());
-        assertEquals(0, bot2.getVilleDuBot().getNbTotalPoint());
-
+        arbitre.compteLesPoints(listeJoueurs);
+        assertEquals(16, listeJoueurs.get(0).getNbPoint()); // 12 + 4
+        assertEquals(18, listeJoueurs.get(1).getNbPoint()); // 15 + 3
+        assertEquals(34, listeJoueurs.get(2).getNbPoint()); // 34 + 2
     }
 
+    @Test
+    void testBonusPremierJoueurAFinirTest(){
+        Bot bot1 = new Bot("Bot1","\033[36m");
+        Bot bot2 = new Bot("Bot2","\033[36m");
+        Arbitre arbitre = new Arbitre();
+
+        bot1.setPremierJoueurAFinir(true);
+        arbitre.testBonusPremierJoueurAFinir(bot1);
+        arbitre.testBonusPremierJoueurAFinir(bot2);
+        assertEquals(4, bot1.getNbPoint());
+        assertEquals(0, bot2.getNbPoint());
+    }
 
     @Test
-    void testCompteLesPointsBonus(){
-        Arbitre arbitre= new Arbitre();
+    void testBonusAConstruit8CesQuartiersTest(){
+        Bot bot1 = new Bot("Bot1","\033[36m");
+        Bot bot2 = new Bot("Bot2","\033[36m");
+        Bot bot3 = new Bot("Bot3","\033[36m");
+        Arbitre arbitre = new Arbitre();
 
-        Ville v1 = new Ville();
-        Ville v2 = new Ville();
+        bot1.setPremierJoueurAFinir(true);
+        bot1.getVilleDuBot().setNbBatimentsConstruits(8);
+        bot2.getVilleDuBot().setNbBatimentsConstruits(8);
 
-        Bot bot1 = new Bot("Bot1",v1);
-        bot1.ajouterCartesCitadellesDansMain(cc[0]);
-        bot1.ajouterCartesCitadellesDansMain(cc[12]);
-        bot1.ajouterCartesCitadellesDansMain(cc[25]);
-        bot1.ajouterCartesCitadellesDansMain(cc[46]);
-        bot1.ajouterCartesCitadellesDansMain(cc[58]);
-        bot1.ajouterCartesCitadellesDansMain(cc[32]);
-        bot1.ajouterCartesCitadellesDansMain(cc[61]);
-        bot1.ajouterCartesCitadellesDansMain(cc[7]);
+        arbitre.testBonusAConstruit8CesQuartiers(bot1);
+        arbitre.testBonusAConstruit8CesQuartiers(bot2);
+        arbitre.testBonusAConstruit8CesQuartiers(bot3);
 
-        v1.construireBatiment(cc[0]);
-        v1.construireBatiment(cc[12]);
-        v1.construireBatiment(cc[25]);
-        v1.construireBatiment(cc[46]);
-        v1.construireBatiment(cc[58]);
-        v1.construireBatiment(cc[32]);
-        v1.construireBatiment(cc[61]);
-        v1.construireBatiment(cc[7]);
+        assertEquals(0, bot1.getNbPoint());
+        assertEquals(2, bot2.getNbPoint());
+        assertEquals(0, bot3.getNbPoint());
+    }
 
+    @Test
+    void testBonusPossede5CouleursDeQuartierDifferentesTest(){
+        Bot bot1 = new Bot("Bot1","\033[36m");
+        Bot bot2 = new Bot("Bot2","\033[36m");
+        Arbitre arbitre = new Arbitre();
 
-        Bot bot2 = new Bot("Bot2",v2);
-        bot2.ajouterCartesCitadellesDansMain(cc[11]);
-        bot2.ajouterCartesCitadellesDansMain(cc[20]);
-        bot2.ajouterCartesCitadellesDansMain(cc[40]);
-        bot2.ajouterCartesCitadellesDansMain(cc[23]);
-        bot2.ajouterCartesCitadellesDansMain(cc[45]);
-        bot2.ajouterCartesCitadellesDansMain(cc[33]);
-        bot2.ajouterCartesCitadellesDansMain(cc[6]);
-        bot2.ajouterCartesCitadellesDansMain(cc[29]);
+        bot1.getVilleDuBot().construireBatiment(cc[0]);
+        bot1.getVilleDuBot().construireBatiment(cc[12]);
+        bot1.getVilleDuBot().construireBatiment(cc[23]);
+        bot1.getVilleDuBot().construireBatiment(cc[43]);
+        bot1.getVilleDuBot().construireBatiment(cc[44]);
 
-        v2.construireBatiment(cc[11]);
-        v2.construireBatiment(cc[20]);
-        v2.construireBatiment(cc[40]);
-        v2.construireBatiment(cc[23]);
-        v2.construireBatiment(cc[45]);
-        v2.construireBatiment(cc[33]);
-        v2.construireBatiment(cc[6]);
-        v2.construireBatiment(cc[29]);
+        bot2.getVilleDuBot().construireBatiment(cc[0]);
+        bot2.getVilleDuBot().construireBatiment(cc[12]);
+        bot2.getVilleDuBot().construireBatiment(cc[23]);
+        bot2.getVilleDuBot().construireBatiment(cc[43]);
+        bot2.getVilleDuBot().construireBatiment(cc[54]);
 
+        arbitre.testBonusPossede5CouleursDeQuartierDifferentes(bot1);
+        arbitre.testBonusPossede5CouleursDeQuartierDifferentes(bot2);
 
+        assertEquals(0, bot1.getNbPoint());
+        assertEquals(3, bot2.getNbPoint());
+    }
+
+    @Test
+    void determineJoueurGagnantTest(){
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
-        listeJoueurs.add(bot1);
-        listeJoueurs.add(bot2);
+        listeJoueurs.add(new Bot("Bot1","\033[36m"));
+        listeJoueurs.add(new Bot("Bot2","\033[36m"));
+        listeJoueurs.add(new Bot("Bot3","\033[36m"));
 
+        listeJoueurs.get(0).setNbPoint(16);
+        listeJoueurs.get(1).setNbPoint(24);
+        listeJoueurs.get(2).setNbPoint(18);
 
+        Arbitre arbitre= new Arbitre();
+        assertNull(arbitre.getJoueurGagnant());
         arbitre.determineJoueurGagnant(listeJoueurs);
-        arbitre.compteLesPoints(listeJoueurs);
-        assertEquals(23, bot1.getVilleDuBot().getNbTotalPoint());//Le score final est bot1 : 30 points et bot2 : 23 points
-
+        assertEquals("Bot2",arbitre.getJoueurGagnant().getNom());
     }
 
 }
