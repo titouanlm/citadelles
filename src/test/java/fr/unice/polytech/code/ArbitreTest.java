@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ArbitreTest {
     CarteCitadelles[] cc = new CarteCitadelles[65];
+
     @BeforeEach
     void setUp() {
         cc[0] = new CarteCitadelles(1, CouleurCarteCitadelles.BLEU, "Temple", 1);
@@ -84,6 +85,7 @@ public class ArbitreTest {
         cc[63] = new CarteCitadelles(64, CouleurCarteCitadelles.VIOLET, "Universitè", 8);
         cc[64] = new CarteCitadelles(65, CouleurCarteCitadelles.VIOLET, "Dracopert", 8);
     }
+
     @Test
     void testCompteLesPoints(){
         Arbitre arbitre= new Arbitre();
@@ -125,66 +127,16 @@ public class ArbitreTest {
         bot2.ajouterCartesCitadellesDansMain(piocheCartesCitadelles1.piocher());
 
 
-        arbitre.compteLesPoints(listeJoueurs);
+        //arbitre.compteLesPoints(listeJoueurs);
         assertEquals(1, bot1.getVilleDuBot().getNbTotalPoint());
         assertEquals(0, bot2.getVilleDuBot().getNbTotalPoint());
 
-
-
-
     }
-    @Test
-    void testDetermineJoueurGagnant(){
-        Arbitre arbitre= new Arbitre();
 
-        Ville v1 = new Ville();
-        Ville v2 = new Ville();
-
-        Bot bot1 = new Bot("Bot1",v1);
-        bot1.ajouterCartesCitadellesDansMain(cc[0]);
-        bot1.ajouterCartesCitadellesDansMain(cc[2]);
-        bot1.ajouterCartesCitadellesDansMain(cc[25]);
-        bot1.ajouterCartesCitadellesDansMain(cc[6]);
-        bot1.ajouterPiece(2);
-        bot1.setPossedeCouronne(true);
-        Architecte architecte=new Architecte();
-        bot1.setPersonnageACeTour(architecte);
-
-        Bot bot2 = new Bot("Bot2",v2);
-        bot2.ajouterCartesCitadellesDansMain(cc[11]);
-        bot2.ajouterCartesCitadellesDansMain(cc[20]);
-        bot2.ajouterCartesCitadellesDansMain(cc[40]);
-        bot2.ajouterCartesCitadellesDansMain(cc[53]);
-        bot2.ajouterPiece(2);
-        Condottiere condottiere=new Condottiere();
-        bot2.setPersonnageACeTour(condottiere);
-
-        ArrayList<Bot> listeJoueurs = new ArrayList<>();
-        listeJoueurs.add(bot1);
-        listeJoueurs.add(bot2);
-
-        // 1er tour
-        bot1.ajouterPiece(2);
-        v1.construireBatiment(cc[0]);
-        bot1.retirerPiece(1);
-
-        PiocheCartesCitadelles piocheCartesCitadelles1 = new PiocheCartesCitadelles();
-        piocheCartesCitadelles1.ajouterCarteCitadelles(cc[10]);
-        piocheCartesCitadelles1.ajouterCarteCitadelles(cc[1]);
-        bot2.ajouterCartesCitadellesDansMain(piocheCartesCitadelles1.piocher());
-
-
-        arbitre.determineJoueurGagnant(listeJoueurs);
-        assertEquals("Bot1"+ " gagne la partie ! ",arbitre.toString());
-
-    }
 
     @Test
     void testCompteLesPointsBonus(){
         Arbitre arbitre= new Arbitre();
-
-
-
 
         Ville v1 = new Ville();
         Ville v2 = new Ville();
@@ -235,16 +187,8 @@ public class ArbitreTest {
 
 
         arbitre.determineJoueurGagnant(listeJoueurs);
-        arbitre.compteLespointsFinal(listeJoueurs);
+        arbitre.compteLesPoints(listeJoueurs);
         assertEquals(23, bot1.getVilleDuBot().getNbTotalPoint());//Le score final est bot1 : 30 points et bot2 : 23 points
-
-
-
-
-
-
-
-
 
     }
 

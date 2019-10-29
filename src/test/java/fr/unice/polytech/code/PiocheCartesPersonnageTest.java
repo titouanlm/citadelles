@@ -15,39 +15,27 @@ public class PiocheCartesPersonnageTest {
     private PiocheCartesPersonnage piocheCartesPersonnage = new PiocheCartesPersonnage();
 
     @Test
-    void piocherTest(){
-        Personnage[] cp = new Personnage[8];
-        cp[0] = new Assassin();
-        cp[1] = new Voleur();
-        cp[2] = new Magicien();
-        cp[3] = new Roi();
-        cp[4] = new Eveque();
-        cp[5] = new Marchand();
-        cp[6] = new Architecte();
-        cp[7] = new Condottiere();
+    void implementerCartesPersonnageTest(){
+        assertEquals(0, piocheCartesPersonnage.getPiocheCP().size());
+        piocheCartesPersonnage.implementerCartesPersonnage();
+        assertEquals(8, piocheCartesPersonnage.getPiocheCP().size());
+    }
 
-        for (int i = 0; i < 8; i++) {
-            piocheCartesPersonnage.ajouterCartePersonnage(cp[i]);
-        }
+    @Test
+    void piocherPersonnageAleatoireTest(){
+        assertNull(piocheCartesPersonnage.piocherPersonnageAleatoire());
+        piocheCartesPersonnage.implementerCartesPersonnage();
         assertNotNull(piocheCartesPersonnage.piocherPersonnageAleatoire());
     }
 
     @Test
-    void melangerTest(){
-        Personnage[] cp = new Personnage[8];
-        cp[0] = new Assassin();
-        cp[1] = new Voleur();
-        cp[2] = new Magicien();
-        cp[3] = new Roi();
-        cp[4] = new Eveque();
-        cp[5] = new Marchand();
-        cp[6] = new Architecte();
-        cp[7] = new Condottiere();
-
-        for (int i = 0; i < 8; i++) {
-            piocheCartesPersonnage.ajouterCartePersonnage(cp[i]);
-        }
-        assertNotEquals(cp,piocheCartesPersonnage.getPiocheCP());
-
+    void reinitialiserTest(){
+        piocheCartesPersonnage.implementerCartesPersonnage();
+        piocheCartesPersonnage.piocherPersonnageAleatoire();
+        piocheCartesPersonnage.piocherPersonnageAleatoire();
+        assertEquals(6, piocheCartesPersonnage.getPiocheCP().size());
+        piocheCartesPersonnage.reinitialiser();
+        assertEquals(8, piocheCartesPersonnage.getPiocheCP().size());
     }
+
 }

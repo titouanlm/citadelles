@@ -4,6 +4,7 @@ package fr.unice.polytech.code;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -15,8 +16,11 @@ public class PiocheCartesCitadellesTest {
         CarteCitadelles[] cc = new CarteCitadelles[65];
         cc[0] = new CarteCitadelles(1,CouleurCarteCitadelles.BLEU, "Temple", 1 );
         cc[1] = new CarteCitadelles(2,CouleurCarteCitadelles.BLEU, "Temple", 1 );
+        assertNull(piocheCartesCitadelles.piocher());
         piocheCartesCitadelles.ajouterCarteCitadelles(cc[0]);
+        assertEquals(1, piocheCartesCitadelles.nbCartesRestantes());
         assertEquals(cc[0],piocheCartesCitadelles.piocher());
+        assertEquals(0, piocheCartesCitadelles.nbCartesRestantes());
     }
 
     @Test
@@ -29,24 +33,20 @@ public class PiocheCartesCitadellesTest {
     }
 
     @Test
-    void melangerTest(){
+    void ajouterCarteCitadellesTest(){
         CarteCitadelles[] cc = new CarteCitadelles[65];
         cc[0] = new CarteCitadelles(1,CouleurCarteCitadelles.BLEU, "Temple", 1 );
-        cc[1] = new CarteCitadelles(2,CouleurCarteCitadelles.BLEU, "Temple", 1 );
-        cc[2] = new CarteCitadelles(3,CouleurCarteCitadelles.BLEU, "Temple", 1 );
-        cc[3] = new CarteCitadelles(4,CouleurCarteCitadelles.BLEU, "Eglise", 2 );
-        cc[4] = new CarteCitadelles(5,CouleurCarteCitadelles.BLEU, "Eglise", 2 );
-        for(int i=0; i<5;i++){
-            piocheCartesCitadelles.ajouterCarteCitadelles(cc[i]);
-        }
-        piocheCartesCitadelles.melanger();
-        assertNotEquals(cc,piocheCartesCitadelles.getPiocheCC());
-
-
+        assertEquals(0, piocheCartesCitadelles.nbCartesRestantes());
+        piocheCartesCitadelles.ajouterCarteCitadelles(cc[0]);
+        assertEquals(1, piocheCartesCitadelles.nbCartesRestantes());
+        assertEquals(cc[0], piocheCartesCitadelles.getPiocheCC().get(0));
     }
 
-
-
-
+    @Test
+    void implementerCartesCitadellesTest(){
+        assertEquals(0, piocheCartesCitadelles.nbCartesRestantes());
+        piocheCartesCitadelles.implementerCartesCitadelles();
+        assertEquals(65, piocheCartesCitadelles.nbCartesRestantes());
+    }
 }
 

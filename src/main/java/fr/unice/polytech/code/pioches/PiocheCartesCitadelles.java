@@ -26,9 +26,12 @@ public class PiocheCartesCitadelles {
     }
 
     public CarteCitadelles piocher(){
-        CarteCitadelles cartePiochee = piocheCC.get(0);
-        piocheCC.remove(0);
-        return cartePiochee;
+        if(piocheCC.size()>0){
+            CarteCitadelles cartePiochee = piocheCC.get(0);
+            piocheCC.remove(0);
+            return cartePiochee;
+        }
+        return null;
     }
 
     public int nbCartesRestantes(){
@@ -110,5 +113,6 @@ public class PiocheCartesCitadelles {
         for(int i=0; i<65;i++){
             this.ajouterCarteCitadelles(cc[i]);
         }
+        this.melanger();
     }
 }

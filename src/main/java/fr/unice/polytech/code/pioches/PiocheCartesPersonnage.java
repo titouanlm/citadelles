@@ -26,10 +26,13 @@ public class PiocheCartesPersonnage {
     }
 
     public Personnage piocherPersonnageAleatoire(){
-        int indicePersonnageAleatoire = (int)(Math.random()*piocheCP.size());
-        Personnage personnageAleatoire = this.piocheCP.get(indicePersonnageAleatoire);
-        this.piocheCP.remove(indicePersonnageAleatoire);
-        return personnageAleatoire;
+        if(piocheCP.size()>0){
+            int indicePersonnageAleatoire = (int)(Math.random()*piocheCP.size());
+            Personnage personnageAleatoire = this.piocheCP.get(indicePersonnageAleatoire);
+            this.piocheCP.remove(indicePersonnageAleatoire);
+            return personnageAleatoire;
+        }
+        return null;
     }
 
     public void reinitialiser() {

@@ -27,6 +27,10 @@ public class Ville {
         return nbBatimentsConstruits;
     }
 
+    public void setNbBatimentsConstruits(int nbBatimentsConstruits) {
+        this.nbBatimentsConstruits = nbBatimentsConstruits;
+    }
+
     public int getNbTotalPoint() {
         return nbTotalPoint;
     }

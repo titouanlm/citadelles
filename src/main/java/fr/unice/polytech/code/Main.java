@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String... args) {
-        Bot bot1 = new Bot("Bot 1");
-        Bot bot2 = new Bot("Bot 2");
-        Bot bot3 = new Bot("Bot 3");
-        Bot bot4 = new Bot("Bot 4");
+        Bot bot1 = new Bot("Bot 1", "\033[36m");
+        Bot bot2 = new Bot("Bot 2", "\033[35m");
+        Bot bot3 = new Bot("Bot 3", "\033[33m");
+        Bot bot4 = new Bot("Bot 4", "\033[34m");
 
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
         listeJoueurs.add(bot1);
@@ -22,7 +22,6 @@ public class Main {
         Arbitre arbitre = new Arbitre();
         arbitre.compteLesPoints(listeJoueurs);
         arbitre.determineJoueurGagnant(listeJoueurs);
-        arbitre.compteLespointsFinal(listeJoueurs);
         System.out.println(arbitre); //Affichage du vainqueur
     }
 }

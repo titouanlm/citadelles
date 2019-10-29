@@ -1,24 +1,28 @@
 package fr.unice.polytech.code;
 
-/** La stratégie des bots pour l'instant est de construire le plus vite possible */
-
 import java.util.ArrayList;
 
 public class Bot {
     private String nom;
+    private String couleur;
     private int nbPiece;
     private ArrayList<CarteCitadelles> cartesCitadellesEnMain;
     private Ville villeDuBot;
     private Personnage personnageACeTour;
     private boolean possedeCouronne;
+    private int nbPoint;
+    private boolean premierJoueurAFinir;
 
-    public Bot(String nom) {
+    public Bot(String nom, String couleur) {
         this.nom = nom;
         this.nbPiece = 0;
         this.cartesCitadellesEnMain = new ArrayList<>();
         this.villeDuBot = new Ville();
         this.personnageACeTour = null;
         this.possedeCouronne = false;
+        this.nbPoint = 0;
+        this.premierJoueurAFinir= false;
+        this.couleur = couleur;
     }
 
     public Bot(String nom, Ville villeDuBot) {
@@ -62,6 +66,26 @@ public class Bot {
         this.cartesCitadellesEnMain.add(cartesCitadellesAAjouter);
     }
 
+    public String getCouleur() {
+        return couleur;
+    }
+
+    public int getNbPoint() {
+        return nbPoint;
+    }
+
+    public void setNbPoint(int nbPoint) {
+        this.nbPoint += nbPoint;
+    }
+
+    public boolean estPremierJoueurAFinir() {
+        return premierJoueurAFinir;
+    }
+
+    public void setPremierJoueurAFinir(boolean premierJoueurAFinir) {
+        this.premierJoueurAFinir = premierJoueurAFinir;
+    }
+
     public Personnage getPersonnageACeTour() {
         return personnageACeTour;
     }
@@ -81,7 +105,7 @@ public class Bot {
     public void strategieConstruitDesQuilPeut() {
         boolean aConstruit =false;
         for (CarteCitadelles carteEnMain : cartesCitadellesEnMain) {
-            if (nbPiece >= carteEnMain.getPoint() && !villeDuBot.contient(carteEnMain.getNom())){ //regarde pour acheter
+            if (nbPiece >= carteEnMain.getPoint() && !villeDuBot.contient(carteEnMain.getNom())){
                 retirerPiece(carteEnMain.getPoint()); //on retire les pieces
                 villeDuBot.construireBatiment(carteEnMain); //on ajoute la carte dans la ville
                 System.out.println(this.nom + " a construit le batiment " + carteEnMain.getNom() + " dans sa ville.");
@@ -90,7 +114,7 @@ public class Bot {
                 break;
             }
         }
-        if(aConstruit==false){
+        if(!aConstruit){
             System.out.println(this.nom + " n'a pas pu construire.");
         }
         this.getPersonnageACeTour().effectuerSpecialite();

@@ -7,11 +7,12 @@ public enum CouleurCarteCitadelles {
     ROUGE("ROUGE"),
     VIOLET("VIOLET");
 
-    private String couleur="";
+    private String couleur;
 
     CouleurCarteCitadelles(String couleur){
         this.couleur=couleur;
     }
+
     public String toString(){
         return couleur;
     }

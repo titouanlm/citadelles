@@ -1,7 +1,5 @@
 package fr.unice.polytech.code;
 
-import fr.unice.polytech.code.personnages.*;
-
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
@@ -16,19 +14,16 @@ public class Moteur {
 
     Moteur(ArrayList<Bot> listeJoueurs) {
         this.listeJoueurs = listeJoueurs;
+        piocheCartesCitadelles.implementerCartesCitadelles();
+        piocheCartesPersonnage.implementerCartesPersonnage();
     }
 
     void lancerUnePartie() {
-        piocheCartesCitadelles.implementerCartesCitadelles();
-        piocheCartesPersonnage.implementerCartesPersonnage();
         this.initialiserPartie();
         this.commencerPartie();
     }
 
-    private void initialiserPartie() {
-        piocheCartesCitadelles.melanger();
-        piocheCartesPersonnage.melanger();
-
+    public void initialiserPartie() {
         for (Bot joueur : listeJoueurs) {
             joueur.ajouterPiece(2);
             for (int j = 0; j < 4; j++) {
@@ -44,7 +39,7 @@ public class Moteur {
         Bot joueurRoi=null;
 
         while (true) {
-            System.out.println("******** Tour " + cptTour + " ********");
+            System.out.println("\033[0m" + "******** Tour " + cptTour + " ********");
             int indiceJoueurPossedantCouronne = this.obtenirIndiceJoueurPossedantCourrone();
 
             piocheCartesPersonnage.piocherPersonnageAleatoire();
@@ -70,15 +65,18 @@ public class Moteur {
                             if (choix == 1) {
                                 joueur.ajouterPiece(2);
                             } else {
-                                joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
+                                joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher()); /* ***/
                             }
-                            System.out.println(joueur.getNom() + " possède " + joueur.getNbPiece() + " pièces.");
+                            System.out.println(joueur.getCouleur() + joueur.getNom() + " possède " + joueur.getNbPiece() + " pièces.");
                             String cartesEnMain = "";
                             for (CarteCitadelles carteEnMain : joueur.getCartesCitadellesEnMain()) {
                                 cartesEnMain += carteEnMain.getNom() + ", ";
                             }
                             System.out.println(joueur.getNom() + " possède les cartes " + cartesEnMain + " dans sa main.");
                             joueur.strategieConstruitDesQuilPeut();
+
+                            this.estJoueurAyantFinisEnPremier(joueur);
+
                             if(i==4){
                                 joueurRoi=joueur;
                                 roiPresent=true;
@@ -102,7 +100,8 @@ public class Moteur {
             }
         }
 
-    private int obtenirIndiceJoueurPossedantCourrone() {
+
+    public int obtenirIndiceJoueurPossedantCourrone() {
         int indiceJoueurPossedantCouronne = 10;
         for(int i= 0; i<listeJoueurs.size(); i++){
             if(listeJoueurs.get(i).possedeCouronne()){
@@ -117,7 +116,7 @@ public class Moteur {
         return indiceJoueurPossedantCouronne;
     }
 
-    private void attributionPersonnageAChaqueJoueur(int indiceJoueurPossedantCouronne) {
+    public void attributionPersonnageAChaqueJoueur(int indiceJoueurPossedantCouronne) {
         for(int i=indiceJoueurPossedantCouronne; i<listeJoueurs.size(); i++){
             listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoire());
         }
@@ -126,7 +125,20 @@ public class Moteur {
         }
     }
 
-    private boolean verifierFinPartie() {
+    public boolean estJoueurAyantFinisEnPremier(Bot joueur) {
+        for (Bot j : listeJoueurs) {
+            if(j.estPremierJoueurAFinir()){
+               return false;
+            }
+        }
+        if(joueur.getVilleDuBot().getNbBatimentsConstruits()==8){
+            joueur.setPremierJoueurAFinir(true);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean verifierFinPartie() {
         for (Bot joueur : listeJoueurs) {
             if (joueur.getVilleDuBot().getNbBatimentsConstruits() == 8) {
                 return true;
