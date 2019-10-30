@@ -32,90 +32,17 @@ public class MoteurTest {
 
     @Test
     void commencerPartieTest(){
-        //A faire
-    }
-
-    @Test
-    void obtenirIndiceJoueurPossedantCourroneTest(){
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
         listeJoueurs.add(bot1);
         listeJoueurs.add(bot2);
         listeJoueurs.add(bot3);
 
         Moteur moteurJeu = new Moteur(listeJoueurs);
-        listeJoueurs.get(1).setPossedeCouronne(true);
-        assertEquals(1,moteurJeu.obtenirIndiceJoueurPossedantCourrone());
+        assertEquals(0,moteurJeu.getListeTours().size());
+        moteurJeu.commencerPartie();
+        assertTrue(moteurJeu.getListeTours().size()>0);
     }
 
-    @Test
-    void defausserCartesPersonnagePourLeTourTest(){
-        ArrayList<Bot> listeJoueurs = new ArrayList<>();
-        listeJoueurs.add(bot1);
-        listeJoueurs.add(bot2);
-        listeJoueurs.add(bot3);
-        Moteur moteurJeu = new Moteur(listeJoueurs);
-
-        assertNotEquals(4, moteurJeu.defausserCartesPersonnagePourLeTour().getNumero());
-        assertEquals(6,moteurJeu.getPiocheCartesPersonnage().getPiocheCP().size());
-    }
-
-    @Test
-    void determinerChoixPiocherOuPieceTest(){
-        ArrayList<Bot> listeJoueurs = new ArrayList<>();
-        listeJoueurs.add(bot1);
-        listeJoueurs.add(bot2);
-        listeJoueurs.add(bot3);
-        Moteur moteurJeu = new Moteur(listeJoueurs);
-        for(int i=0; i<65; i++){
-            moteurJeu.getPiocheCartesCitadelles().piocher();
-        }
-        assertEquals(1,moteurJeu.determinerChoixPiocherOuPiece());
-    }
-
-    @Test
-    void attributionPersonnageAChaqueJoueurTest(){
-        ArrayList<Bot> listeJoueurs = new ArrayList<>();
-        listeJoueurs.add(bot1);
-        listeJoueurs.add(bot2);
-        listeJoueurs.add(bot3);
-
-        Moteur moteurJeu = new Moteur(listeJoueurs);
-
-        assertNull(listeJoueurs.get(0).getPersonnageACeTour());
-        assertNull(listeJoueurs.get(1).getPersonnageACeTour());
-        assertNull(listeJoueurs.get(2).getPersonnageACeTour());
-        moteurJeu.attributionPersonnageAChaqueJoueur(2);
-        assertNotNull(listeJoueurs.get(0).getPersonnageACeTour());
-        assertNotNull(listeJoueurs.get(1).getPersonnageACeTour());
-        assertNotNull(listeJoueurs.get(2).getPersonnageACeTour());
-    }
-
-    @Test
-    void estJoueurAyantFinisEnPremierTest(){
-        ArrayList<Bot> listeJoueurs = new ArrayList<>();
-        listeJoueurs.add(bot1);
-        listeJoueurs.add(bot2);
-
-        Moteur moteurJeu = new Moteur(listeJoueurs);
-
-        assertFalse(moteurJeu.estJoueurAyantFinisEnPremier(listeJoueurs.get(0)));
-        listeJoueurs.get(0).getVilleDuBot().setNbBatimentsConstruits(8);
-        listeJoueurs.get(1).getVilleDuBot().setNbBatimentsConstruits(8);
-        assertTrue(moteurJeu.estJoueurAyantFinisEnPremier(listeJoueurs.get(0)));
-        assertFalse(moteurJeu.estJoueurAyantFinisEnPremier(listeJoueurs.get(1)));
-    }
-
-    @Test
-    void verifierFinPartieTest(){
-        ArrayList<Bot> listeJoueurs = new ArrayList<>();
-        listeJoueurs.add(bot1);
-        listeJoueurs.add(bot2);
-
-        Moteur moteurJeu = new Moteur(listeJoueurs);
-        assertFalse(moteurJeu.verifierFinPartie());
-        listeJoueurs.get(0).getVilleDuBot().setNbBatimentsConstruits(8);
-        assertTrue(moteurJeu.verifierFinPartie());
-    }
 
 }
 
