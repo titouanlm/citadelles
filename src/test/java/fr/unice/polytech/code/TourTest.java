@@ -30,7 +30,7 @@ public class TourTest {
 
         tour.setIndiceJoueurPossedantCourrone();
         tour.setJoueurAyantLeRoi(listeJoueurs.get(1));
-        assertFalse(tour.finPartie());
+        assertFalse(tour.finDuTour());
         for(Bot j : listeJoueurs){
             if(j==tour.getJoueurAyantLeRoi()){
                 assertTrue(j.possedeCouronne());
@@ -40,7 +40,7 @@ public class TourTest {
         }
 
         listeJoueurs.get(1).getVilleDuBot().setNbBatimentsConstruits(8);
-        assertTrue(tour.finPartie());
+        assertTrue(tour.finDuTour());
     }
 
 

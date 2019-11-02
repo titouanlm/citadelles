@@ -14,14 +14,14 @@ class Arbitre {
     }
 
     void compteLesPoints(ArrayList<Bot> listeJoueurs){
-        System.out.println("\033[0m" + "******** Résutats " + " ********\n");
+        //System.out.println("\033[0m" + "******** Résutats " + " ********\n");
         for (Bot joueur : listeJoueurs) {
             joueur.setNbPoint(joueur.getVilleDuBot().getNbTotalPoint());
             this.testBonusPremierJoueurAFinir(joueur);
             this.testBonusAConstruit8CesQuartiers(joueur);
             this.testBonusPossede5CouleursDeQuartierDifferentes(joueur);
 
-            System.out.println(joueur.getCouleur() + joueur.getNom() + " : " + joueur.getNbPoint() + " points \n");
+            //System.out.println(joueur.getCouleur() + joueur.getNom() + " : " + joueur.getNbPoint() + " points \n");
         }
     }
 

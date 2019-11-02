@@ -1,5 +1,8 @@
 package fr.unice.polytech.code.personnages;
 
+import fr.unice.polytech.code.Bot;
+import fr.unice.polytech.code.CarteCitadelles;
+import fr.unice.polytech.code.CouleurCarteCitadelles;
 import fr.unice.polytech.code.Personnage;
 
 public class Eveque extends Personnage {
@@ -20,7 +23,14 @@ public class Eveque extends Personnage {
     }
 
     @Override
-    public void effectuerSpecialite() {
-        System.out.println("L'évèque effectue sa spécialité ! \n");
+    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction) {
+        //System.out.println("L'évèque effectue sa spécialité ! \n");
+        if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Eveque){
+            for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
+                if(c.getCouleur()== CouleurCarteCitadelles.BLEU){
+                    joueurQuiEffectueAction.ajouterPiece(1);
+                }
+            }
+        }
     }
 }

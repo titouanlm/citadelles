@@ -9,5 +9,5 @@ public abstract class Personnage {
 
     public abstract String getNom();
 
-    public abstract void effectuerSpecialite();
+    public abstract void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction);
 }

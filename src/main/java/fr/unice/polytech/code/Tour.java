@@ -50,17 +50,17 @@ public class Tour {
     }
 
     public boolean lancerTour() {
-        System.out.println("\033[0m" + "******** Tour " + this.getNumero() + " ********");
+        //System.out.println("\033[0m" + "******** Tour " + this.getNumero() + " ********");
 
         this.defausserCartesPersonnagePourLeTour();
         this.setIndiceJoueurPossedantCourrone();
         this.attributionPersonnageAChaqueJoueur();
         this.appelerJoueursDansLOrdre();
 
-        return this.finPartie();
+        return this.finDuTour();
     }
 
-    public boolean finPartie() {
+    public boolean finDuTour() {
         if (this.verifierFinPartie()){
             return true;
         }else{
@@ -77,23 +77,25 @@ public class Tour {
         for (int i=1; i < 9 ; i++) {
             for (Bot joueur : listeJoueurs) {
                 if(joueur.getPersonnageACeTour().getNumero()==i) {
+                    if(i==4){
+                        this.setJoueurAyantLeRoi(joueur);
+                    }else if(i==6){
+                        joueur.ajouterPiece(1);
+                    }
+
                     this.choisirPiocherOuPrendrePiece(joueur);
 
-                    //
+                    /*
                     System.out.println(joueur.getCouleur() + joueur.getNom() + " possède " + joueur.getNbPiece() + " pièces.");
                     String cartesEnMain = "";
                     for (CarteCitadelles carteEnMain : joueur.getCartesCitadellesEnMain()) {
                         cartesEnMain += carteEnMain.getNom() + ", ";
                     }
                     System.out.println(joueur.getNom() + " possède les cartes " + cartesEnMain + " dans sa main.");
-                    //
+                    */
 
                     joueur.strategieConstruitDesQuilPeut();
                     this.estJoueurAyantFinisEnPremier(joueur);
-
-                    if(i==4){
-                        this.setJoueurAyantLeRoi(joueur);
-                    }
                     break;
                 }
             }

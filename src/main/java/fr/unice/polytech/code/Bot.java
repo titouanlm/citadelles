@@ -99,15 +99,15 @@ public class Bot {
             if (nbPiece >= carteEnMain.getPoint() && !villeDuBot.contient(carteEnMain.getNom())){
                 retirerPiece(carteEnMain.getPoint()); //on retire les pieces
                 villeDuBot.construireBatiment(carteEnMain); //on ajoute la carte dans la ville
-                System.out.println(this.nom + " a construit le batiment " + carteEnMain.getNom() + " dans sa ville.");
+                //System.out.println(this.nom + " a construit le batiment " + carteEnMain.getNom() + " dans sa ville.");
                 cartesCitadellesEnMain.remove(carteEnMain); //on retire la carte de la main
                 aConstruit = true;
                 break;
             }
         }
         if(!aConstruit){
-            System.out.println(this.nom + " n'a pas pu construire.");
+            //System.out.println(this.nom + " n'a pas pu construire.");
         }
-        this.getPersonnageACeTour().effectuerSpecialite();
+        //this.getPersonnageACeTour().effectuerSpecialite();
     }
 }
