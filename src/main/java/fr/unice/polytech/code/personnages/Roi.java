@@ -13,16 +13,6 @@ public class Roi extends Personnage {
     }
 
     @Override
-    public int getNumero() {
-        return numero;
-    }
-
-    @Override
-    public String getNom() {
-        return null;
-    }
-
-    @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction) {
         //System.out.println("Le roi effectue sa spécialité ! \n");
         if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Roi){

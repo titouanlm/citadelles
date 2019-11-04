@@ -11,16 +11,6 @@ public class Assassin extends Personnage {
     }
 
     @Override
-    public int getNumero() {
-        return numero;
-    }
-
-    @Override
-    public String getNom() {
-        return nom;
-    }
-
-    @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction) {
         //System.out.println("L'assassin effectue sa spécialité ! \n");
         if(joueurQuiSubitAction!=joueurQuiEffectueAction){

@@ -11,16 +11,6 @@ public class Voleur extends Personnage {
     }
 
     @Override
-    public int getNumero() {
-        return numero;
-    }
-
-    @Override
-    public String getNom() {
-        return nom;
-    }
-
-    @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction) {
         //System.out.println("Le voleur effectue sa spécialité ! \n");
         if(!(joueurQuiSubitAction.getPersonnageACeTour()instanceof Assassin) && joueurQuiSubitAction!=joueurQuiEffectueAction && joueurQuiSubitAction.getPersonnageACeTour()!=null){

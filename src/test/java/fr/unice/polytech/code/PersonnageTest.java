@@ -9,9 +9,9 @@ public class PersonnageTest {
 
     @Test
     void effectuerSpecialiteAssassinTest(){
-        Bot bot1 = new Bot("Bot 1", "\033[32m");
-        Bot bot2 = new Bot("Bot 2","\033[33m");
-        Bot bot3 = new Bot("Bot 3","\033[35m");
+        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
+        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
+        Bot bot3 = new BotSimpliste("Bot 3","\033[35m");
 
         bot1.setPersonnageACeTour(new Assassin());
         bot2.setPersonnageACeTour(new Voleur());
@@ -31,10 +31,10 @@ public class PersonnageTest {
 
     @Test
     void effectuerSpecialiteVoleurTest(){
-        Bot bot1 = new Bot("Bot 1", "\033[32m");
-        Bot bot2 = new Bot("Bot 2","\033[33m");
-        Bot bot3 = new Bot("Bot 3","\033[35m");
-        Bot bot4 = new Bot("Bot 4","\033[35m");
+        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
+        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
+        Bot bot3 = new BotSimpliste("Bot 3","\033[35m");
+        Bot bot4 = new BotSimpliste("Bot 4","\033[35m");
 
         bot1.setPersonnageACeTour(new Assassin());
         bot2.setPersonnageACeTour(new Voleur());
@@ -64,8 +64,8 @@ public class PersonnageTest {
 
     @Test
     void effectuerSpecialiteRoiTest(){
-        Bot bot1 = new Bot("Bot 1", "\033[32m");
-        Bot bot2 = new Bot("Bot 2","\033[33m");
+        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
+        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
 
         bot1.setPersonnageACeTour(new Assassin());
         bot2.setPersonnageACeTour(new Roi());
@@ -87,8 +87,8 @@ public class PersonnageTest {
 
     @Test
     void effectuerSpecialiteEvequeTest(){
-        Bot bot1 = new Bot("Bot 1", "\033[32m");
-        Bot bot2 = new Bot("Bot 2","\033[33m");
+        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
+        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
 
         bot1.setPersonnageACeTour(new Assassin());
         bot2.setPersonnageACeTour(new Eveque());
@@ -110,8 +110,8 @@ public class PersonnageTest {
 
     @Test
     void effectuerSpecialiteMarchandTest(){
-        Bot bot1 = new Bot("Bot 1", "\033[32m");
-        Bot bot2 = new Bot("Bot 2","\033[33m");
+        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
+        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
 
         bot1.setPersonnageACeTour(new Assassin());
         bot2.setPersonnageACeTour(new Marchand());

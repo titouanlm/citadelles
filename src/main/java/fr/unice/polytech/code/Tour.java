@@ -83,7 +83,7 @@ public class Tour {
                         joueur.ajouterPiece(1);
                     }
 
-                    this.choisirPiocherOuPrendrePiece(joueur);
+                    joueur.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
 
                     /*
                     System.out.println(joueur.getCouleur() + joueur.getNom() + " possède " + joueur.getNbPiece() + " pièces.");
@@ -94,7 +94,7 @@ public class Tour {
                     System.out.println(joueur.getNom() + " possède les cartes " + cartesEnMain + " dans sa main.");
                     */
 
-                    joueur.strategieConstruitDesQuilPeut();
+                    joueur.strategie();
                     this.estJoueurAyantFinisEnPremier(joueur);
                     break;
                 }
@@ -103,13 +103,6 @@ public class Tour {
 
     }
 
-    public void choisirPiocherOuPrendrePiece(Bot joueur) {
-        if (this.determinerChoixPiocherOuPiece() == 1) {
-            joueur.ajouterPiece(2);
-        } else {
-            joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher()); /* ***/
-        }
-    }
 
     public void setIndiceJoueurPossedantCourrone() {
         int indiceJoueurPossedantCouronne = 10;
@@ -135,21 +128,15 @@ public class Tour {
             personnageDefausseVisible = piocheCartesPersonnage.piocherPersonnageAleatoire();
         }
 
-        System.out.println(personnageDefausseVisible.getNom() + " ne peut être choisit pour ce tour.\n");
+        //System.out.println(personnageDefausseVisible.getNom() + " ne peut être choisit pour ce tour.\n");
         this.setPersonnageDefausseVisible(personnageDefausseVisible);
     }
 
-    public int determinerChoixPiocherOuPiece() {
-        if (piocheCartesCitadelles.nbCartesRestantes()>0){
-            return (int) Math.round(Math.random());
-        }else{
-            return 1;
-        }
-    }
-
+    // Peut être déterminée par le joueur
     public void attributionPersonnageAChaqueJoueur() {
         for(int i=this.indiceJoueurPossedantCouronne; i<listeJoueurs.size(); i++){
             listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoire());
+            //listeJoueurs.get(i).choixDuPersonnagePourLeTour();
         }
         for(int i=0; i<this.indiceJoueurPossedantCouronne; i++){
             listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoire());

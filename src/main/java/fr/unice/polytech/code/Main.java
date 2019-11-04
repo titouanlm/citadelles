@@ -12,11 +12,11 @@ public class Main {
         listeJoueursGagnants.put("Bot 3",0);
         listeJoueursGagnants.put("Bot 4",0);
 
-        for(int i=0 ; i<1000; i++){
-            Bot bot1 = new Bot("Bot 1", "\033[36m");
-            Bot bot2 = new Bot("Bot 2", "\033[35m");
-            Bot bot3 = new Bot("Bot 3", "\033[33m");
-            Bot bot4 = new Bot("Bot 4", "\033[34m");
+        for(int i=0 ; i<100; i++){
+            Bot bot1 = new BotSimpliste("Bot 1", "\033[36m");
+            Bot bot2 = new BotSimpliste("Bot 2", "\033[35m");
+            Bot bot3 = new BotSimpliste("Bot 3", "\033[33m");
+            Bot bot4 = new BotIntelligent("Bot 4", "\033[34m");
 
             ArrayList<Bot> listeJoueurs = new ArrayList<>();
             listeJoueurs.add(bot1);

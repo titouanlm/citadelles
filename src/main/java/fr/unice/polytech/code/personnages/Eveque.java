@@ -13,16 +13,6 @@ public class Eveque extends Personnage {
     }
 
     @Override
-    public int getNumero() {
-        return numero;
-    }
-
-    @Override
-    public String getNom() {
-        return nom;
-    }
-
-    @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction) {
         //System.out.println("L'évèque effectue sa spécialité ! \n");
         if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Eveque){

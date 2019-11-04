@@ -1,8 +1,11 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
+import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
+
 import java.util.ArrayList;
 
-public class Bot {
+public abstract class Bot {
     private String nom;
     private String couleur;
     private int nbPiece;
@@ -110,4 +113,11 @@ public class Bot {
         }
         //this.getPersonnageACeTour().effectuerSpecialite();
     }
+
+    public abstract void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage);
+
+    public abstract void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles);
+
+    public abstract void strategie();
+
 }

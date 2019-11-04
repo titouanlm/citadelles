@@ -11,16 +11,6 @@ public class Condottiere extends Personnage {
     }
 
     @Override
-    public int getNumero() {
-        return numero;
-    }
-
-    @Override
-    public String getNom() {
-        return nom;
-    }
-
-    @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction) {
         //System.out.println("Le condottière effectue sa spécialité ! \n");
     }

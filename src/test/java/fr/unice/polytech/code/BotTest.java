@@ -84,15 +84,15 @@ public class BotTest {
 
     @Test
     void testGetNom() {
-        Bot bot1=new Bot("Bot1","\033[35m");
-        Bot bot2=new Bot("Bot2","\033[33m");
+        Bot bot1=new BotSimpliste("Bot1","\033[35m");
+        Bot bot2=new BotSimpliste("Bot2","\033[33m");
         assertEquals("Bot1",bot1.getNom());
         assertNotEquals("Bot1",bot2.getNom());
     }
 
     @Test
     void testAjouterPiece(){
-        Bot bot1=new Bot("Bot1","\033[35m");
+        Bot bot1=new BotSimpliste("Bot1","\033[35m");
         assertEquals(0,bot1.getNbPiece());
         bot1.ajouterPiece(2);
         assertEquals(2,bot1.getNbPiece());
@@ -103,7 +103,7 @@ public class BotTest {
 
     @Test
     void retirerPieceTest(){
-        Bot bot1=new Bot("Bot1","\033[35m");
+        Bot bot1=new BotSimpliste("Bot1","\033[35m");
         assertEquals(0,bot1.getNbPiece());
         bot1.ajouterPiece(4);
         assertEquals(4,bot1.getNbPiece());
@@ -115,7 +115,7 @@ public class BotTest {
 
     @Test
     void testAjouterCartesCitadellesDansMain(){
-        Bot bot1 = new Bot("Bot1","\033[35m");
+        Bot bot1 = new BotSimpliste("Bot1","\033[35m");
         assertEquals(0,bot1.getCartesCitadellesEnMain().size());
         bot1.ajouterCartesCitadellesDansMain(cc[0]);
         bot1.ajouterCartesCitadellesDansMain(cc[2]);
@@ -128,7 +128,7 @@ public class BotTest {
 
     @Test
     void testSetNbPoint(){
-        Bot bot1 = new Bot("Bot1","\033[35m");
+        Bot bot1 = new BotSimpliste("Bot1","\033[35m");
         assertEquals(0,bot1.getNbPoint());
         bot1.setNbPoint(2);
         assertEquals(2,bot1.getNbPoint());
@@ -138,7 +138,7 @@ public class BotTest {
 
     @Test
     void testSetPremierJoueurAFinir(){
-        Bot bot1 = new Bot("Bot1","\033[35m");
+        Bot bot1 = new BotSimpliste("Bot1","\033[35m");
         assertFalse(bot1.estPremierJoueurAFinir());
         bot1.setPremierJoueurAFinir(true);
         assertTrue(bot1.estPremierJoueurAFinir());
@@ -146,7 +146,7 @@ public class BotTest {
 
     @Test
     void testSetPersonnageACeTour(){
-        Bot bot1 = new Bot("Bot1","\033[35m");
+        Bot bot1 = new BotSimpliste("Bot1","\033[35m");
         Condottiere condottiere=new Condottiere();
         assertNull(bot1.getPersonnageACeTour());
         bot1.setPersonnageACeTour(condottiere);
@@ -155,7 +155,7 @@ public class BotTest {
 
     @Test
     void testSetPossedeCouronne(){
-        Bot bot1 = new Bot("Bot1","\033[35m");
+        Bot bot1 = new BotSimpliste("Bot1","\033[35m");
         assertFalse(bot1.possedeCouronne());
         bot1.setPossedeCouronne(true);
         assertTrue(bot1.possedeCouronne());
@@ -163,7 +163,7 @@ public class BotTest {
 
     @Test
     void testStrategieConstruitDesQuilPeut(){
-        Bot bot1 = new Bot("Bot1","\033[35m");
+        Bot bot1 = new BotSimpliste("Bot1","\033[35m");
         Condottiere condottiere=new Condottiere();
         bot1.setPersonnageACeTour(condottiere);
         bot1.ajouterCartesCitadellesDansMain(cc[0]);
