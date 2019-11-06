@@ -13,6 +13,10 @@ class Arbitre {
         return joueurGagnant;
     }
 
+    /*public int getNbPointJoueurGagnant() {
+        return joueurGagnant.getNbPoint();
+    }*/
+
     void compteLesPoints(ArrayList<Bot> listeJoueurs){
         //System.out.println("\033[0m" + "******** Résutats " + " ********\n");
         for (Bot joueur : listeJoueurs) {

@@ -5,14 +5,9 @@ import java.util.*;
 public class Main {
 
     public static void main(String... args) {
+        Affichage affichage = new Affichage();
 
-        HashMap<String,Integer> listeJoueursGagnants = new HashMap<>();
-        listeJoueursGagnants.put("Bot 1",0);
-        listeJoueursGagnants.put("Bot 2",0);
-        listeJoueursGagnants.put("Bot 3",0);
-        listeJoueursGagnants.put("Bot 4",0);
-
-        for(int i=0 ; i<10000; i++){
+        for(int i=0 ; i<1000; i++){
             Bot bot1 = new BotSimpliste("Bot 1", "\033[36m");
             Bot bot2 = new BotSimpliste("Bot 2", "\033[35m");
             Bot bot3 = new BotSimpliste("Bot 3", "\033[33m");
@@ -31,14 +26,12 @@ public class Main {
             arbitre.compteLesPoints(listeJoueurs);
             arbitre.determineJoueurGagnant(listeJoueurs);
             //System.out.println(arbitre); //Affichage du vainqueur
-            listeJoueursGagnants.put(arbitre.getJoueurGagnant().getNom(), listeJoueursGagnants.get(arbitre.getJoueurGagnant().getNom())+1);
+            affichage.incrementerNbVictoireDuBot(arbitre.getJoueurGagnant());
+            affichage.NbDePointDesBotsEnMoyenne(listeJoueurs);
         }
 
 
-        Set<Map.Entry<String, Integer>> set = listeJoueursGagnants.entrySet();
-        for (Map.Entry<String, Integer> e : set) {
-            System.out.println(e.getKey() + " : " + e.getValue());
-        }
+        affichage.afficherResultats();
 
     }
 }
