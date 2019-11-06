@@ -1,6 +1,7 @@
-package fr.unice.polytech.code;
+/*package fr.unice.polytech.code;
 
 import fr.unice.polytech.code.personnages.Condottiere;
+import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -172,14 +173,15 @@ public class BotTest {
         bot1.ajouterCartesCitadellesDansMain(cc[6]);
 
         bot1.ajouterPiece(1);
-        bot1.strategieConstruitDesQuilPeut();
+        bot1.strategie();
         assertEquals(1,bot1.getVilleDuBot().getBatimentsConstruits().size());
 
-        bot1.strategieConstruitDesQuilPeut();
+        bot1.strategie();
         assertEquals(1,bot1.getVilleDuBot().getBatimentsConstruits().size());
 
         bot1.ajouterPiece(5);
-        bot1.strategieConstruitDesQuilPeut();
+        bot1.strategie();
         assertEquals(2,bot1.getVilleDuBot().getBatimentsConstruits().size());
     }
 }
+*/

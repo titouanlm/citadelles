@@ -83,19 +83,9 @@ public class Tour {
                         joueur.ajouterPiece(1);
                     }
 
-                    joueur.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
+                    joueur.strategie(piocheCartesCitadelles);
 
-                    /*
-                    System.out.println(joueur.getCouleur() + joueur.getNom() + " possède " + joueur.getNbPiece() + " pièces.");
-                    String cartesEnMain = "";
-                    for (CarteCitadelles carteEnMain : joueur.getCartesCitadellesEnMain()) {
-                        cartesEnMain += carteEnMain.getNom() + ", ";
-                    }
-                    System.out.println(joueur.getNom() + " possède les cartes " + cartesEnMain + " dans sa main.");
-                    */
-
-                    joueur.strategie();
-                    this.estJoueurAyantFinisEnPremier(joueur);
+                    this.estJoueurAyantFinisEnPremier(joueur); //besoin d'explication sur ce point
                     break;
                 }
             }
@@ -132,7 +122,7 @@ public class Tour {
         this.setPersonnageDefausseVisible(personnageDefausseVisible);
     }
 
-    // Peut être déterminée par le joueur
+    // Peut être déterminée par le joueur  | faire 2 méthodes stratégie : l'une pour le choix du personnage l'autre pour le reste
     public void attributionPersonnageAChaqueJoueur() {
         for(int i=this.indiceJoueurPossedantCouronne; i<listeJoueurs.size(); i++){
             listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoire());

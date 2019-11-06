@@ -6,15 +6,15 @@ import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 import java.util.ArrayList;
 
 public abstract class Bot {
-    private String nom;
-    private String couleur;
-    private int nbPiece;
-    private ArrayList<CarteCitadelles> cartesCitadellesEnMain;
-    private Ville villeDuBot;
-    private Personnage personnageACeTour;
-    private boolean possedeCouronne;
-    private int nbPoint;
-    private boolean premierJoueurAFinir;
+    String nom;
+    String couleur;
+    int nbPiece;
+    ArrayList<CarteCitadelles> cartesCitadellesEnMain;
+    Ville villeDuBot;
+    Personnage personnageACeTour;
+    boolean possedeCouronne;
+    int nbPoint;
+    boolean premierJoueurAFinir;
 
     public Bot(String nom, String couleur) {
         this.nom = nom;
@@ -96,28 +96,12 @@ public abstract class Bot {
         this.possedeCouronne = possedeCouronne;
     }
 
-    public void strategieConstruitDesQuilPeut() {
-        boolean aConstruit =false;
-        for (CarteCitadelles carteEnMain : cartesCitadellesEnMain) {
-            if (nbPiece >= carteEnMain.getPoint() && !villeDuBot.contient(carteEnMain.getNom())){
-                retirerPiece(carteEnMain.getPoint()); //on retire les pieces
-                villeDuBot.construireBatiment(carteEnMain); //on ajoute la carte dans la ville
-                //System.out.println(this.nom + " a construit le batiment " + carteEnMain.getNom() + " dans sa ville.");
-                cartesCitadellesEnMain.remove(carteEnMain); //on retire la carte de la main
-                aConstruit = true;
-                break;
-            }
-        }
-        if(!aConstruit){
-            //System.out.println(this.nom + " n'a pas pu construire.");
-        }
-        //this.getPersonnageACeTour().effectuerSpecialite();
-    }
+    //public abstract void strategieConstruitDesQuilPeut();
 
     public abstract void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage);
 
     public abstract void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles);
 
-    public abstract void strategie();
+    public abstract void strategie(PiocheCartesCitadelles piocheCartesCitadelles);
 
 }

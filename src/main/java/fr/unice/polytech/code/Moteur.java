@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 public class Moteur {
-    private PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
+    private static PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
     private PiocheCartesPersonnage piocheCartesPersonnage = new PiocheCartesPersonnage();
     private ArrayList<Bot> listeJoueurs;
     private ArrayList<Tour> listeTours;
@@ -19,7 +19,7 @@ public class Moteur {
         piocheCartesPersonnage.implementerCartesPersonnage();
     }
 
-    public PiocheCartesCitadelles getPiocheCartesCitadelles() {
+    public static PiocheCartesCitadelles getPiocheCartesCitadelles() {
         return piocheCartesCitadelles;
     }
 
@@ -45,7 +45,7 @@ public class Moteur {
         }
     }
 
-    public void commencerPartie() {
+    public void commencerPartie() { //ici c'est plus le déroulement de tout les tours
         int cptTour = 1;
         while (true) {
             listeTours.add(new Tour(cptTour, piocheCartesCitadelles, piocheCartesPersonnage, listeJoueurs));

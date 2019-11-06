@@ -24,7 +24,9 @@ public class BotSimpliste extends Bot {
     }
 
     @Override
-    public void strategie() {
+    public void strategie(PiocheCartesCitadelles piocheCartesCitadelles) {
+        this.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
+        this.strategieConstruitDesQuilPeut();
 
     }
 
@@ -36,5 +38,26 @@ public class BotSimpliste extends Bot {
             return 1;
         }
     }
+
+
+
+    public void strategieConstruitDesQuilPeut() {
+        boolean aConstruit =false;
+        for (CarteCitadelles carteEnMain : cartesCitadellesEnMain) {
+            if (nbPiece >= carteEnMain.getPoint() && !villeDuBot.contient(carteEnMain.getNom())){
+                retirerPiece(carteEnMain.getPoint()); //on retire les pieces
+                villeDuBot.construireBatiment(carteEnMain); //on ajoute la carte dans la ville
+                //System.out.println(this.nom + " a construit le batiment " + carteEnMain.getNom() + " dans sa ville.");
+                cartesCitadellesEnMain.remove(carteEnMain); //on retire la carte de la main
+                aConstruit = true;
+                break;
+            }
+        }
+        if(!aConstruit){
+            //System.out.println(this.nom + " n'a pas pu construire.");
+        }
+        //this.getPersonnageACeTour().effectuerSpecialite();
+    }
+
 
 }
