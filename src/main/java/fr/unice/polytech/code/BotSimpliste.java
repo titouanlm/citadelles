@@ -27,7 +27,6 @@ public class BotSimpliste extends Bot {
     public void strategie(PiocheCartesCitadelles piocheCartesCitadelles) {
         this.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
         this.strategieConstruitDesQuilPeut();
-
     }
 
     // Aléatoire
