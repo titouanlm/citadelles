@@ -42,7 +42,7 @@ public class Affichage {
             int[] resultsVictoiresPointsEnMoyenne = e.getValue();
             System.out.println(nomDuBot + " :");
             System.out.println("Victoire(s) : " + resultsVictoiresPointsEnMoyenne[0] + " sur " + this.nbParties + " parties." );
-            System.out.println("Soit " + ((double)resultsVictoiresPointsEnMoyenne[0]/this.nbParties)*100 + "% de victoires.");
+            System.out.println("Soit " + ((float)resultsVictoiresPointsEnMoyenne[0]/this.nbParties)*100 + "% de victoires.");
             System.out.println("Nombre de points moyens par partie : " + (double)resultsVictoiresPointsEnMoyenne[1]/this.nbParties + "\n");
         }
     }

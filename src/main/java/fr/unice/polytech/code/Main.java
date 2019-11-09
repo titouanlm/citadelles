@@ -8,10 +8,11 @@ public class Main {
         Affichage affichage = new Affichage(10000);
 
         for(int i=0 ; i<affichage.getNbParties(); i++){
-            Bot bot1 = new BotSimpliste("Bot 1", "\033[36m");
-            Bot bot2 = new BotIntelligent("Bot 2", "\033[35m");
-            Bot bot3 = new BotSimpliste("Bot 3", "\033[33m");
-            Bot bot4 = new BotIntelligent("Bot 4", "\033[34m");
+            Bot bot1 = new BotIntelligent("Bot 1", "\033[35m");
+            Bot bot3 = new BotSimpliste("Bot 3", "\033[36m");
+            Bot bot2 = new BotIntelligent("Bot 2", "\033[34m");
+            Bot bot4 = new BotSimpliste("Bot 4", "\033[33m");
+
 
             ArrayList<Bot> listeJoueurs = new ArrayList<>();
             listeJoueurs.add(bot1);

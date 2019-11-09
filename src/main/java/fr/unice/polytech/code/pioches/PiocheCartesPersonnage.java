@@ -17,6 +17,8 @@ public class PiocheCartesPersonnage {
         return piocheCP;
     }
 
+    public int getPioheCPSize() { return piocheCP.size(); }
+
     public void ajouterCartePersonnage(Personnage cp) {
         this.piocheCP.add(cp);
     }
@@ -25,12 +27,46 @@ public class PiocheCartesPersonnage {
         Collections.shuffle(this.piocheCP);
     }
 
-    public Personnage piocherPersonnageAleatoire(){
+    public Personnage piocherPersonnageAleatoirement(){
         if(piocheCP.size()>0){
             int indicePersonnageAleatoire = (int)(Math.random()*piocheCP.size());
             Personnage personnageAleatoire = this.piocheCP.get(indicePersonnageAleatoire);
             this.piocheCP.remove(indicePersonnageAleatoire);
+            /*if (personnageAleatoire.getNumero()==7){
+                System.out.println("L'architecte a été pris");
+            }
+            if (personnageAleatoire.getNumero()==1) {
+                System.out.println("L'assassin a été pris");
+                    }*/
             return personnageAleatoire;
+        }
+        return null;
+    }
+
+    public Personnage piocherPersonnageNonAleatoirement(){
+        if(piocheCP.size() > 0 ) {
+            for (int i=0;i<piocheCP.size();i++){
+                if (piocheCP.get(i).getNumero()==1){
+                    Personnage personnagechoisi = this.piocheCP.get(i);
+                    this.piocheCP.remove(i);
+                    /*if (personnagechoisi.getNumero()==1) {
+                        System.out.println("L'assassin a été pris par un bot intelligent");
+                    }*/
+                    return personnagechoisi;
+                }
+                else if (piocheCP.get(i).getNumero()==7){
+                    Personnage personnagechoisi = this.piocheCP.get(i);
+                    this.piocheCP.remove(i);
+                    /*if (personnagechoisi.getNumero()==7) {
+                        System.out.println("L'architecte a été pris par un bot intelligent");
+                    }*/
+                    return personnagechoisi;
+                }
+            }
+                    int indicePersonnageAleatoire = (int) (Math.random() * piocheCP.size());
+                    Personnage personnageAleatoire = this.piocheCP.get(indicePersonnageAleatoire);
+                    this.piocheCP.remove(indicePersonnageAleatoire);
+                    return personnageAleatoire;
         }
         return null;
     }
