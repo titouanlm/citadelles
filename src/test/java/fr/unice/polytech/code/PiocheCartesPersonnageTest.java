@@ -1,9 +1,5 @@
 package fr.unice.polytech.code;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
-import fr.unice.polytech.code.personnages.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,16 +19,16 @@ public class PiocheCartesPersonnageTest {
 
     @Test
     void piocherPersonnageAleatoireTest(){
-        assertNull(piocheCartesPersonnage.piocherPersonnageAleatoire());
+        assertNull(piocheCartesPersonnage.piocherPersonnageAleatoirement());
         piocheCartesPersonnage.implementerCartesPersonnage();
-        assertNotNull(piocheCartesPersonnage.piocherPersonnageAleatoire());
+        assertNotNull(piocheCartesPersonnage.piocherPersonnageAleatoirement());
     }
 
     @Test
     void reinitialiserTest(){
         piocheCartesPersonnage.implementerCartesPersonnage();
-        piocheCartesPersonnage.piocherPersonnageAleatoire();
-        piocheCartesPersonnage.piocherPersonnageAleatoire();
+        piocheCartesPersonnage.piocherPersonnageAleatoirement();
+        piocheCartesPersonnage.piocherPersonnageAleatoirement();
         assertEquals(6, piocheCartesPersonnage.getPiocheCP().size());
         piocheCartesPersonnage.reinitialiser();
         assertEquals(8, piocheCartesPersonnage.getPiocheCP().size());

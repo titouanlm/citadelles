@@ -13,6 +13,7 @@ public class Tour {
     private PiocheCartesCitadelles piocheCartesCitadelles;
     private PiocheCartesPersonnage piocheCartesPersonnage;
     private ArrayList<Bot> listeJoueurs;
+    private int setUpTypeBot;
 
     public Tour(int numero, PiocheCartesCitadelles piocheCartesCitadelles, PiocheCartesPersonnage piocheCartesPersonnage, ArrayList<Bot> listeJoueurs) {
         this.numero = numero;
@@ -73,25 +74,28 @@ public class Tour {
         }
     }
 
-    public void appelerJoueursDansLOrdre() {
+    public void appelerJoueursDansLOrdre() { //
         for (int i=1; i < 9 ; i++) {
             for (Bot joueur : listeJoueurs) {
-                if(joueur.getPersonnageACeTour().getNumero()==i) {
-                    if(i==4){
-                        this.setJoueurAyantLeRoi(joueur);
-                    }else if(i==6){
-                        joueur.ajouterPiece(1);
+                if (joueur.getPersonnageACeTour() != null) {
+                    if (joueur.getPersonnageACeTour().getNumero() == i) {
+                        if (i == 4) {
+                            this.setJoueurAyantLeRoi(joueur);
+                        } else if (i == 6) {
+                            joueur.ajouterPiece(1);
+                        }
+                        //joueur.strategie0(piocheCartesPersonnage);
+                        joueur.strategie(piocheCartesCitadelles);
+
+
+                        this.estJoueurAyantFinisEnPremier(joueur); //besoin d'explication sur ce point
+                        break;
                     }
-
-                    joueur.strategie(piocheCartesCitadelles);
-
-                    this.estJoueurAyantFinisEnPremier(joueur); //besoin d'explication sur ce point
-                    break;
                 }
             }
         }
-
     }
+
 
 
     public void setIndiceJoueurPossedantCourrone() {
@@ -110,26 +114,44 @@ public class Tour {
     }
 
     public void defausserCartesPersonnagePourLeTour() {
-        piocheCartesPersonnage.piocherPersonnageAleatoire();
-        Personnage personnageDefausseVisible= piocheCartesPersonnage.piocherPersonnageAleatoire();
+        piocheCartesPersonnage.piocherPersonnageAleatoirement();
+        Personnage personnageDefausseVisible= piocheCartesPersonnage.piocherPersonnageAleatoirement();
 
         while(personnageDefausseVisible.getNumero()==4){
             piocheCartesPersonnage.ajouterCartePersonnage(personnageDefausseVisible);
-            personnageDefausseVisible = piocheCartesPersonnage.piocherPersonnageAleatoire();
+            personnageDefausseVisible = piocheCartesPersonnage.piocherPersonnageAleatoirement();
         }
 
         //System.out.println(personnageDefausseVisible.getNom() + " ne peut être choisit pour ce tour.\n");
         this.setPersonnageDefausseVisible(personnageDefausseVisible);
     }
 
+
     // Peut être déterminée par le joueur  | faire 2 méthodes stratégie : l'une pour le choix du personnage l'autre pour le reste
+
     public void attributionPersonnageAChaqueJoueur() {
+
         for(int i=this.indiceJoueurPossedantCouronne; i<listeJoueurs.size(); i++){
-            listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoire());
-            //listeJoueurs.get(i).choixDuPersonnagePourLeTour();
+            if (setUpTypeBot < listeJoueurs.size()){
+                listeJoueurs.get(i).setUpTypeBot();
+                setUpTypeBot+=1;
+            }
+            if (listeJoueurs.get(i).getTypedubot() == "Bête") {
+                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoirement());
+                //listeJoueurs.get(i).choixDuPersonnagePourLeTour();
+            }
+            else {
+                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement());
+            }
         }
         for(int i=0; i<this.indiceJoueurPossedantCouronne; i++){
-            listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoire());
+            if (listeJoueurs.get(i).getTypedubot() == "Bête") {
+                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoirement());
+                //listeJoueurs.get(i).choixDuPersonnagePourLeTour();
+            }
+            else {
+                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement());
+            }
         }
     }
 
