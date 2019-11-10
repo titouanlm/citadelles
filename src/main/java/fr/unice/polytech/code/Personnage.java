@@ -1,5 +1,7 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
+
 public abstract class Personnage {
 
     protected int numero;
@@ -13,5 +15,5 @@ public abstract class Personnage {
         return nom;
     }
 
-    public abstract void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction);
+    public abstract void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction , PiocheCartesCitadelles piocheCartesCitadelles);
 }
