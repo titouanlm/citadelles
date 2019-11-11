@@ -4,6 +4,14 @@ import fr.unice.polytech.code.Bot;
 import fr.unice.polytech.code.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
+/**
+ *
+ * Cette classe implémente le pouvoir du Voleur
+ * Il annonce quel personnage il vole (il lui prendra toutes ses pièces d'or)
+ * Le Voleur ne peut voler ni l'Assassin, ni le personnage que l'Assassin a assassiné.
+ *
+ */
+
 public class Voleur extends Personnage {
 
     public Voleur(){

@@ -7,6 +7,15 @@ import fr.unice.polytech.code.CarteCitadelles;
 import fr.unice.polytech.code.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
+/**
+ *
+ * Cette classe sert à implémenter le pouvoir du Magicien
+ * Il peut:
+ * ==> soit échanger tout son jeu de cartes contre le jeu d'un autre joueur de son choix (même s'il n'a pas de cartes en main: il prend alors les cartes de l'autre joueur)
+ * ==> soit échanger un certain nombre de cartes de sa main contre le même nombre de cartes de la pioche. Les cartes défaussées sont mises sous la pioche
+ *
+ */
+
 public class Magicien extends Personnage {
 
     public Magicien(){
