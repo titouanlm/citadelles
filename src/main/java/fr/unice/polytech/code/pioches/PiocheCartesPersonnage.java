@@ -43,17 +43,11 @@ public class PiocheCartesPersonnage {
                 if (piocheCP.get(i).getNumero()==1){
                     Personnage personnagechoisi = this.piocheCP.get(i);
                     this.piocheCP.remove(i);
-                    /*if (personnagechoisi.getNumero()==1) {
-                        System.out.println("L'assassin a été pris par un bot intelligent");
-                    }*/
                     return personnagechoisi;
                 }
                 else if (piocheCP.get(i).getNumero()==7){
                     Personnage personnagechoisi = this.piocheCP.get(i);
                     this.piocheCP.remove(i);
-                    /*if (personnagechoisi.getNumero()==7) {
-                        System.out.println("L'architecte a été pris par un bot intelligent");
-                    }*/
                     return personnagechoisi;
                 }
             }

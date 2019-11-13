@@ -32,6 +32,11 @@ public class BotIntelligent extends Bot {
         this.strategieConstruit(personnageACeTour);
     }
 
+    @Override
+    public void strategie2(){
+    }
+
+
     public int determinerChoixPiocherOuPiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (piocheCartesCitadelles.nbCartesRestantes() > 0 && getNbPiece() >= 5) {
             return 0/*(int) Math.round(Math.random())*/;
@@ -55,7 +60,7 @@ public class BotIntelligent extends Bot {
 
     public void strategieConstruit(Personnage personnageactuel) { //Construire le plus gros batiment d'un coup
         int i = 1;
-        if (personnageactuel != null) {
+        //if (personnageactuel != null) {
             if (personnageactuel.getNom() == "Architecte") {
                 i = 3;
             }
@@ -71,7 +76,7 @@ public class BotIntelligent extends Bot {
                 }
                 i--;
             }
-        }
+        //}
     }
 }
 

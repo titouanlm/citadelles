@@ -1,9 +1,11 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.personnages.Assassin;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Tour {
     private int numero;
@@ -24,6 +26,8 @@ public class Tour {
         this.personnageDefausseVisible = null;
         this.joueurAyantLeRoi = null;
     }
+
+    public ArrayList<Bot> getListeJoueurs() { return listeJoueurs; }
 
     public int getNumero() {
         return numero;
@@ -76,6 +80,7 @@ public class Tour {
 
     public void appelerJoueursDansLOrdre() { //
         for (int i=1; i < 9 ; i++) {
+            Collections.shuffle(listeJoueurs);
             for (Bot joueur : listeJoueurs) {
                 if (joueur.getPersonnageACeTour() != null) {
                     if (joueur.getPersonnageACeTour().getNumero() == i) {
@@ -85,7 +90,8 @@ public class Tour {
                             joueur.ajouterPiece(1);
                         }
                         joueur.strategie(piocheCartesCitadelles);
-
+                        strategieEffectuerSpecialité();
+                        joueur.strategie2();
 
                         this.estJoueurAyantFinisEnPremier(joueur); //besoin d'explication sur ce point
                         break;
@@ -161,7 +167,7 @@ public class Tour {
         if(joueur.getVilleDuBot().getNbBatimentsConstruits()==8){
             joueur.setPremierJoueurAFinir(true);
             return true;
-        }
+    }
         return false;
     }
 
@@ -173,4 +179,23 @@ public class Tour {
         }
         return false;
     }
+
+    public void strategieEffectuerSpecialité(){
+        int joueurmaxpoint=0;
+        int botQuiVaFairePleurerQuelquun=-1;
+        int botQueLonVaDétruire=0;
+        for (int i=0;i<listeJoueurs.size();i++){
+            if (listeJoueurs.get(i).getPersonnageACeTour()instanceof Assassin){
+                botQuiVaFairePleurerQuelquun=i;
+            }
+            else if (listeJoueurs.get(i).getNbPoint() > joueurmaxpoint ){
+                joueurmaxpoint=listeJoueurs.get(i).getNbPoint();
+                botQueLonVaDétruire=i;
+            }
+        }
+        if (botQuiVaFairePleurerQuelquun!=-1){
+            listeJoueurs.get(botQuiVaFairePleurerQuelquun).getPersonnageACeTour().effectuerSpecialite(listeJoueurs.get(botQuiVaFairePleurerQuelquun),listeJoueurs.get(botQueLonVaDétruire),piocheCartesCitadelles);
+        }
+    }
+
 }

@@ -11,7 +11,7 @@ public class BotSimpliste extends Bot {
 
     @Override
     public void setUpTypeBot(){
-        Typedubot="Intelligent";
+        Typedubot="Bête";
     }
 
     @Override
@@ -30,6 +30,13 @@ public class BotSimpliste extends Bot {
         this.choisirPiocherOuPrendrePiece(piocheCartesCitadelles, personnageACeTour);
         this.strategieConstruitDesQuilPeut(personnageACeTour);
     }
+
+    @Override
+    public void strategie2(){
+
+    }
+
+
 
     public int determinerChoixPiocherOuPiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (piocheCartesCitadelles.nbCartesRestantes() > 0) {
