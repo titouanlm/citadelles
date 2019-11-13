@@ -27,7 +27,9 @@ public class Tour {
         this.joueurAyantLeRoi = null;
     }
 
-    public ArrayList<Bot> getListeJoueurs() { return listeJoueurs; }
+    public ArrayList<Bot> getListeJoueurs() {
+        return listeJoueurs;
+    }
 
     public int getNumero() {
         return numero;
@@ -66,12 +68,12 @@ public class Tour {
     }
 
     public boolean finDuTour() {
-        if (this.verifierFinPartie()){
+        if (this.verifierFinPartie()) {
             return true;
-        }else{
+        } else {
             piocheCartesPersonnage.reinitialiser();
             piocheCartesPersonnage.melanger();
-            if(listeJoueurs.get(this.indiceJoueurPossedantCouronne)!=this.joueurAyantLeRoi || this.joueurAyantLeRoi==null){
+            if (listeJoueurs.get(this.indiceJoueurPossedantCouronne) != this.joueurAyantLeRoi || this.joueurAyantLeRoi == null) {
                 listeJoueurs.get(this.indiceJoueurPossedantCouronne).setPossedeCouronne(false);
             }
             return false;
@@ -79,7 +81,7 @@ public class Tour {
     }
 
     public void appelerJoueursDansLOrdre() { //
-        for (int i=1; i < 9 ; i++) {
+        for (int i = 1; i < 9; i++) {
             Collections.shuffle(listeJoueurs);
             for (Bot joueur : listeJoueurs) {
                 if (joueur.getPersonnageACeTour() != null) {
@@ -91,7 +93,6 @@ public class Tour {
                         }
                         joueur.strategie(piocheCartesCitadelles);
                         strategieEffectuerSpecialité();
-                        joueur.strategie2();
 
                         this.estJoueurAyantFinisEnPremier(joueur); //besoin d'explication sur ce point
                         break;
@@ -102,57 +103,49 @@ public class Tour {
     }
 
 
-
     public void setIndiceJoueurPossedantCourrone() {
         int indiceJoueurPossedantCouronne = 10;
-        for(int i= 0; i<listeJoueurs.size(); i++){
-            if(listeJoueurs.get(i).possedeCouronne()){
-                indiceJoueurPossedantCouronne=i;
+        for (int i = 0; i < listeJoueurs.size(); i++) {
+            if (listeJoueurs.get(i).possedeCouronne()) {
+                indiceJoueurPossedantCouronne = i;
                 break;
             }
         }
-        if(indiceJoueurPossedantCouronne==10){
-            indiceJoueurPossedantCouronne = (int)(Math.random()*(listeJoueurs.size()));
+        if (indiceJoueurPossedantCouronne == 10) {
+            indiceJoueurPossedantCouronne = (int) (Math.random() * (listeJoueurs.size()));
             listeJoueurs.get(indiceJoueurPossedantCouronne).setPossedeCouronne(true);
         }
-         this.indiceJoueurPossedantCouronne = indiceJoueurPossedantCouronne;
+        this.indiceJoueurPossedantCouronne = indiceJoueurPossedantCouronne;
     }
 
     public void defausserCartesPersonnagePourLeTour() {
         piocheCartesPersonnage.piocherPersonnageAleatoirement();
-        Personnage personnageDefausseVisible= piocheCartesPersonnage.piocherPersonnageAleatoirement();
+        Personnage personnageDefausseVisible = piocheCartesPersonnage.piocherPersonnageAleatoirement();
 
-        while(personnageDefausseVisible.getNumero()==4){
+        while (personnageDefausseVisible.getNumero() == 4) {
             piocheCartesPersonnage.ajouterCartePersonnage(personnageDefausseVisible);
             personnageDefausseVisible = piocheCartesPersonnage.piocherPersonnageAleatoirement();
         }
         this.setPersonnageDefausseVisible(personnageDefausseVisible);
     }
 
-
-    // Peut être déterminée par le joueur  | faire 2 méthodes stratégie : l'une pour le choix du personnage l'autre pour le reste
-
     public void attributionPersonnageAChaqueJoueur() {
 
-        for(int i=this.indiceJoueurPossedantCouronne; i<listeJoueurs.size(); i++){
-            if (setUpTypeBot < listeJoueurs.size()){
+        for (int i = this.indiceJoueurPossedantCouronne; i < listeJoueurs.size(); i++) {
+            if (setUpTypeBot < listeJoueurs.size()) {
                 listeJoueurs.get(i).setUpTypeBot();
-                setUpTypeBot+=1;
+                setUpTypeBot += 1;
             }
             if (listeJoueurs.get(i).getTypedubot() == "Bête") {
                 listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoirement());
-                //listeJoueurs.get(i).choixDuPersonnagePourLeTour();
-            }
-            else {
+            } else {
                 listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement());
             }
         }
-        for(int i=0; i<this.indiceJoueurPossedantCouronne; i++){
+        for (int i = 0; i < this.indiceJoueurPossedantCouronne; i++) {
             if (listeJoueurs.get(i).getTypedubot() == "Bête") {
                 listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoirement());
-                //listeJoueurs.get(i).choixDuPersonnagePourLeTour();
-            }
-            else {
+            } else {
                 listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement());
             }
         }
@@ -160,14 +153,14 @@ public class Tour {
 
     public boolean estJoueurAyantFinisEnPremier(Bot joueur) {
         for (Bot j : listeJoueurs) {
-            if(j.estPremierJoueurAFinir()){
+            if (j.estPremierJoueurAFinir()) {
                 return false;
             }
         }
-        if(joueur.getVilleDuBot().getNbBatimentsConstruits()==8){
+        if (joueur.getVilleDuBot().getNbBatimentsConstruits() == 8) {
             joueur.setPremierJoueurAFinir(true);
             return true;
-    }
+        }
         return false;
     }
 
@@ -180,22 +173,33 @@ public class Tour {
         return false;
     }
 
-    public void strategieEffectuerSpecialité(){
-        int joueurmaxpoint=0;
-        int botQuiVaFairePleurerQuelquun=-1;
-        int botQueLonVaDétruire=0;
-        for (int i=0;i<listeJoueurs.size();i++){
-            if (listeJoueurs.get(i).getPersonnageACeTour()instanceof Assassin){
-                botQuiVaFairePleurerQuelquun=i;
+    public void strategieEffectuerSpecialité() {
+        for (int i = 0; i < listeJoueurs.size(); i++) {
+            if (listeJoueurs.get(i).getPersonnageACeTour() instanceof Assassin) {
+                strategieAssassin(i);
+                break;
             }
-            else if (listeJoueurs.get(i).getNbPoint() > joueurmaxpoint ){
-                joueurmaxpoint=listeJoueurs.get(i).getNbPoint();
-                botQueLonVaDétruire=i;
-            }
-        }
-        if (botQuiVaFairePleurerQuelquun!=-1){
-            listeJoueurs.get(botQuiVaFairePleurerQuelquun).getPersonnageACeTour().effectuerSpecialite(listeJoueurs.get(botQuiVaFairePleurerQuelquun),listeJoueurs.get(botQueLonVaDétruire),piocheCartesCitadelles);
         }
     }
 
+    public void strategieAssassin(int botQuiVaFairePleurerQuelquun) {
+        int botQueLonVaDétruire = -1;
+        if (listeJoueurs.get(botQuiVaFairePleurerQuelquun).getTypedubot() == "Intelligent") {
+            int joueurmaxpoint = -1;
+            for (int i = 0; i < listeJoueurs.size(); i++) {
+                if (listeJoueurs.get(i).getNbPoint() > joueurmaxpoint) {
+                    joueurmaxpoint = listeJoueurs.get(i).getNbPoint();
+                    botQueLonVaDétruire = i;
+                }
+            }
+        }
+        else {
+            botQueLonVaDétruire= (int) Math.random() * listeJoueurs.size();
+        }
+        /** Les futures lignes sont là pour simplifier le code lors de l'appel de la fonction effecteur spécialté */
+        Personnage personnage = listeJoueurs.get(botQuiVaFairePleurerQuelquun).getPersonnageACeTour();
+        Bot joueur = listeJoueurs.get(botQuiVaFairePleurerQuelquun);
+        Bot victime = listeJoueurs.get(botQueLonVaDétruire);
+        personnage.effectuerSpecialite(joueur, victime, piocheCartesCitadelles);
+    }
 }

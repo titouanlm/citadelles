@@ -32,10 +32,6 @@ public class BotIntelligent extends Bot {
         this.strategieConstruit(personnageACeTour);
     }
 
-    @Override
-    public void strategie2(){
-    }
-
 
     public int determinerChoixPiocherOuPiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (piocheCartesCitadelles.nbCartesRestantes() > 0 && getNbPiece() >= 5) {

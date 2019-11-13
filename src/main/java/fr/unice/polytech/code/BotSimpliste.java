@@ -31,12 +31,6 @@ public class BotSimpliste extends Bot {
         this.strategieConstruitDesQuilPeut(personnageACeTour);
     }
 
-    @Override
-    public void strategie2(){
-
-    }
-
-
 
     public int determinerChoixPiocherOuPiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (piocheCartesCitadelles.nbCartesRestantes() > 0) {
@@ -58,7 +52,6 @@ public class BotSimpliste extends Bot {
                     if (nbPiece >= carteEnMain.getPoint() && !villeDuBot.contient(carteEnMain.getNom())) {
                         retirerPiece(carteEnMain.getPoint()); //on retire les pieces
                         villeDuBot.construireBatiment(carteEnMain); //on ajoute la carte dans la ville
-                        //System.out.println(this.nom + " a construit le batiment " + carteEnMain.getNom() + " dans sa ville.");
                         cartesCitadellesEnMain.remove(carteEnMain); //on retire la carte de la main
                         aConstruit = true;
                         break;

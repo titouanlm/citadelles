@@ -105,5 +105,4 @@ public abstract class Bot {
 
     public abstract void setUpTypeBot();
 
-    public abstract void strategie2();
 }
