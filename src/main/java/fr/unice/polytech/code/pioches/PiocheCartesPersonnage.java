@@ -37,10 +37,15 @@ public class PiocheCartesPersonnage {
         return null;
     }
 
-    public Personnage piocherPersonnageNonAleatoirement(){
+    public Personnage piocherPersonnageNonAleatoirement(int piècePersonnage){
         if(piocheCP.size() > 0 ) {
             for (int i=0;i<piocheCP.size();i++){
-                if (piocheCP.get(i).getNumero()==1){
+                if (piocheCP.get(i).getNumero()==1 && piècePersonnage < 8){
+                    Personnage personnagechoisi = this.piocheCP.get(i);
+                    this.piocheCP.remove(i);
+                    return personnagechoisi;
+                }
+                else if (piocheCP.get(i).getNumero()==2 && piècePersonnage < 8){
                     Personnage personnagechoisi = this.piocheCP.get(i);
                     this.piocheCP.remove(i);
                     return personnagechoisi;

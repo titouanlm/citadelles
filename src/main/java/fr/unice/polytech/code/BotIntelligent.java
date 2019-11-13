@@ -56,7 +56,7 @@ public class BotIntelligent extends Bot {
 
     public void strategieConstruit(Personnage personnageactuel) { //Construire le plus gros batiment d'un coup
         int i = 1;
-        //if (personnageactuel != null) {
+        if (personnageactuel != null) {
             if (personnageactuel.getNom() == "Architecte") {
                 i = 3;
             }
@@ -72,7 +72,8 @@ public class BotIntelligent extends Bot {
                 }
                 i--;
             }
-        //}
+        }
+
     }
 }
 

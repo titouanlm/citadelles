@@ -1,6 +1,8 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.personnages.Architecte;
 import fr.unice.polytech.code.personnages.Assassin;
+import fr.unice.polytech.code.personnages.Voleur;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
@@ -130,7 +132,7 @@ public class Tour {
     }
 
     public void attributionPersonnageAChaqueJoueur() {
-
+        int économie=0;
         for (int i = this.indiceJoueurPossedantCouronne; i < listeJoueurs.size(); i++) {
             if (setUpTypeBot < listeJoueurs.size()) {
                 listeJoueurs.get(i).setUpTypeBot();
@@ -139,14 +141,16 @@ public class Tour {
             if (listeJoueurs.get(i).getTypedubot() == "Bête") {
                 listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoirement());
             } else {
-                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement());
+                économie=listeJoueurs.get(i).nbPiece;
+                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(économie));
             }
         }
         for (int i = 0; i < this.indiceJoueurPossedantCouronne; i++) {
             if (listeJoueurs.get(i).getTypedubot() == "Bête") {
                 listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoirement());
             } else {
-                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement());
+                économie=listeJoueurs.get(i).nbPiece;
+                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(économie));
             }
         }
     }
@@ -179,7 +183,44 @@ public class Tour {
                 strategieAssassin(i);
                 break;
             }
+            if (listeJoueurs.get(i).getPersonnageACeTour() instanceof Architecte) {
+                strategieArchitecte(i);
+                break;
+            }
+            if (listeJoueurs.get(i).getPersonnageACeTour() instanceof Voleur) {
+                strategieVoleur(i);
+                break;
+            }
         }
+    }
+
+    public void strategieVoleur(int personnequidoitvoler){
+        int botQueLonVaDétruire=(int) (Math.random()*listeJoueurs.size());;
+        int nombreDePieceMax=0;
+        if (listeJoueurs.get(personnequidoitvoler).getTypedubot()== "Intelligent"){
+            for (int i=0;i<listeJoueurs.size();i++){
+                if (listeJoueurs.get(i).nbPiece>=nombreDePieceMax && listeJoueurs.get(botQueLonVaDétruire).getPersonnageACeTour()==null){
+                    nombreDePieceMax=listeJoueurs.get(i).nbPiece;
+                    botQueLonVaDétruire=i;
+                }
+            }
+        }
+        else {
+            while (botQueLonVaDétruire==personnequidoitvoler | listeJoueurs.get(botQueLonVaDétruire).getPersonnageACeTour()==null){
+                botQueLonVaDétruire= (int) (Math.random()*listeJoueurs.size());
+            }
+        }
+        /** Les lignes ci-dessous sont là pour simplifier le code lors de l'appel de la fonction effectuer spécialité */
+        Bot victime = listeJoueurs.get(botQueLonVaDétruire);
+        Personnage personnage = listeJoueurs.get(personnequidoitvoler).getPersonnageACeTour();
+        Bot joueur = listeJoueurs.get(personnequidoitvoler);
+        personnage.effectuerSpecialite(joueur, victime, piocheCartesCitadelles);
+    }
+
+    public void strategieArchitecte(int personneQuiDoitConstruire){
+        Personnage personnage = listeJoueurs.get(personneQuiDoitConstruire).getPersonnageACeTour();
+        Bot joueur = listeJoueurs.get(personneQuiDoitConstruire);
+        personnage.effectuerSpecialite(joueur, null, piocheCartesCitadelles);
     }
 
     public void strategieAssassin(int botQuiVaFairePleurerQuelquun) {
@@ -196,10 +237,10 @@ public class Tour {
         else {
             botQueLonVaDétruire= (int) Math.random() * listeJoueurs.size();
         }
-        /** Les futures lignes sont là pour simplifier le code lors de l'appel de la fonction effecteur spécialté */
         Personnage personnage = listeJoueurs.get(botQuiVaFairePleurerQuelquun).getPersonnageACeTour();
         Bot joueur = listeJoueurs.get(botQuiVaFairePleurerQuelquun);
         Bot victime = listeJoueurs.get(botQueLonVaDétruire);
         personnage.effectuerSpecialite(joueur, victime, piocheCartesCitadelles);
     }
+
 }
