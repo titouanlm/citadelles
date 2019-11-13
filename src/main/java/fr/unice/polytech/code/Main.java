@@ -29,7 +29,7 @@ public class Main {
             affichage.incrementerNbPointsDesBotsEnMoyenne(listeJoueurs);
             affichage.incrementerNbVictoireDuBot(arbitre.getJoueurGagnant());
         }
-        
+
         affichage.afficherResultats();
 
     }

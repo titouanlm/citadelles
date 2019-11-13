@@ -13,19 +13,12 @@ class Arbitre {
         return joueurGagnant;
     }
 
-    /*public int getNbPointJoueurGagnant() {
-        return joueurGagnant.getNbPoint();
-    }*/
-
     void compteLesPoints(ArrayList<Bot> listeJoueurs){
-        //System.out.println("\033[0m" + "******** Résutats " + " ********\n");
         for (Bot joueur : listeJoueurs) {
             joueur.setNbPoint(joueur.getVilleDuBot().getNbTotalPoint());
             this.testBonusPremierJoueurAFinir(joueur);
             this.testBonusAConstruit8CesQuartiers(joueur);
             this.testBonusPossede5CouleursDeQuartierDifferentes(joueur);
-
-            //System.out.println(joueur.getCouleur() + joueur.getNom() + " : " + joueur.getNbPoint() + " points \n");
         }
     }
 
@@ -76,5 +69,4 @@ class Arbitre {
     public String toString() {
         return "\033[1;32m" + joueurGagnant.getNom() + " gagne la partie ! ";
     }
-
 }

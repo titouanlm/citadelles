@@ -99,16 +99,11 @@ public abstract class Bot {
         this.possedeCouronne = possedeCouronne;
     }
 
-    //public abstract void strategieConstruitDesQuilPeut();
-
-    //public abstract void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage);
-
     public abstract void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles, Personnage personnageactuel);
 
     public abstract void strategie(PiocheCartesCitadelles piocheCartesCitadelles);
 
     public abstract void setUpTypeBot();
 
-    //public abstract void strategie0(PiocheCartesPersonnage piocheCartesPersonnage);
 
 }

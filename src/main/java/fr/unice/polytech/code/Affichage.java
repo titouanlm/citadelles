@@ -37,35 +37,13 @@ public class Affichage {
 
     public static final String ANSI_RESET = "\u001B[0m";
 
-    public static final String ANSI_BLACK = "\u001B[30m";
-
     public static final String ANSI_RED = "\u001B[31m";
 
-    public static final String ANSI_GREEN = "\u001B[32m";
-
-    public static final String ANSI_LIGHT_YELLOW = "\u001B[93m";
-
-    public static final String ANSI_YELLOW = "\u001B[33m";
-
-    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
-
     public static final String ANSI_BLUE = "\u001B[34m";
-
-    public static final String ANSI_PURPLE = "\u001B[35m";
-
-    public static final String ANSI_CYAN = "\u001B[36m";
-
-    public static final String ANSI_WHITE = "\u001B[37m";
 
     public static final String ANSI_BOLD = "\u001B[1m";
 
     public static final String ANSI_UNBOLD = "\u001B[21m";
-
-    public static final String ANSI_UNDERLINE = "\u001B[4m";
-
-    public static final String ANSI_STOP_UNDERLINE = "\u001B[24m";
-
-    public static final String ANSI_BLINK = "\u001B[5m";
 
     public void afficherResultats() {
         Set<Map.Entry<String,int[] >> set = mapJoueurs.entrySet();
@@ -78,7 +56,4 @@ public class Affichage {
             System.out.println(ANSI_BOLD + ANSI_BLUE + "Nombre de points moyens par partie : " + ANSI_UNBOLD + ANSI_RESET + ANSI_BOLD + (double)resultsVictoiresPointsEnMoyenne[1]/this.nbParties + ANSI_UNBOLD + ANSI_RESET + "\n");
         }
     }
-
-
-
 }

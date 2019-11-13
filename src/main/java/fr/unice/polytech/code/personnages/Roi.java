@@ -7,10 +7,8 @@ import fr.unice.polytech.code.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 /**
- *
  * Cette classe sert à implémenter le pouvoir du Roi
  * Il reçoit une pièce d'or par quartier noble (jaune) dans sa cité
- *
  */
 
 public class Roi extends Personnage {

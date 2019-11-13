@@ -7,11 +7,9 @@ import fr.unice.polytech.code.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 /**
- *
  * Cette classe permet d'implémenter le pouvoir du Marchand
  * Il reçoit au début de son tour une pièce d'or supplémentaire
  * Il reçoit une pièce d'or par quartier marchand (vert) dans sa cité
- *
  */
 
 public class Marchand extends Personnage {

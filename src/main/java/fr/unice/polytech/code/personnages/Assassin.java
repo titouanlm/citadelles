@@ -5,10 +5,8 @@ import fr.unice.polytech.code.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 /**
- *
  * Cette classe consiste à implémenter la spécialité de l'assassin
  * Il assassine un personnage et ce dernier ne jouera pas durant ce tour
- *
  */
 
 public class Assassin extends Personnage {

@@ -84,7 +84,6 @@ public class Tour {
                         } else if (i == 6) {
                             joueur.ajouterPiece(1);
                         }
-                        //joueur.strategie0(piocheCartesPersonnage);
                         joueur.strategie(piocheCartesCitadelles);
 
 
@@ -121,8 +120,6 @@ public class Tour {
             piocheCartesPersonnage.ajouterCartePersonnage(personnageDefausseVisible);
             personnageDefausseVisible = piocheCartesPersonnage.piocherPersonnageAleatoirement();
         }
-
-        //System.out.println(personnageDefausseVisible.getNom() + " ne peut être choisit pour ce tour.\n");
         this.setPersonnageDefausseVisible(personnageDefausseVisible);
     }
 

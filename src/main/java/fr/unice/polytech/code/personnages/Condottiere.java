@@ -9,13 +9,11 @@ import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import java.util.Iterator;
 
 /**
- *
  * Cette classe sert à implémenter le pouvoir du Condottiere
  * Il reçoit une pièce d'or par quartier militaire (rouge) dans sa cité
  * À la fin de son tour, il peut attaquer une cité pour y détruire un quartier de son choix.
  * Il peut détruire gratuitement un quartier de coût 1, ou peut détruire un quartier au coût plus élevé en payant le coût de ce quartier - 1
  * Il ne peut pas attaquer une cité déjà terminée, avec ses huit quartiers.
- *
  */
 
 public class Condottiere extends Personnage {

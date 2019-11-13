@@ -8,6 +8,7 @@ public class BotIntelligent extends Bot {
     public BotIntelligent(String nom, String couleur) {
         super(nom, couleur);
     }
+
     @Override
     public void setUpTypeBot(){
         Typedubot="Intelligent";
@@ -29,23 +30,7 @@ public class BotIntelligent extends Bot {
     public void strategie(PiocheCartesCitadelles piocheCartesCitadelles) {
         this.choisirPiocherOuPrendrePiece(piocheCartesCitadelles, personnageACeTour);
         this.strategieConstruit(personnageACeTour);
-
-
     }
-
-   /* @Override
-    public void strategie0(PiocheCartesPersonnage piocheCartesPersonnage) {
-        Typedubot="Intelligent";
-        choixDuPersonnagePourLeTour(piocheCartesPersonnage); //A modifier :  prendre un personnage intelligemment
-    }*/
-
-
-    /*@Override
-    public void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage) {
-        Typedubot="Intelligent";
-        this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoirement());
-    }*/
-
 
     public int determinerChoixPiocherOuPiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (piocheCartesCitadelles.nbCartesRestantes() > 0 && getNbPiece() >= 5) {
@@ -87,12 +72,7 @@ public class BotIntelligent extends Bot {
                 i--;
             }
         }
-
-
-        //if(!aConstruit){
-        //System.out.println(this.nom + " n'a pas pu construire.");
     }
-    //this.getPersonnageACeTour().effectuerSpecialite();
 }
 
 

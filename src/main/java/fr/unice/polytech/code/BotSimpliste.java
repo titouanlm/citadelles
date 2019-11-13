@@ -31,19 +31,6 @@ public class BotSimpliste extends Bot {
         this.strategieConstruitDesQuilPeut(personnageACeTour);
     }
 
-    /*@Override
-    public void strategie0(PiocheCartesPersonnage piocheCartesPersonnage){
-        Typedubot="Bête";
-        choixDuPersonnagePourLeTour(piocheCartesPersonnage);
-    }*/
-
-    /*@Override
-    public void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage) {
-        Typedubot="Bête";
-        this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnage());
-    }*/
-
-    // Aléatoire
     public int determinerChoixPiocherOuPiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (piocheCartesCitadelles.nbCartesRestantes() > 0) {
             return (int) Math.round(Math.random());
@@ -51,7 +38,6 @@ public class BotSimpliste extends Bot {
             return 1;
         }
     }
-
 
     public void strategieConstruitDesQuilPeut(Personnage personnageactuel) {
         int i = 1;
@@ -73,10 +59,7 @@ public class BotSimpliste extends Bot {
                 }
                 i--;
             }
-            //if(!aConstruit){
-            //System.out.println(this.nom + " n'a pas pu construire.");
         }
-        //this.getPersonnageACeTour().effectuerSpecialite();
     }
 }
 

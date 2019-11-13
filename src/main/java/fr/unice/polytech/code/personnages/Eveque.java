@@ -7,11 +7,9 @@ import fr.unice.polytech.code.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 /**
- *
  * Cette classe permet d'implémenter la spécialité de l'Evèque
  * Il reçoit une pièce d'or par quartier religieux (bleu) dans sa cité
  * Il ne peut pas être attaqué par le Condottiere
- *
  */
 
 public class Eveque extends Personnage {

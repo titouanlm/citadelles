@@ -32,12 +32,6 @@ public class PiocheCartesPersonnage {
             int indicePersonnageAleatoire = (int)(Math.random()*piocheCP.size());
             Personnage personnageAleatoire = this.piocheCP.get(indicePersonnageAleatoire);
             this.piocheCP.remove(indicePersonnageAleatoire);
-            /*if (personnageAleatoire.getNumero()==7){
-                System.out.println("L'architecte a été pris");
-            }
-            if (personnageAleatoire.getNumero()==1) {
-                System.out.println("L'assassin a été pris");
-                    }*/
             return personnageAleatoire;
         }
         return null;
