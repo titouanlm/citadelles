@@ -21,7 +21,6 @@ public class Marchand extends Personnage {
 
     @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction , PiocheCartesCitadelles piocheCartesCitadelles) {
-        //System.out.println("Le marchand effectue sa spécialité ! \n");
         if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Marchand){
             for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
                 if(c.getCouleur()== CouleurCarteCitadelles.VERT){

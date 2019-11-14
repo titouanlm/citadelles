@@ -25,7 +25,6 @@ public class Condottiere extends Personnage {
 
     @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles ){
-        //System.out.println("Le condottière effectue sa spécialité ! \n");
         if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Condottiere){
             for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
                 if(c.getCouleur()== CouleurCarteCitadelles.ROUGE){

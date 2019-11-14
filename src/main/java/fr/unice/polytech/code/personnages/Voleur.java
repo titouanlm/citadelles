@@ -19,7 +19,6 @@ public class Voleur extends Personnage {
 
     @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles) {
-        //System.out.println("Le voleur effectue sa spécialité ! \n");
         if(!(joueurQuiSubitAction.getPersonnageACeTour()instanceof Assassin) && joueurQuiSubitAction!=joueurQuiEffectueAction && joueurQuiSubitAction.getPersonnageACeTour()!=null){
             joueurQuiEffectueAction.ajouterPiece(joueurQuiSubitAction.getNbPiece());
             joueurQuiSubitAction.retirerPiece(joueurQuiSubitAction.getNbPiece());

@@ -61,6 +61,10 @@ public class PiocheCartesPersonnage {
                     Personnage personnagechoisi = this.piocheCP.get(i);
                     this.piocheCP.remove(i);
                     return personnagechoisi;
+                } else if (piocheCP.get(i).getNumero() == 3 && piècePersonnage > 7 && carteEnMain.size() < 2) {
+                    Personnage personnagechoisi = this.piocheCP.get(i);
+                    this.piocheCP.remove(i);
+                    return personnagechoisi;
                 } else if (piocheCP.get(i).getNumero() == 7 && piècePersonnage > 7) {
                     Personnage personnagechoisi = this.piocheCP.get(i);
                     this.piocheCP.remove(i);

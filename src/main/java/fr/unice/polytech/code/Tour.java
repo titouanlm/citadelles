@@ -197,7 +197,28 @@ public class Tour {
                 strategieMarchand(i);
                 break;
             }
+            if (listeJoueurs.get(i).getPersonnageACeTour() instanceof Magicien){
+                strategieMagicien(i);
+                break;
+            }
         }
+    }
+
+    public void strategieMagicien(int botQuiPossèdeLeMagicien){
+        int botQueLonVaDétruire=(int) (Math.random()*listeJoueurs.size());
+        int nombreCarteMaxMain = 0;
+        if (listeJoueurs.get(botQuiPossèdeLeMagicien).getTypedubot()== "Intelligent"){
+            for (int i=0;i<listeJoueurs.size();i++){
+                if (nombreCarteMaxMain <= listeJoueurs.get(i).getCartesCitadellesEnMain().size()){
+                    nombreCarteMaxMain=listeJoueurs.get(i).getCartesCitadellesEnMain().size();
+                    botQueLonVaDétruire=i;
+                }
+            }
+        }
+        Bot joueur = listeJoueurs.get(botQuiPossèdeLeMagicien);
+        Personnage personnage = listeJoueurs.get(botQuiPossèdeLeMagicien).getPersonnageACeTour();
+        Bot victime = listeJoueurs.get(botQueLonVaDétruire);
+        personnage.effectuerSpecialite(joueur, victime, piocheCartesCitadelles);
     }
 
     public void strategieMarchand(int botQuiPossèdeLeMarchand){
@@ -213,7 +234,7 @@ public class Tour {
     }
 
     public void strategieVoleur(int personnequidoitvoler){
-        int botQueLonVaDétruire=(int) (Math.random()*listeJoueurs.size());;
+        int botQueLonVaDétruire=(int) (Math.random()*listeJoueurs.size());
         int nombreDePieceMax=0;
         if (listeJoueurs.get(personnequidoitvoler).getTypedubot()== "Intelligent"){
             for (int i=0;i<listeJoueurs.size();i++){

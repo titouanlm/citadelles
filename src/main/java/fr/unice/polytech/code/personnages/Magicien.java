@@ -23,7 +23,6 @@ public class Magicien extends Personnage {
 
     @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles) {
-        //System.out.println("Le magicien effectue sa spécialité ! \n");
         Random rand = new Random();
         int value = rand.nextInt(2);
         ArrayList<CarteCitadelles> cartesCitadellesIntermedieaire = new ArrayList<>();
@@ -42,14 +41,13 @@ public class Magicien extends Personnage {
                 joueurQuiSubitAction.ajouterCartesCitadellesDansMain(carte);
             }
         } else {
-            System.out.println(joueurQuiEffectueAction.getCartesCitadellesEnMain().size());
             for (Iterator<CarteCitadelles> carteIterator = joueurQuiEffectueAction.getCartesCitadellesEnMain().iterator(); carteIterator.hasNext(); ) {
+                carteIterator.next();
                 carteIterator.remove();
                 break;
 
             }
             joueurQuiEffectueAction.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
-            System.out.println(joueurQuiEffectueAction.getCartesCitadellesEnMain().size());
 
 
         }

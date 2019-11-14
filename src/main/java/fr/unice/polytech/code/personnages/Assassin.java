@@ -18,7 +18,6 @@ public class Assassin extends Personnage {
 
     @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles) {
-        //System.out.println("L'assassin effectue sa spécialité ! \n");
         if(joueurQuiSubitAction!=joueurQuiEffectueAction){
             joueurQuiSubitAction.setPersonnageACeTour(null);
         }

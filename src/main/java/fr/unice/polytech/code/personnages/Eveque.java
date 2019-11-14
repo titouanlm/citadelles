@@ -21,7 +21,6 @@ public class Eveque extends Personnage {
 
     @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles) {
-        //System.out.println("L'évèque effectue sa spécialité ! \n");
         if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Eveque){
             for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
                 if(c.getCouleur()== CouleurCarteCitadelles.BLEU){
