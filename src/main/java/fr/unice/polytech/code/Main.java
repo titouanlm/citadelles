@@ -5,7 +5,7 @@ import java.util.*;
 public class Main {
 
     public static void main(String... args) {
-        Affichage affichage = new Affichage(10000);
+        Affichage affichage = new Affichage(1000);
 
         for(int i=0 ; i<affichage.getNbParties(); i++){
             Bot bot1 = new BotIntelligent("Bot 1", "\033[35m");

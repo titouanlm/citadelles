@@ -1,5 +1,6 @@
 package fr.unice.polytech.code.pioches;
 
+import fr.unice.polytech.code.CarteCitadelles;
 import fr.unice.polytech.code.Personnage;
 import fr.unice.polytech.code.personnages.*;
 
@@ -37,20 +38,20 @@ public class PiocheCartesPersonnage {
         return null;
     }
 
-    public Personnage piocherPersonnageNonAleatoirement(int piècePersonnage){
+    public Personnage piocherPersonnageNonAleatoirement(int piècePersonnage, ArrayList<CarteCitadelles> carteEnMain){
         if(piocheCP.size() > 0 ) {
             for (int i=0;i<piocheCP.size();i++){
-                if (piocheCP.get(i).getNumero()==1 && piècePersonnage < 8){
+                if (piocheCP.get(i).getNumero()==1 && piècePersonnage < 8 && carteEnMain.size()<3){
                     Personnage personnagechoisi = this.piocheCP.get(i);
                     this.piocheCP.remove(i);
                     return personnagechoisi;
                 }
-                else if (piocheCP.get(i).getNumero()==2 && piècePersonnage < 8){
+                else if (piocheCP.get(i).getNumero()==2 && piècePersonnage < 8 ){
                     Personnage personnagechoisi = this.piocheCP.get(i);
                     this.piocheCP.remove(i);
                     return personnagechoisi;
                 }
-                else if (piocheCP.get(i).getNumero()==7){
+                else if (piocheCP.get(i).getNumero()==7 && piècePersonnage > 7){
                     Personnage personnagechoisi = this.piocheCP.get(i);
                     this.piocheCP.remove(i);
                     return personnagechoisi;

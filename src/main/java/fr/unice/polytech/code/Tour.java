@@ -2,6 +2,7 @@ package fr.unice.polytech.code;
 
 import fr.unice.polytech.code.personnages.Architecte;
 import fr.unice.polytech.code.personnages.Assassin;
+import fr.unice.polytech.code.personnages.Roi;
 import fr.unice.polytech.code.personnages.Voleur;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
@@ -27,10 +28,6 @@ public class Tour {
         this.indiceJoueurPossedantCouronne = 0;
         this.personnageDefausseVisible = null;
         this.joueurAyantLeRoi = null;
-    }
-
-    public ArrayList<Bot> getListeJoueurs() {
-        return listeJoueurs;
     }
 
     public int getNumero() {
@@ -142,7 +139,8 @@ public class Tour {
                 listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoirement());
             } else {
                 économie=listeJoueurs.get(i).nbPiece;
-                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(économie));
+                ArrayList<CarteCitadelles> carteEnMain = listeJoueurs.get(i).getCartesCitadellesEnMain();
+                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(économie, carteEnMain));
             }
         }
         for (int i = 0; i < this.indiceJoueurPossedantCouronne; i++) {
@@ -150,7 +148,8 @@ public class Tour {
                 listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoirement());
             } else {
                 économie=listeJoueurs.get(i).nbPiece;
-                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(économie));
+                ArrayList<CarteCitadelles> carteEnMain = listeJoueurs.get(i).getCartesCitadellesEnMain();
+                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(économie, carteEnMain));
             }
         }
     }
@@ -191,7 +190,17 @@ public class Tour {
                 strategieVoleur(i);
                 break;
             }
+            if (listeJoueurs.get(i).getPersonnageACeTour() instanceof Roi){
+                strategieRoi(i);
+                break;
+            }
         }
+    }
+
+    public void strategieRoi(int botQuiPossèdeLeRoi){
+        Bot joueur = listeJoueurs.get(botQuiPossèdeLeRoi);
+        Personnage personnage = listeJoueurs.get(botQuiPossèdeLeRoi).getPersonnageACeTour();
+        personnage.effectuerSpecialite(joueur, null, piocheCartesCitadelles);
     }
 
     public void strategieVoleur(int personnequidoitvoler){
