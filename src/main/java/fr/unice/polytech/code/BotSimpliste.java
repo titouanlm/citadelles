@@ -1,5 +1,6 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.personnages.Architecte;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
@@ -10,27 +11,24 @@ public class BotSimpliste extends Bot {
     }
 
     @Override
-    public void setUpTypeBot(){
-        Typedubot="Bête";
+    public void strategie(PiocheCartesCitadelles piocheCartesCitadelles) {
+        this.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
+        this.strategieConstruitDesQuilPeut();
     }
 
     @Override
-    public void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles, Personnage personnageactuel) {
-        if (personnageactuel != null) {
-            if (this.determinerChoixPiocherOuPiece(piocheCartesCitadelles) == 1) {
-                this.ajouterPiece(2);
-            } else {
-                this.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());// Peut être déterminée par le joueur
-            }
+    public void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage) {
+        this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoirement());
+    }
+
+    @Override
+    public void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles) {
+        if (this.determinerChoixPiocherOuPiece(piocheCartesCitadelles) == 1) {
+            this.ajouterPiece(2);
+        } else {
+            this.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());// Peut être déterminée par le joueur
         }
     }
-
-    @Override
-    public void strategie(PiocheCartesCitadelles piocheCartesCitadelles) {
-        this.choisirPiocherOuPrendrePiece(piocheCartesCitadelles, personnageACeTour);
-        this.strategieConstruitDesQuilPeut(personnageACeTour);
-    }
-
 
     public int determinerChoixPiocherOuPiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (piocheCartesCitadelles.nbCartesRestantes() > 0) {
@@ -40,16 +38,16 @@ public class BotSimpliste extends Bot {
         }
     }
 
-    public void strategieConstruitDesQuilPeut(Personnage personnageactuel) {
+    public void strategieConstruitDesQuilPeut() {
         int i = 1;
-        if (personnageactuel != null) {
-            if (personnageactuel.getNom() == "Architecte") {
+        if (this.personnageACeTour != null) { //Inutile (déjà testé en début de tour)
+            if (personnageACeTour instanceof Architecte) {
                 i = 3;
             }
             while (i > 0) {
                 boolean aConstruit = false;
                 for (CarteCitadelles carteEnMain : cartesCitadellesEnMain) {
-                    if (nbPiece >= carteEnMain.getPoint() && !villeDuBot.contient(carteEnMain.getNom())) {
+                    if (nbPiece >= carteEnMain.getPoint() && !villeDuBot.contient(carteEnMain)) {
                         retirerPiece(carteEnMain.getPoint()); //on retire les pieces
                         villeDuBot.construireBatiment(carteEnMain); //on ajoute la carte dans la ville
                         cartesCitadellesEnMain.remove(carteEnMain); //on retire la carte de la main

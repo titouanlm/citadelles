@@ -35,9 +35,9 @@ public class Ville {
         return nbTotalPoint;
     }
 
-    public boolean contient(String nomBatiment) {
+    public boolean contient(CarteCitadelles carteCitadelles) {
         for(CarteCitadelles batiment: batimentsConstruits){
-            if(batiment.getNom().equals(nomBatiment)){
+            if(batiment.getNom().equals(carteCitadelles.getNom())){
                 return true;
             }
         }

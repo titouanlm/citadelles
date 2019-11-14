@@ -11,11 +11,10 @@ public abstract class Bot {
     int nbPiece;
     ArrayList<CarteCitadelles> cartesCitadellesEnMain;
     Ville villeDuBot;
-    public Personnage personnageACeTour;
+    Personnage personnageACeTour;
     boolean possedeCouronne;
     int nbPoint;
     boolean premierJoueurAFinir;
-    String Typedubot;
 
     public Bot(String nom, String couleur) {
         this.nom = nom;
@@ -36,8 +35,6 @@ public abstract class Bot {
     public int getNbPiece() {
         return nbPiece;
     }
-
-    public String getTypedubot() { return Typedubot; }
 
     public void ajouterPiece(int nbPiece) {
         this.nbPiece += nbPiece;
@@ -61,10 +58,6 @@ public abstract class Bot {
 
     public void ajouterCartesCitadellesDansMain(CarteCitadelles cartesCitadellesAAjouter) {
         this.cartesCitadellesEnMain.add(cartesCitadellesAAjouter);
-    }
-
-    public String getCouleur() {
-        return couleur;
     }
 
     public int getNbPoint() {
@@ -99,10 +92,9 @@ public abstract class Bot {
         this.possedeCouronne = possedeCouronne;
     }
 
-    public abstract void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles, Personnage personnageactuel);
-
     public abstract void strategie(PiocheCartesCitadelles piocheCartesCitadelles);
 
-    public abstract void setUpTypeBot();
+    public abstract void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage);
 
+    public abstract void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles);
 }

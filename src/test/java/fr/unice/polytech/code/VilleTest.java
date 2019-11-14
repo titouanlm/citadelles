@@ -25,9 +25,9 @@ public class VilleTest {
 
     @Test
     void contientTest(){
-        assertFalse(ville.contient("Manufacture"));
+        assertFalse(ville.contient(cc3));
         ville.construireBatiment(cc3);
-        assertTrue(ville.contient("Manufacture"));
-        assertFalse(ville.contient("Donjon"));
+        assertTrue(ville.contient(cc3));
+        assertFalse(ville.contient(cc1));
     }
 }

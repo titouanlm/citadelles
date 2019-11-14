@@ -19,8 +19,6 @@ public class Architecte extends Personnage {
 
     @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction,PiocheCartesCitadelles piocheCartesCitadelles) {
-        joueurQuiEffectueAction.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
-        joueurQuiEffectueAction.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
 
     }
 }

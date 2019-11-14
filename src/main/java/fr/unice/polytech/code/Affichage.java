@@ -9,6 +9,11 @@ public class Affichage {
 
     private final HashMap<String,int[]> mapJoueurs= new HashMap<>();
     private int nbParties;
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_BLUE = "\u001B[34m";
+    private static final String ANSI_BOLD = "\u001B[1m";
+    private static final String ANSI_UNBOLD = "\u001B[21m";
 
     public Affichage(int nbParties) {
         this.nbParties=nbParties;
@@ -34,16 +39,6 @@ public class Affichage {
         tab[0]++;
         mapJoueurs.put(joueurGagnant.getNom(), tab);
     }
-
-    public static final String ANSI_RESET = "\u001B[0m";
-
-    public static final String ANSI_RED = "\u001B[31m";
-
-    public static final String ANSI_BLUE = "\u001B[34m";
-
-    public static final String ANSI_BOLD = "\u001B[1m";
-
-    public static final String ANSI_UNBOLD = "\u001B[21m";
 
     public void afficherResultats() {
         Set<Map.Entry<String,int[] >> set = mapJoueurs.entrySet();
