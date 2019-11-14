@@ -205,7 +205,31 @@ public class Tour {
                 strategieEveque(i);
                 break;
             }
+            if (listeJoueurs.get(i).getPersonnageACeTour() instanceof Condottiere){
+                strategieCondottiere(i);
+                break;
+            }
         }
+    }
+
+    public void strategieCondottiere(int botQuiPossèdeLeCondottiere){
+        int botQueLonVaDétruire=botQuiPossèdeLeCondottiere;
+        int joueurAvecLePlusDePoint=0;
+        while (botQueLonVaDétruire==botQuiPossèdeLeCondottiere){
+            botQueLonVaDétruire=(int) (Math.random()*listeJoueurs.size());
+        }
+        if (listeJoueurs.get(botQuiPossèdeLeCondottiere).getTypedubot()== "Intelligent"){
+            for (int i=0;i<listeJoueurs.size();i++){
+                if (joueurAvecLePlusDePoint <= listeJoueurs.get(i).getNbPoint()){
+                    joueurAvecLePlusDePoint=listeJoueurs.get(i).getNbPoint();
+                    botQueLonVaDétruire=i;
+                }
+            }
+        }
+        Bot joueur = listeJoueurs.get(botQuiPossèdeLeCondottiere);
+        Bot victime = listeJoueurs.get(botQueLonVaDétruire);
+        Personnage personnage = listeJoueurs.get(botQuiPossèdeLeCondottiere).getPersonnageACeTour();
+        personnage.effectuerSpecialite(joueur, victime, piocheCartesCitadelles);
     }
 
     public void strategieEveque(int botQuiPossèdeLeveque){

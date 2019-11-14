@@ -44,6 +44,7 @@ public class PiocheCartesPersonnage {
         int nombreQuartierJaune=0;
         int nombreQuartierVert=0;
         int nombreQuartierBleu=0;
+        int nombreQuartierRouge=0;
         for(CarteCitadelles c : villejoueur.getBatimentsConstruits()) {
             if (c.getCouleur() == CouleurCarteCitadelles.JAUNE) {
                 nombreQuartierJaune += 1;
@@ -53,6 +54,9 @@ public class PiocheCartesPersonnage {
             }
             if (c.getCouleur() == CouleurCarteCitadelles.BLEU) {
                 nombreQuartierBleu += 1;
+            }
+            if (c.getCouleur() == CouleurCarteCitadelles.ROUGE) {
+                nombreQuartierRouge += 1;
             }
         }
         if (piocheCP.size() > 0){
@@ -85,9 +89,12 @@ public class PiocheCartesPersonnage {
                     Personnage personnagechoisi = this.piocheCP.get(i);
                     this.piocheCP.remove(i);
                     return personnagechoisi;
+                } else {
+                    Personnage personnagechoisi = this.piocheCP.get(i);
+                    this.piocheCP.remove(i);
+                    return personnagechoisi;
                 }
             }
-
                 int indicePersonnageAleatoire = (int) (Math.random() * piocheCP.size());
                 Personnage personnageAleatoire = this.piocheCP.get(indicePersonnageAleatoire);
                 this.piocheCP.remove(indicePersonnageAleatoire);
