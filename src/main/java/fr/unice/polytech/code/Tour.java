@@ -201,7 +201,17 @@ public class Tour {
                 strategieMagicien(i);
                 break;
             }
+            if (listeJoueurs.get(i).getPersonnageACeTour() instanceof Eveque){
+                strategieEveque(i);
+                break;
+            }
         }
+    }
+
+    public void strategieEveque(int botQuiPossèdeLeveque){
+        Bot joueur = listeJoueurs.get(botQuiPossèdeLeveque);
+        Personnage personnage = listeJoueurs.get(botQuiPossèdeLeveque).getPersonnageACeTour();
+        personnage.effectuerSpecialite(joueur, null, piocheCartesCitadelles);
     }
 
     public void strategieMagicien(int botQuiPossèdeLeMagicien){
