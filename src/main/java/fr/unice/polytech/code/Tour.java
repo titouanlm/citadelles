@@ -1,9 +1,6 @@
 package fr.unice.polytech.code;
 
-import fr.unice.polytech.code.personnages.Architecte;
-import fr.unice.polytech.code.personnages.Assassin;
-import fr.unice.polytech.code.personnages.Roi;
-import fr.unice.polytech.code.personnages.Voleur;
+import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
@@ -140,7 +137,8 @@ public class Tour {
             } else {
                 économie=listeJoueurs.get(i).nbPiece;
                 ArrayList<CarteCitadelles> carteEnMain = listeJoueurs.get(i).getCartesCitadellesEnMain();
-                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(économie, carteEnMain));
+                Ville villeDuBot=listeJoueurs.get(i).villeDuBot;
+                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(économie, carteEnMain,villeDuBot));
             }
         }
         for (int i = 0; i < this.indiceJoueurPossedantCouronne; i++) {
@@ -149,7 +147,8 @@ public class Tour {
             } else {
                 économie=listeJoueurs.get(i).nbPiece;
                 ArrayList<CarteCitadelles> carteEnMain = listeJoueurs.get(i).getCartesCitadellesEnMain();
-                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(économie, carteEnMain));
+                Ville villeDuBot=listeJoueurs.get(i).villeDuBot;
+                listeJoueurs.get(i).setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(économie, carteEnMain, villeDuBot));
             }
         }
     }
@@ -194,7 +193,17 @@ public class Tour {
                 strategieRoi(i);
                 break;
             }
+            if (listeJoueurs.get(i).getPersonnageACeTour() instanceof Marchand){
+                strategieMarchand(i);
+                break;
+            }
         }
+    }
+
+    public void strategieMarchand(int botQuiPossèdeLeMarchand){
+        Bot joueur = listeJoueurs.get(botQuiPossèdeLeMarchand);
+        Personnage personnage = listeJoueurs.get(botQuiPossèdeLeMarchand).getPersonnageACeTour();
+        personnage.effectuerSpecialite(joueur, null, piocheCartesCitadelles);
     }
 
     public void strategieRoi(int botQuiPossèdeLeRoi){

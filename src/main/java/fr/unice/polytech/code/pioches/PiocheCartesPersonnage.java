@@ -1,7 +1,9 @@
 package fr.unice.polytech.code.pioches;
 
 import fr.unice.polytech.code.CarteCitadelles;
+import fr.unice.polytech.code.CouleurCarteCitadelles;
 import fr.unice.polytech.code.Personnage;
+import fr.unice.polytech.code.Ville;
 import fr.unice.polytech.code.personnages.*;
 
 import java.util.ArrayList;
@@ -38,31 +40,48 @@ public class PiocheCartesPersonnage {
         return null;
     }
 
-    public Personnage piocherPersonnageNonAleatoirement(int piècePersonnage, ArrayList<CarteCitadelles> carteEnMain){
-        if(piocheCP.size() > 0 ) {
-            for (int i=0;i<piocheCP.size();i++){
-                if (piocheCP.get(i).getNumero()==1 && piècePersonnage < 8 && carteEnMain.size()<3){
+    public Personnage piocherPersonnageNonAleatoirement(int piècePersonnage, ArrayList<CarteCitadelles> carteEnMain, Ville villejoueur) {
+        int nombreQuartierJaune=0;
+        int nombreQuartierVert=0;
+        for(CarteCitadelles c : villejoueur.getBatimentsConstruits()) {
+            if (c.getCouleur() == CouleurCarteCitadelles.JAUNE) {
+                nombreQuartierJaune += 1;
+            }
+            if (c.getCouleur() == CouleurCarteCitadelles.VERT) {
+                nombreQuartierVert += 1;
+            }
+        }
+        if (piocheCP.size() > 0){
+            for (int i = 0; i < piocheCP.size(); i++) {
+                if (piocheCP.get(i).getNumero() == 1 && piècePersonnage < 4 && carteEnMain.size() < 3) {
                     Personnage personnagechoisi = this.piocheCP.get(i);
                     this.piocheCP.remove(i);
                     return personnagechoisi;
-                }
-                else if (piocheCP.get(i).getNumero()==2 && piècePersonnage < 8 ){
+                } else if (piocheCP.get(i).getNumero() == 2 && piècePersonnage < 4) {
                     Personnage personnagechoisi = this.piocheCP.get(i);
                     this.piocheCP.remove(i);
                     return personnagechoisi;
-                }
-                else if (piocheCP.get(i).getNumero()==7 && piècePersonnage > 7){
+                } else if (piocheCP.get(i).getNumero() == 7 && piècePersonnage > 7) {
+                    Personnage personnagechoisi = this.piocheCP.get(i);
+                    this.piocheCP.remove(i);
+                    return personnagechoisi;
+                } else if (piocheCP.get(i).getNumero() == 4 && piècePersonnage > 4 && nombreQuartierJaune > 3) {
+                    Personnage personnagechoisi = this.piocheCP.get(i);
+                    this.piocheCP.remove(i);
+                    return personnagechoisi;
+                } else if (piocheCP.get(i).getNumero() == 6 && piècePersonnage > 4 && nombreQuartierVert > 3) {
                     Personnage personnagechoisi = this.piocheCP.get(i);
                     this.piocheCP.remove(i);
                     return personnagechoisi;
                 }
             }
-                    int indicePersonnageAleatoire = (int) (Math.random() * piocheCP.size());
-                    Personnage personnageAleatoire = this.piocheCP.get(indicePersonnageAleatoire);
-                    this.piocheCP.remove(indicePersonnageAleatoire);
-                    return personnageAleatoire;
-        }
-        return null;
+
+                int indicePersonnageAleatoire = (int) (Math.random() * piocheCP.size());
+                Personnage personnageAleatoire = this.piocheCP.get(indicePersonnageAleatoire);
+                this.piocheCP.remove(indicePersonnageAleatoire);
+                return personnageAleatoire;
+            }
+            return null;
     }
 
     public void reinitialiser() {
