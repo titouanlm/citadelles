@@ -29,4 +29,12 @@ public class CarteCitadelles {
     public int getPoint() {
         return point;
     }
+
+    public CarteCitadelles compareNbPoints(CarteCitadelles c2){
+        if(this.getPoint() >= c2.getPoint()){
+            return this;
+        }else{
+            return c2;
+        }
+    }
 }

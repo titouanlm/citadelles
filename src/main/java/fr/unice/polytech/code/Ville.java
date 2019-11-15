@@ -18,9 +18,11 @@ public class Ville {
     }
 
     public void construireBatiment(CarteCitadelles batimentAConstruire) {
-        this.batimentsConstruits.add(batimentAConstruire);
-        this.nbTotalPoint+=batimentAConstruire.getPoint();
-        this.nbBatimentsConstruits+=1;
+        if(!this.contient(batimentAConstruire)){
+            this.batimentsConstruits.add(batimentAConstruire);
+            this.nbTotalPoint+=batimentAConstruire.getPoint();
+            this.nbBatimentsConstruits+=1;
+        }
     }
 
     public int getNbBatimentsConstruits() {

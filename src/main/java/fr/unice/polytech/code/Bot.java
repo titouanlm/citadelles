@@ -60,6 +60,15 @@ public abstract class Bot {
         this.cartesCitadellesEnMain.add(cartesCitadellesAAjouter);
     }
 
+    public boolean contientDansSaMain(CarteCitadelles carteATester){
+        for(CarteCitadelles c : cartesCitadellesEnMain){
+            if(c.getNom().equals(carteATester.getNom())){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getNbPoint() {
         return nbPoint;
     }
