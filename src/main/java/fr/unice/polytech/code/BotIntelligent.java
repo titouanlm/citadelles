@@ -33,75 +33,76 @@ public class BotIntelligent extends Bot {
             cartesCitadellesIntermedieaire.add(piocheCartesCitadelles.piocher());// Peut être déterminée par le joueur
             cartesCitadellesIntermedieaire.add(piocheCartesCitadelles.piocher());
 
-            CarteCitadelles carteAchoisir;
+            if(cartesCitadellesIntermedieaire.get(0)!=null && cartesCitadellesIntermedieaire.get(1)!=null) {
 
-            String couleur="";
-            ArrayList<String> couleursVilleDuBot = new ArrayList<>();
-            couleursVilleDuBot.add("JAUNE");
-            couleursVilleDuBot.add("BLEU");
-            couleursVilleDuBot.add("VERT");
-            couleursVilleDuBot.add("ROUGE");
-            couleursVilleDuBot.add("VIOLET");
+                CarteCitadelles carteAchoisir;
 
-            int j=0;
-            int b=0;
-            int v=0;
-            int r=0;
-            int vi=0;
-            int max=j;
-            int x=0;
-            ArrayList<Integer> nbrCouleursVilleDuBot = new ArrayList<Integer>();
-            nbrCouleursVilleDuBot.add(j);
-            nbrCouleursVilleDuBot.add(b);
-            nbrCouleursVilleDuBot.add(v);
-            nbrCouleursVilleDuBot.add(r);
-            nbrCouleursVilleDuBot.add(vi);
+                String couleur = "";
+                ArrayList<String> couleursVilleDuBot = new ArrayList<>();
+                couleursVilleDuBot.add("JAUNE");
+                couleursVilleDuBot.add("BLEU");
+                couleursVilleDuBot.add("VERT");
+                couleursVilleDuBot.add("ROUGE");
+                couleursVilleDuBot.add("VIOLET");
 
-            for(CarteCitadelles batimentsConstruits :this.getVilleDuBot().getBatimentsConstruits()){
-                if(batimentsConstruits.getCouleur()==CouleurCarteCitadelles.JAUNE){
-                    j++;
-                }
-                if(batimentsConstruits.getCouleur()==CouleurCarteCitadelles.BLEU){
-                    b++;
-                }
-                if(batimentsConstruits.getCouleur()==CouleurCarteCitadelles.VERT){
-                    v++;
-                }
-                if(batimentsConstruits.getCouleur()==CouleurCarteCitadelles.ROUGE){
-                    r++;
-                }
-                if(batimentsConstruits.getCouleur()==CouleurCarteCitadelles.VIOLET){
-                    vi++;
-                }
-            }
-            for (int i=0;i<4;i++){
-                if (nbrCouleursVilleDuBot.get(i)< nbrCouleursVilleDuBot.get(i + 1)){
-                    max=nbrCouleursVilleDuBot.get(i);
-                    x=0;
-                }
-            }
-            for (int i=0;i<4;i++){
-                if(x==i){
-                    couleur=couleursVilleDuBot.get(i);
-                }
-            }
+                int j = 0;
+                int b = 0;
+                int v = 0;
+                int r = 0;
+                int vi = 0;
+                int max = j;
+                int x = 0;
+                ArrayList<Integer> nbrCouleursVilleDuBot = new ArrayList<Integer>();
+                nbrCouleursVilleDuBot.add(j);
+                nbrCouleursVilleDuBot.add(b);
+                nbrCouleursVilleDuBot.add(v);
+                nbrCouleursVilleDuBot.add(r);
+                nbrCouleursVilleDuBot.add(vi);
 
-            for (CarteCitadelles carte:cartesCitadellesIntermedieaire){
-                if (max>1){
-                    if (carte.getCouleur().equals(couleur)){
-                        carteAchoisir=carte;
+                for (CarteCitadelles batimentsConstruits : this.getVilleDuBot().getBatimentsConstruits()) {
+                    if (batimentsConstruits.getCouleur() == CouleurCarteCitadelles.JAUNE) {
+                        j++;
+                    }
+                    if (batimentsConstruits.getCouleur() == CouleurCarteCitadelles.BLEU) {
+                        b++;
+                    }
+                    if (batimentsConstruits.getCouleur() == CouleurCarteCitadelles.VERT) {
+                        v++;
+                    }
+                    if (batimentsConstruits.getCouleur() == CouleurCarteCitadelles.ROUGE) {
+                        r++;
+                    }
+                    if (batimentsConstruits.getCouleur() == CouleurCarteCitadelles.VIOLET) {
+                        vi++;
                     }
                 }
-                else {
-                    if(cartesCitadellesIntermedieaire.get(0).getPoint()<cartesCitadellesIntermedieaire.get(1).getPoint()){
-                        if(this.getVilleDuBot().getNbBatimentsConstruits()==7){
-                            carteAchoisir=cartesCitadellesIntermedieaire.get(0);
-                        }
-                        else {
-                            carteAchoisir = cartesCitadellesIntermedieaire.get(1);
-                        }
+                for (int i = 0; i < 4; i++) {
+                    if (nbrCouleursVilleDuBot.get(i) < nbrCouleursVilleDuBot.get(i + 1)) {
+                        max = nbrCouleursVilleDuBot.get(i);
+                        x = 0;
                     }
-                    carteAchoisir=cartesCitadellesIntermedieaire.get(0);
+                }
+                for (int i = 0; i < 4; i++) {
+                    if (x == i) {
+                        couleur = couleursVilleDuBot.get(i);
+                    }
+                }
+
+                for (CarteCitadelles carte : cartesCitadellesIntermedieaire) {
+                    if (max > 1) {
+                        if (carte.getCouleur().equals(couleur)) {
+                            carteAchoisir = carte;
+                        }
+                    } else {
+                        if (cartesCitadellesIntermedieaire.get(0).getPoint() < cartesCitadellesIntermedieaire.get(1).getPoint()) {
+                            if (this.getVilleDuBot().getNbBatimentsConstruits() == 7) {
+                                carteAchoisir = cartesCitadellesIntermedieaire.get(0);
+                            } else {
+                                carteAchoisir = cartesCitadellesIntermedieaire.get(1);
+                            }
+                        }
+                        carteAchoisir = cartesCitadellesIntermedieaire.get(0);
+                    }
                 }
             }
         }
