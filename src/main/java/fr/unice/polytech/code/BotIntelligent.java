@@ -35,7 +35,7 @@ public class BotIntelligent extends Bot {
 
             if(cartesCitadellesIntermedieaire.get(0)!=null && cartesCitadellesIntermedieaire.get(1)!=null) {
 
-                CarteCitadelles carteAchoisir;
+                CarteCitadelles carteAchoisir=null;
 
                 String couleur = "";
                 ArrayList<String> couleursVilleDuBot = new ArrayList<>();
@@ -104,7 +104,10 @@ public class BotIntelligent extends Bot {
                         carteAchoisir = cartesCitadellesIntermedieaire.get(0);
                     }
                 }
+
+            this.ajouterCartesCitadellesDansMain(carteAchoisir);
             }
+
         }
     }
 
