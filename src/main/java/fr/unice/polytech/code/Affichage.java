@@ -1,9 +1,6 @@
 package fr.unice.polytech.code;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Affichage {
 
@@ -41,13 +38,16 @@ public class Affichage {
     }
 
     public void afficherResultats() {
-        Set<Map.Entry<String,int[] >> set = mapJoueurs.entrySet();
+        Map<String, int[]> sortedMap = new TreeMap<>(mapJoueurs);
+        Set<Map.Entry<String,int[] >> set = sortedMap.entrySet();
         for (Map.Entry<String, int[]> e : set) {
             String nomDuBot=e.getKey();
             int[] resultsVictoiresPointsEnMoyenne = e.getValue();
+            double pourcentageVictoire = ((double)resultsVictoiresPointsEnMoyenne[0]/this.nbParties)*100;
+            double pourcentageVictoireArrondi =  (double) Math.round(pourcentageVictoire * 100)/100;
             System.out.println( ANSI_BOLD + ANSI_RED + nomDuBot + " :"  + ANSI_RESET );
             System.out.println( ANSI_BOLD + ANSI_BLUE + "Victoire(s) : "  + ANSI_RESET + ANSI_BOLD + resultsVictoiresPointsEnMoyenne[0] + ANSI_UNBOLD + ANSI_RESET + " sur " + ANSI_BOLD + this.nbParties + ANSI_UNBOLD + ANSI_RESET  + " parties." );
-            System.out.println("Soit " + ANSI_BOLD + ((float)resultsVictoiresPointsEnMoyenne[0]/this.nbParties)*100 + "%"+ ANSI_UNBOLD + ANSI_RESET + " de victoires.");
+            System.out.println("Soit " + ANSI_BOLD  + pourcentageVictoireArrondi + "%"+ ANSI_UNBOLD + ANSI_RESET + " de victoires.");
             System.out.println(ANSI_BOLD + ANSI_BLUE + "Nombre de points moyens par partie : " + ANSI_UNBOLD + ANSI_RESET + ANSI_BOLD + (double)resultsVictoiresPointsEnMoyenne[1]/this.nbParties + ANSI_UNBOLD + ANSI_RESET + "\n");
         }
     }
