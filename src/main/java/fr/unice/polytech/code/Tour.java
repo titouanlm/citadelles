@@ -77,7 +77,6 @@ public class Tour {
 
     public void appelerJoueursDansLOrdre() { //
         for (int numeroAppeler = 1; numeroAppeler < 9; numeroAppeler++) {
-            Collections.shuffle(listeJoueurs);
             for (Bot joueur : listeJoueurs) {
                 if (joueur.getPersonnageACeTour() != null) {
                     if (joueur.getPersonnageACeTour().getNumero() == numeroAppeler) {

@@ -19,6 +19,7 @@ public class Main {
             listeJoueurs.add(bot3);
             listeJoueurs.add(bot4);
 
+            Collections.shuffle(listeJoueurs);
             Moteur moteurJeu = new Moteur(listeJoueurs);
             moteurJeu.lancerUnePartie();
 
