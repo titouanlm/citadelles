@@ -103,7 +103,7 @@ public abstract class Bot {
 
     public abstract void strategie(PiocheCartesCitadelles piocheCartesCitadelles);
 
-    public abstract void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage);
+    public abstract void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage, Personnage personnageDefausseVisible);
 
     public abstract void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles);
 }

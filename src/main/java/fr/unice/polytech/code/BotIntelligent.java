@@ -17,8 +17,13 @@ public class BotIntelligent extends Bot {
     }
 
     @Override
-    public void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage) {
-        this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(this.nbPiece, this.cartesCitadellesEnMain,this.villeDuBot));
+    public void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage, Personnage personnageDefausseVisible) {
+        if(piocheCartesPersonnage.contient("Roi")){
+            this.setPersonnageACeTour(piocheCartesPersonnage.prendre("Roi"));
+        }else{
+            this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoirement());
+        }
+        //this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(this.nbPiece, this.cartesCitadellesEnMain,this.villeDuBot));
     }
 
     @Override

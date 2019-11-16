@@ -128,10 +128,10 @@ public class Tour {
 
     public void attributionPersonnageAChaqueJoueur() {
         for (int i = this.indiceJoueurPossedantCouronne; i < listeJoueurs.size(); i++) {
-            listeJoueurs.get(i).choixDuPersonnagePourLeTour(piocheCartesPersonnage);
+            listeJoueurs.get(i).choixDuPersonnagePourLeTour(piocheCartesPersonnage, personnageDefausseVisible);
         }
         for (int i = 0; i < this.indiceJoueurPossedantCouronne; i++) {
-            listeJoueurs.get(i).choixDuPersonnagePourLeTour(piocheCartesPersonnage);
+            listeJoueurs.get(i).choixDuPersonnagePourLeTour(piocheCartesPersonnage, personnageDefausseVisible);
         }
     }
 

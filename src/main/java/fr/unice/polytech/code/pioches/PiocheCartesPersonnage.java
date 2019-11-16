@@ -119,4 +119,26 @@ public class PiocheCartesPersonnage {
         }
         this.melanger();
     }
+
+
+    public boolean contient(String personnage) {
+        for(Personnage p: piocheCP){
+            if(p.getNom().equals(personnage)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Personnage prendre(String personnageChoisi) {
+        if(piocheCP.size()>0){
+            for(Personnage p : piocheCP){
+                if(p.getNom().equals(personnageChoisi)){
+                    this.piocheCP.remove(p);
+                    return p;
+                }
+            }
+        }
+        return null;
+    }
 }

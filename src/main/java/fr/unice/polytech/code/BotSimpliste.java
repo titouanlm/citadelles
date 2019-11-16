@@ -17,7 +17,7 @@ public class BotSimpliste extends Bot {
     }
 
     @Override
-    public void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage) {
+    public void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage, Personnage personnageDefausseVisible) {
         this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoirement());
     }
 
