@@ -3,7 +3,6 @@ package fr.unice.polytech.code.personnages;
 import fr.unice.polytech.code.Bot;
 import fr.unice.polytech.code.CarteCitadelles;
 import fr.unice.polytech.code.CouleurCarteCitadelles;
-import fr.unice.polytech.code.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 import java.util.Iterator;
@@ -34,8 +33,8 @@ public class Condottiere extends Personnage {
         }
         for (Iterator<CarteCitadelles> carteIterator = joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits().iterator(); carteIterator.hasNext();){
             CarteCitadelles carte = carteIterator.next();
-            if(joueurQuiSubitAction.getVilleDuBot().getNbBatimentsConstruits()!=8) {
-                if (joueurQuiEffectueAction.getNbPiece() > carte.getPoint() && carte.getPoint() != 1) {
+            if(joueurQuiSubitAction.getVilleDuBot().getNbBatimentsConstruits()!=8 && !(joueurQuiSubitAction.getPersonnageACeTour()instanceof Eveque)) {
+                if (joueurQuiEffectueAction.getNbPiece() > carte.getPoint() && carte.getPoint() != 1 && carte.getNom()!="Donjon") {
                     carteIterator.remove();
                     joueurQuiEffectueAction.retirerPiece(carte.getPoint() - 1);
                 }

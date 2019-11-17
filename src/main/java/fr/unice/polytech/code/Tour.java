@@ -5,7 +5,6 @@ import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Tour {
     private int numero;

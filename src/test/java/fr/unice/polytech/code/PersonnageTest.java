@@ -82,7 +82,7 @@ public class PersonnageTest {
         bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
         bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
 
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot1,null,piocheCartesCitadelles);
+        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
         bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
 
         assertEquals(0,bot1.getNbPiece());
@@ -105,7 +105,7 @@ public class PersonnageTest {
         bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
         bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
 
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot1,null,piocheCartesCitadelles);
+        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
         bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
 
         assertEquals(0,bot1.getNbPiece());
@@ -128,7 +128,7 @@ public class PersonnageTest {
         bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
         bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
 
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot1,null,piocheCartesCitadelles);
+        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
         bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
 
         assertEquals(0,bot1.getNbPiece());
