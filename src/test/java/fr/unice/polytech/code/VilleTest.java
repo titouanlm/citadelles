@@ -30,4 +30,22 @@ public class VilleTest {
         assertTrue(ville.contient(cc3));
         assertFalse(ville.contient(cc1));
     }
+
+    @Test
+    void compterNbQuartiersRougeTest(){
+        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
+        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
+
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot1.getVilleDuBot().construireBatiment( new CarteCitadelles(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot2.getVilleDuBot().construireBatiment( new CarteCitadelles(53,CouleurCarteCitadelles.ROUGE, "Forteresse", 5 ));
+        bot2.getVilleDuBot().construireBatiment( new CarteCitadelles(54,CouleurCarteCitadelles.ROUGE, "Forteresse", 5 ));
+
+        assertEquals(1, bot1.getVilleDuBot().compterNbQuartiersRouge());
+        assertNotEquals(0,bot2.getVilleDuBot().compterNbQuartiersRouge());
+        assertEquals(1, bot2.getVilleDuBot().compterNbQuartiersRouge());
+    }
 }
