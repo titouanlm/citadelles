@@ -19,12 +19,12 @@ public class BotIntelligent extends Bot {
 
     @Override
     public void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage, Personnage personnageDefausseVisible) {
-        if(piocheCartesPersonnage.contient("Roi")){
+        this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(this.nbPiece, this.cartesCitadellesEnMain,this.villeDuBot));
+        /*if(piocheCartesPersonnage.contient("Roi")){
             this.setPersonnageACeTour(piocheCartesPersonnage.prendre("Roi"));
         }else{
-            this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoirement());
-        }
-        //this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(this.nbPiece, this.cartesCitadellesEnMain,this.villeDuBot));
+            this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(this.nbPiece, this.cartesCitadellesEnMain,this.villeDuBot));
+        }*/
     }
 
     @Override
@@ -41,7 +41,7 @@ public class BotIntelligent extends Bot {
                 // On teste si le joueur n'a pas déjà construit les quartiers ou les possède déjà dans sa main
                 if(!this.getVilleDuBot().contient(cartePiochee1) && !this.getVilleDuBot().contient(cartePiochee2) &&
                         !this.contientDansSaMain(cartePiochee1) && !this.contientDansSaMain(cartePiochee2)){
-                   
+
                     if(cartePiochee1.getCouleur().toString().equals("VIOLET") && cartePiochee2.getCouleur().toString().equals("VIOLET")){
                         carteChoisie= cartePiochee1.compareNbPoints(cartePiochee2); //Prend la carte ayant le plus de point
                     }else if(cartePiochee1.getCouleur().toString().equals("VIOLET")){ //Prend la première carte si elle est violette
@@ -58,9 +58,9 @@ public class BotIntelligent extends Bot {
                 }else{ //Prend la première carte si il possède déjà les deux
                     carteChoisie=cartePiochee1;
                 }
-                
+
                 this.ajouterCartesCitadellesDansMain(carteChoisie);
-                
+
                 //On remet dans la pioche la carte que l'on a pas choisi
                 if(carteChoisie==cartePiochee1){
                     piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee2);
@@ -113,5 +113,3 @@ public class BotIntelligent extends Bot {
         return quartierAConstruire;
     }
 }
-
-
