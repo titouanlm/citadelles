@@ -22,6 +22,7 @@ public class Ville {
             this.batimentsConstruits.add(batimentAConstruire);
             this.nbTotalPoint+=batimentAConstruire.getPoint();
             this.nbBatimentsConstruits+=1;
+            System.out.println("Construit le quartier " + batimentAConstruire.getNom() + " dans sa ville." );
         }
     }
 
@@ -54,5 +55,21 @@ public class Ville {
             }
         }
         return nbQuartiersRouge;
+    }
+
+    public String quartiersVilleToString(){
+        String quartiers="";
+        for(CarteCitadelles c : batimentsConstruits){
+            quartiers+= c.getNom()+", ";
+        }
+        return quartiers;
+    }
+
+    public void detruireQuartier(CarteCitadelles quartierADetruire) {
+        if(this.contient(quartierADetruire)){
+            this.batimentsConstruits.remove(quartierADetruire);
+            this.nbTotalPoint-=quartierADetruire.getPoint();
+            this.nbBatimentsConstruits-=1;
+        }
     }
 }

@@ -37,11 +37,14 @@ public class Moteur {
     }
 
     public void initialiserPartie() {
+        System.out.println("Initialisation de la partie.");
         for (Bot joueur : listeJoueurs) {
             joueur.ajouterPiece(2);
             for (int j = 0; j < 4; j++) {
                 joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
             }
+            System.out.println(joueur.getNom() + " possède " + joueur.getNbPiece() + " pièces.");
+            System.out.println("Et il possède les cartes " + joueur.cartesEnMainToString() + " dans sa main.");
         }
     }
 

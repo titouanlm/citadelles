@@ -1,6 +1,7 @@
 package fr.unice.polytech.code;
 
 import fr.unice.polytech.code.personnages.Architecte;
+import fr.unice.polytech.code.personnages.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
@@ -12,21 +13,25 @@ public class BotSimpliste extends Bot {
 
     @Override
     public void strategie(PiocheCartesCitadelles piocheCartesCitadelles) {
-        this.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
         this.strategieConstruitDesQuilPeut();
     }
 
     @Override
     public void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage, Personnage personnageDefausseVisible) {
-        this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageAleatoirement());
+        Personnage pChoisi = piocheCartesPersonnage.piocherPersonnageAleatoirement();
+        this.setPersonnageACeTour(pChoisi);
+        System.out.println(this.getNom() + " a pris le personnage " + pChoisi.getNom() + ".");
     }
 
     @Override
     public void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (this.determinerChoixPiocherOuPiece(piocheCartesCitadelles) == 1) {
             this.ajouterPiece(2);
+            System.out.println("Prend 2 pièces.");
         } else {
-            this.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());// Peut être déterminée par le joueur
+            CarteCitadelles cartePrise = piocheCartesCitadelles.piocher();
+            this.ajouterCartesCitadellesDansMain(cartePrise);
+            System.out.println("Choisit de prendre la carte " + cartePrise.getNom() + " dans sa main.");
         }
     }
 
@@ -45,13 +50,11 @@ public class BotSimpliste extends Bot {
                 i = 3;
             }
             while (i > 0) {
-                boolean aConstruit = false;
                 for (CarteCitadelles carteEnMain : cartesCitadellesEnMain) {
                     if (nbPiece >= carteEnMain.getPoint() && !villeDuBot.contient(carteEnMain)) {
                         retirerPiece(carteEnMain.getPoint()); //on retire les pieces
                         villeDuBot.construireBatiment(carteEnMain); //on ajoute la carte dans la ville
                         cartesCitadellesEnMain.remove(carteEnMain); //on retire la carte de la main
-                        aConstruit = true;
                         break;
                     }
                 }

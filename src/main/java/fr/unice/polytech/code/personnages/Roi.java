@@ -3,7 +3,6 @@ package fr.unice.polytech.code.personnages;
 import fr.unice.polytech.code.Bot;
 import fr.unice.polytech.code.CarteCitadelles;
 import fr.unice.polytech.code.CouleurCarteCitadelles;
-import fr.unice.polytech.code.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 /**
@@ -21,11 +20,14 @@ public class Roi extends Personnage {
     @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction , PiocheCartesCitadelles piocheCartesCitadelles) {
         if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Roi){
+            int nbPieceRecoltee=0;
             for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
                 if(c.getCouleur()== CouleurCarteCitadelles.JAUNE){
                     joueurQuiEffectueAction.ajouterPiece(1);
+                    nbPieceRecoltee+=1;
                 }
             }
+            System.out.println("Récupère " + nbPieceRecoltee + " pièces bonus grâce aux quartier(s) nobles qu'il possède.");
         }
 
     }

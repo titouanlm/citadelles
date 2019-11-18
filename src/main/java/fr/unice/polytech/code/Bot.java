@@ -1,5 +1,6 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.personnages.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
@@ -69,6 +70,10 @@ public abstract class Bot {
         return false;
     }
 
+    public String getCouleur() {
+        return couleur;
+    }
+
     public int getNbPoint() {
         return nbPoint;
     }
@@ -99,6 +104,14 @@ public abstract class Bot {
 
     public void setPossedeCouronne(boolean possedeCouronne) {
         this.possedeCouronne = possedeCouronne;
+    }
+
+    public String cartesEnMainToString(){
+        String cartes="";
+        for(CarteCitadelles c : cartesCitadellesEnMain){
+            cartes+= c.getNom()+", ";
+        }
+        return cartes;
     }
 
     public abstract void strategie(PiocheCartesCitadelles piocheCartesCitadelles);

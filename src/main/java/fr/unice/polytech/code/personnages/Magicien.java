@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.Random;
 import fr.unice.polytech.code.Bot;
 import fr.unice.polytech.code.CarteCitadelles;
-import fr.unice.polytech.code.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 /**

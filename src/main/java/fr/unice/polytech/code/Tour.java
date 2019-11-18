@@ -5,7 +5,6 @@ import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Tour {
     private int numero;
@@ -52,7 +51,7 @@ public class Tour {
     }
 
     public boolean lancerTour() {
-        //System.out.println("\033[0m" + "******** Tour " + this.getNumero() + " ********");
+        System.out.println("\033[0m" + "\n******** Tour " + this.getNumero() + " ********");
 
         this.defausserCartesPersonnagePourLeTour();
         this.setIndiceJoueurPossedantCourrone();
@@ -75,22 +74,30 @@ public class Tour {
         }
     }
 
-    public void appelerJoueursDansLOrdre() { //
+    public void appelerJoueursDansLOrdre() {
         for (int numeroAppeler = 1; numeroAppeler < 9; numeroAppeler++) {
             for (Bot joueur : listeJoueurs) {
                 if (joueur.getPersonnageACeTour() != null) {
                     if (joueur.getPersonnageACeTour().getNumero() == numeroAppeler) {
+                        System.out.println("\n" + joueur.getCouleur() + joueur.getNom() + " : " + joueur.getPersonnageACeTour().getNom());
                         if (numeroAppeler == 4) { //Roi
                             this.setJoueurAyantLeRoi(joueur);
                         } else if (numeroAppeler == 6) { //Marchand
                             joueur.ajouterPiece(1);
+                            System.out.println("Gagne une pièce en plus car il est le Marchand!");
                         }else if(numeroAppeler == 7){ //Architecte
                             joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
                             joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
+                            System.out.println("Pioche 2 cartes en plus car il est l'Architecte!");
                         }
+                        System.out.println("Nombre de pièces : " + joueur.getNbPiece());
+                        joueur.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
+                        System.out.println("Nombre de pièces : " + joueur.getNbPiece());
+                        System.out.println("Cartes en main : " + joueur.cartesEnMainToString());
                         joueur.strategie(piocheCartesCitadelles);
                         this.strategieEffectuerSpecialite(joueur);
-
+                        System.out.println("Quartiers construits dans sa ville : " + joueur.getVilleDuBot().quartiersVilleToString());
+                        System.out.println("Cartes en main : " + joueur.cartesEnMainToString());
                         this.estJoueurAyantFinisEnPremier(joueur);
                         break;
                     }
@@ -112,6 +119,7 @@ public class Tour {
             indiceJoueurPossedantCouronne = (int) (Math.random() * (listeJoueurs.size()));
             listeJoueurs.get(indiceJoueurPossedantCouronne).setPossedeCouronne(true);
         }
+        System.out.println(listeJoueurs.get(indiceJoueurPossedantCouronne).getNom() + " possède la courrone pour ce tour.");
         this.indiceJoueurPossedantCouronne = indiceJoueurPossedantCouronne;
     }
 
@@ -123,6 +131,7 @@ public class Tour {
             piocheCartesPersonnage.ajouterCartePersonnage(personnageDefausseVisible);
             personnageDefausseVisible = piocheCartesPersonnage.piocherPersonnageAleatoirement();
         }
+        System.out.println("Personnage défaussé : " + personnageDefausseVisible.getNom());
         this.setPersonnageDefausseVisible(personnageDefausseVisible);
     }
 
@@ -143,6 +152,7 @@ public class Tour {
         }
         if (joueur.getVilleDuBot().getNbBatimentsConstruits() == 8) {
             joueur.setPremierJoueurAFinir(true);
+            System.out.println(joueur.getNom() + " est le premier joueur à constuire ses 8 quartiers.");
             return true;
         }
         return false;
