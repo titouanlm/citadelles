@@ -34,7 +34,9 @@ public class Condottiere extends Personnage {
             }
             System.out.println("Récupère " + nbPieceRecoltee + " pièces bonus grâce aux quartier(s) militaires() qu'il possède.");
         }
+
         detuireQuartierEnemie(joueurQuiEffectueAction,joueurQuiSubitAction );
+
     }
 
     public void detuireQuartierEnemie(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction){
