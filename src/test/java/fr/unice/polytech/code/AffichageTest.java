@@ -1,8 +1,8 @@
 package fr.unice.polytech.code;
 
 
-import fr.unice.polytech.code.bots.Bot;
-import fr.unice.polytech.code.bots.BotSimpliste;
+import fr.unice.polytech.code.bot.Bot;
+import fr.unice.polytech.code.bot.BotSimpliste;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

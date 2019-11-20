@@ -1,7 +1,7 @@
 package fr.unice.polytech.code.moteur;
 
-import fr.unice.polytech.code.bots.*;
-import fr.unice.polytech.code.bots.BotIntelligent;
+import fr.unice.polytech.code.bot.*;
+import fr.unice.polytech.code.bot.BotIntelligent;
 import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;

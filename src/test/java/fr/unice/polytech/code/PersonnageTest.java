@@ -1,7 +1,7 @@
 package fr.unice.polytech.code;
 
-import fr.unice.polytech.code.bots.Bot;
-import fr.unice.polytech.code.bots.BotSimpliste;
+import fr.unice.polytech.code.bot.*;
+import fr.unice.polytech.code.bot.*;
 import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import org.junit.jupiter.api.Test;

@@ -1,6 +1,6 @@
 package fr.unice.polytech.code.personnages;
 
-import fr.unice.polytech.code.bots.Bot;
+import fr.unice.polytech.code.bot.Bot;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 public abstract class Personnage {
