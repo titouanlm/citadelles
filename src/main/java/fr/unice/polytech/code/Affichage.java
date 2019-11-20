@@ -1,5 +1,7 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.bots.Bot;
+
 import java.util.*;
 
 public class Affichage {
@@ -22,6 +24,7 @@ public class Affichage {
     public int getNbParties() {
         return nbParties;
     }
+    public final HashMap<String,int[]> getMapJoueurs(){return mapJoueurs;}
 
     public void incrementerNbPointsDesBotsEnMoyenne(ArrayList<Bot> listeDeJoueur){
         for(Bot j : listeDeJoueur){

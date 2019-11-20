@@ -1,6 +1,7 @@
 package fr.unice.polytech.code;
 
-import org.junit.jupiter.api.BeforeEach;
+import fr.unice.polytech.code.bots.Bot;
+import fr.unice.polytech.code.bots.BotSimpliste;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

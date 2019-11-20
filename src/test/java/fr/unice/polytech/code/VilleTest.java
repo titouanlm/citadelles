@@ -1,5 +1,7 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.bots.Bot;
+import fr.unice.polytech.code.bots.BotSimpliste;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

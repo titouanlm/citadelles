@@ -1,5 +1,6 @@
-package fr.unice.polytech.code;
+package fr.unice.polytech.code.bots;
 
+import fr.unice.polytech.code.CarteCitadelles;
 import fr.unice.polytech.code.personnages.Architecte;
 import fr.unice.polytech.code.personnages.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
@@ -18,15 +19,16 @@ public class BotIntelligent extends Bot {
 
     @Override
     public void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage, Personnage personnageDefausseVisible) {
-        //this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(this.nbPiece, this.cartesCitadellesEnMain,this.villeDuBot));
-        if(piocheCartesPersonnage.contient("Roi")){
+        this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(this.nbPiece, this.cartesCitadellesEnMain,this.villeDuBot));
+        System.out.println(this.getNom() + " a pris le personnage " + this.getPersonnageACeTour().getNom() + ".");
+        /*if(piocheCartesPersonnage.contient("Roi")){
             this.setPersonnageACeTour(piocheCartesPersonnage.prendre("Roi"));
             System.out.println(this.getNom() + " a pris le personnage Roi.");
         }else{
             Personnage pChoisi = piocheCartesPersonnage.piocherPersonnageAleatoirement();
             this.setPersonnageACeTour(pChoisi);
             System.out.println(this.getNom() + " a pris le personnage " + pChoisi.getNom() + ".");
-        }
+        }*/
     }
 
     @Override

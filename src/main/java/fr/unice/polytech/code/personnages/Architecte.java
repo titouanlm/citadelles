@@ -1,6 +1,6 @@
 package fr.unice.polytech.code.personnages;
 
-import fr.unice.polytech.code.Bot;
+import fr.unice.polytech.code.bots.Bot;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 /**
@@ -18,6 +18,6 @@ public class Architecte extends Personnage {
 
     @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction,PiocheCartesCitadelles piocheCartesCitadelles) {
-
+        System.out.println("Peut contruire 3 quartiers");
     }
 }

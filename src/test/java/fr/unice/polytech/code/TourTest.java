@@ -1,5 +1,9 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.bots.Bot;
+import fr.unice.polytech.code.bots.BotSimpliste;
+import fr.unice.polytech.code.moteur.Moteur;
+import fr.unice.polytech.code.moteur.Tour;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package fr.unice.polytech.code.personnages;
 
-import fr.unice.polytech.code.Bot;
+import fr.unice.polytech.code.bots.Bot;
 import fr.unice.polytech.code.CarteCitadelles;
 import fr.unice.polytech.code.CouleurCarteCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
@@ -35,8 +35,7 @@ public class Condottiere extends Personnage {
             System.out.println("Récupère " + nbPieceRecoltee + " pièces bonus grâce aux quartier(s) militaires() qu'il possède.");
         }
 
-        detuireQuartierEnemie(joueurQuiEffectueAction,joueurQuiSubitAction );
-
+        detuireQuartierEnemie(joueurQuiEffectueAction,joueurQuiSubitAction);
     }
 
     public void detuireQuartierEnemie(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction){

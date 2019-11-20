@@ -1,6 +1,6 @@
 package fr.unice.polytech.code.personnages;
 
-import fr.unice.polytech.code.Bot;
+import fr.unice.polytech.code.bots.Bot;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 /**
@@ -19,6 +19,7 @@ public class Voleur extends Personnage {
     @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles) {
         if(!(joueurQuiSubitAction.getPersonnageACeTour()instanceof Assassin) && joueurQuiSubitAction!=joueurQuiEffectueAction && joueurQuiSubitAction.getPersonnageACeTour()!=null){
+            System.out.println(joueurQuiEffectueAction.getNom() + " vole " + joueurQuiSubitAction.getNbPiece() + " pièces à " + joueurQuiSubitAction.getNom());
             joueurQuiEffectueAction.ajouterPiece(joueurQuiSubitAction.getNbPiece());
             joueurQuiSubitAction.retirerPiece(joueurQuiSubitAction.getNbPiece());
         }
