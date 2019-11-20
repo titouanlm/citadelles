@@ -1,7 +1,6 @@
 package fr.unice.polytech.code;
 
-import fr.unice.polytech.code.bot.Bot;
-import fr.unice.polytech.code.bot.BotSimpliste;
+import fr.unice.polytech.code.bots.*;
 import fr.unice.polytech.code.moteur.Moteur;
 import org.junit.jupiter.api.Test;
 

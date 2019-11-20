@@ -1,4 +1,4 @@
-package fr.unice.polytech.code.bot;
+package fr.unice.polytech.code.bots;
 
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.personnages.Architecte;
@@ -6,9 +6,9 @@ import fr.unice.polytech.code.personnages.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
-public class BotIntelligent extends Bot {
+public class BotFairPlay extends Bot {
 
-    public BotIntelligent(String nom, String couleur) {
+    public BotFairPlay(String nom, String couleur) {
         super(nom, couleur);
     }
 

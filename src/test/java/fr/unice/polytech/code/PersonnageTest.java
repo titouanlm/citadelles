@@ -1,6 +1,6 @@
 package fr.unice.polytech.code;
 
-import fr.unice.polytech.code.bot.*;
+import fr.unice.polytech.code.bots.*;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.cartes.CarteCitadellesSansPouvoir;
 import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;

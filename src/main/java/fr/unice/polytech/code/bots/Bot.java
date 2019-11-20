@@ -1,4 +1,4 @@
-package fr.unice.polytech.code.bot;
+package fr.unice.polytech.code.bots;
 
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.Ville;
