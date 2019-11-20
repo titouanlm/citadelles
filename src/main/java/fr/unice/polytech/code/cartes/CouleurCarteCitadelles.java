@@ -1,4 +1,4 @@
-package fr.unice.polytech.code;
+package fr.unice.polytech.code.cartes;
 
 public enum CouleurCarteCitadelles {
     BLEU("BLEU"),

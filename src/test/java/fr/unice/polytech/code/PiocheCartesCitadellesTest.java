@@ -1,6 +1,9 @@
 
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.cartes.CarteCitadellesSansPouvoir;
+import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +17,8 @@ public class PiocheCartesCitadellesTest {
     @Test
     void piocherTest(){
         CarteCitadelles[] cc = new CarteCitadelles[65];
-        cc[0] = new CarteCitadelles(1,CouleurCarteCitadelles.BLEU, "Temple", 1 );
-        cc[1] = new CarteCitadelles(2,CouleurCarteCitadelles.BLEU, "Temple", 1 );
+        cc[0] = new CarteCitadellesSansPouvoir(1, CouleurCarteCitadelles.BLEU, "Temple", 1 );
+        cc[1] = new CarteCitadellesSansPouvoir(2,CouleurCarteCitadelles.BLEU, "Temple", 1 );
         assertNull(piocheCartesCitadelles.piocher());
         piocheCartesCitadelles.ajouterCarteCitadelles(cc[0]);
         assertEquals(1, piocheCartesCitadelles.nbCartesRestantes());
@@ -26,8 +29,8 @@ public class PiocheCartesCitadellesTest {
     @Test
     void piocherTestFaulse(){
         CarteCitadelles[] cc = new CarteCitadelles[65];
-        cc[0] = new CarteCitadelles(1,CouleurCarteCitadelles.BLEU, "Temple", 1 );
-        cc[1] = new CarteCitadelles(2,CouleurCarteCitadelles.BLEU, "Temple", 1 );
+        cc[0] = new CarteCitadellesSansPouvoir(1,CouleurCarteCitadelles.BLEU, "Temple", 1 );
+        cc[1] = new CarteCitadellesSansPouvoir(2,CouleurCarteCitadelles.BLEU, "Temple", 1 );
         piocheCartesCitadelles.ajouterCarteCitadelles(cc[0]);
         assertNotEquals(cc[1],piocheCartesCitadelles.piocher());
     }
@@ -35,7 +38,7 @@ public class PiocheCartesCitadellesTest {
     @Test
     void ajouterCarteCitadellesTest(){
         CarteCitadelles[] cc = new CarteCitadelles[65];
-        cc[0] = new CarteCitadelles(1,CouleurCarteCitadelles.BLEU, "Temple", 1 );
+        cc[0] = new CarteCitadellesSansPouvoir(1,CouleurCarteCitadelles.BLEU, "Temple", 1 );
         assertEquals(0, piocheCartesCitadelles.nbCartesRestantes());
         piocheCartesCitadelles.ajouterCarteCitadelles(cc[0]);
         assertEquals(1, piocheCartesCitadelles.nbCartesRestantes());

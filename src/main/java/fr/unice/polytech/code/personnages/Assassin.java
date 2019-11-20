@@ -1,6 +1,6 @@
 package fr.unice.polytech.code.personnages;
 
-import fr.unice.polytech.code.Bot;
+import fr.unice.polytech.code.bots.*;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 /**
@@ -19,7 +19,6 @@ public class Assassin extends Personnage {
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles) {
         if(joueurQuiSubitAction!=joueurQuiEffectueAction){
             joueurQuiSubitAction.setPersonnageACeTour(null);
-            System.out.println(joueurQuiEffectueAction.getNom() + " assassine " + joueurQuiSubitAction.getNom());
         }
     }
 }

@@ -1,8 +1,8 @@
 package fr.unice.polytech.code.personnages;
 
-import fr.unice.polytech.code.Bot;
-import fr.unice.polytech.code.CarteCitadelles;
-import fr.unice.polytech.code.CouleurCarteCitadelles;
+import fr.unice.polytech.code.bots.*;
+import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 /**
@@ -20,15 +20,12 @@ public class Eveque extends Personnage {
 
     @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles) {
-        int nbPieceRecoltee=0;
         if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Eveque){
             for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
                 if(c.getCouleur()== CouleurCarteCitadelles.BLEU){
                     joueurQuiEffectueAction.ajouterPiece(1);
-                    nbPieceRecoltee+=1;
                 }
             }
-            System.out.println("Récupère " + nbPieceRecoltee + " pièces bonus grâce aux quartier(s) religieux qu'il possède.");
         }
     }
 }

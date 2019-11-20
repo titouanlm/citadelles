@@ -1,5 +1,8 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.bots.*;
+import fr.unice.polytech.code.moteur.Moteur;
+
 import java.util.*;
 
 public class Main {
@@ -8,8 +11,8 @@ public class Main {
         Affichage affichage = new Affichage(1);
 
         for(int i=0 ; i<affichage.getNbParties(); i++){
-            Bot bot1 = new BotIntelligent("Bot 1", "\033[35m");
-            Bot bot2 = new BotIntelligent("Bot 2", "\033[34m");
+            Bot bot1 = new BotTricheur("Bot 1", "\033[35m");
+            Bot bot2 = new BotFairPlay("Bot 2", "\033[34m");
             Bot bot3 = new BotSimpliste("Bot 3", "\033[36m");
             Bot bot4 = new BotSimpliste("Bot 4", "\033[33m");
 

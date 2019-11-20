@@ -1,8 +1,8 @@
 package fr.unice.polytech.code.personnages;
 
-import fr.unice.polytech.code.Bot;
-import fr.unice.polytech.code.CarteCitadelles;
-import fr.unice.polytech.code.CouleurCarteCitadelles;
+import fr.unice.polytech.code.bots.*;
+import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 import java.util.Iterator;
@@ -25,18 +25,13 @@ public class Condottiere extends Personnage {
     @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles){
         if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Condottiere){
-            int nbPieceRecoltee=0;
             for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
                 if(c.getCouleur()== CouleurCarteCitadelles.ROUGE){
                     joueurQuiEffectueAction.ajouterPiece(1);
-                    nbPieceRecoltee+=1;
                 }
             }
-            System.out.println("Récupère " + nbPieceRecoltee + " pièces bonus grâce aux quartier(s) militaires() qu'il possède.");
         }
-
         detuireQuartierEnemie(joueurQuiEffectueAction,joueurQuiSubitAction );
-
     }
 
     public void detuireQuartierEnemie(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction){
@@ -51,7 +46,6 @@ public class Condottiere extends Personnage {
         if(quartierADetruire!=null){
             joueurQuiSubitAction.getVilleDuBot().detruireQuartier(quartierADetruire);
             joueurQuiEffectueAction.retirerPiece(nbPointMax-1);
-            System.out.println(joueurQuiEffectueAction.getNom() + " detruit le quartier " + quartierADetruire.getNom() + " de " + joueurQuiSubitAction.getNom());
         }
     }
 }

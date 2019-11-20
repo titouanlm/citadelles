@@ -1,6 +1,9 @@
 package fr.unice.polytech.code;
 
-import org.junit.jupiter.api.BeforeEach;
+import fr.unice.polytech.code.bots.*;
+import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.cartes.CarteCitadellesSansPouvoir;
+import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -18,31 +21,31 @@ public class ArbitreTest {
         listeJoueurs.add(new BotSimpliste("Bot2","\033[36m"));
         listeJoueurs.add(new BotSimpliste("Bot3","\033[36m"));
 
-        listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadelles(1, CouleurCarteCitadelles.BLEU, "Temple", 1));
-        listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadelles(44, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1));
-        listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadelles(2, CouleurCarteCitadelles.BLEU, "Temple", 1));
-        listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadelles(14, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadelles(26, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(1, CouleurCarteCitadelles.BLEU, "Temple", 1));
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1));
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(2, CouleurCarteCitadelles.BLEU, "Temple", 1));
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(14, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(26, CouleurCarteCitadelles.VERT, "Taverne", 1));
         listeJoueurs.get(0).setPremierJoueurAFinir(true);
 
-        listeJoueurs.get(1).getVilleDuBot().construireBatiment(new CarteCitadelles(3, CouleurCarteCitadelles.BLEU, "Temple", 1));
-        listeJoueurs.get(1).getVilleDuBot().construireBatiment(new CarteCitadelles(15, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        listeJoueurs.get(1).getVilleDuBot().construireBatiment(new CarteCitadelles(25, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        listeJoueurs.get(1).getVilleDuBot().construireBatiment(new CarteCitadelles(46, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1));
-        listeJoueurs.get(1).getVilleDuBot().construireBatiment(new CarteCitadelles(56, CouleurCarteCitadelles.VIOLET, "Donjon", 3));
-        listeJoueurs.get(1).getVilleDuBot().construireBatiment(new CarteCitadelles(7, CouleurCarteCitadelles.BLEU, "Eglise", 2));
-        listeJoueurs.get(1).getVilleDuBot().construireBatiment(new CarteCitadelles(18, CouleurCarteCitadelles.JAUNE, "Château", 4));
+        listeJoueurs.get(1).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(3, CouleurCarteCitadelles.BLEU, "Temple", 1));
+        listeJoueurs.get(1).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(15, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        listeJoueurs.get(1).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(25, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        listeJoueurs.get(1).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(46, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1));
+        listeJoueurs.get(1).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(56, CouleurCarteCitadelles.VIOLET, "Donjon", 3));
+        listeJoueurs.get(1).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(7, CouleurCarteCitadelles.BLEU, "Eglise", 2));
+        listeJoueurs.get(1).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(18, CouleurCarteCitadelles.JAUNE, "Château", 4));
 
-        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadelles(8, CouleurCarteCitadelles.BLEU, "Monastère", 3));
-        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadelles(9, CouleurCarteCitadelles.BLEU, "Monastère", 3));
-        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadelles(10, CouleurCarteCitadelles.BLEU, "Monastère", 3));
-        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadelles(11, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
-        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadelles(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
-        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadelles(61, CouleurCarteCitadelles.VIOLET, "Cimitière", 5));
-        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadelles(62, CouleurCarteCitadelles.VIOLET, "Bibliothèque", 6));
-        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadelles(6, CouleurCarteCitadelles.BLEU, "Eglise", 2));
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(8, CouleurCarteCitadelles.BLEU, "Monastère", 3));
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(9, CouleurCarteCitadelles.BLEU, "Monastère", 3));
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(10, CouleurCarteCitadelles.BLEU, "Monastère", 3));
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(11, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(61, CouleurCarteCitadelles.VIOLET, "Cimitière", 5));
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(62, CouleurCarteCitadelles.VIOLET, "Bibliothèque", 6));
+        listeJoueurs.get(2).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(6, CouleurCarteCitadelles.BLEU, "Eglise", 2));
 
         arbitre.compteLesPoints(listeJoueurs);
         assertEquals(10, listeJoueurs.get(0).getNbPoint()); // 6 + 4 (BonusPremierJoueurAFinir)
@@ -89,17 +92,17 @@ public class ArbitreTest {
         Bot bot2 = new BotSimpliste("Bot2","\033[36m");
         Arbitre arbitre = new Arbitre();
 
-        bot1.getVilleDuBot().construireBatiment(new CarteCitadelles(1, CouleurCarteCitadelles.BLEU, "Temple", 1));
-        bot1.getVilleDuBot().construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        bot1.getVilleDuBot().construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot1.getVilleDuBot().construireBatiment(new CarteCitadelles(44, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1));
-        bot1.getVilleDuBot().construireBatiment(new CarteCitadelles(45, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(1, CouleurCarteCitadelles.BLEU, "Temple", 1));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(45, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1));
 
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(1, CouleurCarteCitadelles.BLEU, "Temple", 1));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(44, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(55, CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(1, CouleurCarteCitadelles.BLEU, "Temple", 1));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(55, CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2));
 
         arbitre.testBonusPossede5CouleursDeQuartierDifferentes(bot1);
         arbitre.testBonusPossede5CouleursDeQuartierDifferentes(bot2);

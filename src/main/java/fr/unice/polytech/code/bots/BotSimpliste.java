@@ -1,5 +1,6 @@
-package fr.unice.polytech.code;
+package fr.unice.polytech.code.bots;
 
+import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.personnages.Architecte;
 import fr.unice.polytech.code.personnages.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
@@ -20,18 +21,15 @@ public class BotSimpliste extends Bot {
     public void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage, Personnage personnageDefausseVisible) {
         Personnage pChoisi = piocheCartesPersonnage.piocherPersonnageAleatoirement();
         this.setPersonnageACeTour(pChoisi);
-        System.out.println(this.getNom() + " a pris le personnage " + pChoisi.getNom() + ".");
     }
 
     @Override
     public void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (this.determinerChoixPiocherOuPiece(piocheCartesCitadelles) == 1) {
             this.ajouterPiece(2);
-            System.out.println("Prend 2 pièces.");
         } else {
             CarteCitadelles cartePrise = piocheCartesCitadelles.piocher();
             this.ajouterCartesCitadellesDansMain(cartePrise);
-            System.out.println("Choisit de prendre la carte " + cartePrise.getNom() + " dans sa main.");
         }
     }
 

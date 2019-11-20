@@ -1,5 +1,7 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.cartes.CarteCitadelles;
+
 import java.util.ArrayList;
 
 public class Ville {
@@ -8,7 +10,7 @@ public class Ville {
     private int nbBatimentsConstruits;
     private int nbTotalPoint;
 
-    Ville(){
+    public Ville(){
         nbBatimentsConstruits = 0;
         nbTotalPoint=0;
     }
@@ -22,7 +24,6 @@ public class Ville {
             this.batimentsConstruits.add(batimentAConstruire);
             this.nbTotalPoint+=batimentAConstruire.getPoint();
             this.nbBatimentsConstruits+=1;
-            System.out.println("Construit le quartier " + batimentAConstruire.getNom() + " dans sa ville." );
         }
     }
 
@@ -55,6 +56,36 @@ public class Ville {
             }
         }
         return nbQuartiersRouge;
+    }
+
+    public int compterNbQuartiersJaune(){
+        int nbQuartiersJaune=0;
+        for(CarteCitadelles quartier : batimentsConstruits){
+            if(quartier.getCouleur().toString()=="JAUNE"){
+                nbQuartiersJaune++;
+            }
+        }
+        return nbQuartiersJaune;
+    }
+
+    public int compterNbQuartiersBleu(){
+        int nbQuartiersBleu=0;
+        for(CarteCitadelles quartier : batimentsConstruits){
+            if(quartier.getCouleur().toString()=="BLEU"){
+                nbQuartiersBleu++;
+            }
+        }
+        return nbQuartiersBleu;
+    }
+
+    public int compterNbQuartiersVert(){
+        int nbQuartiersVert=0;
+        for(CarteCitadelles quartier : batimentsConstruits){
+            if(quartier.getCouleur().toString()=="VERT"){
+                nbQuartiersVert++;
+            }
+        }
+        return nbQuartiersVert;
     }
 
     public String quartiersVilleToString(){

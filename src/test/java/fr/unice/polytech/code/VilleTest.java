@@ -1,13 +1,17 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.bots.*;
+import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.cartes.CarteCitadellesSansPouvoir;
+import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class VilleTest {
     private Ville ville = new Ville();
-    private CarteCitadelles cc1 = new CarteCitadelles(57,CouleurCarteCitadelles.VIOLET, "Donjon", 3 );
-    private CarteCitadelles cc2 = new CarteCitadelles(58,CouleurCarteCitadelles.VIOLET, "Laboratoire", 5 );
-    private CarteCitadelles cc3 = new CarteCitadelles(59,CouleurCarteCitadelles.VIOLET, "Manufacture", 5 );
+    private CarteCitadelles cc1 = new CarteCitadellesSansPouvoir(57, CouleurCarteCitadelles.VIOLET, "Donjon", 3 );
+    private CarteCitadelles cc2 = new CarteCitadellesSansPouvoir(58,CouleurCarteCitadelles.VIOLET, "Laboratoire", 5 );
+    private CarteCitadelles cc3 = new CarteCitadellesSansPouvoir(59,CouleurCarteCitadelles.VIOLET, "Manufacture", 5 );
 
     @Test
     void construireBatimentTest(){
@@ -36,13 +40,13 @@ public class VilleTest {
         Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
         Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
 
-        bot1.getVilleDuBot().construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot1.getVilleDuBot().construireBatiment( new CarteCitadelles(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot2.getVilleDuBot().construireBatiment( new CarteCitadelles(53,CouleurCarteCitadelles.ROUGE, "Forteresse", 5 ));
-        bot2.getVilleDuBot().construireBatiment( new CarteCitadelles(54,CouleurCarteCitadelles.ROUGE, "Forteresse", 5 ));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot1.getVilleDuBot().construireBatiment( new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot2.getVilleDuBot().construireBatiment( new CarteCitadellesSansPouvoir(53,CouleurCarteCitadelles.ROUGE, "Forteresse", 5 ));
+        bot2.getVilleDuBot().construireBatiment( new CarteCitadellesSansPouvoir(54,CouleurCarteCitadelles.ROUGE, "Forteresse", 5 ));
 
         assertEquals(1, bot1.getVilleDuBot().compterNbQuartiersRouge());
         assertNotEquals(0,bot2.getVilleDuBot().compterNbQuartiersRouge());

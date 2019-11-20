@@ -1,8 +1,8 @@
 package fr.unice.polytech.code.personnages;
 
-import fr.unice.polytech.code.Bot;
-import fr.unice.polytech.code.CarteCitadelles;
-import fr.unice.polytech.code.CouleurCarteCitadelles;
+import fr.unice.polytech.code.bots.*;
+import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 /**
@@ -21,14 +21,11 @@ public class Marchand extends Personnage {
     @Override
     public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction , PiocheCartesCitadelles piocheCartesCitadelles) {
         if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Marchand){
-            int nbPieceRecoltee=0;
             for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
                 if(c.getCouleur()== CouleurCarteCitadelles.VERT){
                     joueurQuiEffectueAction.ajouterPiece(1);
-                    nbPieceRecoltee+=1;
                 }
             }
-            System.out.println("Récupère " + nbPieceRecoltee + " pièces bonus grâce aux quartier(s) marchand(s) qu'il possède.");
         }
     }
 }

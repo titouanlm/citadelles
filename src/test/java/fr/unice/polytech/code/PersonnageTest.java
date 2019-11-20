@@ -1,5 +1,9 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.bots.*;
+import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.cartes.CarteCitadellesSansPouvoir;
+import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import org.junit.jupiter.api.Test;
@@ -77,10 +81,10 @@ public class PersonnageTest {
         assertTrue(bot1.getPersonnageACeTour()instanceof Assassin);
         assertTrue(bot2.getPersonnageACeTour()instanceof Roi);
 
-        bot1.getVilleDuBot().construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
 
         bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
         bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
@@ -100,10 +104,10 @@ public class PersonnageTest {
         assertTrue(bot1.getPersonnageACeTour()instanceof Assassin);
         assertTrue(bot2.getPersonnageACeTour()instanceof Eveque);
 
-        bot1.getVilleDuBot().construireBatiment(new CarteCitadelles(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
 
         bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
         bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
@@ -123,10 +127,10 @@ public class PersonnageTest {
         assertTrue(bot1.getPersonnageACeTour()instanceof Assassin);
         assertTrue(bot2.getPersonnageACeTour()instanceof Marchand);
 
-        bot1.getVilleDuBot().construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
 
         bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
         bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
@@ -145,17 +149,17 @@ public class PersonnageTest {
         bot2.setPersonnageACeTour(new Magicien());
 
 
-        bot2.ajouterCartesCitadellesDansMain(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot2.ajouterCartesCitadellesDansMain(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot2.ajouterCartesCitadellesDansMain(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        bot2.ajouterCartesCitadellesDansMain(new CarteCitadelles(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
-        bot1.ajouterCartesCitadellesDansMain(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot1.ajouterCartesCitadellesDansMain(new CarteCitadelles(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
-        bot1.ajouterCartesCitadellesDansMain(new CarteCitadelles(55,CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2 ));
-        test.add(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        test.add(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        test.add(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        test.add(new CarteCitadelles(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
+        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
+        bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
+        bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(55,CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2 ));
+        test.add(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        test.add(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        test.add(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        test.add(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
 
         bot2.getPersonnageACeTour().effectuerSpecialite(bot2,bot1,piocheCartesCitadelles);
 

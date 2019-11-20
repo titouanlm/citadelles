@@ -1,46 +1,39 @@
-package fr.unice.polytech.code;
+package fr.unice.polytech.code.bots;
 
+import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.personnages.Architecte;
 import fr.unice.polytech.code.personnages.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
-public class BotIntelligent extends Bot {
+public class BotTricheur extends Bot {
 
-    public BotIntelligent(String nom, String couleur) {
+    public BotTricheur(String nom, String couleur) {
         super(nom, couleur);
     }
 
     @Override
     public void strategie(PiocheCartesCitadelles piocheCartesCitadelles) {
+        this.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
         this.strategieConstruit();
     }
 
     @Override
     public void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage, Personnage personnageDefausseVisible) {
-        //this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(this.nbPiece, this.cartesCitadellesEnMain,this.villeDuBot));
-        if(piocheCartesPersonnage.contient("Roi")){
-            this.setPersonnageACeTour(piocheCartesPersonnage.prendre("Roi"));
-            System.out.println(this.getNom() + " a pris le personnage Roi.");
-        }else{
-            Personnage pChoisi = piocheCartesPersonnage.piocherPersonnageAleatoirement();
-            this.setPersonnageACeTour(pChoisi);
-            System.out.println(this.getNom() + " a pris le personnage " + pChoisi.getNom() + ".");
-        }
+        this.setPersonnageACeTour(piocheCartesPersonnage.piocherPersonnageNonAleatoirement(this.nbPiece, this.cartesCitadellesEnMain,this.villeDuBot));
     }
 
     @Override
     public void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (this.determinerChoixPiocherOuPiece(piocheCartesCitadelles) == 1) {
-            System.out.println("Prend 2 pièces.");
             this.ajouterPiece(2);
         } else {
-            CarteCitadelles carteChoisie;
             CarteCitadelles cartePiochee1 = piocheCartesCitadelles.piocher();
             CarteCitadelles cartePiochee2 = piocheCartesCitadelles.piocher();
 
             if(cartePiochee2!=null){
-                System.out.println("Pioche " + cartePiochee1.getNom() + " et " + cartePiochee2.getNom());
+                CarteCitadelles carteChoisie;
+
                 // On teste si le joueur n'a pas déjà construit les quartiers ou les possède déjà dans sa main
                 if(!this.getVilleDuBot().contient(cartePiochee1) && !this.getVilleDuBot().contient(cartePiochee2) &&
                         !this.contientDansSaMain(cartePiochee1) && !this.contientDansSaMain(cartePiochee2)){
@@ -71,10 +64,8 @@ public class BotIntelligent extends Bot {
                     piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee1);
                 }
             }else{
-                carteChoisie=cartePiochee1;
-                this.ajouterCartesCitadellesDansMain(carteChoisie);
+                this.ajouterCartesCitadellesDansMain(cartePiochee1);
             }
-            System.out.println("Choisit de prendre la carte " + carteChoisie.getNom() + " dans sa main.");
         }
     }
 
