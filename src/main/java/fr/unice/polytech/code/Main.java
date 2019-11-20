@@ -1,5 +1,9 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.bots.Bot;
+import fr.unice.polytech.code.bots.BotIntelligent;
+import fr.unice.polytech.code.bots.BotSimpliste;
+
 import java.util.*;
 
 public class Main {

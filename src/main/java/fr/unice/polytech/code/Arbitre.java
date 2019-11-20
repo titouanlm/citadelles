@@ -1,5 +1,7 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.bots.Bot;
+
 import java.util.ArrayList;
 
 class Arbitre {
