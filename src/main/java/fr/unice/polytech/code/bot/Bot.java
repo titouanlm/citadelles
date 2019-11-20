@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public abstract class Bot {
     String nom;
     String couleur;
-    int nbPiece;
-    ArrayList<CarteCitadelles> cartesCitadellesEnMain;
+    public int nbPiece;
+    public ArrayList<CarteCitadelles> cartesCitadellesEnMain;
     Ville villeDuBot;
     Personnage personnageACeTour;
     boolean possedeCouronne;

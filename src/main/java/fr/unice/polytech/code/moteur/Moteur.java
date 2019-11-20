@@ -1,4 +1,4 @@
-package fr.unice.polytech.code;
+package fr.unice.polytech.code.moteur;
 
 import fr.unice.polytech.code.bots.Bot;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
@@ -13,7 +13,7 @@ public class Moteur {
     private ArrayList<Bot> listeJoueurs;
     private ArrayList<Tour> listeTours;
 
-    Moteur(ArrayList<Bot> listeJoueurs) {
+    public Moteur(ArrayList<Bot> listeJoueurs) {
         this.listeJoueurs = listeJoueurs;
         listeTours = new ArrayList<>();
         piocheCartesCitadelles.implementerCartesCitadelles();
@@ -32,7 +32,7 @@ public class Moteur {
         return listeTours;
     }
 
-    void lancerUnePartie() {
+    public void lancerUnePartie() {
         this.initialiserPartie();
         this.commencerPartie();
     }

@@ -8,7 +8,7 @@ public class Ville {
     private int nbBatimentsConstruits;
     private int nbTotalPoint;
 
-    Ville(){
+    public Ville(){
         nbBatimentsConstruits = 0;
         nbTotalPoint=0;
     }

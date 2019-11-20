@@ -1,4 +1,4 @@
-package fr.unice.polytech.code;
+package fr.unice.polytech.code.moteur;
 
 import fr.unice.polytech.code.bots.*;
 import fr.unice.polytech.code.bots.BotIntelligent;
