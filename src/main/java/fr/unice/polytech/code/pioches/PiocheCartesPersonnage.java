@@ -60,7 +60,7 @@ public class PiocheCartesPersonnage {
         if (piocheCP.size() > 0) {
             Personnage personnageChoisi;
             for (int i = 0; i < piocheCP.size(); i++) {
-                if (piocheCP.get(i).getNumero() == 7 && nbPieceJoueur > 7 ) {
+                if (piocheCP.get(i).getNumero() == 7 && nbPieceJoueur > 7) {
                     personnageChoisi = this.piocheCP.get(i);
                     this.piocheCP.remove(i);
                     return personnageChoisi;
@@ -93,11 +93,12 @@ public class PiocheCartesPersonnage {
                     this.piocheCP.remove(i);
                     return personnageChoisi;
                 }
+            }
                 int indicePersonnageAleatoire = (int) (Math.random() * piocheCP.size());
                 Personnage personnageAleatoire = this.piocheCP.get(indicePersonnageAleatoire);
                 this.piocheCP.remove(indicePersonnageAleatoire);
                 return personnageAleatoire;
-            }
+
         }
         return null;
     }
