@@ -22,6 +22,7 @@ public class Affichage {
     public int getNbParties() {
         return nbParties;
     }
+    public final HashMap<String,int[]> getMapJoueurs(){return mapJoueurs;}
 
     public void incrementerNbPointsDesBotsEnMoyenne(ArrayList<Bot> listeDeJoueur){
         for(Bot j : listeDeJoueur){
