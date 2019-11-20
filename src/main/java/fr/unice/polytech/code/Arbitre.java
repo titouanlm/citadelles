@@ -1,6 +1,7 @@
 package fr.unice.polytech.code;
 
 import fr.unice.polytech.code.bot.Bot;
+import fr.unice.polytech.code.cartes.CarteCitadelles;
 
 import java.util.ArrayList;
 

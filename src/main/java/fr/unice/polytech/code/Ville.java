@@ -1,5 +1,7 @@
 package fr.unice.polytech.code;
 
+import fr.unice.polytech.code.cartes.CarteCitadelles;
+
 import java.util.ArrayList;
 
 public class Ville {

@@ -1,6 +1,6 @@
 package fr.unice.polytech.code.bot;
 
-import fr.unice.polytech.code.CarteCitadelles;
+import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.personnages.Architecte;
 import fr.unice.polytech.code.personnages.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;

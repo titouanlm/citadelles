@@ -1,7 +1,7 @@
 package fr.unice.polytech.code.pioches;
 
-import fr.unice.polytech.code.CarteCitadelles;
-import fr.unice.polytech.code.CouleurCarteCitadelles;
+import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import fr.unice.polytech.code.personnages.Personnage;
 import fr.unice.polytech.code.Ville;
 import fr.unice.polytech.code.personnages.*;

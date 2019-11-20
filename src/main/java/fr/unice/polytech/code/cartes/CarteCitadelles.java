@@ -1,6 +1,6 @@
-package fr.unice.polytech.code;
+package fr.unice.polytech.code.cartes;
 
-public class CarteCitadelles {
+public abstract class CarteCitadelles {
 
     private int numero;
     private CouleurCarteCitadelles couleur;
