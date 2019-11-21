@@ -21,38 +21,39 @@ public class Magicien extends Personnage {
     }
 
     @Override
-    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles) {
-        Random rand = new Random();
-        int value = rand.nextInt(2);
-        ArrayList<CarteCitadelles> cartesCitadellesIntermedieaire = new ArrayList<>();
-        if (value == 1) {
-            for (Iterator<CarteCitadelles> carteIterator = joueurQuiEffectueAction.getCartesCitadellesEnMain().iterator(); carteIterator.hasNext(); ) {
-                CarteCitadelles carte = carteIterator.next();
-                cartesCitadellesIntermedieaire.add(carte);
-                carteIterator.remove();
-            }
-            for (Iterator<CarteCitadelles> carteIterator = joueurQuiSubitAction.getCartesCitadellesEnMain().iterator(); carteIterator.hasNext(); ) {
-                CarteCitadelles carte = carteIterator.next();
-                joueurQuiEffectueAction.ajouterCartesCitadellesDansMain(carte);
-                carteIterator.remove();
-            }
-            for (CarteCitadelles carte : cartesCitadellesIntermedieaire) {
-                joueurQuiSubitAction.ajouterCartesCitadellesDansMain(carte);
-            }
-        } else {
-            for (Iterator<CarteCitadelles> carteIterator = joueurQuiEffectueAction.getCartesCitadellesEnMain().iterator(); carteIterator.hasNext(); ) {
-                carteIterator.next();
-                carteIterator.remove();
-                break;
+    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction,PiocheCartesCitadelles piocheCartesCitadelles) {
 
-            }
-            joueurQuiEffectueAction.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
+    }
 
-
+    public void echangerCartesAvecUnPersonnage(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction){
+        if(joueurQuiEffectueAction.getPersonnageACeTour() instanceof Magicien && joueurQuiSubitAction!=joueurQuiEffectueAction){
+            //Ajoute les cartes de la victime dans une liste temporaire
+            ArrayList<CarteCitadelles> carteEnMainDeVictime = new ArrayList<>(joueurQuiSubitAction.getCartesCitadellesEnMain());
+            //Supprime toutes les cartes dans la main de la victime
+            joueurQuiSubitAction.getCartesCitadellesEnMain().clear();
+            //Ajoute les cartes du bot ayant le magicien dans le deck du bot victime
+            joueurQuiSubitAction.getCartesCitadellesEnMain().addAll(joueurQuiEffectueAction.getCartesCitadellesEnMain());
+            //Supprime les cartes dans la main du bot ayant le magicien
+            joueurQuiEffectueAction.getCartesCitadellesEnMain().clear();
+            //Ajoute les cartes du bot victime dans le deck du bot ayant le magicien
+            joueurQuiEffectueAction.getCartesCitadellesEnMain().addAll(carteEnMainDeVictime);
         }
     }
 
-
-
+    public void echangerCartesAvecPioche(Bot joueurQuiEffectueAction, PiocheCartesCitadelles piocheCartesCitadelles, ArrayList<CarteCitadelles> cartesAEchanger) {
+        int nbCartesAPiocher = cartesAEchanger.size();
+        if(joueurQuiEffectueAction.getPersonnageACeTour() instanceof Magicien && piocheCartesCitadelles.nbCartesRestantes()>= nbCartesAPiocher) {
+            //On rajoute en fin de pioche les cartes qu'on a retiré
+            for(CarteCitadelles c : cartesAEchanger){
+                piocheCartesCitadelles.ajouterCarteCitadelles(c);
+            }
+            //Supprime les cartes à échanger avec la pioche du deck du bot
+            joueurQuiEffectueAction.getCartesCitadellesEnMain().removeAll(cartesAEchanger);
+            //Pioche le nombre de carte que l'on veut échanger et les ajoute dans la main du bot
+            for (int i = 0; i < nbCartesAPiocher; i++) {
+                joueurQuiEffectueAction.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
+            }
+        }
+    }
 }
 

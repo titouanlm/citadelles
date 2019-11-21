@@ -17,9 +17,9 @@ public class ArbitreTest {
     void compteLesPointsTest(){
         Arbitre arbitre = new Arbitre();
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
-        listeJoueurs.add(new BotSimpliste("Bot1","\033[36m"));
-        listeJoueurs.add(new BotSimpliste("Bot2","\033[36m"));
-        listeJoueurs.add(new BotSimpliste("Bot3","\033[36m"));
+        listeJoueurs.add(new BotAleatoire("Bot1","\033[36m"));
+        listeJoueurs.add(new BotAleatoire("Bot2","\033[36m"));
+        listeJoueurs.add(new BotAleatoire("Bot3","\033[36m"));
 
         listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(1, CouleurCarteCitadelles.BLEU, "Temple", 1));
         listeJoueurs.get(0).getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
@@ -55,8 +55,8 @@ public class ArbitreTest {
 
     @Test
     void testBonusPremierJoueurAFinirTest(){
-        Bot bot1 = new BotSimpliste("Bot1","\033[36m");
-        Bot bot2 = new BotSimpliste("Bot2","\033[36m");
+        Bot bot1 = new BotAleatoire("Bot1","\033[36m");
+        Bot bot2 = new BotAleatoire("Bot2","\033[36m");
         Arbitre arbitre = new Arbitre();
 
         bot1.setPremierJoueurAFinir(true);
@@ -68,9 +68,9 @@ public class ArbitreTest {
 
     @Test
     void testBonusAConstruit8CesQuartiersTest(){
-        Bot bot1 = new BotSimpliste("Bot1","\033[36m");
-        Bot bot2 = new BotSimpliste("Bot2","\033[36m");
-        Bot bot3 = new BotSimpliste("Bot3","\033[36m");
+        Bot bot1 = new BotAleatoire("Bot1","\033[36m");
+        Bot bot2 = new BotAleatoire("Bot2","\033[36m");
+        Bot bot3 = new BotAleatoire("Bot3","\033[36m");
         Arbitre arbitre = new Arbitre();
 
         bot1.setPremierJoueurAFinir(true);
@@ -88,8 +88,8 @@ public class ArbitreTest {
 
     @Test
     void testBonusPossede5CouleursDeQuartierDifferentesTest(){
-        Bot bot1 = new BotSimpliste("Bot1","\033[36m");
-        Bot bot2 = new BotSimpliste("Bot2","\033[36m");
+        Bot bot1 = new BotAleatoire("Bot1","\033[36m");
+        Bot bot2 = new BotAleatoire("Bot2","\033[36m");
         Arbitre arbitre = new Arbitre();
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(1, CouleurCarteCitadelles.BLEU, "Temple", 1));
@@ -114,9 +114,9 @@ public class ArbitreTest {
     @Test
     void determineJoueurGagnantTest(){
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
-        listeJoueurs.add(new BotSimpliste("Bot1","\033[36m"));
-        listeJoueurs.add(new BotSimpliste("Bot2","\033[36m"));
-        listeJoueurs.add(new BotSimpliste("Bot3","\033[36m"));
+        listeJoueurs.add(new BotAleatoire("Bot1","\033[36m"));
+        listeJoueurs.add(new BotAleatoire("Bot2","\033[36m"));
+        listeJoueurs.add(new BotAleatoire("Bot3","\033[36m"));
 
         listeJoueurs.get(0).setNbPoint(16);
         listeJoueurs.get(1).setNbPoint(24);

@@ -37,8 +37,8 @@ public class VilleTest {
 
     @Test
     void compterNbQuartiersRougeTest(){
-        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
-        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
         bot1.getVilleDuBot().construireBatiment( new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));

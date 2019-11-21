@@ -17,9 +17,9 @@ public class PersonnageTest {
 
     @Test
     void effectuerSpecialiteAssassinTest(){
-        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
-        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
-        Bot bot3 = new BotSimpliste("Bot 3","\033[35m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot3 = new BotAleatoire("Bot 3","\033[35m");
 
         bot1.setPersonnageACeTour(new Assassin());
         bot2.setPersonnageACeTour(new Voleur());
@@ -39,10 +39,10 @@ public class PersonnageTest {
 
     @Test
     void effectuerSpecialiteVoleurTest(){
-        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
-        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
-        Bot bot3 = new BotSimpliste("Bot 3","\033[35m");
-        Bot bot4 = new BotSimpliste("Bot 4","\033[35m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot3 = new BotAleatoire("Bot 3","\033[35m");
+        Bot bot4 = new BotAleatoire("Bot 4","\033[35m");
 
         bot1.setPersonnageACeTour(new Assassin());
         bot2.setPersonnageACeTour(new Voleur());
@@ -72,8 +72,8 @@ public class PersonnageTest {
 
     @Test
     void effectuerSpecialiteRoiTest(){
-        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
-        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
 
         bot1.setPersonnageACeTour(new Assassin());
         bot2.setPersonnageACeTour(new Roi());
@@ -95,8 +95,8 @@ public class PersonnageTest {
 
     @Test
     void effectuerSpecialiteEvequeTest(){
-        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
-        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
 
         bot1.setPersonnageACeTour(new Assassin());
         bot2.setPersonnageACeTour(new Eveque());
@@ -118,8 +118,8 @@ public class PersonnageTest {
 
     @Test
     void effectuerSpecialiteMarchandTest(){
-        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
-        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
 
         bot1.setPersonnageACeTour(new Assassin());
         bot2.setPersonnageACeTour(new Marchand());
@@ -138,37 +138,5 @@ public class PersonnageTest {
         assertEquals(0,bot1.getNbPiece());
         assertEquals(2,bot2.getNbPiece());
     }
-
-    @Test
-    void effectuerSpecialiteMagicienTest(){
-        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
-        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
-        ArrayList<CarteCitadelles> test = new ArrayList<>() ;
-
-        bot1.setPersonnageACeTour(new Eveque());
-        bot2.setPersonnageACeTour(new Magicien());
-
-
-        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
-        bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
-        bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(55,CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2 ));
-        test.add(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        test.add(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        test.add(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        test.add(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
-
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,bot1,piocheCartesCitadelles);
-
-
-
-        assertEquals(bot1.cartesCitadellesEnMain.size(),test.size());
-        assertEquals(bot1.cartesCitadellesEnMain.get(0).getNom(),test.get(0).getNom());
-        assertEquals(bot1.cartesCitadellesEnMain.get(0).getNumero(),test.get(0).getNumero());
-    }
-    //Le test marche si on force la méthode à prendre la valeur value=1 pour choisir d'échanger les cartes en main
 
 }

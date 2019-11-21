@@ -51,7 +51,7 @@ public class Ville {
     public int compterNbQuartiersRouge(){
         int nbQuartiersRouge=0;
         for(CarteCitadelles quartier : batimentsConstruits){
-            if(quartier.getCouleur().toString()=="ROUGE"){
+            if(quartier.getCouleur().toString().equals("ROUGE")){
                 nbQuartiersRouge++;
             }
         }
@@ -61,7 +61,7 @@ public class Ville {
     public int compterNbQuartiersJaune(){
         int nbQuartiersJaune=0;
         for(CarteCitadelles quartier : batimentsConstruits){
-            if(quartier.getCouleur().toString()=="JAUNE"){
+            if(quartier.getCouleur().toString().equals("JAUNE")){
                 nbQuartiersJaune++;
             }
         }
@@ -71,7 +71,7 @@ public class Ville {
     public int compterNbQuartiersBleu(){
         int nbQuartiersBleu=0;
         for(CarteCitadelles quartier : batimentsConstruits){
-            if(quartier.getCouleur().toString()=="BLEU"){
+            if(quartier.getCouleur().toString().equals("BLEU")){
                 nbQuartiersBleu++;
             }
         }
@@ -81,7 +81,7 @@ public class Ville {
     public int compterNbQuartiersVert(){
         int nbQuartiersVert=0;
         for(CarteCitadelles quartier : batimentsConstruits){
-            if(quartier.getCouleur().toString()=="VERT"){
+            if(quartier.getCouleur().toString().equals("VERT")){
                 nbQuartiersVert++;
             }
         }

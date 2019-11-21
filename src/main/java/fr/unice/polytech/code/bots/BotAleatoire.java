@@ -6,9 +6,9 @@ import fr.unice.polytech.code.personnages.Personnage;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
-public class BotSimpliste extends Bot {
+public class BotAleatoire extends Bot {
 
-    public BotSimpliste(String nom, String couleur) {
+    public BotAleatoire(String nom, String couleur) {
         super(nom, couleur);
     }
 

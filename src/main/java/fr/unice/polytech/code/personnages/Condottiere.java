@@ -35,17 +35,20 @@ public class Condottiere extends Personnage {
     }
 
     public void detuireQuartierEnemie(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction){
-        CarteCitadelles quartierADetruire=null;
-        int nbPointMax=0;
-        for(CarteCitadelles quartier : joueurQuiSubitAction.getVilleDuBot().getBatimentsConstruits()){
-           if(nbPointMax<quartier.getPoint()){
-               quartierADetruire=quartier;
-               nbPointMax=quartier.getPoint();
-           }
+        if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Condottiere && !(joueurQuiSubitAction.getPersonnageACeTour()instanceof Eveque) && joueurQuiEffectueAction!=joueurQuiSubitAction){
+            CarteCitadelles quartierADetruire=null;
+            int nbPointMax=0;
+            for(CarteCitadelles quartier : joueurQuiSubitAction.getVilleDuBot().getBatimentsConstruits()){
+                if(nbPointMax<quartier.getPoint()){
+                    quartierADetruire=quartier;
+                    nbPointMax=quartier.getPoint();
+                }
+            }
+            if(quartierADetruire!=null){
+                joueurQuiSubitAction.getVilleDuBot().detruireQuartier(quartierADetruire);
+                joueurQuiEffectueAction.retirerPiece(nbPointMax-1);
+            }
         }
-        if(quartierADetruire!=null){
-            joueurQuiSubitAction.getVilleDuBot().detruireQuartier(quartierADetruire);
-            joueurQuiEffectueAction.retirerPiece(nbPointMax-1);
-        }
+
     }
 }

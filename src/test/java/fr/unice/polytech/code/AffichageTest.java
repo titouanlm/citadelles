@@ -15,10 +15,10 @@ public class AffichageTest {
 
         Affichage affichage=new Affichage(3);
 
-        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
-        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
-        Bot bot3 = new BotSimpliste("Bot 3","\033[35m");
-        Bot bot4 = new BotSimpliste("Bot 4","\033[35m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot3 = new BotAleatoire("Bot 3","\033[35m");
+        Bot bot4 = new BotAleatoire("Bot 4","\033[35m");
 
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
         listeJoueurs.add(bot1);
@@ -44,8 +44,6 @@ public class AffichageTest {
         assertTrue(NombreDePointsMoyensParPartieBot3 < NombreDePointsMoyensParPartieBot1);
         assertFalse(NombreDePointsMoyensParPartieBot4 > NombreDePointsMoyensParPartieBot1);
 
-
-
     }
 
     @Test
@@ -53,10 +51,10 @@ public class AffichageTest {
 
         Affichage affichage=new Affichage(3);
 
-        Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
-        Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
-        Bot bot3 = new BotSimpliste("Bot 3","\033[35m");
-        Bot bot4 = new BotSimpliste("Bot 4","\033[35m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot3 = new BotAleatoire("Bot 3","\033[35m");
+        Bot bot4 = new BotAleatoire("Bot 4","\033[35m");
 
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
         listeJoueurs.add(bot1);

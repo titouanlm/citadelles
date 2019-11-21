@@ -78,7 +78,6 @@ public class Tour {
             for (Bot joueur : listeJoueurs) {
                 if (joueur.getPersonnageACeTour() != null) {
                     if (joueur.getPersonnageACeTour().getNumero() == numeroAppeler) {
-                        System.out.println("\n" + joueur.getCouleur() + joueur.getNom() + " : " + joueur.getPersonnageACeTour().getNom());
                         if (numeroAppeler == 4) { //Roi
                             this.setJoueurAyantLeRoi(joueur);
                         } else if (numeroAppeler == 6) { //Marchand
@@ -219,6 +218,8 @@ public class Tour {
                     botCible = b;
                 }
             }
+        }else{
+
         }
         Personnage magicien = botQuiPossedeLeMagicien.getPersonnageACeTour();
         magicien.effectuerSpecialite(botQuiPossedeLeMagicien, botCible, piocheCartesCitadelles);

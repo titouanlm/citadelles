@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MoteurTest {
-    private Bot bot1 = new BotSimpliste("Bot 1", "\033[32m");
-    private Bot bot2 = new BotSimpliste("Bot 2","\033[33m");
-    private Bot bot3 = new BotSimpliste("Bot 3","\033[35m");
+    private Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+    private Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+    private Bot bot3 = new BotAleatoire("Bot 3","\033[35m");
 
     @Test
     void initialiserPartieTest(){
