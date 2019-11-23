@@ -18,8 +18,18 @@ public class Marchand extends Personnage {
         this.nom = "Marchand";
     }
 
-    @Override
-    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction , PiocheCartesCitadelles piocheCartesCitadelles) {
+    @Override //A supprimer
+    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction ) {
+        if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Marchand){
+            for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
+                if(c.getCouleur()== CouleurCarteCitadelles.VERT){
+                    joueurQuiEffectueAction.ajouterPiece(1);
+                }
+            }
+        }
+    }
+
+    public void effectuerSpecialiteMarchand(Bot joueurQuiEffectueAction) {
         if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Marchand){
             for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
                 if(c.getCouleur()== CouleurCarteCitadelles.VERT){

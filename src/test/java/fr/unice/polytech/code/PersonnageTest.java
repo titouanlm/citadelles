@@ -1,14 +1,12 @@
 package fr.unice.polytech.code;
 
 import fr.unice.polytech.code.bots.*;
-import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.cartes.CarteCitadellesSansPouvoir;
 import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -29,8 +27,8 @@ public class PersonnageTest {
         assertTrue(bot2.getPersonnageACeTour()instanceof Voleur);
         assertTrue(bot3.getPersonnageACeTour()instanceof Architecte);
 
-        bot1.getPersonnageACeTour().effectuerSpecialite(bot1,bot1,piocheCartesCitadelles);
-        bot1.getPersonnageACeTour().effectuerSpecialite(bot1,bot2,piocheCartesCitadelles);
+        bot1.getPersonnageACeTour().effectuerSpecialite(bot1,bot1);
+        bot1.getPersonnageACeTour().effectuerSpecialite(bot1,bot2);
 
         assertNotNull(bot1.getPersonnageACeTour());
         assertNull(bot2.getPersonnageACeTour());
@@ -59,10 +57,10 @@ public class PersonnageTest {
         bot3.ajouterPiece(10);
         bot4.ajouterPiece(10);
 
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,bot1,piocheCartesCitadelles);
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,bot2,piocheCartesCitadelles);
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,bot3,piocheCartesCitadelles);
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,bot4,piocheCartesCitadelles);
+        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,bot1);
+        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,bot2);
+        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,bot3);
+        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,bot4);
 
         assertEquals(10,bot1.getNbPiece());
         assertEquals(20,bot2.getNbPiece());
@@ -86,8 +84,8 @@ public class PersonnageTest {
         bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
         bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
 
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
+        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null);
+        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null);
 
         assertEquals(0,bot1.getNbPiece());
         assertEquals(2,bot2.getNbPiece());
@@ -109,8 +107,8 @@ public class PersonnageTest {
         bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
         bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
 
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
+        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null);
+        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null);
 
         assertEquals(0,bot1.getNbPiece());
         assertEquals(2,bot2.getNbPiece());
@@ -132,8 +130,8 @@ public class PersonnageTest {
         bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
         bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
 
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null,piocheCartesCitadelles);
+        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null);
+        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null);
 
         assertEquals(0,bot1.getNbPiece());
         assertEquals(2,bot2.getNbPiece());

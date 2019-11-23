@@ -87,7 +87,7 @@ public class Tour {
                             joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
                         }
                         joueur.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
-                        joueur.strategie(piocheCartesCitadelles);
+                        joueur.strategieConstruction(piocheCartesCitadelles);
                         this.strategieEffectuerSpecialite(joueur);
                         this.estJoueurAyantFinisEnPremier(joueur);
                         break;
@@ -157,125 +157,22 @@ public class Tour {
 
     public void strategieEffectuerSpecialite(Bot joueur) {
         if (joueur.getPersonnageACeTour() instanceof Assassin) {
-            strategieAssassin(joueur);
+            joueur.strategieAssassin(listeJoueurs, piocheCartesCitadelles);
+        }else if (joueur.getPersonnageACeTour() instanceof Voleur) {
+            joueur.strategieVoleur(listeJoueurs, piocheCartesCitadelles);
+        }else if (joueur.getPersonnageACeTour() instanceof Magicien) {
+            joueur.strategieMagicien(listeJoueurs, piocheCartesCitadelles);
+        }else if (joueur.getPersonnageACeTour() instanceof Roi) {
+            joueur.strategieRoi(piocheCartesCitadelles);
+        }else if (joueur.getPersonnageACeTour() instanceof Eveque) {
+            joueur.strategieEveque(piocheCartesCitadelles);
+        }else if (joueur.getPersonnageACeTour() instanceof Marchand) {
+            joueur.strategieMarchand(piocheCartesCitadelles);
+        }else if (joueur.getPersonnageACeTour() instanceof Architecte) {
+            joueur.strategieArchitecte(piocheCartesCitadelles);
+        }else if (joueur.getPersonnageACeTour() instanceof Condottiere) {
+            joueur.strategieCondottiere(listeJoueurs, piocheCartesCitadelles);
         }
-        if (joueur.getPersonnageACeTour() instanceof Architecte) {
-            strategieArchitecte(joueur);
-        }
-        if (joueur.getPersonnageACeTour() instanceof Voleur) {
-            strategieVoleur(joueur);
-        }
-        if (joueur.getPersonnageACeTour() instanceof Roi) {
-            strategieRoi(joueur);
-        }
-        if (joueur.getPersonnageACeTour() instanceof Marchand) {
-            strategieMarchand(joueur);
-        }
-        if (joueur.getPersonnageACeTour() instanceof Magicien) {
-            strategieMagicien(joueur);
-        }
-        if (joueur.getPersonnageACeTour() instanceof Eveque) {
-            strategieEveque(joueur);
-        }
-        if (joueur.getPersonnageACeTour() instanceof Condottiere) {
-            strategieCondottiere(joueur);
-        }
-    }
-    //Vrai pour le bot tricheur
-    public void strategieCondottiere(Bot botQuiPossedeLeCondottiere) {
-        int joueurAvecLePlusDePoint = 0;
-        int botQueLonVaDetruire = (int)(Math.random() * listeJoueurs.size());
-        while (listeJoueurs.get(botQueLonVaDetruire) == botQuiPossedeLeCondottiere) {
-            botQueLonVaDetruire = (int)(Math.random()* listeJoueurs.size());
-        }
-        if (botQuiPossedeLeCondottiere instanceof BotTricheur) {
-            for (int i = 0; i < listeJoueurs.size(); i++) {
-                if (joueurAvecLePlusDePoint <= listeJoueurs.get(i).getNbPoint()) {
-                    joueurAvecLePlusDePoint = listeJoueurs.get(i).getNbPoint();
-                    botQueLonVaDetruire = i;
-                }
-            }
-        }
-        Bot victime = listeJoueurs.get(botQueLonVaDetruire);
-        Personnage condottiere = botQuiPossedeLeCondottiere.getPersonnageACeTour();
-        condottiere.effectuerSpecialite(botQuiPossedeLeCondottiere, victime, piocheCartesCitadelles);
-    }
-
-    public void strategieEveque(Bot botQuiPossedeLEveque) {
-        Personnage eveque = botQuiPossedeLEveque.getPersonnageACeTour();
-        eveque.effectuerSpecialite(botQuiPossedeLEveque, null, piocheCartesCitadelles);
-    }
-
-    //Marche pour bot tricheur
-    public void strategieMagicien(Bot botQuiPossedeLeMagicien) {
-        int indiceBotCible = (int)(Math.random() * listeJoueurs.size());
-        Bot botCible = listeJoueurs.get(indiceBotCible);
-        int nombreCarteMaxMain = 0;
-        if (botQuiPossedeLeMagicien instanceof BotTricheur) {
-            for(Bot b : listeJoueurs){
-                if (nombreCarteMaxMain <= b.getCartesCitadellesEnMain().size()) {
-                    nombreCarteMaxMain = b.getCartesCitadellesEnMain().size();
-                    botCible = b;
-                }
-            }
-        }else{
-
-        }
-        Personnage magicien = botQuiPossedeLeMagicien.getPersonnageACeTour();
-        magicien.effectuerSpecialite(botQuiPossedeLeMagicien, botCible, piocheCartesCitadelles);
-    }
-
-    public void strategieMarchand(Bot botQuiPossedeLeMarchand) {
-        Personnage marchand = botQuiPossedeLeMarchand.getPersonnageACeTour();
-        marchand.effectuerSpecialite(botQuiPossedeLeMarchand, null, piocheCartesCitadelles);
-    }
-
-    public void strategieRoi(Bot botQuiPossedeLeRoi) {
-        Personnage roi = botQuiPossedeLeRoi.getPersonnageACeTour();
-        roi.effectuerSpecialite(botQuiPossedeLeRoi, null, piocheCartesCitadelles);
-    }
-
-    //Vrai pour le voleur
-    public void strategieVoleur(Bot botVoleur) {
-        Bot botAVoler = null;
-        if (botVoleur instanceof BotTricheur) {
-            int nombreDePieceMax = 0;
-            for (Bot botVictime : listeJoueurs) {
-                if (botVictime.getNbPiece()  >= nombreDePieceMax && botVictime.getPersonnageACeTour() != null &&
-                        botVictime != botVoleur && !(botVictime.getPersonnageACeTour() instanceof Assassin)) {
-                    nombreDePieceMax = botVictime.getNbPiece();
-                    botAVoler = botVictime;
-                }
-            }
-        } else {
-            int indiceBotAVoler = (int) (Math.random() * listeJoueurs.size());
-            botAVoler = listeJoueurs.get(indiceBotAVoler);
-        }
-        botVoleur.getPersonnageACeTour().effectuerSpecialite(botVoleur,botAVoler, piocheCartesCitadelles);
-    }
-
-    public void strategieArchitecte(Bot botArchitecte){
-        Personnage architecte = botArchitecte.getPersonnageACeTour();
-        architecte.effectuerSpecialite(botArchitecte, null, piocheCartesCitadelles);
-    }
-
-    // Vrai pour bot voleur
-    public void strategieAssassin(Bot botAssassin) {
-        Bot botQueLonVaAssassiner= null;
-        if (botAssassin instanceof BotTricheur) {
-            int joueurMaxPoint = -1;
-            for(Bot b : listeJoueurs){
-                if (b.getNbPoint() > joueurMaxPoint) {
-                    joueurMaxPoint = b.getNbPoint();
-                    botQueLonVaAssassiner = b;
-                }
-            }
-        }else{
-            int indiceBotQueLonVaAssassiner=(int)(Math.random()*listeJoueurs.size());
-            botQueLonVaAssassiner = listeJoueurs.get(indiceBotQueLonVaAssassiner);
-        }
-        Personnage assassin = botAssassin.getPersonnageACeTour();
-        assassin.effectuerSpecialite(botAssassin, botQueLonVaAssassiner, piocheCartesCitadelles);
     }
 
 }

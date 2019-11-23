@@ -20,8 +20,8 @@ public class Magicien extends Personnage {
         this.nom = "Magicien";
     }
 
-    @Override
-    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction,PiocheCartesCitadelles piocheCartesCitadelles) {
+    @Override //A supprimer
+    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction) {
 
     }
 

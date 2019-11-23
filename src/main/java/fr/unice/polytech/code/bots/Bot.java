@@ -60,7 +60,11 @@ public abstract class Bot {
     }
 
     public void ajouterCartesCitadellesDansMain(CarteCitadelles cartesCitadellesAAjouter) {
-        this.cartesCitadellesEnMain.add(cartesCitadellesAAjouter);
+        if(cartesCitadellesAAjouter!=null){
+            this.cartesCitadellesEnMain.add(cartesCitadellesAAjouter);
+        }else{
+            System.out.println("Impossible : vous ajoutez une carte null en main");
+        }
     }
 
     public boolean contientDansSaMain(CarteCitadelles carteATester){
@@ -116,9 +120,39 @@ public abstract class Bot {
         return cartes;
     }
 
-    public abstract void strategie(PiocheCartesCitadelles piocheCartesCitadelles);
+    //Recherche le batiment de plus grande valeur qu'il peut construire
+    public CarteCitadelles rechercheCartePlusHauteValeurConstruisable() {
+        int valeurCartePlusHauteEnMain = 0;
+        CarteCitadelles quartierAConstruire = null;
+        for (CarteCitadelles carteEnMain : cartesCitadellesEnMain) {
+            if (nbPiece >= carteEnMain.getPoint() && !villeDuBot.contient(carteEnMain)
+                    && valeurCartePlusHauteEnMain < carteEnMain.getPoint()) {
+                valeurCartePlusHauteEnMain = carteEnMain.getPoint();
+                quartierAConstruire = carteEnMain;
+            }
+        }
+        return quartierAConstruire;
+    }
+
+    public abstract void strategieConstruction(PiocheCartesCitadelles piocheCartesCitadelles);
 
     public abstract void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage, Personnage personnageDefausseVisible);
 
     public abstract void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles);
+
+    public abstract void strategieAssassin(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelles);
+
+    public abstract void strategieVoleur(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelles);
+
+    public abstract void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelles);
+
+    public abstract void strategieRoi(PiocheCartesCitadelles piocheCartesCitadelles);
+
+    public abstract void strategieEveque(PiocheCartesCitadelles piocheCartesCitadelles);
+
+    public abstract void strategieMarchand(PiocheCartesCitadelles piocheCartesCitadelles);
+
+    public abstract void strategieArchitecte(PiocheCartesCitadelles piocheCartesCitadelles);
+
+    public abstract void strategieCondottiere(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelles);
 }

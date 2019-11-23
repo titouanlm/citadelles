@@ -1,8 +1,7 @@
 package fr.unice.polytech.code.pioches;
 
-import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.bots.Bot;
 import fr.unice.polytech.code.personnages.Personnage;
-import fr.unice.polytech.code.Ville;
 import fr.unice.polytech.code.personnages.*;
 
 import java.util.ArrayList;
@@ -37,39 +36,39 @@ public class PiocheCartesPersonnage {
         return null;
     }
 
-    public Personnage piocherPersonnageNonAleatoirement(int nbPieceJoueur, ArrayList<CarteCitadelles> carteEnMain, Ville villeJoueur) {
+    public Personnage piocherPersonnageNonAleatoirement(Bot joueurQuiPioche) {
         if (piocheCP.size() > 0) {
             Personnage personnageChoisi;
             for(Personnage p : this.piocheCP ){
-                if (p.getNumero() == 7 && nbPieceJoueur > 7) {
+                if (p.getNumero() == 7 && joueurQuiPioche.getNbPiece() > 7) {
                     personnageChoisi = p;
                     this.piocheCP.remove(p);
                     return personnageChoisi;
-                } else if (p.getNumero() == 4 && nbPieceJoueur < 4 && villeJoueur.compterNbQuartiersJaune() > 2) {
+                } else if (p.getNumero() == 4 && joueurQuiPioche.getNbPiece() < 4 && joueurQuiPioche.getVilleDuBot().compterNbQuartiersJaune() > 2) {
                     personnageChoisi = p;
                     this.piocheCP.remove(p);
                     return personnageChoisi;
-                } else if (p.getNumero() == 6 && nbPieceJoueur < 4 && villeJoueur.compterNbQuartiersVert() > 2) {
+                } else if (p.getNumero() == 6 && joueurQuiPioche.getNbPiece() < 4 && joueurQuiPioche.getVilleDuBot().compterNbQuartiersVert() > 2) {
                     personnageChoisi = p;
                     this.piocheCP.remove(p);
                     return personnageChoisi;
-                } else if (p.getNumero() == 5 && nbPieceJoueur < 4 && villeJoueur.compterNbQuartiersBleu() > 2) {
+                } else if (p.getNumero() == 5 && joueurQuiPioche.getNbPiece() < 4 && joueurQuiPioche.getVilleDuBot().compterNbQuartiersBleu() > 2) {
                     personnageChoisi = p;
                     this.piocheCP.remove(p);
                     return personnageChoisi;
-                } else if (p.getNumero() == 8 && nbPieceJoueur < 3 && villeJoueur.compterNbQuartiersRouge() > 2) {
+                } else if (p.getNumero() == 8 && joueurQuiPioche.getNbPiece() < 3 && joueurQuiPioche.getVilleDuBot().compterNbQuartiersRouge() > 2) {
                     personnageChoisi = p;
                     this.piocheCP.remove(p);
                     return personnageChoisi;
-                } else if (p.getNumero() == 1 && nbPieceJoueur > 5 && carteEnMain.size() < 2) {
+                } else if (p.getNumero() == 1 && joueurQuiPioche.getNbPiece() > 5 && joueurQuiPioche.getCartesCitadellesEnMain().size() < 2) {
                     personnageChoisi = p;
                     this.piocheCP.remove(p);
                     return personnageChoisi;
-                } else if (p.getNumero() == 2 && nbPieceJoueur < 2) {
+                } else if (p.getNumero() == 2 && joueurQuiPioche.getNbPiece() < 2) {
                     personnageChoisi = p;
                     this.piocheCP.remove(p);
                     return personnageChoisi;
-                } else if (p.getNumero() == 3 && nbPieceJoueur > 7 && carteEnMain.size() < 2) {
+                } else if (p.getNumero() == 3 && joueurQuiPioche.getNbPiece() > 7 && joueurQuiPioche.getCartesCitadellesEnMain().size() < 2) {
                     personnageChoisi = p;
                     this.piocheCP.remove(p);
                     return personnageChoisi;

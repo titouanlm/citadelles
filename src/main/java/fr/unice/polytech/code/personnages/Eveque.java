@@ -18,8 +18,18 @@ public class Eveque extends Personnage {
         this.nom = "Evèque";
     }
 
-    @Override
-    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles) {
+    @Override //A supprimer
+    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction) {
+        if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Eveque){
+            for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
+                if(c.getCouleur()== CouleurCarteCitadelles.BLEU){
+                    joueurQuiEffectueAction.ajouterPiece(1);
+                }
+            }
+        }
+    }
+
+    public void effectuerSpecialiteEveque(Bot joueurQuiEffectueAction) {
         if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Eveque){
             for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
                 if(c.getCouleur()== CouleurCarteCitadelles.BLEU){

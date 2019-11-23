@@ -16,9 +16,18 @@ public class Assassin extends Personnage {
     }
 
     @Override
-    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles) {
+    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction) {
         if(joueurQuiSubitAction!=joueurQuiEffectueAction){
             joueurQuiSubitAction.setPersonnageACeTour(null);
+        }
+    }
+
+    public void effectuerSpecialiteAssassin(Personnage personnageAssassine) {
+        if(!(personnageAssassine instanceof Assassin)){
+            Bot joueurAssassine= null; // A faire
+            if(joueurAssassine!=null){
+                joueurAssassine.setPersonnageACeTour(null);
+            }
         }
     }
 }
