@@ -17,24 +17,10 @@ public class Roi extends Personnage {
         this.nom = "Roi";
     }
 
-    @Override //A supprimer
-    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction ) {
-        if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Roi){
-            for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
-                if(c.getCouleur()== CouleurCarteCitadelles.JAUNE){
-                    joueurQuiEffectueAction.ajouterPiece(1);
-                }
-            }
-        }
-
-    }
-
     public void effectuerSpecialiteRoi(Bot joueurQuiEffectueAction) {
-        if(joueurQuiEffectueAction.getPersonnageACeTour()instanceof Roi){
-            for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
-                if(c.getCouleur()== CouleurCarteCitadelles.JAUNE){
-                    joueurQuiEffectueAction.ajouterPiece(1);
-                }
+        for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
+            if(c.getCouleur()== CouleurCarteCitadelles.JAUNE){
+                joueurQuiEffectueAction.ajouterPiece(1);
             }
         }
     }

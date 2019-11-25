@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PersonnageTest {
     PiocheCartesCitadelles piocheCartesCitadelles;
-
+/*
     @Test
     void effectuerSpecialiteAssassinTest(){
         Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
@@ -66,28 +66,29 @@ public class PersonnageTest {
         assertEquals(20,bot2.getNbPiece());
         assertEquals(0,bot3.getNbPiece());
         assertEquals(10,bot4.getNbPiece());
-    }
+    }*/
 
     @Test
     void effectuerSpecialiteRoiTest(){
         Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
         Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
 
-        bot1.setPersonnageACeTour(new Assassin());
+        bot1.setPersonnageACeTour(new Roi());
         bot2.setPersonnageACeTour(new Roi());
 
-        assertTrue(bot1.getPersonnageACeTour()instanceof Assassin);
-        assertTrue(bot2.getPersonnageACeTour()instanceof Roi);
-
-        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(15, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
         bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(18, CouleurCarteCitadelles.JAUNE, "Château", 4));
 
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null);
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null);
+        if(bot1.getPersonnageACeTour() instanceof Roi){
+            ((Roi) bot1.getPersonnageACeTour()).effectuerSpecialiteRoi(bot1);
+        }
+        if(bot2.getPersonnageACeTour() instanceof Roi){
+            ((Roi) bot2.getPersonnageACeTour()).effectuerSpecialiteRoi(bot2);
+        }
 
-        assertEquals(0,bot1.getNbPiece());
+        assertEquals(1,bot1.getNbPiece());
         assertEquals(2,bot2.getNbPiece());
     }
 
@@ -96,21 +97,23 @@ public class PersonnageTest {
         Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
         Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
 
-        bot1.setPersonnageACeTour(new Assassin());
+        bot1.setPersonnageACeTour(new Eveque());
         bot2.setPersonnageACeTour(new Eveque());
 
-        assertTrue(bot1.getPersonnageACeTour()instanceof Assassin);
-        assertTrue(bot2.getPersonnageACeTour()instanceof Eveque);
-
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(8,CouleurCarteCitadelles.BLEU, "Monastère", 3 ));
         bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
         bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
 
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null);
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null);
+        if(bot1.getPersonnageACeTour() instanceof Eveque){
+            ((Eveque) bot1.getPersonnageACeTour()).effectuerSpecialiteEveque(bot1);
+        }
+        if(bot2.getPersonnageACeTour() instanceof Eveque){
+            ((Eveque) bot2.getPersonnageACeTour()).effectuerSpecialiteEveque(bot2);
+        }
 
-        assertEquals(0,bot1.getNbPiece());
+        assertEquals(1,bot1.getNbPiece());
         assertEquals(2,bot2.getNbPiece());
     }
 
@@ -119,21 +122,48 @@ public class PersonnageTest {
         Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
         Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
 
-        bot1.setPersonnageACeTour(new Assassin());
+        bot1.setPersonnageACeTour(new Marchand());
         bot2.setPersonnageACeTour(new Marchand());
 
-        assertTrue(bot1.getPersonnageACeTour()instanceof Assassin);
-        assertTrue(bot2.getPersonnageACeTour()instanceof Marchand);
-
-        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Echoppe", 2));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Comptoir", 3));
         bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
         bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
 
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null);
-        bot2.getPersonnageACeTour().effectuerSpecialite(bot2,null);
+        if(bot1.getPersonnageACeTour() instanceof Marchand){
+            ((Marchand) bot1.getPersonnageACeTour()).effectuerSpecialiteMarchand(bot1);
+        }
+        if(bot2.getPersonnageACeTour() instanceof Marchand){
+            ((Marchand) bot2.getPersonnageACeTour()).effectuerSpecialiteMarchand(bot2);
+        }
 
-        assertEquals(0,bot1.getNbPiece());
+        assertEquals(1,bot1.getNbPiece());
+        assertEquals(2,bot2.getNbPiece());
+    }
+
+    @Test
+    void effectuerSpecialiteCondottiereTest(){
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+
+        bot1.setPersonnageACeTour(new Condottiere());
+        bot2.setPersonnageACeTour(new Condottiere());
+
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Comptoir", 3));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(50,CouleurCarteCitadelles.ROUGE, "Caserne", 3 ));
+
+        if(bot1.getPersonnageACeTour() instanceof Condottiere){
+            ((Condottiere) bot1.getPersonnageACeTour()).effectuerSpecialiteCondottiere(bot1);
+        }
+        if(bot2.getPersonnageACeTour() instanceof Condottiere){
+            ((Condottiere) bot2.getPersonnageACeTour()).effectuerSpecialiteCondottiere(bot2);
+        }
+
+        assertEquals(1,bot1.getNbPiece());
         assertEquals(2,bot2.getNbPiece());
     }
 

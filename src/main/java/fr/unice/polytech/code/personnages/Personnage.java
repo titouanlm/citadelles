@@ -16,7 +16,4 @@ public abstract class Personnage {
         return nom;
     }
 
-    public abstract void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction);
-
-
 }

@@ -15,15 +15,6 @@ public class Voleur extends Personnage {
         this.numero =2;
         this.nom = "Voleur";
     }
-
-    @Override
-    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction) {
-        if(!(joueurQuiSubitAction.getPersonnageACeTour()instanceof Assassin) && joueurQuiSubitAction!=joueurQuiEffectueAction && joueurQuiSubitAction.getPersonnageACeTour()!=null){
-            joueurQuiEffectueAction.ajouterPiece(joueurQuiSubitAction.getNbPiece());
-            joueurQuiSubitAction.retirerPiece(joueurQuiSubitAction.getNbPiece());
-        }
-    }
-
     public void effectuerSpecialiteVoleur(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction) {
         if(!(joueurQuiSubitAction.getPersonnageACeTour()instanceof Assassin) && joueurQuiSubitAction!=joueurQuiEffectueAction && joueurQuiSubitAction.getPersonnageACeTour()!=null){
             joueurQuiEffectueAction.ajouterPiece(joueurQuiSubitAction.getNbPiece());

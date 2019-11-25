@@ -20,11 +20,6 @@ public class Magicien extends Personnage {
         this.nom = "Magicien";
     }
 
-    @Override //A supprimer
-    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction) {
-
-    }
-
     public void echangerCartesAvecUnPersonnage(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction){
         if(joueurQuiEffectueAction.getPersonnageACeTour() instanceof Magicien && joueurQuiSubitAction!=joueurQuiEffectueAction){
             //Ajoute les cartes de la victime dans une liste temporaire
@@ -56,4 +51,3 @@ public class Magicien extends Personnage {
         }
     }
 }
-

@@ -74,15 +74,15 @@ public class Tour {
     }
 
     public void appelerJoueursDansLOrdre() {
-        for (int numeroAppeler = 1; numeroAppeler < 9; numeroAppeler++) {
+        for (int numeroAppele = 1; numeroAppele < 9; numeroAppele++) {
             for (Bot joueur : listeJoueurs) {
                 if (joueur.getPersonnageACeTour() != null) {
-                    if (joueur.getPersonnageACeTour().getNumero() == numeroAppeler) {
-                        if (numeroAppeler == 4) { //Roi
+                    if (joueur.getPersonnageACeTour().getNumero() == numeroAppele) {
+                        if (numeroAppele == 4) { //Roi
                             this.setJoueurAyantLeRoi(joueur);
-                        } else if (numeroAppeler == 6) { //Marchand
+                        } else if (numeroAppele == 6) { //Marchand
                             joueur.ajouterPiece(1);
-                        }else if(numeroAppeler == 7){ //Architecte
+                        }else if(numeroAppele == 7){ //Architecte
                             joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
                             joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
                         }
@@ -157,21 +157,21 @@ public class Tour {
 
     public void strategieEffectuerSpecialite(Bot joueur) {
         if (joueur.getPersonnageACeTour() instanceof Assassin) {
-            joueur.strategieAssassin(listeJoueurs, piocheCartesCitadelles);
+            joueur.strategieAssassin(listeJoueurs);
         }else if (joueur.getPersonnageACeTour() instanceof Voleur) {
-            joueur.strategieVoleur(listeJoueurs, piocheCartesCitadelles);
+            joueur.strategieVoleur(listeJoueurs);
         }else if (joueur.getPersonnageACeTour() instanceof Magicien) {
-            joueur.strategieMagicien(listeJoueurs, piocheCartesCitadelles);
+            joueur.strategieMagicien(listeJoueurs);
         }else if (joueur.getPersonnageACeTour() instanceof Roi) {
-            joueur.strategieRoi(piocheCartesCitadelles);
+            joueur.strategieRoi();
         }else if (joueur.getPersonnageACeTour() instanceof Eveque) {
-            joueur.strategieEveque(piocheCartesCitadelles);
+            joueur.strategieEveque();
         }else if (joueur.getPersonnageACeTour() instanceof Marchand) {
-            joueur.strategieMarchand(piocheCartesCitadelles);
+            joueur.strategieMarchand();
         }else if (joueur.getPersonnageACeTour() instanceof Architecte) {
             joueur.strategieArchitecte(piocheCartesCitadelles);
         }else if (joueur.getPersonnageACeTour() instanceof Condottiere) {
-            joueur.strategieCondottiere(listeJoueurs, piocheCartesCitadelles);
+            joueur.strategieCondottiere(listeJoueurs);
         }
     }
 

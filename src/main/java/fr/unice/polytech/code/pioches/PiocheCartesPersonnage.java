@@ -40,7 +40,7 @@ public class PiocheCartesPersonnage {
         if (piocheCP.size() > 0) {
             Personnage personnageChoisi;
             for(Personnage p : this.piocheCP ){
-                if (p.getNumero() == 7 && joueurQuiPioche.getNbPiece() > 7) {
+                if (p.getNumero() == 7 && joueurQuiPioche.getNbPiece() > 7 && joueurQuiPioche.getCartesCitadellesEnMain().size() > 1) {
                     personnageChoisi = p;
                     this.piocheCP.remove(p);
                     return personnageChoisi;

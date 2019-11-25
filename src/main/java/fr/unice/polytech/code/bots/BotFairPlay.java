@@ -1,10 +1,8 @@
 package fr.unice.polytech.code.bots;
 
 import fr.unice.polytech.code.cartes.CarteCitadelles;
-import fr.unice.polytech.code.personnages.Architecte;
-import fr.unice.polytech.code.personnages.Personnage;
-import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
-import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
+import fr.unice.polytech.code.personnages.*;
+import fr.unice.polytech.code.pioches.*;
 
 import java.util.ArrayList;
 
@@ -19,18 +17,11 @@ public class BotFairPlay extends Bot {
 
     @Override
     public void strategieConstruction(PiocheCartesCitadelles piocheCartesCitadelles) { //Construit le plus gros batiment qu'il peut
-        int i = 1;
-        if (this.personnageACeTour instanceof Architecte) {
-            i = 3;
-        }
-        while (i > 0) {
-            CarteCitadelles carteEnMainDePlusHauteValeur = this.rechercheCartePlusHauteValeurConstruisable();
-            if (carteEnMainDePlusHauteValeur != null) {
-                this.retirerPiece(carteEnMainDePlusHauteValeur.getPoint());
-                this.villeDuBot.construireBatiment(carteEnMainDePlusHauteValeur);
-                this.cartesCitadellesEnMain.remove(carteEnMainDePlusHauteValeur);
-            }
-            i--;
+        CarteCitadelles carteEnMainDePlusHauteValeur = this.rechercheCartePlusHauteValeurConstruisable();
+        if (carteEnMainDePlusHauteValeur != null) {
+            this.retirerPiece(carteEnMainDePlusHauteValeur.getPoint());
+            this.villeDuBot.construireBatiment(carteEnMainDePlusHauteValeur);
+            this.cartesCitadellesEnMain.remove(carteEnMainDePlusHauteValeur);
         }
     }
 
@@ -85,58 +76,76 @@ public class BotFairPlay extends Bot {
         }
     }
 
-    @Override // A implémenter (Aléatoire pour l'instant)
-    public void strategieAssassin(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelles) {
-        int indiceBotQueLonVaAssassiner=(int)(Math.random()*listeJoueurs.size());
+    @Override // A implémenter (Aléatoire pour l'instant) TUE UN PERSO
+    public void strategieAssassin(ArrayList<Bot> listeJoueurs) {
+        /*int indiceBotQueLonVaAssassiner=(int)(Math.random()*listeJoueurs.size());
         Bot botQueLonVaAssassiner = listeJoueurs.get(indiceBotQueLonVaAssassiner);
         Personnage assassin = this.getPersonnageACeTour();
-        assassin.effectuerSpecialite(this, botQueLonVaAssassiner);
+        assassin.effectuerSpecialite(this, botQueLonVaAssassiner);*/
     }
 
-    @Override // A implémenter (Aléatoire pour l'instant)
-    public void strategieVoleur(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelles) {
-        int indiceBotAVoler = (int) (Math.random() * listeJoueurs.size());
+    @Override // A implémenter (Aléatoire pour l'instant) VOLE UN PERSO
+    public void strategieVoleur(ArrayList<Bot> listeJoueurs) {
+       /* int indiceBotAVoler = (int) (Math.random() * listeJoueurs.size());
         Bot botAVoler = listeJoueurs.get(indiceBotAVoler);
-        this.getPersonnageACeTour().effectuerSpecialite(this,botAVoler);
+        this.getPersonnageACeTour().effectuerSpecialite(this,botAVoler);*/
     }
 
-    @Override // A implémenter
-    public void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelles) {
+    @Override // A implémenter : Vole les cartes d'un joueur PAS UN PERSO
+    public void strategieMagicien(ArrayList<Bot> listeJoueurs) {
 
-    }
-
-    @Override
-    public void strategieRoi(PiocheCartesCitadelles piocheCartesCitadelles) {
-        Personnage roi = this.getPersonnageACeTour();
-        roi.effectuerSpecialite(this, null);
     }
 
     @Override
-    public void strategieEveque(PiocheCartesCitadelles piocheCartesCitadelles) {
-        Personnage eveque = this.getPersonnageACeTour();
-        eveque.effectuerSpecialite(this, null);
+    public void strategieRoi() {
+        Personnage personnageJoueur = this.getPersonnageACeTour();
+        if(personnageJoueur instanceof Roi){
+            ((Roi) personnageJoueur).effectuerSpecialiteRoi(this);
+        }
     }
 
     @Override
-    public void strategieMarchand(PiocheCartesCitadelles piocheCartesCitadelles) {
-        Personnage marchand = this.getPersonnageACeTour();
-        marchand.effectuerSpecialite(this, null);
+    public void strategieEveque() {
+        Personnage personnageJoueur = this.getPersonnageACeTour();
+        if(personnageJoueur instanceof Eveque){
+            ((Eveque) personnageJoueur).effectuerSpecialiteEveque(this);
+        }
+    }
+
+    @Override
+    public void strategieMarchand() {
+        Personnage personnageJoueur = this.getPersonnageACeTour();
+        if(personnageJoueur instanceof Marchand){
+            ((Marchand) personnageJoueur).effectuerSpecialiteMarchand(this);
+        }
     }
 
     @Override
     public void strategieArchitecte(PiocheCartesCitadelles piocheCartesCitadelles) {
-        Personnage architecte = this.getPersonnageACeTour();
-        architecte.effectuerSpecialite(this, null);
+        Personnage personnageJoueur = this.getPersonnageACeTour();
+        if(personnageJoueur instanceof Architecte){
+            ((Architecte) personnageJoueur).effectuerSpecialiteArchitecte(this, piocheCartesCitadelles);
+        }
     }
 
-    @Override // A implémenter (Aléatoire pour l'instant)
-    public void strategieCondottiere(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelles) {
-        int indiceBotVictime = (int)(Math.random()*listeJoueurs.size());
-        Bot victime = listeJoueurs.get(indiceBotVictime);
-        Personnage condottiere = this.getPersonnageACeTour();
-        condottiere.effectuerSpecialite(this, victime);
-    }
+    @Override // A implémenter (Aléatoire pour l'instant) DETRUIT LE BAT D'UN JOUEUR
+    public void strategieCondottiere(ArrayList<Bot> listeJoueurs) {
+        Personnage personnageJoueur = this.getPersonnageACeTour();
+        if(personnageJoueur instanceof Condottiere){
+            ((Condottiere) personnageJoueur).effectuerSpecialiteCondottiere(this);
 
+            int nbPointMax=0;
+            Bot victime=null;
+            for(Bot b : listeJoueurs){
+                if(b!=this && b.getVilleDuBot().getNbTotalPoint()>nbPointMax){
+                    nbPointMax=b.getVilleDuBot().getNbTotalPoint();
+                    victime=b;
+                }
+            }
+
+            ((Condottiere) personnageJoueur).detruirePlusGrosQuartierEnemie(this, victime);
+        }
+    }
 
     public int determinerChoixPiocherOuPiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (piocheCartesCitadelles.nbCartesRestantes() > 0 && getNbPiece() >= 5) {

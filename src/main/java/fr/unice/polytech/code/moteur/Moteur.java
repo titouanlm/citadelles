@@ -50,7 +50,7 @@ public class Moteur {
         int cptTour = 1;
         while (true) {
             listeTours.add(new Tour(cptTour, piocheCartesCitadelles, piocheCartesPersonnage, listeJoueurs));
-            if (!listeTours.get(cptTour-1).lancerTour()) {
+            if (!listeTours.get(cptTour - 1).lancerTour()) {
                 cptTour++;
             } else {
                 break;

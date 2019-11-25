@@ -1,5 +1,6 @@
 package fr.unice.polytech.code.pioches;
 
+import fr.unice.polytech.code.bots.Bot;
 import fr.unice.polytech.code.cartes.*;
 import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 

@@ -2,12 +2,10 @@ package fr.unice.polytech.code.bots;
 
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.Ville;
-import fr.unice.polytech.code.personnages.Personnage;
-import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
-import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
+import fr.unice.polytech.code.personnages.*;
+import fr.unice.polytech.code.pioches.*;
 
 import java.util.ArrayList;
-
 public abstract class Bot {
     String nom;
     String couleur;
@@ -49,7 +47,7 @@ public abstract class Bot {
         }else{
             this.nbPiece-=nbPiece;
         }
-     }
+    }
 
     public Ville getVilleDuBot() {
         return villeDuBot;
@@ -140,19 +138,19 @@ public abstract class Bot {
 
     public abstract void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles);
 
-    public abstract void strategieAssassin(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelles);
+    public abstract void strategieAssassin(ArrayList<Bot> listeJoueurs);
 
-    public abstract void strategieVoleur(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelles);
+    public abstract void strategieVoleur(ArrayList<Bot> listeJoueurs);
 
-    public abstract void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelles);
+    public abstract void strategieMagicien(ArrayList<Bot> listeJoueurs);
 
-    public abstract void strategieRoi(PiocheCartesCitadelles piocheCartesCitadelles);
+    public abstract void strategieRoi();
 
-    public abstract void strategieEveque(PiocheCartesCitadelles piocheCartesCitadelles);
+    public abstract void strategieEveque();
 
-    public abstract void strategieMarchand(PiocheCartesCitadelles piocheCartesCitadelles);
+    public abstract void strategieMarchand();
 
     public abstract void strategieArchitecte(PiocheCartesCitadelles piocheCartesCitadelles);
 
-    public abstract void strategieCondottiere(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelles);
+    public abstract void strategieCondottiere(ArrayList<Bot> listeJoueurs);
 }

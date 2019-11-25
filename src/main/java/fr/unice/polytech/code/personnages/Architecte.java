@@ -16,8 +16,9 @@ public class Architecte extends Personnage {
         this.nom = "Architecte";
     }
 
-    @Override //A supprimer
-    public void effectuerSpecialite(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction) {
-
+    public void effectuerSpecialiteArchitecte(Bot joueurPossedantArchitecte, PiocheCartesCitadelles piocheCartesCitadelles) {
+        for(int i=0; i<2; i++){
+            joueurPossedantArchitecte.strategieConstruction(piocheCartesCitadelles);
+        }
     }
 }

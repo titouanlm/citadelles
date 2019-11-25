@@ -1,6 +1,8 @@
 package fr.unice.polytech.code;
 
 import fr.unice.polytech.code.bots.*;
+import fr.unice.polytech.code.moteur.Moteur;
+import fr.unice.polytech.code.moteur.Tour;
 
 import java.util.*;
 
@@ -8,6 +10,7 @@ public class Affichage {
 
     private final HashMap<String,int[]> mapJoueurs= new HashMap<>();
     private int nbParties;
+    private boolean modeDetails;
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_RED = "\u001B[31m";
     private static final String ANSI_BLUE = "\u001B[34m";
@@ -24,6 +27,11 @@ public class Affichage {
     public int getNbParties() {
         return nbParties;
     }
+
+    public void setModeDetails(boolean modeDetails) {
+        this.modeDetails = modeDetails;
+    }
+
     public final HashMap<String,int[]> getMapJoueurs(){return mapJoueurs;}
 
     public void incrementerNbPointsDesBotsEnMoyenne(ArrayList<Bot> listeDeJoueur){
@@ -52,6 +60,13 @@ public class Affichage {
             System.out.println( ANSI_BOLD + ANSI_BLUE + "Victoire(s) : "  + ANSI_RESET + ANSI_BOLD + resultsVictoiresPointsEnMoyenne[0] + ANSI_UNBOLD + ANSI_RESET + " sur " + ANSI_BOLD + this.nbParties + ANSI_UNBOLD + ANSI_RESET  + " parties." );
             System.out.println("Soit " + ANSI_BOLD  + pourcentageVictoireArrondi + "%"+ ANSI_UNBOLD + ANSI_RESET + " de victoires.");
             System.out.println(ANSI_BOLD + ANSI_BLUE + "Nombre de points moyens par partie : " + ANSI_UNBOLD + ANSI_RESET + ANSI_BOLD + (double)resultsVictoiresPointsEnMoyenne[1]/this.nbParties + ANSI_UNBOLD + ANSI_RESET + "\n");
+        }
+    }
+
+
+    public void afficherDetails(Moteur moteur, Arbitre arbitre) {
+        if (modeDetails) {
+
         }
     }
 }
