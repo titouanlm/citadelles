@@ -8,5 +8,5 @@ public abstract class CarteCitadellesAvecPouvoir extends CarteCitadelles {
         super(numero, couleur, nom, point);
     }
 
-    public abstract void effectuerSpecialite();
+    public abstract void effectuerSpecialite(int numero, CouleurCarteCitadelles couleur, String nom, int point, Bot joueur, PiocheCartesCitadelles piocheCartesCitadelles);
 }

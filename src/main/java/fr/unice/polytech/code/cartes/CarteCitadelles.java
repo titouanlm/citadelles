@@ -22,6 +22,10 @@ public abstract class CarteCitadelles {
         return couleur;
     }
 
+    public void setCouleur(CouleurCarteCitadelles couleure){
+        this.couleur=couleure;
+    }
+
     public String getNom() {
         return nom;
     }
