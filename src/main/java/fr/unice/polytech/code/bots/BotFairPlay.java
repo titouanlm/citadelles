@@ -91,9 +91,29 @@ public class BotFairPlay extends Bot {
         this.getPersonnageACeTour().effectuerSpecialite(this,botAVoler);*/
     }
 
-    @Override // A implémenter : Vole les cartes d'un joueur PAS UN PERSO
+    @Override
     public void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles pioche) {
-
+        Personnage magicien = this.getPersonnageACeTour();
+        int nombreCarteMaxMainPersonne = 0;
+        int b=0;
+        ArrayList<CarteCitadelles> cartesAEchanger = new ArrayList<>();
+        for (int i =0 ; i < listeJoueurs.size(); i++) {
+            if (nombreCarteMaxMainPersonne < listeJoueurs.get(i).getCartesCitadellesEnMain().size()) {
+                nombreCarteMaxMainPersonne = listeJoueurs.get(i).getCartesCitadellesEnMain().size();
+                b=i;
+            }
+        }
+        for (int p = 0; p < this.getCartesCitadellesEnMain().size(); p++) {
+            if (this.getCartesCitadellesEnMain().get(p).getPoint() < 4) {
+                cartesAEchanger.add(this.getCartesCitadellesEnMain().get(p));
+            }
+        }
+        if (nombreCarteMaxMainPersonne > 3) {
+            ((Magicien) magicien).echangerCartesAvecUnPersonnage(this, listeJoueurs.get(b));
+        }
+        else {
+            ((Magicien) magicien).echangerCartesAvecPioche(this, pioche, cartesAEchanger);
+        }
     }
 
     @Override
@@ -142,7 +162,6 @@ public class BotFairPlay extends Bot {
                     victime=b;
                 }
             }
-
             ((Condottiere) personnageJoueur).detruirePlusGrosQuartierEnemie(this, victime);
         }
     }

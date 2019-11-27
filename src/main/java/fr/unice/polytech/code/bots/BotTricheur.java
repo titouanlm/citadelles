@@ -105,9 +105,32 @@ public class BotTricheur extends Bot {
         ((Voleur) personnageJoueur).effectuerSpecialiteVoleur(this, botAVoler.getPersonnageACeTour(), listeJoueurs);
     }
 
-    @Override //A implémenter
+    @Override
     public void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles pioche) {
-
+        Personnage magicien = this.getPersonnageACeTour();
+        int nombrePointsCarteMaxMainPersonne = 0;
+        int nombrePointsCarteMainPersonne =0;
+        int b=0;
+        ArrayList<CarteCitadelles> cartesAEchanger = new ArrayList<>();
+        for (int i =0 ; i < listeJoueurs.size(); i++) {
+            for (int c = 0; c < listeJoueurs.get(i).getCartesCitadellesEnMain().size(); c++) {
+                nombrePointsCarteMainPersonne+=listeJoueurs.get(i).getCartesCitadellesEnMain().get(c).getPoint();
+            }
+            if (nombrePointsCarteMainPersonne > nombrePointsCarteMaxMainPersonne){
+                nombrePointsCarteMaxMainPersonne=nombrePointsCarteMainPersonne;
+            }
+        }
+        for (int p = 0; p < this.getCartesCitadellesEnMain().size(); p++) {
+            if (this.getCartesCitadellesEnMain().get(p).getPoint() < 4) {
+                cartesAEchanger.add(this.getCartesCitadellesEnMain().get(p));
+            }
+        }
+        if (nombrePointsCarteMaxMainPersonne > 10) {
+            ((Magicien) magicien).echangerCartesAvecUnPersonnage(this, listeJoueurs.get(b));
+        }
+        else {
+            ((Magicien) magicien).echangerCartesAvecPioche(this, pioche, cartesAEchanger);
+        }
     }
 
     @Override
