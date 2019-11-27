@@ -31,7 +31,7 @@ public class Condottiere extends Personnage {
     }
 
     public void detruirePlusGrosQuartierEnemie(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction){
-        if(!(joueurQuiSubitAction.getPersonnageACeTour()instanceof Eveque) && joueurQuiEffectueAction!=joueurQuiSubitAction
+        if(joueurQuiSubitAction!=null && !(joueurQuiSubitAction.getPersonnageACeTour()instanceof Eveque) && joueurQuiEffectueAction!=joueurQuiSubitAction
                 && joueurQuiSubitAction.getVilleDuBot().getNbBatimentsConstruits()<8){
             CarteCitadelles quartierADetruire=null;
             int nbPointMax=0;
@@ -49,7 +49,7 @@ public class Condottiere extends Personnage {
     }
 
     public void detruireQuartierAleatoireEnemie(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction){
-        if(!(joueurQuiSubitAction.getPersonnageACeTour()instanceof Eveque) && joueurQuiSubitAction.getVilleDuBot().getNbBatimentsConstruits()<8){
+        if(joueurQuiSubitAction!=null && !(joueurQuiSubitAction.getPersonnageACeTour()instanceof Eveque) && joueurQuiSubitAction.getVilleDuBot().getNbBatimentsConstruits()<8){
             int nbBatConstruits = joueurQuiSubitAction.getVilleDuBot().getBatimentsConstruits().size();
             if(nbBatConstruits>0){
                 int indiceQuartierADetruire = (int)(Math.random() * nbBatConstruits);

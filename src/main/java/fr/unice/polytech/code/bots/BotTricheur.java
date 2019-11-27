@@ -77,7 +77,7 @@ public class BotTricheur extends Bot {
     }
 
     @Override // Assassine le joueur ayant le plus de point
-    public void strategieAssassin(ArrayList<Bot> listeJoueurs) {
+    public void strategieAssassin(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
         Bot botQueLonVaAssassiner= null;
         int joueurMaxPoint = -1;
         for(Bot b : listeJoueurs){
@@ -91,7 +91,7 @@ public class BotTricheur extends Bot {
     }
 
     @Override // Vole le joueur ayant le plus de pièce
-    public void strategieVoleur(ArrayList<Bot> listeJoueurs) {
+    public void strategieVoleur(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
         Bot botAVoler = null;
         int nombreDePieceMax = 0;
         for (Bot botVictime : listeJoueurs) {
@@ -170,7 +170,6 @@ public class BotTricheur extends Bot {
         Personnage personnageJoueur = this.getPersonnageACeTour();
         if(personnageJoueur instanceof Condottiere){
             ((Condottiere) personnageJoueur).effectuerSpecialiteCondottiere(this);
-
             int nbPointMax=0;
             Bot victime=null;
             for(Bot b : listeJoueurs){
@@ -179,7 +178,6 @@ public class BotTricheur extends Bot {
                     victime=b;
                 }
             }
-
             ((Condottiere) personnageJoueur).detruirePlusGrosQuartierEnemie(this, victime);
         }
     }

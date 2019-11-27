@@ -76,19 +76,40 @@ public class BotFairPlay extends Bot {
         }
     }
 
-    @Override // A implémenter (Aléatoire pour l'instant) TUE UN PERSO
-    public void strategieAssassin(ArrayList<Bot> listeJoueurs) {
-        /*int indiceBotQueLonVaAssassiner=(int)(Math.random()*listeJoueurs.size());
-        Bot botQueLonVaAssassiner = listeJoueurs.get(indiceBotQueLonVaAssassiner);
+    @Override
+    public void strategieAssassin(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
+        int personnageAssassiner=-1;
+        Personnage personnageAAssassiner=null;
+        do{
+            personnageAssassiner = (int)(Math.random()*8);
+        }while(personnageAssassiner == this.getPersonnageACeTour().getNumero() && personnageAssassiner!=personnageDefausse.getNumero());
+        for (int i=0;i<listeJoueurs.size();i++){
+            if (listeJoueurs.get(i).getPersonnageACeTour().getNumero()==personnageAssassiner){
+                personnageAAssassiner = listeJoueurs.get(i).getPersonnageACeTour();
+            }
+        }
         Personnage assassin = this.getPersonnageACeTour();
-        assassin.effectuerSpecialite(this, botQueLonVaAssassiner);*/
+        if (personnageAAssassiner!=null){
+            ((Assassin) assassin).effectuerSpecialiteAssassin(personnageAAssassiner, listeJoueurs);
+        }
     }
 
-    @Override // A implémenter (Aléatoire pour l'instant) VOLE UN PERSO
-    public void strategieVoleur(ArrayList<Bot> listeJoueurs) {
-       /* int indiceBotAVoler = (int) (Math.random() * listeJoueurs.size());
-        Bot botAVoler = listeJoueurs.get(indiceBotAVoler);
-        this.getPersonnageACeTour().effectuerSpecialite(this,botAVoler);*/
+    @Override
+    public void strategieVoleur(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
+        int indicePersonnageAVoler=-1;
+        Personnage personnageAVoler=null;
+        do{
+            indicePersonnageAVoler = (int)(Math.random()*8);
+        }while(indicePersonnageAVoler == this.getPersonnageACeTour().getNumero() && indicePersonnageAVoler!=personnageDefausse.getNumero());
+        for (int i=0;i<listeJoueurs.size();i++){
+            if (listeJoueurs.get(i).getPersonnageACeTour()!=null && listeJoueurs.get(i).getPersonnageACeTour().getNumero()==indicePersonnageAVoler){
+                personnageAVoler = listeJoueurs.get(i).getPersonnageACeTour();
+            }
+        }
+        Personnage voleur = this.getPersonnageACeTour();
+        if (personnageAVoler!=null){
+            ((Voleur) voleur).effectuerSpecialiteVoleur(this, personnageAVoler, listeJoueurs);
+        }
     }
 
     @Override
@@ -153,7 +174,6 @@ public class BotFairPlay extends Bot {
         Personnage personnageJoueur = this.getPersonnageACeTour();
         if(personnageJoueur instanceof Condottiere){
             ((Condottiere) personnageJoueur).effectuerSpecialiteCondottiere(this);
-
             int nbPointMax=0;
             Bot victime=null;
             for(Bot b : listeJoueurs){

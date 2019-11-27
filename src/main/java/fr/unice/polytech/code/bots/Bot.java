@@ -140,9 +140,9 @@ public abstract class Bot {
 
     public abstract void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles);
 
-    public abstract void strategieAssassin(ArrayList<Bot> listeJoueurs);
+    public abstract void strategieAssassin(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse);
 
-    public abstract void strategieVoleur(ArrayList<Bot> listeJoueurs);
+    public abstract void strategieVoleur(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse);
 
     public abstract void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles pioche);
 

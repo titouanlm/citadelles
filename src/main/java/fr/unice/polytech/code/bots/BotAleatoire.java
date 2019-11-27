@@ -46,7 +46,7 @@ public class BotAleatoire extends Bot {
     /** Changer le fonctionnement pour viser un personnage et non pas un joueur */
 
     @Override
-    public void strategieAssassin(ArrayList<Bot> listeJoueurs) {
+    public void strategieAssassin(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
         int personnageAssassiner=-1;
         Personnage personnageAAssassiner=null;
         do{
@@ -64,7 +64,7 @@ public class BotAleatoire extends Bot {
     }
 
     @Override
-    public void strategieVoleur(ArrayList<Bot> listeJoueurs) {
+    public void strategieVoleur(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
         int indicePersonnageAVoler=-1;
         Personnage personnageAVoler=null;
         do{

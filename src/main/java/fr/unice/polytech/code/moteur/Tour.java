@@ -157,9 +157,9 @@ public class Tour {
 
     public void strategieEffectuerSpecialite(Bot joueur) {
         if (joueur.getPersonnageACeTour() instanceof Assassin) {
-            joueur.strategieAssassin(listeJoueurs);
+            joueur.strategieAssassin(listeJoueurs, personnageDefausseVisible);
         }else if (joueur.getPersonnageACeTour() instanceof Voleur) {
-            joueur.strategieVoleur(listeJoueurs);
+            joueur.strategieVoleur(listeJoueurs, personnageDefausseVisible);
         }else if (joueur.getPersonnageACeTour() instanceof Magicien) {
             joueur.strategieMagicien(listeJoueurs, piocheCartesCitadelles);
         }else if (joueur.getPersonnageACeTour() instanceof Roi) {
