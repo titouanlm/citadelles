@@ -142,7 +142,7 @@ public abstract class Bot {
 
     public abstract void strategieAssassin(ArrayList<Bot> listeJoueurs);
 
-    public abstract void strategieVoleur(ArrayList<Bot> listeJoueurs,Bot botVoleur);
+    public abstract void strategieVoleur(ArrayList<Bot> listeJoueurs);
 
     public abstract void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles pioche);
 

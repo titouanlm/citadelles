@@ -87,22 +87,22 @@ public class BotTricheur extends Bot {
             }
         }
         Personnage personnageJoueur = this.getPersonnageACeTour();
-        ((Assassin) personnageJoueur).effectuerSpecialiteAssassin(botQueLonVaAssassiner.getPersonnageACeTour());
+        ((Assassin) personnageJoueur).effectuerSpecialiteAssassin(botQueLonVaAssassiner.getPersonnageACeTour(), listeJoueurs);
     }
 
     @Override // Vole le joueur ayant le plus de pièce
-    public void strategieVoleur(ArrayList<Bot> listeJoueurs,Bot botVoleur) {
-        Bot PersonnageAVoler = null;
+    public void strategieVoleur(ArrayList<Bot> listeJoueurs) {
+        Bot botAVoler = null;
         int nombreDePieceMax = 0;
         for (Bot botVictime : listeJoueurs) {
             if (botVictime.getNbPiece()  >= nombreDePieceMax && botVictime.getPersonnageACeTour() != null &&
                     botVictime != this && !(botVictime.getPersonnageACeTour() instanceof Assassin)) {
                 nombreDePieceMax = botVictime.getNbPiece();
-                PersonnageAVoler = botVictime.getPersonnageACeTour();
+                botAVoler=botVictime;
             }
         }
         Personnage personnageJoueur = this.getPersonnageACeTour();
-        ((Voleur) personnageJoueur).effectuerSpecialiteVoleur(botVoleur,PersonnageAVoler);
+        ((Voleur) personnageJoueur).effectuerSpecialiteVoleur(this, botAVoler.getPersonnageACeTour(), listeJoueurs);
     }
 
     @Override //A implémenter
