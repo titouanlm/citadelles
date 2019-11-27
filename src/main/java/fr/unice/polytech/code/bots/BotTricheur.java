@@ -78,7 +78,7 @@ public class BotTricheur extends Bot {
 
     @Override // Assassine le joueur ayant le plus de point
     public void strategieAssassin(ArrayList<Bot> listeJoueurs) {
-        /*Bot botQueLonVaAssassiner= null;
+        Bot botQueLonVaAssassiner= null;
         int joueurMaxPoint = -1;
         for(Bot b : listeJoueurs){
             if (b.getNbPoint() > joueurMaxPoint) {
@@ -86,13 +86,13 @@ public class BotTricheur extends Bot {
                 botQueLonVaAssassiner = b;
             }
         }
-        Personnage assassin = this.getPersonnageACeTour();
-        assassin.effectuerSpecialite(this, botQueLonVaAssassiner);*/
+        Personnage personnageJoueur = this.getPersonnageACeTour();
+        ((Assassin) personnageJoueur).effectuerSpecialiteAssassin(botQueLonVaAssassiner.getPersonnageACeTour());
     }
 
     @Override // Vole le joueur ayant le plus de pièce
-    public void strategieVoleur(ArrayList<Bot> listeJoueurs) {
-        /*Bot botAVoler = null;
+    public void strategieVoleur(ArrayList<Bot> listeJoueurs,Bot botVoleur) {
+        Bot botAVoler = null;
         int nombreDePieceMax = 0;
         for (Bot botVictime : listeJoueurs) {
             if (botVictime.getNbPiece()  >= nombreDePieceMax && botVictime.getPersonnageACeTour() != null &&
@@ -101,11 +101,12 @@ public class BotTricheur extends Bot {
                 botAVoler = botVictime;
             }
         }
-        this.getPersonnageACeTour().effectuerSpecialite(this ,botAVoler);*/
+        Personnage personnageJoueur = this.getPersonnageACeTour();
+        ((Voleur) personnageJoueur).effectuerSpecialiteVoleur(botVoleur,botAVoler);
     }
 
     @Override //A implémenter
-    public void strategieMagicien(ArrayList<Bot> listeJoueurs) {
+    public void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles pioche) {
 
     }
 

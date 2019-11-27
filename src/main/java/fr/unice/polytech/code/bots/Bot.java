@@ -2,10 +2,12 @@ package fr.unice.polytech.code.bots;
 
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.Ville;
-import fr.unice.polytech.code.personnages.*;
-import fr.unice.polytech.code.pioches.*;
+import fr.unice.polytech.code.personnages.Personnage;
+import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
+import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
 import java.util.ArrayList;
+
 public abstract class Bot {
     String nom;
     String couleur;
@@ -140,9 +142,9 @@ public abstract class Bot {
 
     public abstract void strategieAssassin(ArrayList<Bot> listeJoueurs);
 
-    public abstract void strategieVoleur(ArrayList<Bot> listeJoueurs);
+    public abstract void strategieVoleur(ArrayList<Bot> listeJoueurs,Bot botVoleur);
 
-    public abstract void strategieMagicien(ArrayList<Bot> listeJoueurs);
+    public abstract void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles pioche);
 
     public abstract void strategieRoi();
 

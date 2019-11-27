@@ -38,16 +38,8 @@ public class BotAleatoire extends Bot {
         if (this.determinerChoixPiocherOuPiece(piocheCartesCitadelles) == 1) {
             this.ajouterPiece(2);
         } else {
-            CarteCitadelles cartePiochee1 = piocheCartesCitadelles.piocher();
-            CarteCitadelles cartePiochee2 = piocheCartesCitadelles.piocher();
-            int indiceCarteAPrendre = (int)(Math.random()*2);
-            if(indiceCarteAPrendre==0){
-                this.ajouterCartesCitadellesDansMain(cartePiochee1);
-                piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee2);
-            }else{
-                this.ajouterCartesCitadellesDansMain(cartePiochee2);
-                piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee1);
-            }
+            CarteCitadelles cartePrise = piocheCartesCitadelles.piocher();
+            this.ajouterCartesCitadellesDansMain(cartePrise);
         }
     }
 
@@ -55,31 +47,53 @@ public class BotAleatoire extends Bot {
 
     @Override
     public void strategieAssassin(ArrayList<Bot> listeJoueurs) {
-        /*int indiceBotAAssassiner;
+        int personnageAssassiner=-1;
+        Personnage personnageAAssassiner=null;
         do{
-            indiceBotAAssassiner = (int)(Math.random()*listeJoueurs.size());
-        }while(listeJoueurs.get(indiceBotAAssassiner) == this);
-
-        Bot botAAssassiner = listeJoueurs.get(indiceBotAAssassiner);
+            personnageAssassiner = (int)(Math.random()*8);
+        }while(personnageAssassiner == this.getPersonnageACeTour().getNumero());
+        for (int i=0;i<listeJoueurs.size();i++){
+            if (listeJoueurs.get(i).getPersonnageACeTour().getNumero()==personnageAssassiner){
+                personnageAAssassiner = listeJoueurs.get(i).getPersonnageACeTour();
+            }
+        }
         Personnage assassin = this.getPersonnageACeTour();
-        assassin.effectuerSpecialite(this, botAAssassiner);*/
+        if (personnageAAssassiner!=null){
+            ((Assassin) assassin).effectuerSpecialiteAssassin(personnageAAssassiner);
+        }
     }
 
     @Override
-    public void strategieVoleur(ArrayList<Bot> listeJoueurs) {
-        /*int indiceBotAVoler;
+    public void strategieVoleur(ArrayList<Bot> listeJoueurs, Bot botVoleur) {
+        int personnageVolé=-1;
+        Bot personnageAVoler=null;
         do{
-            indiceBotAVoler = (int)(Math.random()*listeJoueurs.size());
-        }while(listeJoueurs.get(indiceBotAVoler) == this);
-
-        Bot botAVoler = listeJoueurs.get(indiceBotAVoler);
-        Personnage voleur = this.getPersonnageACeTour();
-        voleur.effectuerSpecialite(this, botAVoler);*/
+            personnageVolé = (int)(Math.random()*8);
+        }while(personnageVolé == this.getPersonnageACeTour().getNumero());
+        for (int i=0;i<listeJoueurs.size();i++){
+            if (listeJoueurs.get(i).getPersonnageACeTour().getNumero()==personnageVolé){
+                personnageAVoler = listeJoueurs.get(i);
+            }
+        }
+        Personnage voleur = botVoleur.getPersonnageACeTour();
+        if (personnageAVoler!=null){
+            ((Voleur) voleur).effectuerSpecialiteVoleur(this, personnageAVoler);
+        }
     }
 
-    @Override //A implémenter
-    public void strategieMagicien(ArrayList<Bot> listeJoueurs) {
-
+    @Override
+    public void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles pioche) {
+        Personnage magicien = this.getPersonnageACeTour();
+        if (Math.round(Math.random() * 2) == 0)
+            ((Magicien) magicien).echangerCartesAvecUnPersonnage(this, listeJoueurs.get((int) (Math.random() * listeJoueurs.size())));
+        else {
+            int nombreCartesAleatoireAEchanger= (int) (Math.random() * this.getCartesCitadellesEnMain().size());
+            ArrayList<CarteCitadelles> cartesAEchanger = new ArrayList<>();
+            for (int i=0; i<nombreCartesAleatoireAEchanger;i++){
+                cartesAEchanger.add(cartesCitadellesEnMain.get(i));
+            }
+            ((Magicien) magicien).echangerCartesAvecPioche(this, pioche, cartesAEchanger);
+        }
     }
 
     @Override
@@ -137,3 +151,7 @@ public class BotAleatoire extends Bot {
         }
     }
 }
+
+
+
+

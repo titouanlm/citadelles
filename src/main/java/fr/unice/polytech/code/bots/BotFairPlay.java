@@ -85,14 +85,14 @@ public class BotFairPlay extends Bot {
     }
 
     @Override // A implémenter (Aléatoire pour l'instant) VOLE UN PERSO
-    public void strategieVoleur(ArrayList<Bot> listeJoueurs) {
+    public void strategieVoleur(ArrayList<Bot> listeJoueurs, Bot botVoleur) {
        /* int indiceBotAVoler = (int) (Math.random() * listeJoueurs.size());
         Bot botAVoler = listeJoueurs.get(indiceBotAVoler);
         this.getPersonnageACeTour().effectuerSpecialite(this,botAVoler);*/
     }
 
     @Override // A implémenter : Vole les cartes d'un joueur PAS UN PERSO
-    public void strategieMagicien(ArrayList<Bot> listeJoueurs) {
+    public void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles pioche) {
 
     }
 

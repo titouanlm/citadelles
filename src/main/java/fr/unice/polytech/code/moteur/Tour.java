@@ -159,9 +159,9 @@ public class Tour {
         if (joueur.getPersonnageACeTour() instanceof Assassin) {
             joueur.strategieAssassin(listeJoueurs);
         }else if (joueur.getPersonnageACeTour() instanceof Voleur) {
-            joueur.strategieVoleur(listeJoueurs);
+            joueur.strategieVoleur(listeJoueurs, joueur);
         }else if (joueur.getPersonnageACeTour() instanceof Magicien) {
-            joueur.strategieMagicien(listeJoueurs);
+            joueur.strategieMagicien(listeJoueurs, piocheCartesCitadelles);
         }else if (joueur.getPersonnageACeTour() instanceof Roi) {
             joueur.strategieRoi();
         }else if (joueur.getPersonnageACeTour() instanceof Eveque) {
