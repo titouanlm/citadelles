@@ -72,7 +72,7 @@ public class BotAleatoire extends Bot {
         }while(personnageVolé == this.getPersonnageACeTour().getNumero());
         for (int i=0;i<listeJoueurs.size();i++){
             if (listeJoueurs.get(i).getPersonnageACeTour().getNumero()==personnageVolé){
-                personnageAVoler = listeJoueurs.get(i);
+                personnageAVoler = listeJoueurs.get(i).getPersonnageACeTour();
             }
         }
         Personnage voleur = botVoleur.getPersonnageACeTour();
