@@ -38,8 +38,16 @@ public class BotAleatoire extends Bot {
         if (this.determinerChoixPiocherOuPiece(piocheCartesCitadelles) == 1) {
             this.ajouterPiece(2);
         } else {
-            CarteCitadelles cartePrise = piocheCartesCitadelles.piocher();
-            this.ajouterCartesCitadellesDansMain(cartePrise);
+            CarteCitadelles cartePiochee1 = piocheCartesCitadelles.piocher();
+            CarteCitadelles cartePiochee2 = piocheCartesCitadelles.piocher();
+            int indiceCarteAPrendre = (int)(Math.random()*2);
+            if(indiceCarteAPrendre==0){
+                this.ajouterCartesCitadellesDansMain(cartePiochee1);
+                piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee2);
+            }else{
+                this.ajouterCartesCitadellesDansMain(cartePiochee2);
+                piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee1);
+            }
         }
     }
 
