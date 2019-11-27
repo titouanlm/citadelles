@@ -20,8 +20,10 @@ public abstract class Personnage {
 
     public Bot botQuiPossede(Personnage p , ArrayList<Bot> listeJoueurs){
         for(Bot b : listeJoueurs){
-            if(b.getPersonnageACeTour() != null && b.getPersonnageACeTour().getNom() == p.getNom()){
-                return b;
+            if(b.getPersonnageACeTour() != null && p!=null) {
+                if (b.getPersonnageACeTour().getNom() == p.getNom()){
+                    return b;
+                }
             }
         }
         return null;

@@ -17,6 +17,7 @@ public class Voleur extends Personnage {
         this.numero =2;
         this.nom = "Voleur";
     }
+
     public void effectuerSpecialiteVoleur(Bot joueurQuiEffectueAction, Personnage personnageAVoler, ArrayList<Bot> listeJoueurs) {
         if(!(personnageAVoler instanceof Assassin) && !(personnageAVoler instanceof Voleur)
                 && personnageAVoler!=null){

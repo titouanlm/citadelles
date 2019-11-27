@@ -3,6 +3,7 @@ package fr.unice.polytech.code.personnages;
 import fr.unice.polytech.code.bots.*;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
+import fr.unice.polytech.code.cartes.Donjon;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 import java.util.Iterator;
@@ -36,7 +37,7 @@ public class Condottiere extends Personnage {
             CarteCitadelles quartierADetruire=null;
             int nbPointMax=0;
             for(CarteCitadelles quartier : joueurQuiSubitAction.getVilleDuBot().getBatimentsConstruits()){
-                if(nbPointMax<quartier.getPoint() && joueurQuiEffectueAction.getNbPiece()>= quartier.getPoint()-1){
+                if(nbPointMax<quartier.getPoint() && joueurQuiEffectueAction.getNbPiece()>= quartier.getPoint()-1 && !(quartier instanceof Donjon)){
                     quartierADetruire=quartier;
                     nbPointMax=quartier.getPoint();
                 }
@@ -55,7 +56,7 @@ public class Condottiere extends Personnage {
                 int indiceQuartierADetruire = (int)(Math.random() * nbBatConstruits);
                 CarteCitadelles quartierADetruire = joueurQuiSubitAction.getVilleDuBot().getBatimentsConstruits().get(indiceQuartierADetruire);
                 int coutDestruction = quartierADetruire.getPoint()-1;
-                if(coutDestruction<=joueurQuiEffectueAction.getNbPiece()){
+                if(coutDestruction<=joueurQuiEffectueAction.getNbPiece() && !(quartierADetruire instanceof Donjon)){
                     joueurQuiSubitAction.getVilleDuBot().detruireQuartier(quartierADetruire);
                     joueurQuiEffectueAction.retirerPiece(coutDestruction);
                 }
@@ -73,7 +74,7 @@ public class Condottiere extends Personnage {
                     nbPointMin=quartier.getPoint();
                 }
             }
-            if(quartierADetruire!=null){
+            if(quartierADetruire!=null && !(quartierADetruire instanceof Donjon)){
                 joueurQuiSubitAction.getVilleDuBot().detruireQuartier(quartierADetruire);
                 joueurQuiEffectueAction.retirerPiece(quartierADetruire.getPoint()-1);
             }
