@@ -46,32 +46,54 @@ public class BotAleatoire extends Bot {
     /** Changer le fonctionnement pour viser un personnage et non pas un joueur */
 
     @Override
-    public void strategieAssassin(ArrayList<Bot> listeJoueurs) {
-        /*int indiceBotAAssassiner;
+    public void strategieAssassin(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
+        int personnageAssassiner=-1;
+        Personnage personnageAAssassiner=null;
         do{
-            indiceBotAAssassiner = (int)(Math.random()*listeJoueurs.size());
-        }while(listeJoueurs.get(indiceBotAAssassiner) == this);
-
-        Bot botAAssassiner = listeJoueurs.get(indiceBotAAssassiner);
+            personnageAssassiner = (int)(Math.random()*8);
+        }while(personnageAssassiner == this.getPersonnageACeTour().getNumero());
+        for (int i=0;i<listeJoueurs.size();i++){
+            if (listeJoueurs.get(i).getPersonnageACeTour().getNumero()==personnageAssassiner){
+                personnageAAssassiner = listeJoueurs.get(i).getPersonnageACeTour();
+            }
+        }
         Personnage assassin = this.getPersonnageACeTour();
-        assassin.effectuerSpecialite(this, botAAssassiner);*/
+        if (personnageAAssassiner!=null){
+            ((Assassin) assassin).effectuerSpecialiteAssassin(personnageAAssassiner, listeJoueurs);
+        }
     }
 
     @Override
-    public void strategieVoleur(ArrayList<Bot> listeJoueurs) {
-        /*int indiceBotAVoler;
+    public void strategieVoleur(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
+        int indicePersonnageAVoler=-1;
+        Personnage personnageAVoler=null;
         do{
-            indiceBotAVoler = (int)(Math.random()*listeJoueurs.size());
-        }while(listeJoueurs.get(indiceBotAVoler) == this);
-
-        Bot botAVoler = listeJoueurs.get(indiceBotAVoler);
+            indicePersonnageAVoler = (int)(Math.random()*8);
+        }while(indicePersonnageAVoler == this.getPersonnageACeTour().getNumero());
+        for (int i=0;i<listeJoueurs.size();i++){
+            if (listeJoueurs.get(i).getPersonnageACeTour()!=null && listeJoueurs.get(i).getPersonnageACeTour().getNumero()==indicePersonnageAVoler){
+                personnageAVoler = listeJoueurs.get(i).getPersonnageACeTour();
+            }
+        }
         Personnage voleur = this.getPersonnageACeTour();
-        voleur.effectuerSpecialite(this, botAVoler);*/
+        if (personnageAVoler!=null){
+            ((Voleur) voleur).effectuerSpecialiteVoleur(this, personnageAVoler, listeJoueurs);
+        }
     }
 
-    @Override //A implémenter
-    public void strategieMagicien(ArrayList<Bot> listeJoueurs) {
-
+    @Override
+    public void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles pioche) {
+        Personnage magicien = this.getPersonnageACeTour();
+        if ((int) (Math.random() * 2) == 0) {
+            ((Magicien) magicien).echangerCartesAvecUnPersonnage(this, listeJoueurs.get((int) (Math.random() * listeJoueurs.size())));
+        }else {
+            int nombreCartesAleatoireAEchanger= (int) (Math.random() * this.getCartesCitadellesEnMain().size());
+            ArrayList<CarteCitadelles> cartesAEchanger = new ArrayList<>();
+            for (int i=0; i<nombreCartesAleatoireAEchanger;i++){
+                cartesAEchanger.add(cartesCitadellesEnMain.get(i));
+            }
+            ((Magicien) magicien).echangerCartesAvecPioche(this, pioche, cartesAEchanger);
+        }
     }
 
     @Override
@@ -129,3 +151,7 @@ public class BotAleatoire extends Bot {
         }
     }
 }
+
+
+
+

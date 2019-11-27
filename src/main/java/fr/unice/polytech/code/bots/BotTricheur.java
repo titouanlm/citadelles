@@ -77,8 +77,8 @@ public class BotTricheur extends Bot {
     }
 
     @Override // Assassine le joueur ayant le plus de point
-    public void strategieAssassin(ArrayList<Bot> listeJoueurs) {
-        /*Bot botQueLonVaAssassiner= null;
+    public void strategieAssassin(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
+        Bot botQueLonVaAssassiner= null;
         int joueurMaxPoint = -1;
         for(Bot b : listeJoueurs){
             if (b.getNbPoint() > joueurMaxPoint) {
@@ -86,27 +86,51 @@ public class BotTricheur extends Bot {
                 botQueLonVaAssassiner = b;
             }
         }
-        Personnage assassin = this.getPersonnageACeTour();
-        assassin.effectuerSpecialite(this, botQueLonVaAssassiner);*/
+        Personnage personnageJoueur = this.getPersonnageACeTour();
+        ((Assassin) personnageJoueur).effectuerSpecialiteAssassin(botQueLonVaAssassiner.getPersonnageACeTour(), listeJoueurs);
     }
 
     @Override // Vole le joueur ayant le plus de pièce
-    public void strategieVoleur(ArrayList<Bot> listeJoueurs) {
-        /*Bot botAVoler = null;
+    public void strategieVoleur(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
+        Bot botAVoler = null;
         int nombreDePieceMax = 0;
         for (Bot botVictime : listeJoueurs) {
             if (botVictime.getNbPiece()  >= nombreDePieceMax && botVictime.getPersonnageACeTour() != null &&
                     botVictime != this && !(botVictime.getPersonnageACeTour() instanceof Assassin)) {
                 nombreDePieceMax = botVictime.getNbPiece();
-                botAVoler = botVictime;
+                botAVoler=botVictime;
             }
         }
-        this.getPersonnageACeTour().effectuerSpecialite(this ,botAVoler);*/
+        Personnage personnageJoueur = this.getPersonnageACeTour();
+        ((Voleur) personnageJoueur).effectuerSpecialiteVoleur(this, botAVoler.getPersonnageACeTour(), listeJoueurs);
     }
 
-    @Override //A implémenter
-    public void strategieMagicien(ArrayList<Bot> listeJoueurs) {
-
+    @Override
+    public void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles pioche) {
+        Personnage magicien = this.getPersonnageACeTour();
+        int nombrePointsCarteMaxMainPersonne = 0;
+        int nombrePointsCarteMainPersonne =0;
+        int b=0;
+        ArrayList<CarteCitadelles> cartesAEchanger = new ArrayList<>();
+        for (int i =0 ; i < listeJoueurs.size(); i++) {
+            for (int c = 0; c < listeJoueurs.get(i).getCartesCitadellesEnMain().size(); c++) {
+                nombrePointsCarteMainPersonne+=listeJoueurs.get(i).getCartesCitadellesEnMain().get(c).getPoint();
+            }
+            if (nombrePointsCarteMainPersonne > nombrePointsCarteMaxMainPersonne){
+                nombrePointsCarteMaxMainPersonne=nombrePointsCarteMainPersonne;
+            }
+        }
+        for (int p = 0; p < this.getCartesCitadellesEnMain().size(); p++) {
+            if (this.getCartesCitadellesEnMain().get(p).getPoint() < 4) {
+                cartesAEchanger.add(this.getCartesCitadellesEnMain().get(p));
+            }
+        }
+        if (nombrePointsCarteMaxMainPersonne > 10) {
+            ((Magicien) magicien).echangerCartesAvecUnPersonnage(this, listeJoueurs.get(b));
+        }
+        else {
+            ((Magicien) magicien).echangerCartesAvecPioche(this, pioche, cartesAEchanger);
+        }
     }
 
     @Override
@@ -146,7 +170,6 @@ public class BotTricheur extends Bot {
         Personnage personnageJoueur = this.getPersonnageACeTour();
         if(personnageJoueur instanceof Condottiere){
             ((Condottiere) personnageJoueur).effectuerSpecialiteCondottiere(this);
-
             int nbPointMax=0;
             Bot victime=null;
             for(Bot b : listeJoueurs){
@@ -155,7 +178,6 @@ public class BotTricheur extends Bot {
                     victime=b;
                 }
             }
-
             ((Condottiere) personnageJoueur).detruirePlusGrosQuartierEnemie(this, victime);
         }
     }

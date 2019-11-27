@@ -3,6 +3,8 @@ package fr.unice.polytech.code.personnages;
 import fr.unice.polytech.code.bots.*;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
+import java.util.ArrayList;
+
 /**
  * Cette classe implémente le pouvoir du Voleur
  * Il annonce quel personnage il vole (il lui prendra toutes ses pièces d'or)
@@ -15,10 +17,12 @@ public class Voleur extends Personnage {
         this.numero =2;
         this.nom = "Voleur";
     }
-    public void effectuerSpecialiteVoleur(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction) {
-        if(!(joueurQuiSubitAction.getPersonnageACeTour()instanceof Assassin) && joueurQuiSubitAction!=joueurQuiEffectueAction && joueurQuiSubitAction.getPersonnageACeTour()!=null){
-            joueurQuiEffectueAction.ajouterPiece(joueurQuiSubitAction.getNbPiece());
-            joueurQuiSubitAction.retirerPiece(joueurQuiSubitAction.getNbPiece());
+    public void effectuerSpecialiteVoleur(Bot joueurQuiEffectueAction, Personnage personnageAVoler, ArrayList<Bot> listeJoueurs) {
+        if(!(personnageAVoler instanceof Assassin) && !(personnageAVoler instanceof Voleur)
+                && personnageAVoler!=null){
+            Bot joueurAVoler = this.botQuiPossede(personnageAVoler, listeJoueurs);
+            joueurQuiEffectueAction.ajouterPiece(joueurAVoler.getNbPiece());
+            joueurAVoler.retirerPiece(joueurAVoler.getNbPiece());
         }
     }
 }
