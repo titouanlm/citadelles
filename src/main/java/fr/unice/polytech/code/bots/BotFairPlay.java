@@ -1,5 +1,6 @@
 package fr.unice.polytech.code.bots;
 
+import fr.unice.polytech.code.cartes.Bibliotheque;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.*;
@@ -40,34 +41,41 @@ public class BotFairPlay extends Bot {
             CarteCitadelles cartePiochee2 = piocheCartesCitadelles.piocher();
 
             if(cartePiochee2!=null){
-                // On teste si le joueur n'a pas déjà construit les quartiers ou les possède déjà dans sa main
-                if(!this.getVilleDuBot().contient(cartePiochee1) && !this.getVilleDuBot().contient(cartePiochee2) &&
-                        !this.contientDansSaMain(cartePiochee1) && !this.contientDansSaMain(cartePiochee2)){
-
-                    if(cartePiochee1.getCouleur().toString().equals("VIOLET") && cartePiochee2.getCouleur().toString().equals("VIOLET")){
-                        carteChoisie= cartePiochee1.compareNbPoints(cartePiochee2); //Prend la carte ayant le plus de point
-                    }else if(cartePiochee1.getCouleur().toString().equals("VIOLET")){ //Prend la première carte si elle est violette
-                        carteChoisie=cartePiochee1;
-                    }else if(cartePiochee2.getCouleur().toString().equals("VIOLET")){//Prend la deuxième carte si elle est violette
-                        carteChoisie=cartePiochee2;
-                    }else{
-                        carteChoisie= cartePiochee1.compareNbPoints(cartePiochee2); //Prend la carte ayant le plus de point
-                    }
-                }else if(!this.getVilleDuBot().contient(cartePiochee1) && !this.contientDansSaMain(cartePiochee1)){ //Prend la première carte s'il possède déjà la 2ème
-                    carteChoisie=cartePiochee1;
-                }else if(!this.getVilleDuBot().contient(cartePiochee2) && !this.contientDansSaMain(cartePiochee2)){ //Prend la 2ème carte s'il possède déjà la première
-                    carteChoisie=cartePiochee2;
-                }else{ //Prend la première carte si il possède déjà les deux
-                    carteChoisie=cartePiochee1;
+                if(this.contientDansSaMain("Bibliothèque")) {
+                    this.ajouterCartesCitadellesDansMain(cartePiochee1);
+                    this.ajouterCartesCitadellesDansMain(cartePiochee2);
                 }
+                else {
+                    // On teste si le joueur n'a pas déjà construit les quartiers ou les possède déjà dans sa main
+                    if (!this.getVilleDuBot().contient(cartePiochee1) && !this.getVilleDuBot().contient(cartePiochee2) &&
+                            !this.contientDansSaMain(cartePiochee1) && !this.contientDansSaMain(cartePiochee2)) {
 
-                this.ajouterCartesCitadellesDansMain(carteChoisie);
 
-                //On remet dans la pioche la carte que l'on a pas choisi
-                if(carteChoisie==cartePiochee1){
-                    piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee2);
-                }else{
-                    piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee1);
+                        if (cartePiochee1.getCouleur().toString().equals("VIOLET") && cartePiochee2.getCouleur().toString().equals("VIOLET")) {
+                            carteChoisie = cartePiochee1.compareNbPoints(cartePiochee2); //Prend la carte ayant le plus de point
+                        } else if (cartePiochee1.getCouleur().toString().equals("VIOLET")) { //Prend la première carte si elle est violette
+                            carteChoisie = cartePiochee1;
+                        } else if (cartePiochee2.getCouleur().toString().equals("VIOLET")) {//Prend la deuxième carte si elle est violette
+                            carteChoisie = cartePiochee2;
+                        } else {
+                            carteChoisie = cartePiochee1.compareNbPoints(cartePiochee2); //Prend la carte ayant le plus de point
+                        }
+                    } else if (!this.getVilleDuBot().contient(cartePiochee1) && !this.contientDansSaMain(cartePiochee1)) { //Prend la première carte s'il possède déjà la 2ème
+                        carteChoisie = cartePiochee1;
+                    } else if (!this.getVilleDuBot().contient(cartePiochee2) && !this.contientDansSaMain(cartePiochee2)) { //Prend la 2ème carte s'il possède déjà la première
+                        carteChoisie = cartePiochee2;
+                    } else { //Prend la première carte si il possède déjà les deux
+                        carteChoisie = cartePiochee1;
+                    }
+
+                    this.ajouterCartesCitadellesDansMain(carteChoisie);
+
+                    //On remet dans la pioche la carte que l'on a pas choisi
+                    if (carteChoisie == cartePiochee1) {
+                        piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee2);
+                    } else {
+                        piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee1);
+                    }
                 }
             }else{
                 carteChoisie=cartePiochee1;

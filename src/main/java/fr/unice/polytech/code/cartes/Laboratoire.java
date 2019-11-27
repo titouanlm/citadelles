@@ -10,11 +10,11 @@ public class Laboratoire extends CarteCitadellesAvecPouvoir {
     }
 
     @Override
-    public void effectuerSpecialite(int numero, CouleurCarteCitadelles couleur, String nom, int point, Bot joueur, PiocheCartesCitadelles piocheCartesCitadelles) {
+    public void effectuerSpecialite(CarteCitadellesAvecPouvoir carte, Bot joueur, PiocheCartesCitadelles piocheCartesCitadelles) {
         CarteCitadelles carteAdefausser=joueur.getCartesCitadellesEnMain().get(0);
-        for (CarteCitadelles  carte :joueur.getCartesCitadellesEnMain()){
-            if(carte.getPoint()<carteAdefausser.getPoint()){
-                carteAdefausser=carte;
+        for (CarteCitadelles  carte1 :joueur.getCartesCitadellesEnMain()){
+            if(carte1.getPoint()<carteAdefausser.getPoint()){
+                carteAdefausser=carte1;
             }
         }
         joueur.getCartesCitadellesEnMain().remove(carteAdefausser);

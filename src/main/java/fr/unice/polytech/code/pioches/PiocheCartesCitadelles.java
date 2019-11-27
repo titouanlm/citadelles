@@ -108,8 +108,8 @@ public class PiocheCartesCitadelles {
         cc[60] = new Cimitiere(61,CouleurCarteCitadelles.VIOLET, "Cimitière", 5 );
         cc[61] = new Bibliotheque(62,CouleurCarteCitadelles.VIOLET, "Bibliothèque", 6 );
         cc[62] = new EcoleDeMagie(63,CouleurCarteCitadelles.VIOLET, "École de magie", 6 );
-        cc[63] = new Universite(64,CouleurCarteCitadelles.VIOLET, "Université", 8 );
-        cc[64] = new Dracopert(65,CouleurCarteCitadelles.VIOLET, "Dracopert", 8 );
+        cc[63] = new Universite(64,CouleurCarteCitadelles.VIOLET, "Université", 6);
+        cc[64] = new Dracopert(65,CouleurCarteCitadelles.VIOLET, "Dracopert", 6);
 
         for(int i=0; i<65;i++){
             this.ajouterCarteCitadelles(cc[i]);

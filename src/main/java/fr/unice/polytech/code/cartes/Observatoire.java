@@ -9,7 +9,7 @@ public class Observatoire extends CarteCitadellesAvecPouvoir {
     }
 
     @Override
-    public void effectuerSpecialite(int numero, CouleurCarteCitadelles couleur, String nom, int point, Bot joueur,PiocheCartesCitadelles piocheCartesCitadelles) {
+    public void effectuerSpecialite(CarteCitadellesAvecPouvoir carte , Bot joueur,PiocheCartesCitadelles piocheCartesCitadelles) {
 
         CarteCitadelles cartechoisie;
         CarteCitadelles cartePiochee1 = piocheCartesCitadelles.piocher();
@@ -28,7 +28,6 @@ public class Observatoire extends CarteCitadellesAvecPouvoir {
         }
         else {
             cartechoisie=cartePiochee1;}
-
     }
 }
 

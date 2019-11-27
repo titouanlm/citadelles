@@ -1,6 +1,8 @@
 package fr.unice.polytech.code;
 
 import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.cartes.Dracopert;
+import fr.unice.polytech.code.cartes.Universite;
 
 import java.util.ArrayList;
 
@@ -22,7 +24,11 @@ public class Ville {
     public void construireBatiment(CarteCitadelles batimentAConstruire) {
         if(!this.contient(batimentAConstruire)){
             this.batimentsConstruits.add(batimentAConstruire);
-            this.nbTotalPoint+=batimentAConstruire.getPoint();
+            if(batimentAConstruire instanceof Universite || batimentAConstruire instanceof Dracopert){
+                this.nbTotalPoint+=batimentAConstruire.getPoint()+2;
+            } else {
+                this.nbTotalPoint+=batimentAConstruire.getPoint();
+            }
             this.nbBatimentsConstruits+=1;
         }
     }
@@ -88,6 +94,16 @@ public class Ville {
         return nbQuartiersVert;
     }
 
+    public int compterNbQuartiersViolet(){
+        int nbQuartiersVert=0;
+        for(CarteCitadelles quartier : batimentsConstruits){
+            if(quartier.getCouleur().toString().equals("VIOLET")){
+                nbQuartiersVert++;
+            }
+        }
+        return nbQuartiersVert;
+    }
+
     public String quartiersVilleToString(){
         String quartiers="";
         for(CarteCitadelles c : batimentsConstruits){
@@ -103,4 +119,6 @@ public class Ville {
             this.nbBatimentsConstruits-=1;
         }
     }
+
+
 }

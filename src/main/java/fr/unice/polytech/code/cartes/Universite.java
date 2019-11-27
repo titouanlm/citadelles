@@ -9,7 +9,7 @@ public class Universite extends CarteCitadellesAvecPouvoir {
     }
 
     @Override
-    public void effectuerSpecialite(int numero, CouleurCarteCitadelles couleur, String nom, int point, Bot joueur, PiocheCartesCitadelles piocheCartesCitadelles) {
+    public void effectuerSpecialite(CarteCitadellesAvecPouvoir carte, Bot joueur, PiocheCartesCitadelles piocheCartesCitadelles) {
 
     }
 }

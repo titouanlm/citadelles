@@ -9,11 +9,13 @@ public class Manufacture extends CarteCitadellesAvecPouvoir {
     }
 
     @Override
-    public void effectuerSpecialite(int numero, CouleurCarteCitadelles couleur, String nom, int point, Bot joueur, PiocheCartesCitadelles piocheCartesCitadelles) {
-        joueur.retirerPiece(3);
-        for(int i=0;i<3;i++){
-            joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
+    public void effectuerSpecialite(CarteCitadellesAvecPouvoir carte, Bot joueur, PiocheCartesCitadelles piocheCartesCitadelles) {
+        if(joueur.getNbPiece()>=3) {
+            joueur.retirerPiece(3);
+            for (int i = 0; i < 3; i++) {
+                joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
 
+            }
         }
 
     }

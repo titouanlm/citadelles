@@ -74,6 +74,15 @@ public abstract class Bot {
         return false;
     }
 
+    public boolean contientDansSaMain(String carteATester){
+        for(CarteCitadelles c : cartesCitadellesEnMain){
+            if(c.getNom().equals(carteATester)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getCouleur() {
         return couleur;
     }
