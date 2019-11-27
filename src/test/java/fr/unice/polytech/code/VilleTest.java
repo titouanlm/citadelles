@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class VilleTest {
-    private Ville ville = new Ville();
+    private Ville ville = new Ville(null);
     private CarteCitadelles cc1 = new CarteCitadellesSansPouvoir(57, CouleurCarteCitadelles.VIOLET, "Donjon", 3 );
     private CarteCitadelles cc2 = new CarteCitadellesSansPouvoir(58,CouleurCarteCitadelles.VIOLET, "Laboratoire", 5 );
     private CarteCitadelles cc3 = new CarteCitadellesSansPouvoir(59,CouleurCarteCitadelles.VIOLET, "Manufacture", 5 );
@@ -37,8 +37,8 @@ public class VilleTest {
 
     @Test
     void compterNbQuartiersRougeTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m",null);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m", null);
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
         bot1.getVilleDuBot().construireBatiment( new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
@@ -56,8 +56,8 @@ public class VilleTest {
 
     @Test
     void compterNbQuartiersJauneTest() {
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[35m");
-        Bot bot2 = new BotAleatoire("Bot 2", "\033[35m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[35m",null);
+        Bot bot2 = new BotAleatoire("Bot 2", "\033[35m",null);
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(15, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
@@ -76,8 +76,8 @@ public class VilleTest {
     @Test
     void compterNbQuartiersBleuTest(){
 
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[35m");
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[35m",null);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m",null);
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(1, CouleurCarteCitadelles.BLEU, "Temple", 1 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(4,CouleurCarteCitadelles.BLEU, "Eglise", 2 ));
@@ -97,8 +97,8 @@ public class VilleTest {
     @Test
     void compterNbQuartiersVertTest(){
 
-        Bot bot1 = new BotAleatoire("Bot 2", "\033[35m");
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 2", "\033[35m",null);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m",null);
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(19, CouleurCarteCitadelles.JAUNE, "Château", 4));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(31, CouleurCarteCitadelles.VERT, "Échoppe", 2));
@@ -118,8 +118,8 @@ public class VilleTest {
     @Test
     void quartiersVilleToStringTest(){
 
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[35m");
-        Bot bot2 = new BotAleatoire("Bot 2", "\033[35m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[35m",null);
+        Bot bot2 = new BotAleatoire("Bot 2", "\033[35m",null);
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(15, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
@@ -138,8 +138,8 @@ public class VilleTest {
 
     @Test
     void detruireQuartierTest(){
-        Bot bot1 = new BotAleatoire("Bot 2", "\033[35m");
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 2", "\033[35m",null);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m",null);
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(19, CouleurCarteCitadelles.JAUNE, "Château", 4));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(31, CouleurCarteCitadelles.VERT, "Échoppe", 2));

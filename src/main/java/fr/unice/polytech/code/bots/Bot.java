@@ -1,5 +1,6 @@
 package fr.unice.polytech.code.bots;
 
+import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.Ville;
 import fr.unice.polytech.code.personnages.Personnage;
@@ -18,12 +19,13 @@ public abstract class Bot {
     boolean possedeCouronne;
     int nbPoint;
     boolean premierJoueurAFinir;
+    protected Affichage affichage;
 
-    public Bot(String nom, String couleur) {
+    public Bot(String nom, String couleur,Affichage affichage) {
         this.nom = nom;
         this.nbPiece = 0;
         this.cartesCitadellesEnMain = new ArrayList<>();
-        this.villeDuBot = new Ville();
+        this.villeDuBot = new Ville(affichage);
         this.personnageACeTour = null;
         this.possedeCouronne = false;
         this.nbPoint = 0;

@@ -1,5 +1,6 @@
 package fr.unice.polytech.code.bots;
 
+import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.*;
@@ -11,8 +12,8 @@ import java.util.ArrayList;
  */
 public class BotAleatoire extends Bot {
 
-    public BotAleatoire(String nom, String couleur) {
-        super(nom, couleur);
+    public BotAleatoire(String nom, String couleur, Affichage affichage) {
+        super(nom, couleur, affichage);
     }
 
     @Override

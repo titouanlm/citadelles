@@ -70,8 +70,8 @@ public class PersonnageTest {
 
     @Test
     void effectuerSpecialiteRoiTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m",null);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m",null);
 
         bot1.setPersonnageACeTour(new Roi());
         bot2.setPersonnageACeTour(new Roi());
@@ -94,8 +94,8 @@ public class PersonnageTest {
 
     @Test
     void effectuerSpecialiteEvequeTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m",null);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m",null);
 
         bot1.setPersonnageACeTour(new Eveque());
         bot2.setPersonnageACeTour(new Eveque());
@@ -119,8 +119,8 @@ public class PersonnageTest {
 
     @Test
     void effectuerSpecialiteMarchandTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m",null);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m",null);
 
         bot1.setPersonnageACeTour(new Marchand());
         bot2.setPersonnageACeTour(new Marchand());
@@ -144,8 +144,8 @@ public class PersonnageTest {
 
     @Test
     void effectuerSpecialiteCondottiereTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m",null);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m",null);
 
         bot1.setPersonnageACeTour(new Condottiere());
         bot2.setPersonnageACeTour(new Condottiere());

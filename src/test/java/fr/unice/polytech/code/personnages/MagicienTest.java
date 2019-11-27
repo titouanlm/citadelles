@@ -21,8 +21,8 @@ class MagicienTest {
 
     @Test
     void echangerCartesAvecUnPersonnageTest() {
-        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m");
-        Bot bot2 = new BotFairPlay("Bot 2","\033[33m");
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m",null);
+        Bot bot2 = new BotFairPlay("Bot 2","\033[33m",null);
 
         bot1.setPersonnageACeTour(new Eveque());
         bot2.setPersonnageACeTour(new Magicien());
@@ -45,7 +45,7 @@ class MagicienTest {
 
     @Test
     void echangerCartesAvecPiocheTest() {
-        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m");
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m",null);
 
         bot1.setPersonnageACeTour(new Magicien());
 

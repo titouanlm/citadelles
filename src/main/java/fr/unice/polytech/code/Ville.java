@@ -1,8 +1,6 @@
 package fr.unice.polytech.code;
 
 import fr.unice.polytech.code.cartes.CarteCitadelles;
-import fr.unice.polytech.code.cartes.Dracopert;
-import fr.unice.polytech.code.cartes.Universite;
 
 import java.util.ArrayList;
 
@@ -11,10 +9,12 @@ public class Ville {
     public ArrayList<CarteCitadelles> batimentsConstruits = new ArrayList<>();
     private int nbBatimentsConstruits;
     private int nbTotalPoint;
+    private Affichage affichage;
 
-    public Ville(){
+    public Ville(Affichage affichage){
         nbBatimentsConstruits = 0;
         nbTotalPoint=0;
+        this.affichage = affichage;
     }
 
     public ArrayList<CarteCitadelles> getBatimentsConstruits() {
@@ -24,11 +24,7 @@ public class Ville {
     public void construireBatiment(CarteCitadelles batimentAConstruire) {
         if(!this.contient(batimentAConstruire)){
             this.batimentsConstruits.add(batimentAConstruire);
-            if(batimentAConstruire instanceof Universite || batimentAConstruire instanceof Dracopert){
-                this.nbTotalPoint+=batimentAConstruire.getPoint()+2;
-            } else {
-                this.nbTotalPoint+=batimentAConstruire.getPoint();
-            }
+            this.nbTotalPoint+=batimentAConstruire.getPoint();
             this.nbBatimentsConstruits+=1;
         }
     }
@@ -95,13 +91,13 @@ public class Ville {
     }
 
     public int compterNbQuartiersViolet(){
-        int nbQuartiersVert=0;
+        int nbQuartiersViolet=0;
         for(CarteCitadelles quartier : batimentsConstruits){
             if(quartier.getCouleur().toString().equals("VIOLET")){
-                nbQuartiersVert++;
+                nbQuartiersViolet++;
             }
         }
-        return nbQuartiersVert;
+        return nbQuartiersViolet;
     }
 
     public String quartiersVilleToString(){
@@ -115,10 +111,9 @@ public class Ville {
     public void detruireQuartier(CarteCitadelles quartierADetruire) {
         if(this.contient(quartierADetruire)){
             this.batimentsConstruits.remove(quartierADetruire);
+            affichage.afficherDetails("Le joueur détruit le quartier " + toString() + "\n");
             this.nbTotalPoint-=quartierADetruire.getPoint();
             this.nbBatimentsConstruits-=1;
         }
     }
-
-
 }

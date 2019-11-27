@@ -7,9 +7,11 @@ import java.util.ArrayList;
 
 class Arbitre {
     private Bot joueurGagnant;
+    private Affichage affichage;
 
-    Arbitre(){
+    Arbitre(Affichage affichage){
         joueurGagnant = null;
+        this.affichage = affichage;
     }
 
     public Bot getJoueurGagnant() {
@@ -28,12 +30,14 @@ class Arbitre {
     void testBonusPremierJoueurAFinir(Bot joueur){
         if(joueur.estPremierJoueurAFinir()){
             joueur.setNbPoint(4);
+            affichage.afficherDetails("\u001B[1m" + "\u001B[32m" +joueur.getNom() + "\u001B[21m" + "\u001B[0m" + " est le premier joueur ayant posé son huitième quartier ");
         }
     }
 
     void testBonusAConstruit8CesQuartiers(Bot joueur){
         if (joueur.getVilleDuBot().getNbBatimentsConstruits() == 8 && !joueur.estPremierJoueurAFinir()){
             joueur.setNbPoint(2);
+            affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + "\u001B[21m" + "\u001B[0m" + " a huit quartiers ");
         }
     }
 
@@ -55,7 +59,9 @@ class Arbitre {
 
         if(couleurs.size()==0){
             joueur.setNbPoint(3);
+            affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + "\u001B[21m" + "\u001B[0m" + " a des quartiers de cinq couleurs différentes dans sa cité ");
         }
+        affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + " : " + "\u001B[21m" + "\u001B[0m" + joueur.getNbPoint() + " points");
     }
 
     void determineJoueurGagnant(ArrayList<Bot> listeJoueurs) {
@@ -66,10 +72,11 @@ class Arbitre {
                 joueurGagnant = joueur;
             }
         }
+        affichage.afficherDetails(toString());
     }
 
     @Override
     public String toString() {
-        return "\033[1;32m" + joueurGagnant.getNom() + " gagne la partie ! ";
+        return "\u001B[1m" + "\u001B[34m"  + joueurGagnant.getNom() + " gagne la partie ! " + "\u001B[0m" +"\n";
     }
 }

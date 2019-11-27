@@ -10,13 +10,15 @@ import java.util.*;
 public class Main {
 
     public static void main(String... args) {
-        Affichage affichage = new Affichage(10000);
+        Affichage affichage = new Affichage(2);
 
         for(int i=0 ; i<affichage.getNbParties(); i++){
-            Bot bot1 = new BotTricheur("Bot 1", "\033[35m");
-            Bot bot2 = new BotFairPlay("Bot 2", "\033[34m");
-            Bot bot3 = new BotFairPlay("Bot 3", "\033[36m");
-            Bot bot4 = new BotAleatoire("Bot 4", "\033[33m");
+            Bot bot1 = new BotTricheur("Bot 1", "\033[35m",affichage);
+            Bot bot2 = new BotFairPlay("Bot 2", "\033[34m",affichage);
+            Bot bot3 = new BotAleatoire("Bot 3", "\033[36m",affichage);
+            Bot bot4 = new BotAleatoire("Bot 4", "\033[33m",affichage);
+            affichage.setModeDetails(true);
+            affichage.setModeStatistiques(false);
 
             ArrayList<Bot> listeJoueurs = new ArrayList<>();
             listeJoueurs.add(bot1);
@@ -25,10 +27,10 @@ public class Main {
             listeJoueurs.add(bot4);
 
             Collections.shuffle(listeJoueurs);
-            Moteur moteurJeu = new Moteur(listeJoueurs);
+            Moteur moteurJeu = new Moteur(listeJoueurs,affichage);
             moteurJeu.lancerUnePartie();
 
-            Arbitre arbitre = new Arbitre();
+            Arbitre arbitre = new Arbitre(affichage);
             arbitre.compteLesPoints(listeJoueurs);
             arbitre.determineJoueurGagnant(listeJoueurs);
             affichage.incrementerNbPointsDesBotsEnMoyenne(listeJoueurs);

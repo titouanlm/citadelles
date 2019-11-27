@@ -1,5 +1,6 @@
 package fr.unice.polytech.code.bots;
 
+import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.cartes.Bibliotheque;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.personnages.*;
@@ -12,8 +13,8 @@ import java.util.ArrayList;
  */
 public class BotFairPlay extends Bot {
 
-    public BotFairPlay(String nom, String couleur) {
-        super(nom, couleur);
+    public BotFairPlay(String nom, String couleur, Affichage affichage) {
+        super(nom, couleur,affichage);
     }
 
     @Override

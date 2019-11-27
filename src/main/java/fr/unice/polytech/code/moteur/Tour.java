@@ -1,5 +1,6 @@
 package fr.unice.polytech.code.moteur;
 
+import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.*;
 import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.*;
@@ -15,8 +16,10 @@ public class Tour {
     private PiocheCartesCitadelles piocheCartesCitadelles;
     private PiocheCartesPersonnage piocheCartesPersonnage;
     private ArrayList<Bot> listeJoueurs;
+    private Affichage affichage;
 
-    public Tour(int numero, PiocheCartesCitadelles piocheCartesCitadelles, PiocheCartesPersonnage piocheCartesPersonnage, ArrayList<Bot> listeJoueurs) {
+
+    public Tour(int numero, PiocheCartesCitadelles piocheCartesCitadelles, PiocheCartesPersonnage piocheCartesPersonnage, ArrayList<Bot> listeJoueurs,Affichage affichage) {
         this.numero = numero;
         this.piocheCartesCitadelles = piocheCartesCitadelles;
         this.piocheCartesPersonnage = piocheCartesPersonnage;
@@ -24,6 +27,7 @@ public class Tour {
         this.indiceJoueurPossedantCouronne = 0;
         this.personnageDefausseVisible = null;
         this.joueurAyantLeRoi = null;
+        this.affichage = affichage;
     }
 
     public int getNumero() {
@@ -54,6 +58,7 @@ public class Tour {
     public boolean lancerTour() {
         this.defausserCartesPersonnagePourLeTour();
         this.setIndiceJoueurPossedantCourrone();
+        affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + "Le " + listeJoueurs.get(indiceJoueurPossedantCouronne).getNom() + "\u001B[21m" + "\u001B[0m" + " possède la carte courounne \n" );
         this.attributionPersonnageAChaqueJoueur();
         this.appelerJoueursDansLOrdre();
 
@@ -122,14 +127,17 @@ public class Tour {
             personnageDefausseVisible = piocheCartesPersonnage.piocherPersonnageAleatoirement();
         }
         this.setPersonnageDefausseVisible(personnageDefausseVisible);
+        affichage.afficherDetails(personnageDefausseVisible.getNom() + " ne peut pas être choisit pour ce tour.\n");
     }
 
     public void attributionPersonnageAChaqueJoueur() {
         for (int i = this.indiceJoueurPossedantCouronne; i < listeJoueurs.size(); i++) {
             listeJoueurs.get(i).choixDuPersonnagePourLeTour(piocheCartesPersonnage, personnageDefausseVisible);
+            affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + listeJoueurs.get(i).getNom() + " :" + "\u001B[21m" + "\u001B[0m" +" a le personnage " + listeJoueurs.get(i).getPersonnageACeTour().getNom() + " à ce tour");
         }
         for (int i = 0; i < this.indiceJoueurPossedantCouronne; i++) {
             listeJoueurs.get(i).choixDuPersonnagePourLeTour(piocheCartesPersonnage, personnageDefausseVisible);
+            affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + listeJoueurs.get(i).getNom() + " :" + "\u001B[21m" + "\u001B[0m" + " a le personnage " + listeJoueurs.get(i).getPersonnageACeTour().getNom() + " à ce tour");
         }
     }
 
@@ -149,6 +157,9 @@ public class Tour {
     public boolean verifierFinPartie() {
         for (Bot joueur : listeJoueurs) {
             if (joueur.getVilleDuBot().getNbBatimentsConstruits() == 8) {
+                affichage.afficherDetails("--------------------------------------------------");
+                affichage.afficherDetails("\u001B[1m" + "\u001B[31m"  + "\t\t\t La partie est terminée" + "\u001B[0m" );
+                affichage.afficherDetails("--------------------------------------------------");
                 return true;
             }
         }
@@ -158,21 +169,54 @@ public class Tour {
     public void strategieEffectuerSpecialite(Bot joueur) {
         if (joueur.getPersonnageACeTour() instanceof Assassin) {
             joueur.strategieAssassin(listeJoueurs, personnageDefausseVisible);
+            affichage.afficherDetails("L'assassin effectue sa spécialité");
+            if (joueur.getVilleDuBot().getNbBatimentsConstruits()!=0)
+                affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + "\u001B[21m" + "\u001B[0m" + " a construit : " + joueur.getVilleDuBot().quartiersVilleToString());
+            affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + " :" + "\u001B[21m" + "\u001B[0m" + " possède " + joueur.getNbPiece() + " pièces" + "\n");
         }else if (joueur.getPersonnageACeTour() instanceof Voleur) {
             joueur.strategieVoleur(listeJoueurs, personnageDefausseVisible);
+            affichage.afficherDetails("Le voleur effectue sa spécialité");
+            if (joueur.getVilleDuBot().getNbBatimentsConstruits()!=0)
+                affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + "\u001B[21m" + "\u001B[0m" + " a construit : " + joueur.getVilleDuBot().quartiersVilleToString());
+            affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + " :" + "\u001B[21m" + "\u001B[0m" + " possède " + joueur.getNbPiece() + " pièces" + "\n");
         }else if (joueur.getPersonnageACeTour() instanceof Magicien) {
             joueur.strategieMagicien(listeJoueurs, piocheCartesCitadelles);
+            affichage.afficherDetails("Le magicien effectue sa spécialité");
+            if (joueur.getVilleDuBot().getNbBatimentsConstruits()!=0)
+                affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + "\u001B[21m" + "\u001B[0m" + " a construit : " + joueur.getVilleDuBot().quartiersVilleToString());
+            affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + " :" + "\u001B[21m" + "\u001B[0m" + " possède " + joueur.getNbPiece() + " pièces" + "\n");
         }else if (joueur.getPersonnageACeTour() instanceof Roi) {
             joueur.strategieRoi();
+            affichage.afficherDetails("Le roi effectue sa spécialité");
+            if (joueur.getVilleDuBot().getNbBatimentsConstruits()!=0)
+                affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + "\u001B[21m" + "\u001B[0m" + " a construit : " + joueur.getVilleDuBot().quartiersVilleToString());
+            affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + " :" + "\u001B[21m" + "\u001B[0m" + " possède " + joueur.getNbPiece() + " pièces" + "\n");
         }else if (joueur.getPersonnageACeTour() instanceof Eveque) {
             joueur.strategieEveque();
+            affichage.afficherDetails("L'évèque effectue sa spécialité");
+            if (joueur.getVilleDuBot().getNbBatimentsConstruits()!=0)
+                affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + "\u001B[21m" + "\u001B[0m" + " a construit : " + joueur.getVilleDuBot().quartiersVilleToString());
+            affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + " :" + "\u001B[21m" + "\u001B[0m" + " possède " + joueur.getNbPiece() + " pièces" + "\n");
         }else if (joueur.getPersonnageACeTour() instanceof Marchand) {
             joueur.strategieMarchand();
+            affichage.afficherDetails("Le marchand effectue sa spécialité");
+            if (joueur.getVilleDuBot().getNbBatimentsConstruits()!=0)
+                affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + "\u001B[21m" + "\u001B[0m" + " a construit : " + joueur.getVilleDuBot().quartiersVilleToString());
+            affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + " :" + "\u001B[21m" + "\u001B[0m" + " possède " + joueur.getNbPiece() + " pièces" + "\n");
         }else if (joueur.getPersonnageACeTour() instanceof Architecte) {
             joueur.strategieArchitecte(piocheCartesCitadelles);
+            affichage.afficherDetails("L'architecte effectue sa spécialité");
+            if (joueur.getVilleDuBot().getNbBatimentsConstruits()!=0)
+                affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + "\u001B[21m" + "\u001B[0m" + " a construit : " + joueur.getVilleDuBot().quartiersVilleToString());
+            affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + " :" + "\u001B[21m" + "\u001B[0m" + " possède " + joueur.getNbPiece() + " pièces" + "\n");
         }else if (joueur.getPersonnageACeTour() instanceof Condottiere) {
             joueur.strategieCondottiere(listeJoueurs);
+            affichage.afficherDetails("Le condottiere effectue sa spécialité");
+            if (joueur.getVilleDuBot().getNbBatimentsConstruits()!=0)
+                affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + "\u001B[21m" + "\u001B[0m" + " a construit : " + joueur.getVilleDuBot().quartiersVilleToString());
+            affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + joueur.getNom() + " :" + "\u001B[21m" + "\u001B[0m" + " possède " + joueur.getNbPiece() + " pièces" + "\n");
         }
     }
+
 
 }
