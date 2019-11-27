@@ -59,34 +59,34 @@ public class BotAleatoire extends Bot {
         }
         Personnage assassin = this.getPersonnageACeTour();
         if (personnageAAssassiner!=null){
-            ((Assassin) assassin).effectuerSpecialiteAssassin(personnageAAssassiner);
+            ((Assassin) assassin).effectuerSpecialiteAssassin(personnageAAssassiner, listeJoueurs);
         }
     }
 
     @Override
-    public void strategieVoleur(ArrayList<Bot> listeJoueurs, Bot botVoleur) {
-        int personnageVolé=-1;
-        Bot personnageAVoler=null;
+    public void strategieVoleur(ArrayList<Bot> listeJoueurs) {
+        int indicePersonnageAVoler=-1;
+        Personnage personnageAVoler=null;
         do{
-            personnageVolé = (int)(Math.random()*8);
-        }while(personnageVolé == this.getPersonnageACeTour().getNumero());
+            indicePersonnageAVoler = (int)(Math.random()*8);
+        }while(indicePersonnageAVoler == this.getPersonnageACeTour().getNumero());
         for (int i=0;i<listeJoueurs.size();i++){
-            if (listeJoueurs.get(i).getPersonnageACeTour().getNumero()==personnageVolé){
-                personnageAVoler = listeJoueurs.get(i);
+            if (listeJoueurs.get(i).getPersonnageACeTour()!=null && listeJoueurs.get(i).getPersonnageACeTour().getNumero()==indicePersonnageAVoler){
+                personnageAVoler = listeJoueurs.get(i).getPersonnageACeTour();
             }
         }
-        Personnage voleur = botVoleur.getPersonnageACeTour();
+        Personnage voleur = this.getPersonnageACeTour();
         if (personnageAVoler!=null){
-            ((Voleur) voleur).effectuerSpecialiteVoleur(this, personnageAVoler);
+            ((Voleur) voleur).effectuerSpecialiteVoleur(this, personnageAVoler, listeJoueurs);
         }
     }
 
     @Override
     public void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles pioche) {
         Personnage magicien = this.getPersonnageACeTour();
-        if (Math.round(Math.random() * 2) == 0)
+        if ((int) (Math.random() * 2) == 0) {
             ((Magicien) magicien).echangerCartesAvecUnPersonnage(this, listeJoueurs.get((int) (Math.random() * listeJoueurs.size())));
-        else {
+        }else {
             int nombreCartesAleatoireAEchanger= (int) (Math.random() * this.getCartesCitadellesEnMain().size());
             ArrayList<CarteCitadelles> cartesAEchanger = new ArrayList<>();
             for (int i=0; i<nombreCartesAleatoireAEchanger;i++){
