@@ -1,5 +1,6 @@
 package fr.unice.polytech.code.personnages;
 
+import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.Bot;
 import fr.unice.polytech.code.bots.BotAleatoire;
 import fr.unice.polytech.code.bots.BotFairPlay;
@@ -18,6 +19,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MagicienTest {
     PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
+
+    Affichage affichage  = new Affichage(1);
 
     @Test
     void echangerCartesAvecUnPersonnageTest() {

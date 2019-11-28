@@ -1,5 +1,6 @@
 package fr.unice.polytech.code.personnages;
 
+import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.Bot;
 import fr.unice.polytech.code.bots.BotAleatoire;
 import fr.unice.polytech.code.cartes.CarteCitadellesSansPouvoir;
@@ -10,10 +11,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EvequeTest {
 
+    Affichage affichage  = new Affichage(1);
+
     @Test
     void effectuerSpecialiteEvequeTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", null);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m", null);
 
         bot1.setPersonnageACeTour(new Eveque());
         bot2.setPersonnageACeTour(new Eveque());

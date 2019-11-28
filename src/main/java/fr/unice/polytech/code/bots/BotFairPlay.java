@@ -1,7 +1,6 @@
 package fr.unice.polytech.code.bots;
 
 import fr.unice.polytech.code.Affichage;
-import fr.unice.polytech.code.cartes.Bibliotheque;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.*;
@@ -87,7 +86,7 @@ public class BotFairPlay extends Bot {
 
     @Override
     public void strategieAssassin(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
-        int personnageAssassiner=-1;
+        int personnageAssassiner;
         Personnage personnageAAssassiner=null;
         do{
             personnageAssassiner = (int)(Math.random()*8);
@@ -105,7 +104,7 @@ public class BotFairPlay extends Bot {
 
     @Override
     public void strategieVoleur(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
-        int indicePersonnageAVoler=-1;
+        int indicePersonnageAVoler;
         Personnage personnageAVoler=null;
         do{
             indicePersonnageAVoler = (int)(Math.random()*8);

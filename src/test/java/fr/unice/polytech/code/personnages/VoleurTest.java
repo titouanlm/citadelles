@@ -1,5 +1,6 @@
 package fr.unice.polytech.code.personnages;
 
+import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.Bot;
 import fr.unice.polytech.code.bots.BotFairPlay;
 import org.junit.jupiter.api.Test;
@@ -9,12 +10,12 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VoleurTest {
-
+    Affichage affichage  = new Affichage(1);
     @Test
     void effectuerSpecialiteVolerUnAssassin() {
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
-        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m");
-        Bot bot2 = new BotFairPlay("Bot 2","\033[33m");
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m", null);
+        Bot bot2 = new BotFairPlay("Bot 2","\033[33m", null);
 
         listeJoueurs.add(bot1);
         listeJoueurs.add(bot2);
@@ -40,8 +41,8 @@ class VoleurTest {
     @Test
     void effectuerSpecialiteVolerUnPersonnageAssassine() {
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
-        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m");
-        Bot bot2 = new BotFairPlay("Bot 2","\033[33m");
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m", null);
+        Bot bot2 = new BotFairPlay("Bot 2","\033[33m", null);
 
         listeJoueurs.add(bot1);
         listeJoueurs.add(bot2);
@@ -66,8 +67,8 @@ class VoleurTest {
     @Test
     void effectuerSpecialiteVolerUnPersonnage() {
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
-        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m");
-        Bot bot2 = new BotFairPlay("Bot 2","\033[33m");
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m", null);
+        Bot bot2 = new BotFairPlay("Bot 2","\033[33m", null);
 
         listeJoueurs.add(bot1);
         listeJoueurs.add(bot2);

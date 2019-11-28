@@ -16,10 +16,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CarteCitadellesAvecPouvoirTest {
     PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
+    Affichage affichage  = new Affichage(1);
 
     @Test
     void carteUniversitéEtDracopertTest(){
-         Ville ville = new Ville(null);
+         Ville ville = new Ville(affichage);
         CarteCitadellesAvecPouvoir carte1 = new Universite(64,CouleurCarteCitadelles.VIOLET, "Université", 6 );
         CarteCitadellesAvecPouvoir carte2 = new Dracopert(65,CouleurCarteCitadelles.VIOLET, "Dracopert", 6 );
         CarteCitadelles cc1 = new CarteCitadellesSansPouvoir(57, CouleurCarteCitadelles.VIOLET, "Donjon", 3 );
@@ -37,8 +38,8 @@ public class CarteCitadellesAvecPouvoirTest {
     }
     @Test
     void carteCourDesMiracles(){
-        Bot bot1 = new BotAleatoire("Bot1","\033[36m",null);
-        Arbitre arbitre = new Arbitre(null);
+        Bot bot1 = new BotAleatoire("Bot1","\033[36m",affichage);
+        Arbitre arbitre = new Arbitre(affichage);
 
         Ville ville = new Ville(null);
         bot1.getVilleDuBot().construireBatiment(new CourDesMiracles(55,CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2 ));
@@ -56,7 +57,7 @@ public class CarteCitadellesAvecPouvoirTest {
 
     @Test
     void carteEcoleDeMagie(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m",null);
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m",affichage);
         bot1.setPersonnageACeTour(new Roi());
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
@@ -77,7 +78,7 @@ public class CarteCitadellesAvecPouvoirTest {
 
     @Test
     void carteBibliothèque(){
-        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m",null);
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m",affichage);
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
         bot1.ajouterCartesCitadellesDansMain(new Bibliotheque(62,CouleurCarteCitadelles.VIOLET, "Bibliothèque", 6 ));
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
@@ -85,14 +86,9 @@ public class CarteCitadellesAvecPouvoirTest {
 
         bot1.ajouterPiece(8);
         piocheCartesCitadelles.implementerCartesCitadelles();
-
-
         bot1.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
 
         assertEquals(6,bot1.cartesCitadellesEnMain.size());
-
-
-
 
     }
 

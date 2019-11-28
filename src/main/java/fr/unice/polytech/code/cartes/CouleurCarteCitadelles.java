@@ -1,11 +1,11 @@
 package fr.unice.polytech.code.cartes;
 
 public enum CouleurCarteCitadelles {
-    BLEU("BLEU"),
-    JAUNE("JAUNE"),
-    VERT("VERT"),
-    ROUGE("ROUGE"),
-    VIOLET("VIOLET");
+    BLEU("\u001B[34m"),
+    JAUNE("\u001B[33m"),
+    VERT("\u001B[32m"),
+    ROUGE("\u001B[31m"),
+    VIOLET("\u001B[35m");
 
     private String couleur;
 

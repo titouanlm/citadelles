@@ -48,7 +48,7 @@ public class BotAleatoire extends Bot {
 
     @Override
     public void strategieAssassin(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
-        int personnageAssassiner=-1;
+        int personnageAssassiner;
         Personnage personnageAAssassiner=null;
         do{
             personnageAssassiner = (int)(Math.random()*8);
@@ -66,7 +66,7 @@ public class BotAleatoire extends Bot {
 
     @Override
     public void strategieVoleur(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
-        int indicePersonnageAVoler=-1;
+        int indicePersonnageAVoler;
         Personnage personnageAVoler=null;
         do{
             indicePersonnageAVoler = (int)(Math.random()*8);

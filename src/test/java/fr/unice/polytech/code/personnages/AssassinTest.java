@@ -1,6 +1,8 @@
 package fr.unice.polytech.code.personnages;
 
+import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.Bot;
+import fr.unice.polytech.code.bots.BotAleatoire;
 import fr.unice.polytech.code.bots.BotFairPlay;
 import org.junit.jupiter.api.Test;
 
@@ -13,9 +15,10 @@ class AssassinTest {
     @Test
     void effectuerSpecialiteAssassin() {
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
-        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m");
-        Bot bot2 = new BotFairPlay("Bot 2","\033[33m");
-        Bot bot3 = new BotFairPlay("Bot 3","\033[33m");
+        Affichage affichage  = new Affichage(1);
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", affichage);
+        Bot bot2 = new BotFairPlay("Bot 2","\033[33m", affichage);
+        Bot bot3 = new BotFairPlay("Bot 3","\033[33m", affichage);
 
         listeJoueurs.add(bot1);
         listeJoueurs.add(bot2);

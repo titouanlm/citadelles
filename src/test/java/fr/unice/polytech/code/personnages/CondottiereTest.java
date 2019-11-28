@@ -1,5 +1,6 @@
 package fr.unice.polytech.code.personnages;
 
+import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.Bot;
 import fr.unice.polytech.code.bots.BotAleatoire;
 import fr.unice.polytech.code.cartes.CarteCitadellesSansPouvoir;
@@ -13,10 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CondottiereTest {
 
+    Affichage affichage  = new Affichage(1);
+
     @Test
     void effectuerSpecialiteCondottiereTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", affichage);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
 
         bot1.setPersonnageACeTour(new Condottiere());
         bot2.setPersonnageACeTour(new Condottiere());
@@ -41,8 +44,8 @@ class CondottiereTest {
 
     @Test
     void detruirePlusGrosQuartierEnemieTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", affichage);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
 
         bot1.setPersonnageACeTour(new Condottiere());
         bot2.setPersonnageACeTour(new Marchand());
@@ -92,8 +95,8 @@ class CondottiereTest {
 
     @Test
     void detruirePlusGrosQuartierEnemieEvequeTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", affichage);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
 
         bot1.setPersonnageACeTour(new Condottiere());
         bot2.setPersonnageACeTour(new Eveque());
@@ -120,8 +123,8 @@ class CondottiereTest {
 
     @Test
     void detruireQuartierAleatoireEnemieTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", affichage);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
 
         bot1.setPersonnageACeTour(new Condottiere());
         bot2.setPersonnageACeTour(new Marchand());
@@ -146,8 +149,8 @@ class CondottiereTest {
 
     @Test
     void detruirePlusPetitQuartierEnemieTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", affichage);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
 
         bot1.setPersonnageACeTour(new Condottiere());
         bot2.setPersonnageACeTour(new Marchand());

@@ -11,19 +11,18 @@ public class Affichage {
     private final HashMap<String,int[]> mapJoueurs= new HashMap<>();
     private int nbParties;
     private boolean modeDetails;
-    private boolean modeStatistiques;
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_RED = "\u001B[31m";
     private static final String ANSI_BLUE = "\u001B[34m";
     private static final String ANSI_BOLD = "\u001B[1m";
     private static final String ANSI_UNBOLD = "\u001B[21m";
-    public static final String ANSI_GREEN = "\u001B[32m";
 
     public Affichage(int nbParties) {
         this.nbParties=nbParties;
         for (int i=1;i<5;i++){
             mapJoueurs.put("Bot "+i,new int[2]);
         }
+        this.modeDetails=false;
     }
 
     public int getNbParties() {
@@ -32,10 +31,6 @@ public class Affichage {
 
     public void setModeDetails(boolean modeDetails) {
         this.modeDetails = modeDetails;
-    }
-
-    public void setModeStatistiques(boolean modeStatistiques){
-        this.modeStatistiques = modeStatistiques;
     }
 
     public final HashMap<String,int[]> getMapJoueurs(){return mapJoueurs;}
@@ -55,7 +50,7 @@ public class Affichage {
     }
 
     public void afficherResultats() {
-        if (modeStatistiques) {
+        if (!modeDetails) {
             Map<String, int[]> sortedMap = new TreeMap<>(mapJoueurs);
             Set<Map.Entry<String, int[]>> set = sortedMap.entrySet();
             for (Map.Entry<String, int[]> e : set) {

@@ -2,6 +2,7 @@ package fr.unice.polytech.code;
 
 import fr.unice.polytech.code.bots.*;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 
 import java.util.ArrayList;
 
@@ -42,16 +43,16 @@ class Arbitre {
     }
 
     void testBonusPossede5CouleursDeQuartierDifferentes(Bot joueur){
-        ArrayList<String> couleurs = new ArrayList<>();
-        couleurs.add("BLEU");
-        couleurs.add("JAUNE");
-        couleurs.add("VERT");
-        couleurs.add("ROUGE");
-        couleurs.add("VIOLET");
+        ArrayList<CouleurCarteCitadelles> couleurs = new ArrayList<>();
+        couleurs.add(CouleurCarteCitadelles.BLEU);
+        couleurs.add(CouleurCarteCitadelles.JAUNE);
+        couleurs.add(CouleurCarteCitadelles.VERT);
+        couleurs.add(CouleurCarteCitadelles.ROUGE);
+        couleurs.add(CouleurCarteCitadelles.VIOLET);
 
         for (CarteCitadelles batiment : joueur.getVilleDuBot().getBatimentsConstruits() ){
             for(int i=0;i<couleurs.size();i++){
-                if (batiment.getCouleur().toString().equals(couleurs.get(i))) {
+                if (batiment.getCouleur().equals(couleurs.get(i))) {
                     couleurs.remove(i);
                 }
             }
