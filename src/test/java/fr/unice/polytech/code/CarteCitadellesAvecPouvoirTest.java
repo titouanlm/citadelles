@@ -39,7 +39,7 @@ public class CarteCitadellesAvecPouvoirTest {
 
     }
     @Test
-    void carteCourDesMiracles(){
+    void carteCourDesMiraclesTest(){
         Bot bot1 = new BotAleatoire("Bot1","\033[36m",affichage);
         Arbitre arbitre = new Arbitre(affichage);
 
@@ -58,7 +58,7 @@ public class CarteCitadellesAvecPouvoirTest {
     }
 
     @Test
-    void carteEcoleDeMagie(){
+    void carteEcoleDeMagieTest(){
         Bot bot1 = new BotAleatoire("Bot 1", "\033[32m",affichage);
         bot1.setPersonnageACeTour(new Roi());
 
@@ -79,7 +79,7 @@ public class CarteCitadellesAvecPouvoirTest {
     }
 
     @Test
-    void carteBibliothèque(){
+    void carteBibliothèqueTest(){
         Bot bot1 = new BotFairPlay("Bot 1", "\033[32m",affichage);
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
         bot1.ajouterCartesCitadellesDansMain(new Bibliotheque(62,CouleurCarteCitadelles.VIOLET, "Bibliothèque", 6 ));
@@ -181,6 +181,22 @@ public class CarteCitadellesAvecPouvoirTest {
         assertEquals(1,bot2.getVilleDuBot().getNbBatimentsConstruits());
         assertEquals(2,bot2.getCartesCitadellesEnMain().size());
         assertEquals(5,bot2.getNbPiece());
+    }
+
+    @Test
+    void carteObservatoireTest(){
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m",affichage);
+        bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
+        bot1.ajouterCartesCitadellesDansMain(new Observatoire(60,CouleurCarteCitadelles.VIOLET, "Observatoire", 5 ));
+        bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
+        bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Comptoir", 3));
+
+        bot1.ajouterPiece(8);
+        piocheCartesCitadelles.implementerCartesCitadelles();
+        bot1.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
+
+        assertEquals(5,bot1.cartesCitadellesEnMain.size());
+
     }
 
 }
