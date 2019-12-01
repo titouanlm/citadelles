@@ -10,7 +10,6 @@ public class Cimitiere extends CarteCitadellesAvecPouvoir {
 
     @Override
     public void effectuerSpecialite(CarteCitadellesAvecPouvoir carte, Bot joueur, PiocheCartesCitadelles piocheCartesCitadelles) {
-
-
+        
     }
 }

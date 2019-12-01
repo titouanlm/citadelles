@@ -6,12 +6,14 @@ import fr.unice.polytech.code.bots.BotFairPlay;
 import fr.unice.polytech.code.cartes.*;
 import fr.unice.polytech.code.moteur.Moteur;
 import fr.unice.polytech.code.personnages.Condottiere;
+import fr.unice.polytech.code.personnages.Marchand;
 import fr.unice.polytech.code.personnages.Roi;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
+import static junit.framework.TestCase.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CarteCitadellesAvecPouvoirTest {
@@ -90,6 +92,95 @@ public class CarteCitadellesAvecPouvoirTest {
 
         assertEquals(6,bot1.cartesCitadellesEnMain.size());
 
+    }
+
+    @Test
+    void detruirePlusGrosQuartierEnemieTest(){
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m", affichage);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
+
+        bot1.setPersonnageACeTour(new Condottiere());
+        bot2.setPersonnageACeTour(new Marchand());
+
+        bot1.ajouterPiece(15);
+        bot2.ajouterPiece(5);
+
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Comptoir", 3));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
+        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
+        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Comptoir", 3));
+        bot2.ajouterCartesCitadellesDansMain(new Cimitiere(61,CouleurCarteCitadelles.VIOLET, "Cimitière", 5 ));
+
+
+
+
+        ((Condottiere) bot1.getPersonnageACeTour()).detruirePlusGrosQuartierEnemie(bot1, bot2);
+
+
+        assertEquals(1,bot2.getVilleDuBot().getNbBatimentsConstruits());
+        assertEquals(4,bot2.getCartesCitadellesEnMain().size());
+        assertEquals(4,bot2.getNbPiece());
+    }
+
+    @Test
+    void detruireQuartierAleatoireEnemieTest(){
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m", affichage);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
+
+        bot1.setPersonnageACeTour(new Condottiere());
+        bot2.setPersonnageACeTour(new Marchand());
+
+        bot1.ajouterPiece(15);
+        bot2.ajouterPiece(5);
+
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Comptoir", 3));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
+        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
+        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Comptoir", 3));
+        bot2.ajouterCartesCitadellesDansMain(new Cimitiere(61,CouleurCarteCitadelles.VIOLET, "Cimitière", 5 ));
+
+
+
+
+        ((Condottiere) bot1.getPersonnageACeTour()).detruireQuartierAleatoireEnemie(bot1, bot2);
+
+
+        assertEquals(1,bot2.getVilleDuBot().getNbBatimentsConstruits());
+        assertEquals(4,bot2.getCartesCitadellesEnMain().size());
+        assertEquals(4,bot2.getNbPiece());
+    }
+
+    @Test
+    void detruirePlusPetitQuartierEnemieTest(){
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m", affichage);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
+
+        bot1.setPersonnageACeTour(new Condottiere());
+        bot2.setPersonnageACeTour(new Marchand());
+
+        bot1.ajouterPiece(15);
+        bot2.ajouterPiece(5);
+
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Comptoir", 3));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
+        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
+        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Comptoir", 3));
+
+
+
+
+        ((Condottiere) bot1.getPersonnageACeTour()).detruirePlusPetitQuartierEnemie(bot1, bot2);
+
+
+        assertEquals(1,bot2.getVilleDuBot().getNbBatimentsConstruits());
+        assertEquals(2,bot2.getCartesCitadellesEnMain().size());
+        assertEquals(5,bot2.getNbPiece());
     }
 
 }

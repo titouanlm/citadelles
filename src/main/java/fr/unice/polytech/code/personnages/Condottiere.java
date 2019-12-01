@@ -45,6 +45,11 @@ public class Condottiere extends Personnage {
             if(quartierADetruire!=null){
                 joueurQuiSubitAction.getVilleDuBot().detruireQuartier(quartierADetruire);
                 joueurQuiEffectueAction.retirerPiece(quartierADetruire.getPoint()-1);
+
+                if (joueurQuiSubitAction.contientDansSaMain("Cimitière") && !(joueurQuiSubitAction.getPersonnageACeTour() instanceof Condottiere) ){
+                    joueurQuiSubitAction.retirerPiece(1);
+                    joueurQuiSubitAction.ajouterCartesCitadellesDansMain(quartierADetruire);
+                }
             }
         }
     }
@@ -59,6 +64,12 @@ public class Condottiere extends Personnage {
                 if(coutDestruction<=joueurQuiEffectueAction.getNbPiece() && !(quartierADetruire instanceof Donjon)){
                     joueurQuiSubitAction.getVilleDuBot().detruireQuartier(quartierADetruire);
                     joueurQuiEffectueAction.retirerPiece(coutDestruction);
+                }
+                if (quartierADetruire!=null){
+                    if (joueurQuiSubitAction.contientDansSaMain("Cimitière") && !(joueurQuiSubitAction.getPersonnageACeTour() instanceof Condottiere) ){
+                        joueurQuiSubitAction.retirerPiece(1);
+                        joueurQuiSubitAction.ajouterCartesCitadellesDansMain(quartierADetruire);
+                    }
                 }
             }
         }
@@ -77,6 +88,12 @@ public class Condottiere extends Personnage {
             if(quartierADetruire!=null && !(quartierADetruire instanceof Donjon)){
                 joueurQuiSubitAction.getVilleDuBot().detruireQuartier(quartierADetruire);
                 joueurQuiEffectueAction.retirerPiece(quartierADetruire.getPoint()-1);
+            }
+            if (quartierADetruire!=null){
+                if (joueurQuiSubitAction.contientDansSaMain("Cimitière") && !(joueurQuiSubitAction.getPersonnageACeTour() instanceof Condottiere) ){
+                    joueurQuiSubitAction.retirerPiece(1);
+                    joueurQuiSubitAction.ajouterCartesCitadellesDansMain(quartierADetruire);
+                }
             }
         }
     }
