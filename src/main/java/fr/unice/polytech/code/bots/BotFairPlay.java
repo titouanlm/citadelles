@@ -47,6 +47,7 @@ public class BotFairPlay extends Bot {
                 if(this.contientDansSaMain("Bibliothèque")) {
                     this.ajouterCartesCitadellesDansMain(cartePiochee1);
                     this.ajouterCartesCitadellesDansMain(cartePiochee2);
+                    return;
                 }
                 if (this.contientDansSaMain("Observatoire")){
                     CarteCitadelles cartePiochee3 = piocheCartesCitadelles.piocher();
