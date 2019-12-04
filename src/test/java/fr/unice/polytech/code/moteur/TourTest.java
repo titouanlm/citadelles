@@ -1,6 +1,7 @@
-package fr.unice.polytech.code;
+package fr.unice.polytech.code.moteur;
 
 
+import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.*;
 import fr.unice.polytech.code.moteur.Moteur;
 import fr.unice.polytech.code.moteur.Tour;

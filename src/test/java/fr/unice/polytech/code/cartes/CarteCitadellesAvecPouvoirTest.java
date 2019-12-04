@@ -1,10 +1,12 @@
-package fr.unice.polytech.code;
+package fr.unice.polytech.code.cartes;
 
+import fr.unice.polytech.code.Affichage;
+import fr.unice.polytech.code.Arbitre;
+import fr.unice.polytech.code.Ville;
 import fr.unice.polytech.code.bots.Bot;
 import fr.unice.polytech.code.bots.BotAleatoire;
 import fr.unice.polytech.code.bots.BotFairPlay;
 import fr.unice.polytech.code.cartes.*;
-import fr.unice.polytech.code.moteur.Moteur;
 import fr.unice.polytech.code.personnages.Condottiere;
 import fr.unice.polytech.code.personnages.Marchand;
 import fr.unice.polytech.code.personnages.Roi;
@@ -14,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class CarteCitadellesAvecPouvoirTest {
     PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
@@ -42,19 +43,27 @@ public class CarteCitadellesAvecPouvoirTest {
     void carteCourDesMiraclesTest(){
         Bot bot1 = new BotAleatoire("Bot1","\033[36m",affichage);
         Arbitre arbitre = new Arbitre(affichage);
+        ArrayList<Bot> listeJoueurs = new ArrayList<>();
+        listeJoueurs.add(bot1);
 
         Ville ville = new Ville(null);
         bot1.getVilleDuBot().construireBatiment(new CourDesMiracles(55,CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
-        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(37,CouleurCarteCitadelles.VERT, "Comptoir", 3 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(17,CouleurCarteCitadelles.JAUNE, "Manoir", 3 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(20,CouleurCarteCitadelles.JAUNE, "Château", 4 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(9,CouleurCarteCitadelles.BLEU, "Monastère", 3 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(6,CouleurCarteCitadelles.BLEU, "Eglise", 2 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(46,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
+        bot1.getVilleDuBot().construireBatiment(new Dracopert(65,CouleurCarteCitadelles.VIOLET, "Dracopert", 6));
 
-        arbitre.testBonusPossede5CouleursDeQuartierDifferentes(bot1);
-        assertEquals(3, bot1.getNbPoint());
+        /*for(CarteCitadelles c : bot1.getVilleDuBot().getBatimentsConstruits()){
+            if(c instanceof CourDesMiracles){
+                ((CourDesMiracles) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, bot1, piocheCartesCitadelles);
+            }
+        }*/
+
+        arbitre.compteLesPoints(listeJoueurs);
+        assertEquals(26, bot1.getNbPoint());
     }
 
     @Test

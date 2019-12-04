@@ -2,15 +2,18 @@ package fr.unice.polytech.code;
 
 import fr.unice.polytech.code.bots.*;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.cartes.CarteCitadellesAvecPouvoir;
 import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
+import fr.unice.polytech.code.cartes.CourDesMiracles;
+import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 import java.util.ArrayList;
 
-class Arbitre {
+public class Arbitre {
     private Bot joueurGagnant;
     private Affichage affichage;
 
-    Arbitre(Affichage affichage){
+    public Arbitre(Affichage affichage){
         joueurGagnant = null;
         this.affichage = affichage;
     }
@@ -19,11 +22,17 @@ class Arbitre {
         return joueurGagnant;
     }
 
-    void compteLesPoints(ArrayList<Bot> listeJoueurs){
+    public void compteLesPoints(ArrayList<Bot> listeJoueurs){
         for (Bot joueur : listeJoueurs) {
             joueur.setNbPoint(joueur.getVilleDuBot().getNbTotalPoint());
             this.testBonusPremierJoueurAFinir(joueur);
             this.testBonusAConstruit8CesQuartiers(joueur);
+            for(CarteCitadelles c : joueur.getVilleDuBot().getBatimentsConstruits()){
+                if(c instanceof CourDesMiracles){
+                    PiocheCartesCitadelles piocheCartesCitadelles = null;
+                    ((CourDesMiracles) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, joueur, piocheCartesCitadelles);
+                }
+            }
             this.testBonusPossede5CouleursDeQuartierDifferentes(joueur);
         }
     }

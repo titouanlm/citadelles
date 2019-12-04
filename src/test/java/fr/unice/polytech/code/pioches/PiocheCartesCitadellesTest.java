@@ -1,10 +1,9 @@
 
-package fr.unice.polytech.code;
+package fr.unice.polytech.code.pioches;
 
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.cartes.CarteCitadellesSansPouvoir;
 import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
-import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertNull;

@@ -1,6 +1,6 @@
-package fr.unice.polytech.code;
-import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
+package fr.unice.polytech.code.pioches;
 
+import fr.unice.polytech.code.Affichage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

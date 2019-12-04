@@ -1,18 +1,41 @@
-/*package fr.unice.polytech.code;
+package fr.unice.polytech.code.bots;
 
+import fr.unice.polytech.code.Affichage;
+import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
+import fr.unice.polytech.code.personnages.Assassin;
 import fr.unice.polytech.code.personnages.Condottiere;
+import fr.unice.polytech.code.personnages.Marchand;
+import fr.unice.polytech.code.personnages.Voleur;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.*;
+import org.mockito.Mock;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public class BotTest {
-    CarteCitadelles[] cc = new CarteCitadelles[65];
+public class BotTricheurTest {
+
+
+    Affichage affichage  = new Affichage(1);
+    Bot bot1 = new BotTricheur("Bot 1", "\033[35m",affichage);
+    Bot bot2 = new BotFairPlay("Bot 2", "\033[34m",affichage);
+    Bot bot3 = new BotAleatoire("Bot 3", "\033[36m",affichage);
+    Bot bot4 = mock(BotTricheur.class);
+    ArrayList<Bot> listeJoueurs = new ArrayList<>();
 
     @BeforeEach
     void setUp() {
-        cc[0] = new CarteCitadelles(1, CouleurCarteCitadelles.BLEU, "Temple", 1);
+        listeJoueurs.add(bot1);
+        listeJoueurs.add(bot2);
+        listeJoueurs.add(bot3);
+        listeJoueurs.add(bot4);
+        /*cc[0] = new CarteCitadelles(1, CouleurCarteCitadelles.BLEU, "Temple", 1);
         cc[1] = new CarteCitadelles(2, CouleurCarteCitadelles.BLEU, "Temple", 1);
         cc[2] = new CarteCitadelles(3, CouleurCarteCitadelles.BLEU, "Temple", 1);
         cc[3] = new CarteCitadelles(4, CouleurCarteCitadelles.BLEU, "Eglise", 2);
@@ -80,108 +103,22 @@ public class BotTest {
         cc[61] = new CarteCitadelles(62, CouleurCarteCitadelles.VIOLET, "Bibliothèque", 6);
         cc[62] = new CarteCitadelles(63, CouleurCarteCitadelles.VIOLET, "École de magie", 6);
         cc[63] = new CarteCitadelles(64, CouleurCarteCitadelles.VIOLET, "Universitè", 8);
-        cc[64] = new CarteCitadelles(65, CouleurCarteCitadelles.VIOLET, "Dracopert", 8);
+        cc[64] = new CarteCitadelles(65, CouleurCarteCitadelles.VIOLET, "Dracopert", 8);*/
     }
 
     @Test
-    void testGetNom() {
-        Bot bot1=new BotSimpliste("Bot1","\033[35m");
-        Bot bot2=new BotSimpliste("Bot2","\033[33m");
-        assertEquals("Bot1",bot1.getNom());
-        assertNotEquals("Bot1",bot2.getNom());
+    public void strategieVoleur(){
+        bot1.ajouterPiece(10);
+        bot2.ajouterPiece(30);
+        bot3.ajouterPiece(40);
+        bot1.setPersonnageACeTour(new Voleur(affichage));
+        bot2.setPersonnageACeTour(new Condottiere(affichage));
+        bot3.setPersonnageACeTour(new Marchand(affichage));
+        when(bot4.getPersonnageACeTour()).thenReturn(new Assassin(affichage));
+        bot1.strategieVoleur(listeJoueurs,null);
+        assertEquals(50, bot1.getNbPiece());
+        assertEquals(30, bot2.getNbPiece());
+        assertEquals(0, bot3.getNbPiece());
     }
 
-    @Test
-    void testAjouterPiece(){
-        Bot bot1=new BotSimpliste("Bot1","\033[35m");
-        assertEquals(0,bot1.getNbPiece());
-        bot1.ajouterPiece(2);
-        assertEquals(2,bot1.getNbPiece());
-        bot1.ajouterPiece(2);
-        assertEquals(4,bot1.getNbPiece());
-    }
-
-
-    @Test
-    void retirerPieceTest(){
-        Bot bot1=new BotSimpliste("Bot1","\033[35m");
-        assertEquals(0,bot1.getNbPiece());
-        bot1.ajouterPiece(4);
-        assertEquals(4,bot1.getNbPiece());
-        bot1.retirerPiece(2);
-        assertEquals(2,bot1.getNbPiece());
-        bot1.retirerPiece(100);
-        assertEquals(0,bot1.getNbPiece());
-    }
-
-    @Test
-    void testAjouterCartesCitadellesDansMain(){
-        Bot bot1 = new BotSimpliste("Bot1","\033[35m");
-        assertEquals(0,bot1.getCartesCitadellesEnMain().size());
-        bot1.ajouterCartesCitadellesDansMain(cc[0]);
-        bot1.ajouterCartesCitadellesDansMain(cc[2]);
-        bot1.ajouterCartesCitadellesDansMain(cc[25]);
-        bot1.ajouterCartesCitadellesDansMain(cc[60]);
-        assertEquals(4,bot1.getCartesCitadellesEnMain().size());
-        assertEquals(cc[2],bot1.getCartesCitadellesEnMain().get(1));
-        assertEquals(cc[60],bot1.getCartesCitadellesEnMain().get(3));
-    }
-
-    @Test
-    void testSetNbPoint(){
-        Bot bot1 = new BotSimpliste("Bot1","\033[35m");
-        assertEquals(0,bot1.getNbPoint());
-        bot1.setNbPoint(2);
-        assertEquals(2,bot1.getNbPoint());
-        bot1.setNbPoint(2);
-        assertEquals(4,bot1.getNbPoint());
-    }
-
-    @Test
-    void testSetPremierJoueurAFinir(){
-        Bot bot1 = new BotSimpliste("Bot1","\033[35m");
-        assertFalse(bot1.estPremierJoueurAFinir());
-        bot1.setPremierJoueurAFinir(true);
-        assertTrue(bot1.estPremierJoueurAFinir());
-    }
-
-    @Test
-    void testSetPersonnageACeTour(){
-        Bot bot1 = new BotSimpliste("Bot1","\033[35m");
-        Condottiere condottiere=new Condottiere();
-        assertNull(bot1.getPersonnageACeTour());
-        bot1.setPersonnageACeTour(condottiere);
-        assertEquals(condottiere,bot1.getPersonnageACeTour());
-    }
-
-    @Test
-    void testSetPossedeCouronne(){
-        Bot bot1 = new BotSimpliste("Bot1","\033[35m");
-        assertFalse(bot1.possedeCouronne());
-        bot1.setPossedeCouronne(true);
-        assertTrue(bot1.possedeCouronne());
-    }
-
-    @Test
-    void testStrategieConstruitDesQuilPeut(){
-        Bot bot1 = new BotSimpliste("Bot1","\033[35m");
-        Condottiere condottiere=new Condottiere();
-        bot1.setPersonnageACeTour(condottiere);
-        bot1.ajouterCartesCitadellesDansMain(cc[0]);
-        bot1.ajouterCartesCitadellesDansMain(cc[2]);
-        bot1.ajouterCartesCitadellesDansMain(cc[25]);
-        bot1.ajouterCartesCitadellesDansMain(cc[6]);
-
-        bot1.ajouterPiece(1);
-        bot1.strategie();
-        assertEquals(1,bot1.getVilleDuBot().getBatimentsConstruits().size());
-
-        bot1.strategie();
-        assertEquals(1,bot1.getVilleDuBot().getBatimentsConstruits().size());
-
-        bot1.ajouterPiece(5);
-        bot1.strategie();
-        assertEquals(2,bot1.getVilleDuBot().getBatimentsConstruits().size());
-    }
 }
-*/

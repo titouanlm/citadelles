@@ -2,6 +2,7 @@ package fr.unice.polytech.code.moteur;
 
 import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.*;
+import fr.unice.polytech.code.cartes.*;
 import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.*;
 
@@ -97,6 +98,27 @@ public class Tour {
                         affichage.afficherDetails("Possède " + joueur.getNbPiece() + " pièces.\n" + "Cartes dans sa main : \n"+ joueur.cartesEnMainToString() +  "\u001B[0m"+ joueur.getCouleur());
 
                         joueur.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
+                        if (joueur.contientDansSaMain("École de magie")){
+                            for(CarteCitadelles c : joueur.getVilleDuBot().getBatimentsConstruits()){
+                                if(c instanceof EcoleDeMagie){
+                                    ((EcoleDeMagie) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, joueur, piocheCartesCitadelles);
+                                }
+                            }
+                        }
+                        if (joueur.contientDansSaMain("Laboratoire")){
+                            for(CarteCitadelles c : joueur.getVilleDuBot().getBatimentsConstruits()){
+                                if(c instanceof Laboratoire){
+                                    ((Laboratoire) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, joueur, piocheCartesCitadelles);
+                                }
+                            }
+                        }
+                        if (joueur.contientDansSaMain("Manufacture")){
+                            for(CarteCitadelles c : joueur.getVilleDuBot().getBatimentsConstruits()){
+                                if(c instanceof Manufacture){
+                                    ((Manufacture) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, joueur, piocheCartesCitadelles);
+                                }
+                            }
+                        }
                         joueur.strategieConstruction(piocheCartesCitadelles);
                         this.strategieEffectuerSpecialite(joueur);
                         this.estJoueurAyantFinisEnPremier(joueur);
