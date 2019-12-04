@@ -6,6 +6,8 @@ import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static fr.unice.polytech.code.cartes.CouleurCarteCitadelles.VERT;
+
 public class CourDesMiracles extends CarteCitadellesAvecPouvoir {
 
     public CourDesMiracles(int numero, CouleurCarteCitadelles couleur, String nom, int point) {
@@ -44,24 +46,26 @@ public class CourDesMiracles extends CarteCitadellesAvecPouvoir {
                     x=i;
                 }
             }
+
             if(cpt==1){
                 if(x==0){
-                    this.setCouleur(CouleurCarteCitadelles.JAUNE);
+                    carte.setCouleur(CouleurCarteCitadelles.JAUNE);
                 }
                 else if (x==1){
-                    this.setCouleur(CouleurCarteCitadelles.BLEU);
+                    carte.setCouleur(CouleurCarteCitadelles.BLEU);
                 }
                 else if (x==2){
-                    this.setCouleur(CouleurCarteCitadelles.VERT);
+                    carte.setCouleur(CouleurCarteCitadelles.VERT);
                 }
                 else if (x==3){
-                    this.setCouleur(CouleurCarteCitadelles.ROUGE);
+                    carte.setCouleur(CouleurCarteCitadelles.ROUGE);
                 }
                 else{
-                    this.setCouleur(CouleurCarteCitadelles.VIOLET);
+                    carte.setCouleur(CouleurCarteCitadelles.VIOLET);
                 }
 
             }
+
         }
     }
 

@@ -15,16 +15,16 @@ public class EcoleDeMagie extends CarteCitadellesAvecPouvoir {
     @Override
     public void effectuerSpecialite(CarteCitadellesAvecPouvoir carte, Bot joueur, PiocheCartesCitadelles piocheCartesCitadelles) {
         if(joueur.getPersonnageACeTour() instanceof Roi){
-            this.setCouleur(CouleurCarteCitadelles.JAUNE);
+            carte.setCouleur(CouleurCarteCitadelles.JAUNE);
         }
         else if(joueur.getPersonnageACeTour() instanceof Eveque){
-            this.setCouleur(CouleurCarteCitadelles.BLEU);
+            carte.setCouleur(CouleurCarteCitadelles.BLEU);
         }
         else if(joueur.getPersonnageACeTour() instanceof Marchand){
-            this.setCouleur(CouleurCarteCitadelles.VERT);
+            carte.setCouleur(CouleurCarteCitadelles.VERT);
         }
         else if(joueur.getPersonnageACeTour() instanceof Condottiere){
-            this.setCouleur(CouleurCarteCitadelles.ROUGE);
+            carte.setCouleur(CouleurCarteCitadelles.ROUGE);
         }
 
     }

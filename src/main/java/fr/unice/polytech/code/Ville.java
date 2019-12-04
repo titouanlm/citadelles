@@ -70,7 +70,7 @@ public class Ville {
     public int compterNbQuartiersJaune(){
         int nbQuartiersJaune=0;
         for(CarteCitadelles quartier : batimentsConstruits){
-            if(quartier.getCouleur().toString().equals("JAUNE")){
+            if(quartier.getCouleur()== CouleurCarteCitadelles.JAUNE){
                 nbQuartiersJaune++;
             }
         }
@@ -80,7 +80,7 @@ public class Ville {
     public int compterNbQuartiersBleu(){
         int nbQuartiersBleu=0;
         for(CarteCitadelles quartier : batimentsConstruits){
-            if(quartier.getCouleur().toString().equals("BLEU")){
+            if(quartier.getCouleur()== CouleurCarteCitadelles.BLEU){
                 nbQuartiersBleu++;
             }
         }
@@ -90,7 +90,7 @@ public class Ville {
     public int compterNbQuartiersVert(){
         int nbQuartiersVert=0;
         for(CarteCitadelles quartier : batimentsConstruits){
-            if(quartier.getCouleur().toString().equals("VERT")){
+            if(quartier.getCouleur()== CouleurCarteCitadelles.VERT){
                 nbQuartiersVert++;
             }
         }
@@ -100,7 +100,7 @@ public class Ville {
     public int compterNbQuartiersViolet(){
         int nbQuartiersViolet=0;
         for(CarteCitadelles quartier : batimentsConstruits){
-            if(quartier.getCouleur().toString().equals("VIOLET")){
+            if(quartier.getCouleur()== CouleurCarteCitadelles.VIOLET){
                 nbQuartiersViolet++;
             }
         }

@@ -46,12 +46,18 @@ public class CarteCitadellesAvecPouvoirTest {
         Ville ville = new Ville(null);
         bot1.getVilleDuBot().construireBatiment(new CourDesMiracles(55,CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
-        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(37,CouleurCarteCitadelles.VERT, "Comptoir", 3 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(17,CouleurCarteCitadelles.JAUNE, "Manoir", 3 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(20,CouleurCarteCitadelles.JAUNE, "Château", 4 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(9,CouleurCarteCitadelles.BLEU, "Monastère", 3 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(6,CouleurCarteCitadelles.BLEU, "Eglise", 2 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(46,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
+        bot1.getVilleDuBot().construireBatiment(new Dracopert(65,CouleurCarteCitadelles.VIOLET, "Dracopert", 6));
+
+        for(CarteCitadelles c : bot1.getVilleDuBot().getBatimentsConstruits()){
+            if(c instanceof CourDesMiracles){
+                ((CourDesMiracles) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, bot1, piocheCartesCitadelles);
+            }
+        }
 
         arbitre.testBonusPossede5CouleursDeQuartierDifferentes(bot1);
         assertEquals(3, bot1.getNbPoint());
