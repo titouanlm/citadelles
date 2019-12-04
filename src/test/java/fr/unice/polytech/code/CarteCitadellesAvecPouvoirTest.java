@@ -42,6 +42,8 @@ public class CarteCitadellesAvecPouvoirTest {
     void carteCourDesMiraclesTest(){
         Bot bot1 = new BotAleatoire("Bot1","\033[36m",affichage);
         Arbitre arbitre = new Arbitre(affichage);
+        ArrayList<Bot> listeJoueurs = new ArrayList<>();
+        listeJoueurs.add(bot1);
 
         Ville ville = new Ville(null);
         bot1.getVilleDuBot().construireBatiment(new CourDesMiracles(55,CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2 ));
@@ -53,14 +55,14 @@ public class CarteCitadellesAvecPouvoirTest {
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(46,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
         bot1.getVilleDuBot().construireBatiment(new Dracopert(65,CouleurCarteCitadelles.VIOLET, "Dracopert", 6));
 
-        for(CarteCitadelles c : bot1.getVilleDuBot().getBatimentsConstruits()){
+        /*for(CarteCitadelles c : bot1.getVilleDuBot().getBatimentsConstruits()){
             if(c instanceof CourDesMiracles){
                 ((CourDesMiracles) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, bot1, piocheCartesCitadelles);
             }
-        }
+        }*/
 
-        arbitre.testBonusPossede5CouleursDeQuartierDifferentes(bot1);
-        assertEquals(3, bot1.getNbPoint());
+        arbitre.compteLesPoints(listeJoueurs);
+        assertEquals(26, bot1.getNbPoint());
     }
 
     @Test
