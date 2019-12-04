@@ -27,8 +27,8 @@ class MagicienTest {
         Bot bot1 = new BotFairPlay("Bot 1", "\033[32m",null);
         Bot bot2 = new BotFairPlay("Bot 2","\033[33m",null);
 
-        bot1.setPersonnageACeTour(new Eveque());
-        bot2.setPersonnageACeTour(new Magicien());
+        bot1.setPersonnageACeTour(new Eveque(affichage));
+        bot2.setPersonnageACeTour(new Magicien(affichage));
 
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
@@ -39,7 +39,7 @@ class MagicienTest {
         assertNotEquals(deckBot1,bot2.getCartesCitadellesEnMain());
 
         if(bot2.getPersonnageACeTour() instanceof Magicien){
-            ((Magicien)bot2.getPersonnageACeTour()).echangerCartesAvecUnPersonnage(bot2,bot1);
+            ((Magicien)bot2.getPersonnageACeTour()).echangerCartesAvecUnJoueur(bot2,bot1);
         }
 
         assertNotEquals(deckBot1, bot1.getCartesCitadellesEnMain());
@@ -50,7 +50,7 @@ class MagicienTest {
     void echangerCartesAvecPiocheTest() {
         Bot bot1 = new BotFairPlay("Bot 1", "\033[32m",null);
 
-        bot1.setPersonnageACeTour(new Magicien());
+        bot1.setPersonnageACeTour(new Magicien(affichage));
 
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));

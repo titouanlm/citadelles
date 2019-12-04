@@ -17,8 +17,8 @@ class MarchandTest {
         Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", null);
         Bot bot2 = new BotAleatoire("Bot 2","\033[33m", null);
 
-        bot1.setPersonnageACeTour(new Marchand());
-        bot2.setPersonnageACeTour(new Marchand());
+        bot1.setPersonnageACeTour(new Marchand(affichage));
+        bot2.setPersonnageACeTour(new Marchand(affichage));
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Echoppe", 2));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));

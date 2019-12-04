@@ -3,7 +3,7 @@ package fr.unice.polytech.code.bots;
 import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.Ville;
-import fr.unice.polytech.code.personnages.Personnage;
+import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
@@ -31,6 +31,7 @@ public abstract class Bot {
         this.nbPoint = 0;
         this.premierJoueurAFinir= false;
         this.couleur = couleur;
+        this.affichage =affichage;
     }
 
     public String getNom() {
@@ -126,7 +127,7 @@ public abstract class Bot {
     public String cartesEnMainToString(){
         String cartes="";
         for(CarteCitadelles c : cartesCitadellesEnMain){
-            cartes+= c.getNom()+", ";
+            cartes+= c.getCouleur() + c.getNom()+ "\u001B[0m" +", ";
         }
         return cartes;
     }
@@ -143,6 +144,34 @@ public abstract class Bot {
             }
         }
         return quartierAConstruire;
+    }
+
+    Personnage listePersonnages(int chiffre){
+        if(chiffre == 0){
+            return new Assassin(affichage);
+        }
+        if(chiffre == 1){
+            return new Voleur(affichage);
+        }
+        if(chiffre == 2){
+            return new Magicien(affichage);
+        }
+        if(chiffre == 3){
+            return new Roi(affichage);
+        }
+        if(chiffre == 4){
+            return new Eveque(affichage);
+        }
+        if(chiffre == 5){
+            return new Marchand(affichage);
+        }
+        if(chiffre == 6){
+            return new Architecte(affichage);
+        }
+        if(chiffre == 7){
+            return new Condottiere(affichage);
+        }
+        return null;
     }
 
     public abstract void strategieConstruction(PiocheCartesCitadelles piocheCartesCitadelles);

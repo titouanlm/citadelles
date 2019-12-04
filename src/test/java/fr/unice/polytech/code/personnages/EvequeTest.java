@@ -18,8 +18,8 @@ public class EvequeTest {
         Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", null);
         Bot bot2 = new BotAleatoire("Bot 2","\033[33m", null);
 
-        bot1.setPersonnageACeTour(new Eveque());
-        bot2.setPersonnageACeTour(new Eveque());
+        bot1.setPersonnageACeTour(new Eveque(affichage));
+        bot2.setPersonnageACeTour(new Eveque(affichage));
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));

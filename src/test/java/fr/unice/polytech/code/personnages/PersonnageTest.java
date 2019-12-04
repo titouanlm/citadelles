@@ -21,19 +21,15 @@ class PersonnageTest {
         listeJoueurs.add(bot2);
         listeJoueurs.add(bot3);
 
-        bot1.setPersonnageACeTour(new Roi());
-        bot2.setPersonnageACeTour(new Marchand());
-        bot3.setPersonnageACeTour(new Eveque());
+        bot1.setPersonnageACeTour(new Roi(affichage));
+        bot2.setPersonnageACeTour(new Marchand(affichage));
+        bot3.setPersonnageACeTour(new Eveque(affichage));
 
-        assertEquals(bot1, bot1.getPersonnageACeTour().botQuiPossede(new Roi() , listeJoueurs));
-        assertEquals(bot2, bot1.getPersonnageACeTour().botQuiPossede(new Marchand() , listeJoueurs));
-        assertEquals(bot3, bot1.getPersonnageACeTour().botQuiPossede(new Eveque() , listeJoueurs));
+        assertEquals(bot1, bot1.getPersonnageACeTour().botQuiPossede(new Roi(affichage) , listeJoueurs));
+        assertEquals(bot2, bot1.getPersonnageACeTour().botQuiPossede(new Marchand(affichage) , listeJoueurs));
+        assertEquals(bot3, bot1.getPersonnageACeTour().botQuiPossede(new Eveque(affichage) , listeJoueurs));
         assertNull(bot1.getPersonnageACeTour().botQuiPossede(null, listeJoueurs));
 
     }
-
-
-
-
 
 }

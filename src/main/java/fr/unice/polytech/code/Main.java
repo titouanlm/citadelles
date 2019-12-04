@@ -25,12 +25,14 @@ public class Main {
             Bot bot2 = new BotFairPlay("Bot 2", "\033[34m",affichage);
             Bot bot3 = new BotAleatoire("Bot 3", "\033[36m",affichage);
             Bot bot4 = new BotAleatoire("Bot 4", "\033[33m",affichage);
+            Bot bot5 = new BotAleatoire("Bot 5", "\033[32m",affichage);
 
             ArrayList<Bot> listeJoueurs = new ArrayList<>();
             listeJoueurs.add(bot1);
             listeJoueurs.add(bot2);
             listeJoueurs.add(bot3);
             listeJoueurs.add(bot4);
+            listeJoueurs.add(bot5);
 
             Collections.shuffle(listeJoueurs);
             Moteur moteurJeu = new Moteur(listeJoueurs,affichage);

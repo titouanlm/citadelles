@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Moteur {
     private static PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
-    private PiocheCartesPersonnage piocheCartesPersonnage = new PiocheCartesPersonnage();
+    private PiocheCartesPersonnage piocheCartesPersonnage ;
     private ArrayList<Bot> listeJoueurs;
     private ArrayList<Tour> listeTours;
     private Affichage affichage;
@@ -19,6 +19,7 @@ public class Moteur {
         this.listeJoueurs = listeJoueurs;
         this.affichage=affichage;
         listeTours = new ArrayList<>();
+        piocheCartesPersonnage = new PiocheCartesPersonnage(this.affichage);
         piocheCartesCitadelles.implementerCartesCitadelles();
         piocheCartesPersonnage.implementerCartesPersonnage();
     }
@@ -37,22 +38,21 @@ public class Moteur {
 
     public void lancerUnePartie() {
         this.initialiserPartie();
-
         this.commencerPartie();
     }
 
     public void initialiserPartie() {
         affichage.afficherDetails("--------------------------------------------------");
-        affichage.afficherDetails( "\u001B[1m" + "\u001B[31m"  + "\t\t\t-- Debut de partie --" + "\u001B[0m");
+        affichage.afficherDetails( "\t\t\t-- Début de la partie --");
         affichage.afficherDetails("--------------------------------------------------");
-        affichage.afficherDetails("\u001B[1m" + "\u001B[34m"  + "\t\t\t Initialisation du jeu " +"\u001B[0m" +"\n" );
+        affichage.afficherDetails("\t\t\t Initialisation du jeu " +"\n" );
         for (Bot joueur : listeJoueurs) {
             joueur.ajouterPiece(2);
-            affichage.afficherDetails( "\u001B[1m" + "\u001B[32m" + "Le " + joueur.getNom() + "\u001B[21m" + "\u001B[0m" + " reçoit 2 pièces ");
+            affichage.afficherDetails(joueur.getCouleur() + joueur.getNom() +  " reçoit 2 pièces. " + "\u001B[0m");
             for (int j = 0; j < 4; j++) {
                 joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
             }
-            affichage.afficherDetails("\u001B[1m" + "\u001B[32m" + "Le " + joueur.getNom() + "\u001B[21m" + "\u001B[0m" +" reçoit les cartes de Quartier suivantes : ");
+            affichage.afficherDetails(joueur.getCouleur() + joueur.getNom() +" reçoit les cartes Citadelles suivantes : "+ "\u001B[0m" );
             affichage.afficherDetails( joueur.cartesEnMainToString() + "\n");
         }
     }
@@ -60,9 +60,7 @@ public class Moteur {
     public void commencerPartie() { //ici c'est plus le déroulement de tout les tours
         int cptTour = 1;
         while (true) {
-            affichage.afficherDetails("--------------------------------------------------");
-            affichage.afficherDetails("\u001B[1m" + "\u001B[34m"  + "\t\t\t\t Tour  " + cptTour + ":\t\t\t\t"+ "\u001B[0m" );
-            affichage.afficherDetails("--------------------------------------------------");
+            affichage.afficherDetails("\u001B[1m"+"*********************"  + " Tour " + cptTour + " ********************\n"+ "\u001B[0m");
             listeTours.add(new Tour(cptTour, piocheCartesCitadelles, piocheCartesPersonnage, listeJoueurs,affichage));
             if (!listeTours.get(cptTour - 1).lancerTour()) {
                 cptTour++;

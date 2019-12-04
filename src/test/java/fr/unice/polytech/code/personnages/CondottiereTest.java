@@ -21,8 +21,8 @@ class CondottiereTest {
         Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", affichage);
         Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
 
-        bot1.setPersonnageACeTour(new Condottiere());
-        bot2.setPersonnageACeTour(new Condottiere());
+        bot1.setPersonnageACeTour(new Condottiere(affichage));
+        bot2.setPersonnageACeTour(new Condottiere(affichage));
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
@@ -47,8 +47,8 @@ class CondottiereTest {
         Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", affichage);
         Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
 
-        bot1.setPersonnageACeTour(new Condottiere());
-        bot2.setPersonnageACeTour(new Marchand());
+        bot1.setPersonnageACeTour(new Condottiere(affichage));
+        bot2.setPersonnageACeTour(new Marchand(affichage));
 
         bot1.ajouterPiece(5);
 
@@ -98,8 +98,8 @@ class CondottiereTest {
         Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", affichage);
         Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
 
-        bot1.setPersonnageACeTour(new Condottiere());
-        bot2.setPersonnageACeTour(new Eveque());
+        bot1.setPersonnageACeTour(new Condottiere(affichage));
+        bot2.setPersonnageACeTour(new Eveque(affichage));
 
         bot1.ajouterPiece(5);
 
@@ -126,8 +126,8 @@ class CondottiereTest {
         Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", affichage);
         Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
 
-        bot1.setPersonnageACeTour(new Condottiere());
-        bot2.setPersonnageACeTour(new Marchand());
+        bot1.setPersonnageACeTour(new Condottiere(affichage));
+        bot2.setPersonnageACeTour(new Marchand(affichage));
 
         bot1.ajouterPiece(5);
 
@@ -152,8 +152,8 @@ class CondottiereTest {
         Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", affichage);
         Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
 
-        bot1.setPersonnageACeTour(new Condottiere());
-        bot2.setPersonnageACeTour(new Marchand());
+        bot1.setPersonnageACeTour(new Condottiere(affichage));
+        bot2.setPersonnageACeTour(new Marchand(affichage));
 
         bot1.ajouterPiece(5);
 

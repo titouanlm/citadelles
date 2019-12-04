@@ -1,5 +1,6 @@
 package fr.unice.polytech.code.personnages;
 
+import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.*;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
@@ -11,7 +12,8 @@ import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 public class Architecte extends Personnage {
 
-    public Architecte(){
+    public Architecte(Affichage affichage){
+        super(affichage);
         this.numero = 7;
         this.nom = "Architecte";
     }

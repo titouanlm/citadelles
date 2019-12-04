@@ -60,7 +60,7 @@ public class CarteCitadellesAvecPouvoirTest {
     @Test
     void carteEcoleDeMagieTest(){
         Bot bot1 = new BotAleatoire("Bot 1", "\033[32m",affichage);
-        bot1.setPersonnageACeTour(new Roi());
+        bot1.setPersonnageACeTour(new Roi(affichage));
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
         bot1.getVilleDuBot().construireBatiment(new EcoleDeMagie(63,CouleurCarteCitadelles.VIOLET, "École de magie", 6 ));
@@ -99,8 +99,8 @@ public class CarteCitadellesAvecPouvoirTest {
         Bot bot1 = new BotFairPlay("Bot 1", "\033[32m", affichage);
         Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
 
-        bot1.setPersonnageACeTour(new Condottiere());
-        bot2.setPersonnageACeTour(new Marchand());
+        bot1.setPersonnageACeTour(new Condottiere(affichage));
+        bot2.setPersonnageACeTour(new Marchand(affichage));
 
         bot1.ajouterPiece(15);
         bot2.ajouterPiece(5);
@@ -113,11 +113,7 @@ public class CarteCitadellesAvecPouvoirTest {
         bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Comptoir", 3));
         bot2.ajouterCartesCitadellesDansMain(new Cimitiere(61,CouleurCarteCitadelles.VIOLET, "Cimitière", 5 ));
 
-
-
-
         ((Condottiere) bot1.getPersonnageACeTour()).detruirePlusGrosQuartierEnemie(bot1, bot2);
-
 
         assertEquals(1,bot2.getVilleDuBot().getNbBatimentsConstruits());
         assertEquals(4,bot2.getCartesCitadellesEnMain().size());
@@ -129,8 +125,8 @@ public class CarteCitadellesAvecPouvoirTest {
         Bot bot1 = new BotFairPlay("Bot 1", "\033[32m", affichage);
         Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
 
-        bot1.setPersonnageACeTour(new Condottiere());
-        bot2.setPersonnageACeTour(new Marchand());
+        bot1.setPersonnageACeTour(new Condottiere(affichage));
+        bot2.setPersonnageACeTour(new Marchand(affichage));
 
         bot1.ajouterPiece(15);
         bot2.ajouterPiece(5);
@@ -143,11 +139,7 @@ public class CarteCitadellesAvecPouvoirTest {
         bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Comptoir", 3));
         bot2.ajouterCartesCitadellesDansMain(new Cimitiere(61,CouleurCarteCitadelles.VIOLET, "Cimitière", 5 ));
 
-
-
-
         ((Condottiere) bot1.getPersonnageACeTour()).detruireQuartierAleatoireEnemie(bot1, bot2);
-
 
         assertEquals(1,bot2.getVilleDuBot().getNbBatimentsConstruits());
         assertEquals(4,bot2.getCartesCitadellesEnMain().size());
@@ -159,8 +151,8 @@ public class CarteCitadellesAvecPouvoirTest {
         Bot bot1 = new BotFairPlay("Bot 1", "\033[32m", affichage);
         Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
 
-        bot1.setPersonnageACeTour(new Condottiere());
-        bot2.setPersonnageACeTour(new Marchand());
+        bot1.setPersonnageACeTour(new Condottiere(affichage));
+        bot2.setPersonnageACeTour(new Marchand(affichage));
 
         bot1.ajouterPiece(15);
         bot2.ajouterPiece(5);
@@ -172,11 +164,7 @@ public class CarteCitadellesAvecPouvoirTest {
         bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
         bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Comptoir", 3));
 
-
-
-
         ((Condottiere) bot1.getPersonnageACeTour()).detruirePlusPetitQuartierEnemie(bot1, bot2);
-
 
         assertEquals(1,bot2.getVilleDuBot().getNbBatimentsConstruits());
         assertEquals(2,bot2.getCartesCitadellesEnMain().size());
@@ -195,7 +183,7 @@ public class CarteCitadellesAvecPouvoirTest {
         piocheCartesCitadelles.implementerCartesCitadelles();
         bot1.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
 
-        assertEquals(5,bot1.cartesCitadellesEnMain.size());
+        assertEquals(6,bot1.cartesCitadellesEnMain.size());
 
     }
 

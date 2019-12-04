@@ -1,5 +1,6 @@
 package fr.unice.polytech.code.personnages;
 
+import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.*;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
@@ -8,27 +9,24 @@ import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 import java.util.Iterator;
 
-/**
- * Cette classe sert à implémenter le pouvoir du Condottiere
- * Il reçoit une pièce d'or par quartier militaire (rouge) dans sa cité
- * À la fin de son tour, il peut attaquer une cité pour y détruire un quartier de son choix.
- * Il peut détruire gratuitement un quartier de coût 1, ou peut détruire un quartier au coût plus élevé en payant le coût de ce quartier - 1
- * Il ne peut pas attaquer une cité déjà terminée, avec ses huit quartiers.
- */
-
 public class Condottiere extends Personnage {
 
-    public Condottiere(){
+    public Condottiere(Affichage affichage){
+        super(affichage);
         this.numero =8;
         this.nom = "Condottiere";
     }
 
     public void effectuerSpecialiteCondottiere(Bot joueurQuiEffectueAction){
+        int nbPieceGagnee=0;
         for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
             if(c.getCouleur()== CouleurCarteCitadelles.ROUGE){
                 joueurQuiEffectueAction.ajouterPiece(1);
+                nbPieceGagnee++;
             }
         }
+        affichage.afficherDetails("Récupère " + nbPieceGagnee + " pièces bonus grâce aux quartiers militaires.");
+
     }
 
     public void detruirePlusGrosQuartierEnemie(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction){
@@ -43,9 +41,10 @@ public class Condottiere extends Personnage {
                 }
             }
             if(quartierADetruire!=null){
+                int coutDestruction = quartierADetruire.getPoint()-1;
                 joueurQuiSubitAction.getVilleDuBot().detruireQuartier(quartierADetruire);
-                joueurQuiEffectueAction.retirerPiece(quartierADetruire.getPoint()-1);
-
+                joueurQuiEffectueAction.retirerPiece(coutDestruction);
+                affichage.afficherDetails("Détruit le quartier " + quartierADetruire.getNom() + " de " + joueurQuiSubitAction.getNom() + " pour " + coutDestruction + " pièces.");
                 if (joueurQuiSubitAction.contientDansSaMain("Cimitière") && !(joueurQuiSubitAction.getPersonnageACeTour() instanceof Condottiere) ){
                     joueurQuiSubitAction.retirerPiece(1);
                     joueurQuiSubitAction.ajouterCartesCitadellesDansMain(quartierADetruire);
@@ -64,6 +63,8 @@ public class Condottiere extends Personnage {
                 if(coutDestruction<=joueurQuiEffectueAction.getNbPiece() && !(quartierADetruire instanceof Donjon)){
                     joueurQuiSubitAction.getVilleDuBot().detruireQuartier(quartierADetruire);
                     joueurQuiEffectueAction.retirerPiece(coutDestruction);
+                    affichage.afficherDetails("Détruit le quartier " + quartierADetruire.getNom() + " de " + joueurQuiSubitAction.getNom() + " pour " + coutDestruction + " pièces.");
+
                 }
                 if (quartierADetruire!=null){
                     if (joueurQuiSubitAction.contientDansSaMain("Cimitière") && !(joueurQuiSubitAction.getPersonnageACeTour() instanceof Condottiere) ){
@@ -86,8 +87,10 @@ public class Condottiere extends Personnage {
                 }
             }
             if(quartierADetruire!=null && !(quartierADetruire instanceof Donjon)){
+                int coutDestruction =quartierADetruire.getPoint()-1;
                 joueurQuiSubitAction.getVilleDuBot().detruireQuartier(quartierADetruire);
-                joueurQuiEffectueAction.retirerPiece(quartierADetruire.getPoint()-1);
+                joueurQuiEffectueAction.retirerPiece(coutDestruction);
+                affichage.afficherDetails("Détruit le quartier " + quartierADetruire.getNom() + " de " + joueurQuiSubitAction.getNom() + " pour " + coutDestruction + " pièces.");
             }
             if (quartierADetruire!=null){
                 if (joueurQuiSubitAction.contientDansSaMain("Cimitière") && !(joueurQuiSubitAction.getPersonnageACeTour() instanceof Condottiere) ){

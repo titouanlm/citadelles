@@ -19,7 +19,7 @@ public class Affichage {
 
     public Affichage(int nbParties) {
         this.nbParties=nbParties;
-        for (int i=1;i<5;i++){
+        for (int i=1;i<6;i++){
             mapJoueurs.put("Bot "+i,new int[2]);
         }
         this.modeDetails=false;

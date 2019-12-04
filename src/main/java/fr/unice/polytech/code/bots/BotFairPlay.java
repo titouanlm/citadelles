@@ -25,6 +25,7 @@ public class BotFairPlay extends Bot {
             this.retirerPiece(carteEnMainDePlusHauteValeur.getPoint());
             this.villeDuBot.construireBatiment(carteEnMainDePlusHauteValeur);
             this.cartesCitadellesEnMain.remove(carteEnMainDePlusHauteValeur);
+            affichage.afficherDetails(this.getCouleur() + "Construit le quartier " + carteEnMainDePlusHauteValeur.getCouleur() + carteEnMainDePlusHauteValeur.getNom() + "\u001B[0m" + this.getCouleur() + " dans sa ville.");
         }
     }
 
@@ -37,13 +38,17 @@ public class BotFairPlay extends Bot {
     public void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (this.determinerChoixPiocherOuPiece(piocheCartesCitadelles) == 1) {
             this.ajouterPiece(2);
+            affichage.afficherDetails("Choisit de prendre 2 pièces.");
         } else {
             CarteCitadelles carteChoisie;
             CarteCitadelles carteChoisie1;
             CarteCitadelles cartePiochee1 = piocheCartesCitadelles.piocher();
             CarteCitadelles cartePiochee2 = piocheCartesCitadelles.piocher();
 
+
             if(cartePiochee2!=null){
+                affichage.afficherDetails("Pioche 2 cartes : " + cartePiochee1.getNom() + " et " + cartePiochee2.getNom());
+
                 if(this.contientDansSaMain("Bibliothèque")) {
                     this.ajouterCartesCitadellesDansMain(cartePiochee1);
                     this.ajouterCartesCitadellesDansMain(cartePiochee2);
@@ -131,45 +136,31 @@ public class BotFairPlay extends Bot {
                 }
             }else{
                 carteChoisie=cartePiochee1;
-                this.ajouterCartesCitadellesDansMain(carteChoisie);
             }
+            this.ajouterCartesCitadellesDansMain(carteChoisie);
+            affichage.afficherDetails("Choisit de prendre : " + carteChoisie.getNom());
         }
     }
 
     @Override
     public void strategieAssassin(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
-        int personnageAssassiner;
-        Personnage personnageAAssassiner=null;
+        int indicePersonnageAssassiner;
         do{
-            personnageAssassiner = (int)(Math.random()*8);
-        }while(personnageAssassiner == this.getPersonnageACeTour().getNumero() && personnageAssassiner!=personnageDefausse.getNumero());
-        for (int i=0;i<listeJoueurs.size();i++){
-            if (listeJoueurs.get(i).getPersonnageACeTour().getNumero()==personnageAssassiner){
-                personnageAAssassiner = listeJoueurs.get(i).getPersonnageACeTour();
-            }
-        }
-        Personnage assassin = this.getPersonnageACeTour();
-        if (personnageAAssassiner!=null){
-            ((Assassin) assassin).effectuerSpecialiteAssassin(personnageAAssassiner, listeJoueurs);
-        }
+            indicePersonnageAssassiner = (int)(Math.random()*8);
+        }while(indicePersonnageAssassiner == this.getPersonnageACeTour().getNumero() || (indicePersonnageAssassiner+1)==personnageDefausse.getNumero());
+
+        Personnage p = this.getPersonnageACeTour();
+        ((Assassin) p).effectuerSpecialiteAssassin( this.listePersonnages(indicePersonnageAssassiner), listeJoueurs);
     }
 
     @Override
     public void strategieVoleur(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
         int indicePersonnageAVoler;
-        Personnage personnageAVoler=null;
         do{
             indicePersonnageAVoler = (int)(Math.random()*8);
-        }while(indicePersonnageAVoler == this.getPersonnageACeTour().getNumero() && indicePersonnageAVoler!=personnageDefausse.getNumero());
-        for (int i=0;i<listeJoueurs.size();i++){
-            if (listeJoueurs.get(i).getPersonnageACeTour()!=null && listeJoueurs.get(i).getPersonnageACeTour().getNumero()==indicePersonnageAVoler){
-                personnageAVoler = listeJoueurs.get(i).getPersonnageACeTour();
-            }
-        }
-        Personnage voleur = this.getPersonnageACeTour();
-        if (personnageAVoler!=null){
-            ((Voleur) voleur).effectuerSpecialiteVoleur(this, personnageAVoler, listeJoueurs);
-        }
+        }while(indicePersonnageAVoler == this.getPersonnageACeTour().getNumero() || indicePersonnageAVoler == 0 || (indicePersonnageAVoler+1)==personnageDefausse.getNumero());
+        Personnage p = this.getPersonnageACeTour();
+        ((Voleur) p).effectuerSpecialiteVoleur(this, this.listePersonnages(indicePersonnageAVoler), listeJoueurs);
     }
 
     @Override
@@ -190,7 +181,7 @@ public class BotFairPlay extends Bot {
             }
         }
         if (nombreCarteMaxMainPersonne > 3) {
-            ((Magicien) magicien).echangerCartesAvecUnPersonnage(this, listeJoueurs.get(b));
+            ((Magicien) magicien).echangerCartesAvecUnJoueur(this, listeJoueurs.get(b));
         }
         else {
             ((Magicien) magicien).echangerCartesAvecPioche(this, pioche, cartesAEchanger);

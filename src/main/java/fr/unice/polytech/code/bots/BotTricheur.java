@@ -23,6 +23,7 @@ public class BotTricheur extends Bot {
             this.retirerPiece(carteEnMainDePlusHauteValeur.getPoint());
             this.villeDuBot.construireBatiment(carteEnMainDePlusHauteValeur);
             this.cartesCitadellesEnMain.remove(carteEnMainDePlusHauteValeur);
+            affichage.afficherDetails(this.getCouleur() + "Construit le quartier " + carteEnMainDePlusHauteValeur.getCouleur() + carteEnMainDePlusHauteValeur.getNom() + "\u001B[0m" + this.getCouleur() + " dans sa ville.");
         }
     }
 
@@ -35,13 +36,13 @@ public class BotTricheur extends Bot {
     public void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (this.determinerChoixPiocherOuPiece(piocheCartesCitadelles) == 1) {
             this.ajouterPiece(2);
+            affichage.afficherDetails("Choisit de prendre 2 pièces.");
         } else {
             CarteCitadelles cartePiochee1 = piocheCartesCitadelles.piocher();
             CarteCitadelles cartePiochee2 = piocheCartesCitadelles.piocher();
-
+            CarteCitadelles carteChoisie;
             if(cartePiochee2!=null){
-                CarteCitadelles carteChoisie;
-
+                affichage.afficherDetails("Pioche 2 cartes : " + cartePiochee1.getNom() + " et " + cartePiochee2.getNom());
                 // On teste si le joueur n'a pas déjà construit les quartiers ou les possède déjà dans sa main
                 if(!this.getVilleDuBot().contient(cartePiochee1) && !this.getVilleDuBot().contient(cartePiochee2) &&
                         !this.contientDansSaMain(cartePiochee1) && !this.contientDansSaMain(cartePiochee2)){
@@ -63,8 +64,6 @@ public class BotTricheur extends Bot {
                     carteChoisie=cartePiochee1;
                 }
 
-                this.ajouterCartesCitadellesDansMain(carteChoisie);
-
                 //On remet dans la pioche la carte que l'on a pas choisi
                 if(carteChoisie==cartePiochee1){
                     piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee2);
@@ -72,8 +71,11 @@ public class BotTricheur extends Bot {
                     piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee1);
                 }
             }else{
-                this.ajouterCartesCitadellesDansMain(cartePiochee1);
+                carteChoisie=cartePiochee1;
             }
+            this.ajouterCartesCitadellesDansMain(carteChoisie);
+
+            affichage.afficherDetails("Choisit de prendre : " + carteChoisie.getNom());
         }
     }
 
@@ -82,7 +84,7 @@ public class BotTricheur extends Bot {
         Bot botQueLonVaAssassiner= null;
         int joueurMaxPoint = -1;
         for(Bot b : listeJoueurs){
-            if (b.getNbPoint() > joueurMaxPoint) {
+            if (b.getNbPoint() > joueurMaxPoint && b != this) {
                 joueurMaxPoint = b.getNbPoint();
                 botQueLonVaAssassiner = b;
             }
@@ -127,7 +129,7 @@ public class BotTricheur extends Bot {
             }
         }
         if (nombrePointsCarteMaxMainPersonne > 10) {
-            ((Magicien) magicien).echangerCartesAvecUnPersonnage(this, listeJoueurs.get(b));
+            ((Magicien) magicien).echangerCartesAvecUnJoueur(this, listeJoueurs.get(b));
         }
         else {
             ((Magicien) magicien).echangerCartesAvecPioche(this, pioche, cartesAEchanger);

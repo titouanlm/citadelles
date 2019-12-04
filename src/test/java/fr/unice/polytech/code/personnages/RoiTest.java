@@ -17,8 +17,8 @@ class RoiTest {
         Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", null);
         Bot bot2 = new BotAleatoire("Bot 2","\033[33m", null);
 
-        bot1.setPersonnageACeTour(new Roi());
-        bot2.setPersonnageACeTour(new Roi());
+        bot1.setPersonnageACeTour(new Roi(affichage));
+        bot2.setPersonnageACeTour(new Roi(affichage));
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(15, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));

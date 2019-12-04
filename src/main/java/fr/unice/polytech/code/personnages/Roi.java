@@ -1,5 +1,6 @@
 package fr.unice.polytech.code.personnages;
 
+import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.*;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
@@ -12,16 +13,20 @@ import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 public class Roi extends Personnage {
 
-    public Roi(){
+    public Roi(Affichage affichage){
+        super(affichage);
         this.numero =4;
         this.nom = "Roi";
     }
 
     public void effectuerSpecialiteRoi(Bot joueurQuiEffectueAction) {
+        int nbPieceGagnee=0;
         for(CarteCitadelles c : joueurQuiEffectueAction.getVilleDuBot().getBatimentsConstruits()){
             if(c.getCouleur()== CouleurCarteCitadelles.JAUNE){
                 joueurQuiEffectueAction.ajouterPiece(1);
+                nbPieceGagnee++;
             }
         }
+        affichage.afficherDetails("Récupère " + nbPieceGagnee + " pièces bonus grâce aux quartiers nobles.");
     }
 }

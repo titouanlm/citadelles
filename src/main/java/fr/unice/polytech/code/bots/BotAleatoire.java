@@ -23,6 +23,7 @@ public class BotAleatoire extends Bot {
                 retirerPiece(carteEnMain.getPoint()); //on retire les pieces
                 villeDuBot.construireBatiment(carteEnMain); //on ajoute la carte dans la ville
                 cartesCitadellesEnMain.remove(carteEnMain); //on retire la carte de la main
+                affichage.afficherDetails(this.getCouleur() + "Construit le quartier " + carteEnMain.getCouleur() + carteEnMain.getNom() + "\u001B[0m" + this.getCouleur() + " dans sa ville.");
                 break;
             }
         }
@@ -38,55 +39,59 @@ public class BotAleatoire extends Bot {
     public void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles) { //Non aléatoire
         if (this.determinerChoixPiocherOuPiece(piocheCartesCitadelles) == 1) {
             this.ajouterPiece(2);
+            affichage.afficherDetails("Choisit de prendre 2 pièces.");
         } else {
-            CarteCitadelles cartePrise = piocheCartesCitadelles.piocher();
-            this.ajouterCartesCitadellesDansMain(cartePrise);
+            CarteCitadelles cartePiochee1 = piocheCartesCitadelles.piocher();
+            CarteCitadelles cartePiochee2 = piocheCartesCitadelles.piocher();
+
+            affichage.afficherDetails("Pioche 2 cartes : " + cartePiochee1.getNom() + " et " + cartePiochee2.getNom());
+            CarteCitadelles carteChoisie;
+
+            if(cartePiochee2!=null){
+                int choix = (int) (Math.random() * 2);
+                if(choix==0){
+                    carteChoisie = cartePiochee1;
+                    piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee2);
+                }else{
+                    carteChoisie = cartePiochee2;
+                    piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee1);
+                }
+            }else{
+                carteChoisie=cartePiochee1;
+            }
+
+            this.ajouterCartesCitadellesDansMain(carteChoisie);
+            affichage.afficherDetails("Choisit de prendre : " + carteChoisie.getNom());
         }
     }
-
-    /** Changer le fonctionnement pour viser un personnage et non pas un joueur */
 
     @Override
     public void strategieAssassin(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
         int personnageAssassiner;
-        Personnage personnageAAssassiner=null;
         do{
             personnageAssassiner = (int)(Math.random()*8);
         }while(personnageAssassiner == this.getPersonnageACeTour().getNumero());
-        for (int i=0;i<listeJoueurs.size();i++){
-            if (listeJoueurs.get(i).getPersonnageACeTour().getNumero()==personnageAssassiner){
-                personnageAAssassiner = listeJoueurs.get(i).getPersonnageACeTour();
-            }
-        }
-        Personnage assassin = this.getPersonnageACeTour();
-        if (personnageAAssassiner!=null){
-            ((Assassin) assassin).effectuerSpecialiteAssassin(personnageAAssassiner, listeJoueurs);
-        }
+
+        Personnage p = this.getPersonnageACeTour();
+        ((Assassin) p).effectuerSpecialiteAssassin( this.listePersonnages(personnageAssassiner), listeJoueurs);
     }
 
     @Override
     public void strategieVoleur(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
         int indicePersonnageAVoler;
-        Personnage personnageAVoler=null;
         do{
             indicePersonnageAVoler = (int)(Math.random()*8);
-        }while(indicePersonnageAVoler == this.getPersonnageACeTour().getNumero());
-        for (int i=0;i<listeJoueurs.size();i++){
-            if (listeJoueurs.get(i).getPersonnageACeTour()!=null && listeJoueurs.get(i).getPersonnageACeTour().getNumero()==indicePersonnageAVoler){
-                personnageAVoler = listeJoueurs.get(i).getPersonnageACeTour();
-            }
-        }
-        Personnage voleur = this.getPersonnageACeTour();
-        if (personnageAVoler!=null){
-            ((Voleur) voleur).effectuerSpecialiteVoleur(this, personnageAVoler, listeJoueurs);
-        }
+        }while(indicePersonnageAVoler == this.getPersonnageACeTour().getNumero() || indicePersonnageAVoler == 0); // 0 numéro Associé à l'Assassin
+
+        Personnage p = this.getPersonnageACeTour();
+        ((Voleur) p).effectuerSpecialiteVoleur( this, this.listePersonnages(indicePersonnageAVoler), listeJoueurs);
     }
 
     @Override
     public void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles pioche) {
         Personnage magicien = this.getPersonnageACeTour();
         if ((int) (Math.random() * 2) == 0) {
-            ((Magicien) magicien).echangerCartesAvecUnPersonnage(this, listeJoueurs.get((int) (Math.random() * listeJoueurs.size())));
+            ((Magicien) magicien).echangerCartesAvecUnJoueur(this, listeJoueurs.get((int) (Math.random() * listeJoueurs.size())));
         }else {
             int nombreCartesAleatoireAEchanger= (int) (Math.random() * this.getCartesCitadellesEnMain().size());
             ArrayList<CarteCitadelles> cartesAEchanger = new ArrayList<>();

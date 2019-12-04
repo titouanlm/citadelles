@@ -24,9 +24,9 @@ class AssassinTest {
         listeJoueurs.add(bot2);
         listeJoueurs.add(bot3);
 
-        bot1.setPersonnageACeTour(new Assassin());
-        bot2.setPersonnageACeTour(new Magicien());
-        bot3.setPersonnageACeTour(new Voleur());
+        bot1.setPersonnageACeTour(new Assassin(affichage));
+        bot2.setPersonnageACeTour(new Magicien(affichage));
+        bot3.setPersonnageACeTour(new Voleur(affichage));
 
         assertNotNull(bot1.getPersonnageACeTour());
         assertNotNull(bot2.getPersonnageACeTour());
@@ -34,7 +34,7 @@ class AssassinTest {
 
         if(bot1.getPersonnageACeTour() instanceof Assassin){
             ((Assassin) bot1.getPersonnageACeTour()).effectuerSpecialiteAssassin(bot1.getPersonnageACeTour(), listeJoueurs);
-            ((Assassin) bot1.getPersonnageACeTour()).effectuerSpecialiteAssassin(new Magicien(), listeJoueurs);
+            ((Assassin) bot1.getPersonnageACeTour()).effectuerSpecialiteAssassin(new Magicien(affichage), listeJoueurs);
             ((Assassin) bot1.getPersonnageACeTour()).effectuerSpecialiteAssassin(null, listeJoueurs);
         }
 

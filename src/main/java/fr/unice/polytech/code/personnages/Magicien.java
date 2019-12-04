@@ -2,6 +2,8 @@ package fr.unice.polytech.code.personnages;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
+
+import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.*;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
@@ -15,12 +17,13 @@ import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 public class Magicien extends Personnage {
 
-    public Magicien(){
+    public Magicien(Affichage affichage){
+        super(affichage);
         this.numero = 3;
         this.nom = "Magicien";
     }
 
-    public void echangerCartesAvecUnPersonnage(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction){
+    public void echangerCartesAvecUnJoueur(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction){
         if(joueurQuiEffectueAction.getPersonnageACeTour() instanceof Magicien && joueurQuiSubitAction!=joueurQuiEffectueAction){
             //Ajoute les cartes de la victime dans une liste temporaire
             ArrayList<CarteCitadelles> carteEnMainDeVictime = new ArrayList<>(joueurQuiSubitAction.getCartesCitadellesEnMain());
@@ -32,11 +35,19 @@ public class Magicien extends Personnage {
             joueurQuiEffectueAction.getCartesCitadellesEnMain().clear();
             //Ajoute les cartes du bot victime dans le deck du bot ayant le magicien
             joueurQuiEffectueAction.getCartesCitadellesEnMain().addAll(carteEnMainDeVictime);
+
+            affichage.afficherDetails("Echange son deck avec le deck de " + joueurQuiSubitAction.getNom());
         }
     }
 
     public void echangerCartesAvecPioche(Bot joueurQuiEffectueAction, PiocheCartesCitadelles piocheCartesCitadelles, ArrayList<CarteCitadelles> cartesAEchanger) {
         int nbCartesAPiocher = cartesAEchanger.size();
+        if(nbCartesAPiocher>0){
+            affichage.afficherDetails("Echange avec la pioche les cartes : ");
+            for (CarteCitadelles c : cartesAEchanger){
+                affichage.afficherDetails(c.getNom()+", ");
+            }
+        }
         if(joueurQuiEffectueAction.getPersonnageACeTour() instanceof Magicien && piocheCartesCitadelles.nbCartesRestantes()>= nbCartesAPiocher) {
             //On rajoute en fin de pioche les cartes qu'on a retiré
             for(CarteCitadelles c : cartesAEchanger){
