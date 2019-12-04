@@ -1,10 +1,12 @@
-package fr.unice.polytech.code;
+package fr.unice.polytech.code.cartes;
 
+import fr.unice.polytech.code.Affichage;
+import fr.unice.polytech.code.Arbitre;
+import fr.unice.polytech.code.Ville;
 import fr.unice.polytech.code.bots.Bot;
 import fr.unice.polytech.code.bots.BotAleatoire;
 import fr.unice.polytech.code.bots.BotFairPlay;
 import fr.unice.polytech.code.cartes.*;
-import fr.unice.polytech.code.moteur.Moteur;
 import fr.unice.polytech.code.personnages.Condottiere;
 import fr.unice.polytech.code.personnages.Marchand;
 import fr.unice.polytech.code.personnages.Roi;
@@ -14,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static junit.framework.TestCase.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class CarteCitadellesAvecPouvoirTest {
     PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();

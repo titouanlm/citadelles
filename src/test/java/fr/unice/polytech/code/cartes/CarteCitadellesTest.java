@@ -1,4 +1,4 @@
-package fr.unice.polytech.code;
+package fr.unice.polytech.code.cartes;
 
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.cartes.CarteCitadellesSansPouvoir;

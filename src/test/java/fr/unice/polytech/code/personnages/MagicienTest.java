@@ -2,14 +2,11 @@ package fr.unice.polytech.code.personnages;
 
 import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.Bot;
-import fr.unice.polytech.code.bots.BotAleatoire;
 import fr.unice.polytech.code.bots.BotFairPlay;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.cartes.CarteCitadellesSansPouvoir;
 import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import fr.unice.polytech.code.cartes.Donjon;
-import fr.unice.polytech.code.personnages.Eveque;
-import fr.unice.polytech.code.personnages.Magicien;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import org.junit.jupiter.api.Test;
 

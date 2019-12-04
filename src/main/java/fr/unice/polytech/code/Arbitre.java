@@ -9,11 +9,11 @@ import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 import java.util.ArrayList;
 
-class Arbitre {
+public class Arbitre {
     private Bot joueurGagnant;
     private Affichage affichage;
 
-    Arbitre(Affichage affichage){
+    public Arbitre(Affichage affichage){
         joueurGagnant = null;
         this.affichage = affichage;
     }
@@ -22,7 +22,7 @@ class Arbitre {
         return joueurGagnant;
     }
 
-    void compteLesPoints(ArrayList<Bot> listeJoueurs){
+    public void compteLesPoints(ArrayList<Bot> listeJoueurs){
         for (Bot joueur : listeJoueurs) {
             joueur.setNbPoint(joueur.getVilleDuBot().getNbTotalPoint());
             this.testBonusPremierJoueurAFinir(joueur);
