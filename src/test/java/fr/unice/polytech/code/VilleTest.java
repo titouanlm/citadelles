@@ -130,8 +130,13 @@ public class VilleTest {
         bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
         bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(19, CouleurCarteCitadelles.JAUNE, "Château", 4));
 
-        //assertEquals("[33mManoir\u001B[0m, \u001B[33mChâteau\u001B[0m, \u001B[32mÉchoppe\u001B[0m, ",bot1.getVilleDuBot().quartiersVilleToString());
-       // assertEquals("Forteresse, Taverne, Château, ",bot2.getVilleDuBot().quartiersVilleToString());
+        assertTrue(bot1.getVilleDuBot().quartiersVilleToString().contains("Manoir"));
+        assertTrue(bot1.getVilleDuBot().quartiersVilleToString().contains("Château"));
+        assertTrue(bot1.getVilleDuBot().quartiersVilleToString().contains("Échoppe"));
+        assertFalse((bot1.getVilleDuBot().quartiersVilleToString().contains("Taverne")));
+        assertTrue(bot2.getVilleDuBot().quartiersVilleToString().contains("Forteresse"));
+        assertTrue(bot2.getVilleDuBot().quartiersVilleToString().contains("Château"));
+        assertTrue(bot2.getVilleDuBot().quartiersVilleToString().contains("Taverne"));
     }
 
     @Test
