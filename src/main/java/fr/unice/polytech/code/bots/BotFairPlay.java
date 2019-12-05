@@ -67,13 +67,15 @@ public class BotFairPlay extends Bot {
     @Override
     public void strategieMagicien(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles pioche) {
         Personnage magicien = this.getPersonnageACeTour();
-        int nombreCarteMaxMainPersonne = 0;
+        int nombreCarteMaxMainPersonne = -1;
         int b=0;
         ArrayList<CarteCitadelles> cartesAEchanger = new ArrayList<>();
         for (int i =0 ; i < listeJoueurs.size(); i++) {
-            if (nombreCarteMaxMainPersonne < listeJoueurs.get(i).getCartesCitadellesEnMain().size()) {
-                nombreCarteMaxMainPersonne = listeJoueurs.get(i).getCartesCitadellesEnMain().size();
-                b=i;
+            if (listeJoueurs.get(i) != this) {
+                if (listeJoueurs.get(i).getCartesCitadellesEnMain().size() > nombreCarteMaxMainPersonne) {
+                    nombreCarteMaxMainPersonne=listeJoueurs.get(i).getCartesCitadellesEnMain().size();
+                    b = i;
+                }
             }
         }
         for (int p = 0; p < this.getCartesCitadellesEnMain().size(); p++) {
@@ -81,7 +83,7 @@ public class BotFairPlay extends Bot {
                 cartesAEchanger.add(this.getCartesCitadellesEnMain().get(p));
             }
         }
-        if (nombreCarteMaxMainPersonne > 3) {
+        if (nombreCarteMaxMainPersonne > 10) {
             ((Magicien) magicien).echangerCartesAvecUnJoueur(this, listeJoueurs.get(b));
         }
         else {

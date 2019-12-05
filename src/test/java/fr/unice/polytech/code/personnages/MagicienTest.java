@@ -38,7 +38,8 @@ class MagicienTest {
         if(bot2.getPersonnageACeTour() instanceof Magicien){
             ((Magicien)bot2.getPersonnageACeTour()).echangerCartesAvecUnJoueur(bot2,bot1);
         }
-
+        System.out.println(bot1.getCartesCitadellesEnMain().size());
+        System.out.println(bot2.getCartesCitadellesEnMain().size());
         assertNotEquals(deckBot1, bot1.getCartesCitadellesEnMain());
         assertEquals(deckBot1,bot2.getCartesCitadellesEnMain());
     }

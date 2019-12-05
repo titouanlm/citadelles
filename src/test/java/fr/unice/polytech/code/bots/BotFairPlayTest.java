@@ -15,7 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class BotTricheurTest {
+public class BotFairPlayTest {
+
 
     PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
     Affichage affichage  = new Affichage(1);
@@ -105,29 +106,28 @@ public class BotTricheurTest {
     public void strategieVoleur(){
         listeJoueurs.add(bot4);
         bot1.ajouterPiece(10);
-        bot2.ajouterPiece(30);
+        bot2.ajouterPiece(0);
         bot3.ajouterPiece(40);
-        bot1.setPersonnageACeTour(new Voleur(affichage));
-        bot2.setPersonnageACeTour(new Condottiere(affichage));
+        bot1.setPersonnageACeTour(new Condottiere(affichage));
+        bot2.setPersonnageACeTour(new Voleur(affichage));
         bot3.setPersonnageACeTour(new Marchand(affichage));
         when(bot4.getPersonnageACeTour()).thenReturn(new Assassin(affichage));
-        bot1.strategieVoleur(listeJoueurs,null);
-        assertEquals(50, bot1.getNbPiece());
-        assertEquals(30, bot2.getNbPiece());
-        assertEquals(0, bot3.getNbPiece());
+        bot2.strategieVoleur(listeJoueurs,new Eveque(affichage));
+        assertNotEquals(0,bot2.getNbPiece());
     }
 
     @Test
     public void strategieAssassin(){
-        bot1.setNbPoint(10);
-        bot2.setNbPoint(20);
-        bot3.setNbPoint(30);
-        bot1.setPersonnageACeTour(new Assassin(affichage));
-        bot2.setPersonnageACeTour(new Condottiere(affichage));
+        bot2.setPersonnageACeTour(new Assassin(affichage));
+        bot1.setPersonnageACeTour(new Condottiere(affichage));
         bot3.setPersonnageACeTour(new Architecte(affichage));
-        bot1.strategieAssassin(listeJoueurs,null);
-        assertEquals(bot3.getPersonnageACeTour(),null);
-        assertSame("Condottiere", bot2.getPersonnageACeTour().getNom());
+        bot2.strategieAssassin(listeJoueurs,new Marchand(affichage));
+        if (bot1.getPersonnageACeTour().getNom()!=null) {
+            assertSame("Condottiere", bot1.getPersonnageACeTour().getNom());
+        }
+        else {
+            assertSame("Architecte", bot3.getPersonnageACeTour().getNom());
+        }
     }
 
     @Test
@@ -149,73 +149,73 @@ public class BotTricheurTest {
 
     @Test
     public void strategieRoi(){
-        bot1.setPersonnageACeTour(new Roi(affichage));
-        bot1.villeDuBot.construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        bot1.villeDuBot.construireBatiment(new CarteCitadelles(21, CouleurCarteCitadelles.JAUNE, "Château", 4));
-        bot1.villeDuBot.construireBatiment(new CarteCitadelles(22, CouleurCarteCitadelles.JAUNE, "Palais", 5));
-        bot1.strategieRoi();
-        assertEquals(3,bot1.getNbPiece());
+        bot2.setPersonnageACeTour(new Roi(affichage));
+        bot2.villeDuBot.construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        bot2.villeDuBot.construireBatiment(new CarteCitadelles(21, CouleurCarteCitadelles.JAUNE, "Château", 4));
+        bot2.villeDuBot.construireBatiment(new CarteCitadelles(22, CouleurCarteCitadelles.JAUNE, "Palais", 5));
+        bot2.strategieRoi();
+        assertEquals(3,bot2.getNbPiece());
     }
 
     @Test
     public void strategieEveque() {
-        bot1.setPersonnageACeTour(new Eveque(affichage));
-        bot1.villeDuBot.construireBatiment(new CarteCitadelles(7, CouleurCarteCitadelles.BLEU, "Eglise", 2));
-        bot1.villeDuBot.construireBatiment(new CarteCitadelles(10, CouleurCarteCitadelles.BLEU, "Monastère", 3));
-        bot1.villeDuBot.construireBatiment(new CarteCitadelles(11, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
-        bot1.strategieEveque();
-        bot2.ajouterPiece(50);
-        bot2.setPersonnageACeTour(new Condottiere(affichage));
+        bot2.setPersonnageACeTour(new Eveque(affichage));
+        bot2.villeDuBot.construireBatiment(new CarteCitadelles(7, CouleurCarteCitadelles.BLEU, "Eglise", 2));
+        bot2.villeDuBot.construireBatiment(new CarteCitadelles(10, CouleurCarteCitadelles.BLEU, "Monastère", 3));
+        bot2.villeDuBot.construireBatiment(new CarteCitadelles(11, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
+        bot2.strategieEveque();
+        bot1.ajouterPiece(50);
+        bot1.setPersonnageACeTour(new Condottiere(affichage));
         bot3.setPersonnageACeTour(new Architecte(affichage));
-        bot2.strategieCondottiere(listeJoueurs);
-        assertEquals(3, bot1.getNbPiece());
+        bot1.strategieCondottiere(listeJoueurs);
+        assertEquals(3, bot2.getNbPiece());
     }
 
     @Test
     public void strategieMarchand() {
-        bot1.setPersonnageACeTour(new Marchand(affichage));
-        bot1.villeDuBot.construireBatiment(new CarteCitadelles(38, CouleurCarteCitadelles.VERT, "Comptoir", 3));
-        bot1.villeDuBot.construireBatiment(new CarteCitadelles(39, CouleurCarteCitadelles.VERT, "Port", 4));
-        bot1.villeDuBot.construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot1.strategieMarchand();
-        assertEquals(3, bot1.getNbPiece());
+        bot2.setPersonnageACeTour(new Marchand(affichage));
+        bot2.villeDuBot.construireBatiment(new CarteCitadelles(38, CouleurCarteCitadelles.VERT, "Comptoir", 3));
+        bot2.villeDuBot.construireBatiment(new CarteCitadelles(39, CouleurCarteCitadelles.VERT, "Port", 4));
+        bot2.villeDuBot.construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot2.strategieMarchand();
+        assertEquals(3, bot2.getNbPiece());
     }
 
     @Test
     public void strategieArchitecte() {
-        bot1.ajouterPiece(30);
-        bot1.setPersonnageACeTour(new Architecte(affichage));
-        bot1.cartesCitadellesEnMain.add(new CarteCitadelles(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
-        bot1.cartesCitadellesEnMain.add(new CarteCitadelles(63, CouleurCarteCitadelles.VIOLET, "École de magie", 6));
-        bot1.cartesCitadellesEnMain.add(new CarteCitadelles(64, CouleurCarteCitadelles.VIOLET, "Universitè", 8));
-        bot1.cartesCitadellesEnMain.add(new CarteCitadelles(17, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
-        bot1.cartesCitadellesEnMain.add(new CarteCitadelles(18, CouleurCarteCitadelles.JAUNE, "Château", 4));
-        bot1.strategieArchitecte();
-        assertEquals(2,bot1.villeDuBot.getNbBatimentsConstruits());
+        bot2.ajouterPiece(30);
+        bot2.setPersonnageACeTour(new Architecte(affichage));
+        bot2.cartesCitadellesEnMain.add(new CarteCitadelles(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
+        bot2.cartesCitadellesEnMain.add(new CarteCitadelles(63, CouleurCarteCitadelles.VIOLET, "École de magie", 6));
+        bot2.cartesCitadellesEnMain.add(new CarteCitadelles(64, CouleurCarteCitadelles.VIOLET, "Universitè", 8));
+        bot2.cartesCitadellesEnMain.add(new CarteCitadelles(17, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
+        bot2.cartesCitadellesEnMain.add(new CarteCitadelles(18, CouleurCarteCitadelles.JAUNE, "Château", 4));
+        bot2.strategieArchitecte();
+        assertEquals(2,bot2.villeDuBot.getNbBatimentsConstruits());
     }
 
     @Test
     public void strategieCondottiere() {
-        bot1.setPersonnageACeTour(new Condottiere(affichage));
-        bot1.ajouterPiece(30);
-        bot2.villeDuBot.construireBatiment(new CarteCitadelles(41, CouleurCarteCitadelles.VERT, "Port", 4));
-        bot2.villeDuBot.construireBatiment(new CarteCitadelles(42, CouleurCarteCitadelles.VERT, "Hôtel de ville", 5));
-        bot1.villeDuBot.construireBatiment(new CarteCitadelles(52, CouleurCarteCitadelles.ROUGE, "Caserne", 3));
-        bot1.villeDuBot.construireBatiment(new CarteCitadelles(53, CouleurCarteCitadelles.ROUGE, "Forteresse", 5));
-        bot1.villeDuBot.construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot1.strategieCondottiere(listeJoueurs);
-        assertEquals(28, bot1.getNbPiece());
-        assertEquals(1,bot2.villeDuBot.getNbBatimentsConstruits());
+        bot2.setPersonnageACeTour(new Condottiere(affichage));
+        bot2.ajouterPiece(30);
+        bot1.villeDuBot.construireBatiment(new CarteCitadelles(41, CouleurCarteCitadelles.VERT, "Port", 4));
+        bot1.villeDuBot.construireBatiment(new CarteCitadelles(42, CouleurCarteCitadelles.VERT, "Hôtel de ville", 5));
+        bot2.villeDuBot.construireBatiment(new CarteCitadelles(52, CouleurCarteCitadelles.ROUGE, "Caserne", 3));
+        bot2.villeDuBot.construireBatiment(new CarteCitadelles(53, CouleurCarteCitadelles.ROUGE, "Forteresse", 5));
+        bot2.villeDuBot.construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
+        bot2.strategieCondottiere(listeJoueurs);
+        assertEquals(28, bot2.getNbPiece());
+        assertEquals(1,bot1.villeDuBot.getNbBatimentsConstruits());
     }
 
     @Test
     public void strategieConstruction() {
-        bot1.ajouterPiece(30);
-        bot1.cartesCitadellesEnMain.add(new CarteCitadelles(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
-        bot1.cartesCitadellesEnMain.add(new CarteCitadelles(63, CouleurCarteCitadelles.VIOLET, "École de magie", 6));
-        bot1.cartesCitadellesEnMain.add(new CarteCitadelles(64, CouleurCarteCitadelles.VIOLET, "Universitè", 8));
-        bot1.strategieConstruction();
-        assertEquals(8, bot1.villeDuBot.getNbTotalPoint());
+        bot2.ajouterPiece(30);
+        bot2.cartesCitadellesEnMain.add(new CarteCitadelles(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
+        bot2.cartesCitadellesEnMain.add(new CarteCitadelles(63, CouleurCarteCitadelles.VIOLET, "École de magie", 6));
+        bot2.cartesCitadellesEnMain.add(new CarteCitadelles(64, CouleurCarteCitadelles.VIOLET, "Universitè", 8));
+        bot2.strategieConstruction();
+        assertEquals(8, bot2.villeDuBot.getNbTotalPoint());
     }
 
 }
