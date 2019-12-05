@@ -174,7 +174,7 @@ public abstract class Bot {
         return null;
     }
 
-    public abstract void strategieConstruction(PiocheCartesCitadelles piocheCartesCitadelles);
+    public abstract void strategieConstruction();
 
     public abstract void choixDuPersonnagePourLeTour(PiocheCartesPersonnage piocheCartesPersonnage, Personnage personnageDefausseVisible);
 
@@ -192,7 +192,7 @@ public abstract class Bot {
 
     public abstract void strategieMarchand();
 
-    public abstract void strategieArchitecte(PiocheCartesCitadelles piocheCartesCitadelles);
+    public abstract void strategieArchitecte();
 
     public abstract void strategieCondottiere(ArrayList<Bot> listeJoueurs);
 }

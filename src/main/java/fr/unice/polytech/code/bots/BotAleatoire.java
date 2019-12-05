@@ -17,7 +17,7 @@ public class BotAleatoire extends Bot {
     }
 
     @Override
-    public void strategieConstruction(PiocheCartesCitadelles piocheCartesCitadelles) { //Construit le premier batiment qu'il peut construire
+    public void strategieConstruction() { //Construit le premier batiment qu'il peut construire
         for (CarteCitadelles carteEnMain : cartesCitadellesEnMain) {
             if (nbPiece >= carteEnMain.getPoint() && !villeDuBot.contient(carteEnMain)) {
                 retirerPiece(carteEnMain.getPoint()); //on retire les pieces
@@ -127,10 +127,10 @@ public class BotAleatoire extends Bot {
     }
 
     @Override
-    public void strategieArchitecte(PiocheCartesCitadelles piocheCartesCitadelles) {
+    public void strategieArchitecte() {
         Personnage personnageJoueur = this.getPersonnageACeTour();
         if(personnageJoueur instanceof Architecte){
-            ((Architecte) personnageJoueur).effectuerSpecialiteArchitecte(this, piocheCartesCitadelles);
+            ((Architecte) personnageJoueur).effectuerSpecialiteArchitecte(this);
         }
     }
 

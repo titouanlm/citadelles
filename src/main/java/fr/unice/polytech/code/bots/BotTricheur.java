@@ -17,7 +17,7 @@ public class BotTricheur extends Bot {
     }
 
     @Override
-    public void strategieConstruction(PiocheCartesCitadelles piocheCartesCitadelles) { //Construit le plus gros batiment qu'il peut
+    public void strategieConstruction() { //Construit le plus gros batiment qu'il peut
         CarteCitadelles carteEnMainDePlusHauteValeur = this.rechercheCartePlusHauteValeurConstruisable();
         if (carteEnMainDePlusHauteValeur != null) {
             this.retirerPiece(carteEnMainDePlusHauteValeur.getPoint());
@@ -36,46 +36,8 @@ public class BotTricheur extends Bot {
     public void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (this.determinerChoixPiocherOuPiece(piocheCartesCitadelles) == 1) {
             this.ajouterPiece(2);
-            affichage.afficherDetails("Choisit de prendre 2 pièces.");
         } else {
-            CarteCitadelles cartePiochee1 = piocheCartesCitadelles.piocher();
-            CarteCitadelles cartePiochee2 = piocheCartesCitadelles.piocher();
-            CarteCitadelles carteChoisie;
-            if(cartePiochee2!=null){
-                affichage.afficherDetails("Pioche 2 cartes : " + cartePiochee1.getNom() + " et " + cartePiochee2.getNom());
-                // On teste si le joueur n'a pas déjà construit les quartiers ou les possède déjà dans sa main
-                if(!this.getVilleDuBot().contient(cartePiochee1) && !this.getVilleDuBot().contient(cartePiochee2) &&
-                        !this.contientDansSaMain(cartePiochee1) && !this.contientDansSaMain(cartePiochee2)){
-
-                    if(cartePiochee1.getCouleur().toString().equals("VIOLET") && cartePiochee2.getCouleur().toString().equals("VIOLET")){
-                        carteChoisie= cartePiochee1.compareNbPoints(cartePiochee2); //Prend la carte ayant le plus de point
-                    }else if(cartePiochee1.getCouleur().toString().equals("VIOLET")){ //Prend la première carte si elle est violette
-                        carteChoisie=cartePiochee1;
-                    }else if(cartePiochee2.getCouleur().toString().equals("VIOLET")){//Prend la deuxième carte si elle est violette
-                        carteChoisie=cartePiochee2;
-                    }else{
-                        carteChoisie= cartePiochee1.compareNbPoints(cartePiochee2); //Prend la carte ayant le plus de point
-                    }
-                }else if(!this.getVilleDuBot().contient(cartePiochee1) && !this.contientDansSaMain(cartePiochee1)){ //Prend la première carte s'il possède déjà la 2ème
-                    carteChoisie=cartePiochee1;
-                }else if(!this.getVilleDuBot().contient(cartePiochee2) && !this.contientDansSaMain(cartePiochee2)){ //Prend la 2ème carte s'il possède déjà la première
-                    carteChoisie=cartePiochee2;
-                }else{ //Prend la première carte si il possède déjà les deux
-                    carteChoisie=cartePiochee1;
-                }
-
-                //On remet dans la pioche la carte que l'on a pas choisi
-                if(carteChoisie==cartePiochee1){
-                    piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee2);
-                }else{
-                    piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee1);
-                }
-            }else{
-                carteChoisie=cartePiochee1;
-            }
-            this.ajouterCartesCitadellesDansMain(carteChoisie);
-
-            affichage.afficherDetails("Choisit de prendre : " + carteChoisie.getNom());
+            this.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());// Peut être déterminée par le joueur
         }
     }
 
@@ -161,10 +123,10 @@ public class BotTricheur extends Bot {
     }
 
     @Override
-    public void strategieArchitecte(PiocheCartesCitadelles piocheCartesCitadelles) {
+    public void strategieArchitecte() {
         Personnage personnageJoueur = this.getPersonnageACeTour();
         if(personnageJoueur instanceof Architecte){
-            ((Architecte) personnageJoueur).effectuerSpecialiteArchitecte(this, piocheCartesCitadelles);
+            ((Architecte) personnageJoueur).effectuerSpecialiteArchitecte(this);
         }
     }
 

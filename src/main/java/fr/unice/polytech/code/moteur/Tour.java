@@ -119,7 +119,7 @@ public class Tour {
                                 }
                             }
                         }
-                        joueur.strategieConstruction(piocheCartesCitadelles);
+                        joueur.strategieConstruction();
                         this.strategieEffectuerSpecialite(joueur);
                         this.estJoueurAyantFinisEnPremier(joueur);
 
@@ -215,7 +215,7 @@ public class Tour {
         }else if (joueur.getPersonnageACeTour() instanceof Marchand) {
             joueur.strategieMarchand();
         }else if (joueur.getPersonnageACeTour() instanceof Architecte) {
-            joueur.strategieArchitecte(piocheCartesCitadelles);
+            joueur.strategieArchitecte();
         }else if (joueur.getPersonnageACeTour() instanceof Condottiere) {
             joueur.strategieCondottiere(listeJoueurs);
         }
