@@ -6,7 +6,7 @@
    -   Titouan LE MAO 
    -   Hamza AYOUB
    -   Sana DIBE  
-####Arborescence et structure du projet
+#### Arborescence et structure du projet
    ```
    src
         main
@@ -81,14 +81,14 @@
                           VilleTest
       
    ```
-####État du projet 
-####Descrption du projet
-####Outils utilisés
+#### État du projet 
+#### Descrption du projet
+#### Outils utilisés
  - IntelliJ IDEA 2019.2.2 (Ultimate Edition)
  - Java 11.0.4
  - JUnit5
  - Mockito
- ####Compilation et exécution du programme en ligne de commande
+ #### Compilation et exécution du programme en ligne de commande
    
 
  
