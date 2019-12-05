@@ -6,6 +6,7 @@ import fr.unice.polytech.code.Ville;
 import fr.unice.polytech.code.bots.Bot;
 import fr.unice.polytech.code.bots.BotAleatoire;
 import fr.unice.polytech.code.bots.BotFairPlay;
+import fr.unice.polytech.code.bots.BotTricheur;
 import fr.unice.polytech.code.cartes.*;
 import fr.unice.polytech.code.personnages.Condottiere;
 import fr.unice.polytech.code.personnages.Marchand;
@@ -89,7 +90,7 @@ public class CarteCitadellesAvecPouvoirTest {
 
     @Test
     void carteBibliothèqueTest(){
-        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m",affichage);
+        Bot bot1 = new BotTricheur("Bot 1", "\033[32m",affichage);
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
         bot1.ajouterCartesCitadellesDansMain(new Bibliotheque(62,CouleurCarteCitadelles.VIOLET, "Bibliothèque", 6 ));
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
@@ -182,7 +183,7 @@ public class CarteCitadellesAvecPouvoirTest {
 
     @Test
     void carteObservatoireTest(){
-        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m",affichage);
+        Bot bot1 = new BotTricheur("Bot 1", "\033[32m",affichage);
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
         bot1.ajouterCartesCitadellesDansMain(new Observatoire(60,CouleurCarteCitadelles.VIOLET, "Observatoire", 5 ));
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
