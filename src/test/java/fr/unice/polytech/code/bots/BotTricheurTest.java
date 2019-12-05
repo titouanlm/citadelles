@@ -5,7 +5,6 @@ import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
-import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

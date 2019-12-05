@@ -5,15 +5,13 @@ import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
-import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+
 
 public class BotFairPlayTest {
 
@@ -23,7 +21,6 @@ public class BotFairPlayTest {
     Bot bot1 = new BotTricheur("Bot 1", "\033[35m",affichage);
     Bot bot2 = new BotFairPlay("Bot 2", "\033[34m",affichage);
     Bot bot3 = new BotAleatoire("Bot 3", "\033[36m",affichage);
-    Bot bot4 = mock(BotTricheur.class);
     ArrayList<Bot> listeJoueurs = new ArrayList<>();
 
     @BeforeEach
@@ -35,14 +32,12 @@ public class BotFairPlayTest {
 
     @Test
     public void strategieVoleur(){
-        listeJoueurs.add(bot4);
         bot1.ajouterPiece(10);
         bot2.ajouterPiece(0);
         bot3.ajouterPiece(40);
         bot1.setPersonnageACeTour(new Condottiere(affichage));
         bot2.setPersonnageACeTour(new Voleur(affichage));
         bot3.setPersonnageACeTour(new Marchand(affichage));
-        when(bot4.getPersonnageACeTour()).thenReturn(new Assassin(affichage));
         bot2.strategieVoleur(listeJoueurs,new Eveque(affichage));
         assertNotEquals(0,bot2.getNbPiece());
     }
