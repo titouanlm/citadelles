@@ -34,4 +34,17 @@ public class PiocheCartesPersonnageTest {
         assertEquals(8, piocheCartesPersonnage.getPiocheCP().size());
     }
 
+    @Test
+    void prendre(){
+        piocheCartesPersonnage.reinitialiser();
+        piocheCartesPersonnage.prendre("Voleur");
+        assertFalse(piocheCartesPersonnage.contient("Voleur"));
+        assertNotEquals(8,piocheCartesPersonnage.getPiocheCP().size());
+        assertEquals(7,piocheCartesPersonnage.getPiocheCP().size());
+        for (int i=0; i<=6; i++)
+            piocheCartesPersonnage.piocherPersonnageAleatoirement();
+        assertEquals(0,piocheCartesPersonnage.getPiocheCP().size());
+        assertNull(piocheCartesPersonnage.prendre("Condottiere"));
+    }
+
 }
