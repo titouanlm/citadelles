@@ -146,8 +146,8 @@ public class BotFairPlay extends Bot {
     public void strategieAssassin(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse) {
         int indicePersonnageAssassiner;
         do{
-            indicePersonnageAssassiner = (int)(Math.random()*8);
-        }while(indicePersonnageAssassiner == this.getPersonnageACeTour().getNumero() || (indicePersonnageAssassiner+1)==personnageDefausse.getNumero());
+            indicePersonnageAssassiner = ((int)(Math.random()*8))+1;
+        }while(indicePersonnageAssassiner == this.getPersonnageACeTour().getNumero() || indicePersonnageAssassiner==personnageDefausse.getNumero());
 
         Personnage p = this.getPersonnageACeTour();
         ((Assassin) p).effectuerSpecialiteAssassin( this.listePersonnages(indicePersonnageAssassiner), listeJoueurs);
