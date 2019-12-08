@@ -53,7 +53,7 @@ public class BotFairPlayTest {
         bot1.setPersonnageACeTour(new Condottiere(affichage));
         bot3.setPersonnageACeTour(new Architecte(affichage));
         bot2.strategieAssassin(listeJoueurs,new Marchand(affichage));
-        if (bot1.getPersonnageACeTour().getNom()!=null) {
+        if (bot1.getPersonnageACeTour()!=null) {
             assertSame("Condottiere", bot1.getPersonnageACeTour().getNom());
         }
         else {
