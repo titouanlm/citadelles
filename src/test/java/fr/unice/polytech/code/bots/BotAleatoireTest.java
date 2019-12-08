@@ -146,7 +146,7 @@ public class BotAleatoireTest {
         bot3.cartesCitadellesEnMain.add(new CarteCitadelles(63, CouleurCarteCitadelles.VIOLET, "École de magie", 6));
         bot3.cartesCitadellesEnMain.add(new CarteCitadelles(64, CouleurCarteCitadelles.VIOLET, "Universitè", 8));
         bot3.strategieConstruction();
-        assertNotNull(bot3.villeDuBot.getNbTotalPoint());
+        assertNotEquals(0, bot3.villeDuBot.getNbTotalPoint());
     }
 
 }

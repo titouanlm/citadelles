@@ -183,7 +183,7 @@ public class CarteCitadellesAvecPouvoirTest {
 
     @Test
     void carteObservatoireTest(){
-        Bot bot1 = new BotTricheur("Bot 1", "\033[32m",affichage);
+        Bot bot1 = new BotTricheur( "Bot 1", "\033[32m",affichage);
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
         bot1.ajouterCartesCitadellesDansMain(new Observatoire(60,CouleurCarteCitadelles.VIOLET, "Observatoire", 5 ));
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
