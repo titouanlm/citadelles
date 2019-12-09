@@ -62,20 +62,34 @@ public class BotFairPlayTest {
     }
 
     @Test
-    public void strategieMagicien(){
+    public void strategieMagicien1(){
         piocheCartesCitadelles.ajouterCarteCitadelles(new CarteCitadelles(63, CouleurCarteCitadelles.VIOLET, "École de magie", 6));
         piocheCartesCitadelles.ajouterCarteCitadelles(new CarteCitadelles(63, CouleurCarteCitadelles.VIOLET, "École de magie", 6));
-        bot1.setPersonnageACeTour(new Magicien(affichage));
-        bot2.ajouterCartesCitadellesDansMain(new CarteCitadelles(43, CouleurCarteCitadelles.VERT, "Hôtel de ville", 5));
-        bot2.ajouterCartesCitadellesDansMain(new CarteCitadelles(65, CouleurCarteCitadelles.VIOLET, "Dracopert", 8));
-        bot2.ajouterCartesCitadellesDansMain(new CarteCitadelles(64, CouleurCarteCitadelles.VIOLET, "Universitè", 8));
+        bot2.setPersonnageACeTour(new Magicien(affichage));
+        bot1.ajouterCartesCitadellesDansMain(new CarteCitadelles(43, CouleurCarteCitadelles.VERT, "Hôtel de ville", 5));
+        bot1.ajouterCartesCitadellesDansMain(new CarteCitadelles(65, CouleurCarteCitadelles.VIOLET, "Dracopert", 8));
+        bot1.ajouterCartesCitadellesDansMain(new CarteCitadelles(64, CouleurCarteCitadelles.VIOLET, "Universitè", 8));
         bot3.ajouterCartesCitadellesDansMain(new CarteCitadelles(55, CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2));
         bot3.ajouterCartesCitadellesDansMain(new CarteCitadelles(46, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1));
-        bot1.strategieMagicien(listeJoueurs,piocheCartesCitadelles);
-        assertSame("Hôtel de ville",bot1.getCartesCitadellesEnMain().get(0).getNom());
-        assertSame("Dracopert",bot1.getCartesCitadellesEnMain().get(1).getNom());
-        assertSame("Universitè",bot1.getCartesCitadellesEnMain().get(2).getNom());
-        assertNotEquals(null,bot1.getCartesCitadellesEnMain());
+        bot2.strategieMagicien(listeJoueurs,piocheCartesCitadelles);
+        assertSame("Hôtel de ville",bot2.getCartesCitadellesEnMain().get(0).getNom());
+        assertSame("Dracopert",bot2.getCartesCitadellesEnMain().get(1).getNom());
+        assertSame("Universitè",bot2.getCartesCitadellesEnMain().get(2).getNom());
+        assertEquals(0,bot1.getCartesCitadellesEnMain().size());
+    }
+
+    @Test
+    public void strategieMagicien2(){
+        piocheCartesCitadelles.ajouterCarteCitadelles(new CarteCitadelles(63, CouleurCarteCitadelles.VIOLET, "École de magie", 6));
+        piocheCartesCitadelles.ajouterCarteCitadelles(new CarteCitadelles(63, CouleurCarteCitadelles.VIOLET, "École de magie", 6));
+        bot2.setPersonnageACeTour(new Magicien(affichage));
+        bot1.ajouterCartesCitadellesDansMain(new CarteCitadelles(43, CouleurCarteCitadelles.VERT, "Hôtel de ville", 5));
+        bot1.ajouterCartesCitadellesDansMain(new CarteCitadelles(65, CouleurCarteCitadelles.VIOLET, "Dracopert", 8));
+        bot3.ajouterCartesCitadellesDansMain(new CarteCitadelles(55, CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2));
+        bot3.ajouterCartesCitadellesDansMain(new CarteCitadelles(46, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1));
+        bot2.strategieMagicien(listeJoueurs,piocheCartesCitadelles);
+        assertEquals(2,bot1.getCartesCitadellesEnMain().size());
+        assertEquals(0,bot2.getCartesCitadellesEnMain().size());
     }
 
     @Test

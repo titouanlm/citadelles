@@ -182,7 +182,7 @@ public class BotFairPlay extends Bot {
                 cartesAEchanger.add(this.getCartesCitadellesEnMain().get(p));
             }
         }
-        if (nombreCarteMaxMainPersonne > 10) {
+        if (nombreCarteMaxMainPersonne > 2) {
             ((Magicien) magicien).echangerCartesAvecUnJoueur(this, listeJoueurs.get(b));
         }
         else {
