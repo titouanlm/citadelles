@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String... args) {
         System.out.println("Meilleur bot (Bot 1) contre 4 versions du second (Bot 2, Bot 3, Bot 4, Bot 5) :");
-        Affichage affichage1 = new Affichage(1000);
+        Affichage affichage1 = new Affichage(1000); 
         for(int i=0 ; i<affichage1.getNbParties(); i++){
             Bot bot1 = new BotFairPlay("Bot 1", "\033[35m");
             Bot bot2 = new BotAleatoire("Bot 2", "\033[34m");
