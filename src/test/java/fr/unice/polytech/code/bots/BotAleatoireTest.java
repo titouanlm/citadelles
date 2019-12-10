@@ -2,6 +2,7 @@ package fr.unice.polytech.code.bots;
 
 import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.cartes.CarteCitadellesSansPouvoir;
 import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
@@ -22,7 +23,6 @@ public class BotAleatoireTest {
     Bot bot1 = new BotTricheur("Bot 1", "\033[35m",affichage);
     Bot bot2 = new BotFairPlay("Bot 2", "\033[34m",affichage);
     Bot bot3 = new BotAleatoire("Bot 3", "\033[36m",affichage);
-    Bot bot4 = mock(BotTricheur.class);
     ArrayList<Bot> listeJoueurs = new ArrayList<>();
 
     @BeforeEach
@@ -31,6 +31,20 @@ public class BotAleatoireTest {
         listeJoueurs.add(bot2);
         listeJoueurs.add(bot3);
     }
+
+    @Test
+    public void choixCartesPiochees(){
+        piocheCartesCitadelles.ajouterCarteCitadelles(new CarteCitadellesSansPouvoir(1, CouleurCarteCitadelles.BLEU, "Temple", 1 ));
+        assertEquals(0 , bot3.getCartesCitadellesEnMain().size());
+        assertEquals(1 , piocheCartesCitadelles.nbCartesRestantes());
+
+        CarteCitadelles cartePiochee1 = piocheCartesCitadelles.piocher();
+        CarteCitadelles cartePiochee2 = piocheCartesCitadelles.piocher();
+        CarteCitadelles carteCitadelles = bot3.choixCartesPiochees(piocheCartesCitadelles, cartePiochee1, cartePiochee2);
+
+        assertEquals("Temple" , carteCitadelles.getNom());
+    }
+
 
     @Test
     public void strategieVoleur() {
@@ -99,8 +113,9 @@ public class BotAleatoireTest {
         bot2.ajouterPiece(50);
         bot2.setPersonnageACeTour(new Condottiere(affichage));
         bot1.setPersonnageACeTour(new Architecte(affichage));
-        bot2.strategieCondottiere(listeJoueurs);
+        bot2.strategieCondottiere(listeJoueurs, piocheCartesCitadelles);
         assertEquals(3, bot3.getNbPiece());
+        assertEquals(3, bot3.getVilleDuBot().getNbBatimentsConstruits());
     }
 
     @Test
@@ -135,7 +150,7 @@ public class BotAleatoireTest {
         bot3.villeDuBot.construireBatiment(new CarteCitadelles(52, CouleurCarteCitadelles.ROUGE, "Caserne", 3));
         bot3.villeDuBot.construireBatiment(new CarteCitadelles(53, CouleurCarteCitadelles.ROUGE, "Forteresse", 5));
         bot3.villeDuBot.construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot3.strategieCondottiere(listeJoueurs);
+        bot3.strategieCondottiere(listeJoueurs, piocheCartesCitadelles);
         assertNotEquals(30, bot3.getNbPiece());
     }
 

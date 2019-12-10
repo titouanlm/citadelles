@@ -7,6 +7,7 @@ import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import fr.unice.polytech.code.cartes.Donjon;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Condottiere extends Personnage {
@@ -26,10 +27,9 @@ public class Condottiere extends Personnage {
             }
         }
         affichage.afficherDetails("Récupère " + nbPieceGagnee + " pièces bonus grâce aux quartiers militaires.");
-
     }
 
-    public void detruirePlusGrosQuartierEnemie(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction){
+    public void detruirePlusGrosQuartierEnemie(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles, ArrayList<Bot> listeJoueurs){
         if(joueurQuiSubitAction!=null && !(joueurQuiSubitAction.getPersonnageACeTour()instanceof Eveque) && joueurQuiEffectueAction!=joueurQuiSubitAction
                 && joueurQuiSubitAction.getVilleDuBot().getNbBatimentsConstruits()<8){
             CarteCitadelles quartierADetruire=null;
@@ -44,16 +44,15 @@ public class Condottiere extends Personnage {
                 int coutDestruction = quartierADetruire.getPoint()-1;
                 joueurQuiSubitAction.getVilleDuBot().detruireQuartier(quartierADetruire);
                 joueurQuiEffectueAction.retirerPiece(coutDestruction);
-                affichage.afficherDetails("Détruit le quartier " + quartierADetruire.getNom() + " de " + joueurQuiSubitAction.getNom() + " pour " + coutDestruction + " pièces.");
-                if (joueurQuiSubitAction.contientDansSaMain("Cimitière") && !(joueurQuiSubitAction.getPersonnageACeTour() instanceof Condottiere) ){
-                    joueurQuiSubitAction.retirerPiece(1);
-                    joueurQuiSubitAction.ajouterCartesCitadellesDansMain(quartierADetruire);
+                if(!recupereQuartierDetruit(listeJoueurs, quartierADetruire)){
+                    piocheCartesCitadelles.ajouterCarteCitadelles(quartierADetruire);
                 }
+                affichage.afficherDetails("Détruit le quartier " + quartierADetruire.getNom() + " de " + joueurQuiSubitAction.getNom() + " pour " + coutDestruction + " pièces.");
             }
         }
     }
 
-    public void detruireQuartierAleatoireEnemie(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction){
+    public void detruireQuartierAleatoireEnemie(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles, ArrayList<Bot> listeJoueurs){
         if(joueurQuiSubitAction!=null && !(joueurQuiSubitAction.getPersonnageACeTour()instanceof Eveque) && joueurQuiSubitAction.getVilleDuBot().getNbBatimentsConstruits()<8){
             int nbBatConstruits = joueurQuiSubitAction.getVilleDuBot().getBatimentsConstruits().size();
             if(nbBatConstruits>0){
@@ -63,41 +62,45 @@ public class Condottiere extends Personnage {
                 if(coutDestruction<=joueurQuiEffectueAction.getNbPiece() && !(quartierADetruire instanceof Donjon)){
                     joueurQuiSubitAction.getVilleDuBot().detruireQuartier(quartierADetruire);
                     joueurQuiEffectueAction.retirerPiece(coutDestruction);
-                    affichage.afficherDetails("Détruit le quartier " + quartierADetruire.getNom() + " de " + joueurQuiSubitAction.getNom() + " pour " + coutDestruction + " pièces.");
-
-                }
-                if (quartierADetruire!=null){
-                    if (joueurQuiSubitAction.contientDansSaMain("Cimitière") && !(joueurQuiSubitAction.getPersonnageACeTour() instanceof Condottiere) ){
-                        joueurQuiSubitAction.retirerPiece(1);
-                        joueurQuiSubitAction.ajouterCartesCitadellesDansMain(quartierADetruire);
+                    if(!recupereQuartierDetruit(listeJoueurs, quartierADetruire)){
+                        piocheCartesCitadelles.ajouterCarteCitadelles(quartierADetruire);
                     }
+                    affichage.afficherDetails("Détruit le quartier " + quartierADetruire.getNom() + " de " + joueurQuiSubitAction.getNom() + " pour " + coutDestruction + " pièces.");
                 }
             }
         }
     }
 
-    public void detruirePlusPetitQuartierEnemie(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction){
+    public void detruirePlusPetitQuartierEnemie(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles, ArrayList<Bot> listeJoueurs){
         if(joueurQuiSubitAction!=null && !(joueurQuiSubitAction.getPersonnageACeTour()instanceof Eveque) && joueurQuiEffectueAction!=joueurQuiSubitAction && joueurQuiSubitAction.getVilleDuBot().getNbBatimentsConstruits()<8){
             CarteCitadelles quartierADetruire=null;
             int nbPointMin=10;
             for(CarteCitadelles quartier : joueurQuiSubitAction.getVilleDuBot().getBatimentsConstruits()){
-                if(nbPointMin>quartier.getPoint() && joueurQuiEffectueAction.getNbPiece()>= quartier.getPoint()-1){
+                if(nbPointMin>quartier.getPoint() && joueurQuiEffectueAction.getNbPiece()>= quartier.getPoint()-1 && !(quartierADetruire instanceof Donjon)){
                     quartierADetruire=quartier;
                     nbPointMin=quartier.getPoint();
                 }
             }
-            if(quartierADetruire!=null && !(quartierADetruire instanceof Donjon)){
+            if(quartierADetruire!=null){
                 int coutDestruction =quartierADetruire.getPoint()-1;
                 joueurQuiSubitAction.getVilleDuBot().detruireQuartier(quartierADetruire);
                 joueurQuiEffectueAction.retirerPiece(coutDestruction);
+                if(!recupereQuartierDetruit(listeJoueurs, quartierADetruire)){
+                    piocheCartesCitadelles.ajouterCarteCitadelles(quartierADetruire);
+                }
                 affichage.afficherDetails("Détruit le quartier " + quartierADetruire.getNom() + " de " + joueurQuiSubitAction.getNom() + " pour " + coutDestruction + " pièces.");
             }
-            if (quartierADetruire!=null){
-                if (joueurQuiSubitAction.contientDansSaMain("Cimitière") && !(joueurQuiSubitAction.getPersonnageACeTour() instanceof Condottiere) ){
-                    joueurQuiSubitAction.retirerPiece(1);
-                    joueurQuiSubitAction.ajouterCartesCitadellesDansMain(quartierADetruire);
-                }
+        }
+    }
+
+    public boolean recupereQuartierDetruit(ArrayList<Bot> listeJoueurs, CarteCitadelles quartierDetruit) {
+        for(Bot joueur : listeJoueurs){
+            if(joueur.getVilleDuBot().contient("Cimetière") && joueur.getNbPiece()>=1 && !(joueur.getPersonnageACeTour() instanceof Condottiere)){
+                joueur.retirerPiece(1);
+                joueur.ajouterCartesCitadellesDansMain(quartierDetruit);
+                return true;
             }
         }
+        return false;
     }
 }

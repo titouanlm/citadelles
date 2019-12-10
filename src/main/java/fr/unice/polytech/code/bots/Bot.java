@@ -65,8 +65,6 @@ public abstract class Bot {
     public void ajouterCartesCitadellesDansMain(CarteCitadelles cartesCitadellesAAjouter) {
         if(cartesCitadellesAAjouter!=null){
             this.cartesCitadellesEnMain.add(cartesCitadellesAAjouter);
-        }else{
-            System.out.println("Impossible : vous ajoutez une carte null en main");
         }
     }
 
@@ -180,6 +178,8 @@ public abstract class Bot {
 
     public abstract void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles);
 
+    public abstract CarteCitadelles choixCartesPiochees(PiocheCartesCitadelles piocheCartesCitadelles, CarteCitadelles cartePiochee1,CarteCitadelles cartePiochee2);
+
     public abstract void strategieAssassin(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse);
 
     public abstract void strategieVoleur(ArrayList<Bot> listeJoueurs, Personnage personnageDefausse);
@@ -194,5 +194,6 @@ public abstract class Bot {
 
     public abstract void strategieArchitecte();
 
-    public abstract void strategieCondottiere(ArrayList<Bot> listeJoueurs);
+    public abstract void strategieCondottiere(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelle);
+
 }

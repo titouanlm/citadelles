@@ -2,6 +2,7 @@ package fr.unice.polytech.code.moteur;
 
 import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.*;
+import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 import fr.unice.polytech.code.pioches.PiocheCartesPersonnage;
 
@@ -57,7 +58,7 @@ public class Moteur {
         }
     }
 
-    public void commencerPartie() { //ici c'est plus le déroulement de tout les tours
+    public void commencerPartie() {
         int cptTour = 1;
         while (true) {
             affichage.afficherDetails("\u001B[1m"+"*********************"  + " Tour " + cptTour + " ********************\n"+ "\u001B[0m");

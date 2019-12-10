@@ -57,6 +57,15 @@ public class Ville {
         return false;
     }
 
+    public boolean contient(String carteCitadelles) {
+        for(CarteCitadelles batiment: batimentsConstruits){
+            if(batiment.getNom().equals(carteCitadelles)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int compterNbQuartiersRouge(){
         int nbQuartiersRouge=0;
         for(CarteCitadelles quartier : batimentsConstruits){

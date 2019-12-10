@@ -36,33 +36,49 @@ public class BotAleatoire extends Bot {
     }
 
     @Override
-    public void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles) { //Non aléatoire
+    public void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (this.determinerChoixPiocherOuPiece(piocheCartesCitadelles) == 1) {
             this.ajouterPiece(2);
             affichage.afficherDetails("Choisit de prendre 2 pièces.");
         } else {
             CarteCitadelles cartePiochee1 = piocheCartesCitadelles.piocher();
             CarteCitadelles cartePiochee2 = piocheCartesCitadelles.piocher();
-
-            affichage.afficherDetails("Pioche 2 cartes : " + cartePiochee1.getNom() + " et " + cartePiochee2.getNom());
-            CarteCitadelles carteChoisie;
-
-            if(cartePiochee2!=null){
-                int choix = (int) (Math.random() * 2);
-                if(choix==0){
-                    carteChoisie = cartePiochee1;
-                    piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee2);
-                }else{
-                    carteChoisie = cartePiochee2;
-                    piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee1);
-                }
+            if(this.getVilleDuBot().contient("Observatoire")){
+                CarteCitadelles cartePiochee3 = piocheCartesCitadelles.piocher();
+                CarteCitadelles carteChoisie =  this.choixCartesPiochees(piocheCartesCitadelles, cartePiochee1, cartePiochee2);
+                CarteCitadelles carteChoisieFinal =  this.choixCartesPiochees(piocheCartesCitadelles, cartePiochee3,carteChoisie );
+                this.ajouterCartesCitadellesDansMain(carteChoisieFinal);
             }else{
-                carteChoisie=cartePiochee1;
+                CarteCitadelles carteChoisie =  this.choixCartesPiochees(piocheCartesCitadelles, cartePiochee1, cartePiochee2);
+                this.ajouterCartesCitadellesDansMain(carteChoisie);
+                if(carteChoisie!=null){
+                    affichage.afficherDetails("Choisit de prendre : " + carteChoisie.getNom());
+                }
             }
-
-            this.ajouterCartesCitadellesDansMain(carteChoisie);
-            affichage.afficherDetails("Choisit de prendre : " + carteChoisie.getNom());
         }
+    }
+
+    @Override
+    public CarteCitadelles choixCartesPiochees(PiocheCartesCitadelles piocheCartesCitadelles, CarteCitadelles cartePiochee1,CarteCitadelles cartePiochee2) {
+        CarteCitadelles carteChoisie;
+        if(cartePiochee2!=null){
+            affichage.afficherDetails("Pioche 2 cartes : " + cartePiochee1.getNom() + " et " + cartePiochee2.getNom());
+            int choix = (int) (Math.random() * 2);
+            if(this.getVilleDuBot().contient("Bibliothèque")) {
+                this.ajouterCartesCitadellesDansMain(cartePiochee1);
+                this.ajouterCartesCitadellesDansMain(cartePiochee2);
+                return null;
+            }else if(choix==0){
+                carteChoisie = cartePiochee1;
+                piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee2);
+            }else{
+                carteChoisie = cartePiochee2;
+                piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee1);
+            }
+        }else{
+            carteChoisie=cartePiochee1;
+        }
+        return carteChoisie;
     }
 
     @Override
@@ -135,7 +151,7 @@ public class BotAleatoire extends Bot {
     }
 
     @Override
-    public void strategieCondottiere(ArrayList<Bot> listeJoueurs) {
+    public void strategieCondottiere(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelles) {
         Personnage personnageJoueur = this.getPersonnageACeTour();
         if(personnageJoueur instanceof Condottiere){
             ((Condottiere) personnageJoueur).effectuerSpecialiteCondottiere(this);
@@ -145,9 +161,10 @@ public class BotAleatoire extends Bot {
                 indiceBotVictime = (int)(Math.random()*listeJoueurs.size());
             }while(listeJoueurs.get(indiceBotVictime) == this);
             Bot victime = listeJoueurs.get(indiceBotVictime);
-            ((Condottiere) personnageJoueur).detruireQuartierAleatoireEnemie(this, victime);
+            ((Condottiere) personnageJoueur).detruireQuartierAleatoireEnemie(this, victime, piocheCartesCitadelles, listeJoueurs);
         }
     }
+
 
     public int determinerChoixPiocherOuPiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (piocheCartesCitadelles.nbCartesRestantes() > 0) {

@@ -2,8 +2,7 @@ package fr.unice.polytech.code.bots;
 
 import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
-import fr.unice.polytech.code.cartes.CarteCitadellesAvecPouvoir;
-import fr.unice.polytech.code.cartes.Observatoire;
+import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.*;
 
@@ -40,106 +39,62 @@ public class BotFairPlay extends Bot {
             this.ajouterPiece(2);
             affichage.afficherDetails("Choisit de prendre 2 pièces.");
         } else {
-            CarteCitadelles carteChoisie;
-            CarteCitadelles carteChoisie1;
             CarteCitadelles cartePiochee1 = piocheCartesCitadelles.piocher();
             CarteCitadelles cartePiochee2 = piocheCartesCitadelles.piocher();
-
-
-            if(cartePiochee2!=null){
-                affichage.afficherDetails("Pioche 2 cartes : " + cartePiochee1.getNom() + " et " + cartePiochee2.getNom());
-
-                if(this.contientDansSaMain("Bibliothèque")) {
-                    this.ajouterCartesCitadellesDansMain(cartePiochee1);
-                    this.ajouterCartesCitadellesDansMain(cartePiochee2);
-                    return;
-                }
-                if (this.contientDansSaMain("Observatoire")){
-                    CarteCitadelles cartePiochee3 = piocheCartesCitadelles.piocher();
-                    if(cartePiochee3!=null ){
-                        if (!this.getVilleDuBot().contient(cartePiochee1) && !this.getVilleDuBot().contient(cartePiochee2) &&
-                                !this.getVilleDuBot().contient(cartePiochee3) && !this.contientDansSaMain(cartePiochee1) &&
-                                !this.contientDansSaMain(cartePiochee2) && !this.contientDansSaMain(cartePiochee3)) {
-
-                            if (cartePiochee1.getCouleur().toString().equals("VIOLET") && cartePiochee2.getCouleur().toString().equals("VIOLET")
-                                    && cartePiochee3.getCouleur().toString().equals("VIOLET")) {
-                                carteChoisie = cartePiochee1.compareNbPoints(cartePiochee2);
-                            } else if (cartePiochee1.getCouleur().toString().equals("VIOLET")) {
-                                carteChoisie = cartePiochee1;
-                            } else if (cartePiochee2.getCouleur().toString().equals("VIOLET")) {
-                                carteChoisie = cartePiochee2;
-                            } else if (cartePiochee3.getCouleur().toString().equals("VIOLET")) {
-                                carteChoisie = cartePiochee3;
-                            } else {
-                                carteChoisie1 = cartePiochee1.compareNbPoints(cartePiochee2);
-                                carteChoisie = carteChoisie1.compareNbPoints(cartePiochee3);
-                            }
-                        } else if (!this.getVilleDuBot().contient(cartePiochee1) && !this.contientDansSaMain(cartePiochee1)) {
-                            carteChoisie = cartePiochee1;
-                        } else if (!this.getVilleDuBot().contient(cartePiochee2) && !this.contientDansSaMain(cartePiochee2)) {
-                            carteChoisie = cartePiochee2;
-                        }else if (!this.getVilleDuBot().contient(cartePiochee3) && !this.contientDansSaMain(cartePiochee3)) {
-                            carteChoisie = cartePiochee3;
-                        } else {
-                            carteChoisie = cartePiochee1;
-                        }
-                        this.ajouterCartesCitadellesDansMain(carteChoisie);
-
-                        if (carteChoisie == cartePiochee1) {
-                            piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee2);
-                            piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee3);
-                        } else if (carteChoisie == cartePiochee2){
-                            piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee1);
-                            piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee3);
-                        }
-                        else {
-                            piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee1);
-                            piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee2);
-                        }
-                    }else{
-                        carteChoisie=cartePiochee1;
-                        this.ajouterCartesCitadellesDansMain(carteChoisie);
-
-                    }
-                }
-                else {
-                    // On teste si le joueur n'a pas déjà construit les quartiers ou les possède déjà dans sa main
-                    if (!this.getVilleDuBot().contient(cartePiochee1) && !this.getVilleDuBot().contient(cartePiochee2) &&
-                            !this.contientDansSaMain(cartePiochee1) && !this.contientDansSaMain(cartePiochee2)) {
-
-
-                        if (cartePiochee1.getCouleur().toString().equals("VIOLET") && cartePiochee2.getCouleur().toString().equals("VIOLET")) {
-                            carteChoisie = cartePiochee1.compareNbPoints(cartePiochee2); //Prend la carte ayant le plus de point
-                        } else if (cartePiochee1.getCouleur().toString().equals("VIOLET")) { //Prend la première carte si elle est violette
-                            carteChoisie = cartePiochee1;
-                        } else if (cartePiochee2.getCouleur().toString().equals("VIOLET")) {//Prend la deuxième carte si elle est violette
-                            carteChoisie = cartePiochee2;
-                        } else {
-                            carteChoisie = cartePiochee1.compareNbPoints(cartePiochee2); //Prend la carte ayant le plus de point
-                        }
-                    } else if (!this.getVilleDuBot().contient(cartePiochee1) && !this.contientDansSaMain(cartePiochee1)) { //Prend la première carte s'il possède déjà la 2ème
-                        carteChoisie = cartePiochee1;
-                    } else if (!this.getVilleDuBot().contient(cartePiochee2) && !this.contientDansSaMain(cartePiochee2)) { //Prend la 2ème carte s'il possède déjà la première
-                        carteChoisie = cartePiochee2;
-                    } else { //Prend la première carte si il possède déjà les deux
-                        carteChoisie = cartePiochee1;
-                    }
-
-                    this.ajouterCartesCitadellesDansMain(carteChoisie);
-
-                    //On remet dans la pioche la carte que l'on a pas choisi
-                    if (carteChoisie == cartePiochee1) {
-                        piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee2);
-                    } else {
-                        piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee1);
-                    }
-                }
+            if(this.getVilleDuBot().contient("Observatoire")){
+                CarteCitadelles cartePiochee3 = piocheCartesCitadelles.piocher();
+                CarteCitadelles carteChoisie =  this.choixCartesPiochees(piocheCartesCitadelles, cartePiochee1, cartePiochee2);
+                CarteCitadelles carteChoisieFinal =  this.choixCartesPiochees(piocheCartesCitadelles, cartePiochee3,carteChoisie );
+                this.ajouterCartesCitadellesDansMain(carteChoisieFinal);
             }else{
-                carteChoisie=cartePiochee1;
+                CarteCitadelles carteChoisie =  this.choixCartesPiochees(piocheCartesCitadelles, cartePiochee1, cartePiochee2);
+                this.ajouterCartesCitadellesDansMain(carteChoisie);
+                if(carteChoisie!=null){
+                    affichage.afficherDetails("Choisit de prendre : " + carteChoisie.getNom());
+                }
             }
-            this.ajouterCartesCitadellesDansMain(carteChoisie);
-            affichage.afficherDetails("Choisit de prendre : " + carteChoisie.getNom());
+
         }
+    }
+
+    @Override
+    public CarteCitadelles choixCartesPiochees(PiocheCartesCitadelles piocheCartesCitadelles,CarteCitadelles cartePiochee1,CarteCitadelles cartePiochee2) {
+        CarteCitadelles carteChoisie;
+        if(cartePiochee2!=null){
+            affichage.afficherDetails("Pioche 2 cartes : " + cartePiochee1.getNom() + " et " + cartePiochee2.getNom());
+
+            if(this.getVilleDuBot().contient("Bibliothèque")) {
+                this.ajouterCartesCitadellesDansMain(cartePiochee1);
+                this.ajouterCartesCitadellesDansMain(cartePiochee2);
+                return null;
+            }else if (!this.getVilleDuBot().contient(cartePiochee1) && !this.getVilleDuBot().contient(cartePiochee2) &&
+                    !this.contientDansSaMain(cartePiochee1) && !this.contientDansSaMain(cartePiochee2)) {
+                if (cartePiochee1.getCouleur().equals(CouleurCarteCitadelles.VIOLET) && cartePiochee2.getCouleur().equals(CouleurCarteCitadelles.VIOLET)) {
+                    carteChoisie = cartePiochee1.compareNbPoints(cartePiochee2); //Prend la carte ayant le plus de point
+                } else if (cartePiochee1.getCouleur().equals(CouleurCarteCitadelles.VIOLET)) { //Prend la première carte si elle est violette
+                    carteChoisie = cartePiochee1;
+                } else if (cartePiochee2.getCouleur().equals(CouleurCarteCitadelles.VIOLET)) {//Prend la deuxième carte si elle est violette
+                    carteChoisie = cartePiochee2;
+                } else {
+                    carteChoisie = cartePiochee1.compareNbPoints(cartePiochee2); //Prend la carte ayant le plus de point
+                }
+            } else if (!this.getVilleDuBot().contient(cartePiochee1) && !this.contientDansSaMain(cartePiochee1)) { //Prend la première carte s'il possède déjà la 2ème
+                carteChoisie = cartePiochee1;
+            } else if (!this.getVilleDuBot().contient(cartePiochee2) && !this.contientDansSaMain(cartePiochee2)) { //Prend la 2ème carte s'il possède déjà la première
+                carteChoisie = cartePiochee2;
+            } else { //Prend la première carte si il possède déjà les deux
+                carteChoisie = cartePiochee1;
+            }
+            //On remet dans la pioche la carte que l'on a pas choisi
+            if (carteChoisie == cartePiochee1) {
+                piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee2);
+            } else {
+                piocheCartesCitadelles.ajouterCarteCitadelles(cartePiochee1);
+            }
+        }else{
+            carteChoisie=cartePiochee1;
+        }
+        return carteChoisie;
     }
 
     @Override
@@ -222,8 +177,8 @@ public class BotFairPlay extends Bot {
         }
     }
 
-    @Override // A implémenter (Aléatoire pour l'instant) DETRUIT LE BAT D'UN JOUEUR
-    public void strategieCondottiere(ArrayList<Bot> listeJoueurs) {
+    @Override
+    public void strategieCondottiere(ArrayList<Bot> listeJoueurs, PiocheCartesCitadelles piocheCartesCitadelles) {
         Personnage personnageJoueur = this.getPersonnageACeTour();
         if(personnageJoueur instanceof Condottiere){
             ((Condottiere) personnageJoueur).effectuerSpecialiteCondottiere(this);
@@ -235,7 +190,7 @@ public class BotFairPlay extends Bot {
                     victime=b;
                 }
             }
-            ((Condottiere) personnageJoueur).detruirePlusGrosQuartierEnemie(this, victime);
+            ((Condottiere) personnageJoueur).detruirePlusGrosQuartierEnemie(this, victime, piocheCartesCitadelles, listeJoueurs);
         }
     }
 

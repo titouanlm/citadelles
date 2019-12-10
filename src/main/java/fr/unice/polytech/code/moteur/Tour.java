@@ -98,28 +98,11 @@ public class Tour {
                         affichage.afficherDetails("Possède " + joueur.getNbPiece() + " pièces.\n" + "Cartes dans sa main : \n"+ joueur.cartesEnMainToString() +  "\u001B[0m"+ joueur.getCouleur());
 
                         joueur.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
-                        if (joueur.contientDansSaMain("École de magie")){
-                            for(CarteCitadelles c : joueur.getVilleDuBot().getBatimentsConstruits()){
-                                if(c instanceof EcoleDeMagie){
-                                    ((EcoleDeMagie) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, joueur, piocheCartesCitadelles);
-                                }
-                            }
-                        }
-                        if (joueur.contientDansSaMain("Laboratoire")){
-                            for(CarteCitadelles c : joueur.getVilleDuBot().getBatimentsConstruits()){
-                                if(c instanceof Laboratoire){
-                                    ((Laboratoire) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, joueur, piocheCartesCitadelles);
-                                }
-                            }
-                        }
-                        if (joueur.contientDansSaMain("Manufacture")){
-                            for(CarteCitadelles c : joueur.getVilleDuBot().getBatimentsConstruits()){
-                                if(c instanceof Manufacture){
-                                    ((Manufacture) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, joueur, piocheCartesCitadelles);
-                                }
-                            }
-                        }
+                        this.strategieManufacture(joueur);
+                        this.strategieLaboratoire(joueur);
                         joueur.strategieConstruction();
+
+                        this.strategieEcoleDeMagie(joueur);
                         this.strategieEffectuerSpecialite(joueur);
                         this.estJoueurAyantFinisEnPremier(joueur);
 
@@ -129,6 +112,32 @@ public class Tour {
                         break;
                     }
                 }
+            }
+        }
+    }
+
+    public void strategieLaboratoire(Bot joueur) {
+        for(CarteCitadelles c : joueur.getVilleDuBot().getBatimentsConstruits()){
+            if(c instanceof Laboratoire){
+                ((Laboratoire) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, joueur, piocheCartesCitadelles);
+            }
+        }
+    }
+
+    public void strategieManufacture(Bot joueur) {
+        for(CarteCitadelles c : joueur.getVilleDuBot().getBatimentsConstruits()){
+            if(c instanceof Manufacture){
+                if(joueur.getCartesCitadellesEnMain().size() < 2){
+                    ((Manufacture) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, joueur, piocheCartesCitadelles);
+                }
+            }
+        }
+    }
+
+    public void strategieEcoleDeMagie(Bot joueur) {
+        for(CarteCitadelles c : joueur.getVilleDuBot().getBatimentsConstruits()){
+            if(c instanceof EcoleDeMagie){
+                ((EcoleDeMagie) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, joueur, piocheCartesCitadelles);
             }
         }
     }
@@ -154,7 +163,6 @@ public class Tour {
     public void defausserCartesPersonnagePourLeTour() {
         piocheCartesPersonnage.piocherPersonnageAleatoirement();
         Personnage personnageDefausseVisible = piocheCartesPersonnage.piocherPersonnageAleatoirement();
-
         while (personnageDefausseVisible.getNumero() == 4) {
             piocheCartesPersonnage.ajouterCartePersonnage(personnageDefausseVisible);
             personnageDefausseVisible = piocheCartesPersonnage.piocherPersonnageAleatoirement();
@@ -217,7 +225,7 @@ public class Tour {
         }else if (joueur.getPersonnageACeTour() instanceof Architecte) {
             joueur.strategieArchitecte();
         }else if (joueur.getPersonnageACeTour() instanceof Condottiere) {
-            joueur.strategieCondottiere(listeJoueurs);
+            joueur.strategieCondottiere(listeJoueurs, piocheCartesCitadelles);
         }
     }
 

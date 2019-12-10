@@ -2,6 +2,7 @@ package fr.unice.polytech.code.bots;
 
 import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
+import fr.unice.polytech.code.cartes.CarteCitadellesSansPouvoir;
 import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
 import fr.unice.polytech.code.personnages.*;
 import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
@@ -14,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class BotFairPlayTest {
-
 
     PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
     Affichage affichage  = new Affichage(1);
@@ -30,6 +30,24 @@ public class BotFairPlayTest {
         listeJoueurs.add(bot3);
     }
 
+
+    @Test
+    public void choixCartesPiocheesCartesPlusHaute(){
+        piocheCartesCitadelles.ajouterCarteCitadelles(new CarteCitadellesSansPouvoir(1, CouleurCarteCitadelles.VIOLET, "Temple", 1 ));
+        piocheCartesCitadelles.ajouterCarteCitadelles(new CarteCitadellesSansPouvoir(4,CouleurCarteCitadelles.VIOLET, "Eglise", 2 ));
+        bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(5,CouleurCarteCitadelles.VIOLET, "Eglise", 2 ));
+        assertEquals(1 , bot2.getCartesCitadellesEnMain().size());
+        assertEquals(2, piocheCartesCitadelles.nbCartesRestantes());
+
+        CarteCitadelles cartePiochee1 = piocheCartesCitadelles.piocher();
+        CarteCitadelles cartePiochee2 = piocheCartesCitadelles.piocher();
+        CarteCitadelles carteChoisie = bot2.choixCartesPiochees(piocheCartesCitadelles, cartePiochee1, cartePiochee2);
+
+        assertEquals(1 , piocheCartesCitadelles.nbCartesRestantes());
+        assertEquals("Temple" , carteChoisie.getNom());
+    }
+
+
     @Test
     public void strategieVoleur() {
         bot1.ajouterPiece(10);
@@ -40,12 +58,13 @@ public class BotFairPlayTest {
         bot3.setPersonnageACeTour(new Marchand(affichage));
         bot2.strategieVoleur(listeJoueurs, new Eveque(affichage));
         if (bot3.getNbPiece() == 0) {
-            assertNotEquals(0, bot2.getNbPiece());
+            assertEquals(40, bot2.getNbPiece());
         }
         else if (bot1.getNbPiece()==0){
-            assertNotEquals(0, bot2.getNbPiece());
+            assertEquals(10, bot2.getNbPiece());
         }
     }
+
 
     @Test
     public void strategieAssassin(){
@@ -75,7 +94,8 @@ public class BotFairPlayTest {
         assertSame("Hôtel de ville",bot1.getCartesCitadellesEnMain().get(0).getNom());
         assertSame("Dracopert",bot1.getCartesCitadellesEnMain().get(1).getNom());
         assertSame("Universitè",bot1.getCartesCitadellesEnMain().get(2).getNom());
-        assertNotEquals(null,bot1.getCartesCitadellesEnMain());
+        assertNotEquals(0,bot1.getCartesCitadellesEnMain().size());
+        assertEquals(0, bot2.getCartesCitadellesEnMain().size());
     }
 
     @Test
@@ -98,8 +118,9 @@ public class BotFairPlayTest {
         bot1.ajouterPiece(50);
         bot1.setPersonnageACeTour(new Condottiere(affichage));
         bot3.setPersonnageACeTour(new Architecte(affichage));
-        bot1.strategieCondottiere(listeJoueurs);
+        bot1.strategieCondottiere(listeJoueurs, piocheCartesCitadelles);
         assertEquals(3, bot2.getNbPiece());
+        assertEquals(3, bot2.getVilleDuBot().getNbBatimentsConstruits());
     }
 
     @Test
@@ -134,7 +155,7 @@ public class BotFairPlayTest {
         bot2.villeDuBot.construireBatiment(new CarteCitadelles(52, CouleurCarteCitadelles.ROUGE, "Caserne", 3));
         bot2.villeDuBot.construireBatiment(new CarteCitadelles(53, CouleurCarteCitadelles.ROUGE, "Forteresse", 5));
         bot2.villeDuBot.construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
-        bot2.strategieCondottiere(listeJoueurs);
+        bot2.strategieCondottiere(listeJoueurs, piocheCartesCitadelles);
         assertEquals(28, bot2.getNbPiece());
         assertEquals(1,bot1.villeDuBot.getNbBatimentsConstruits());
     }

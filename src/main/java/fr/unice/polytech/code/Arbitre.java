@@ -27,17 +27,11 @@ public class Arbitre {
             joueur.setNbPoint(joueur.getVilleDuBot().getNbTotalPoint());
             this.testBonusPremierJoueurAFinir(joueur);
             this.testBonusAConstruit8CesQuartiers(joueur);
-            for(CarteCitadelles c : joueur.getVilleDuBot().getBatimentsConstruits()){
-                if(c instanceof CourDesMiracles){
-                    PiocheCartesCitadelles piocheCartesCitadelles = null;
-                    ((CourDesMiracles) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, joueur, piocheCartesCitadelles);
-                }
-            }
             this.testBonusPossede5CouleursDeQuartierDifferentes(joueur);
         }
     }
 
-    void testBonusPremierJoueurAFinir(Bot joueur){
+    public void testBonusPremierJoueurAFinir(Bot joueur){
         if(joueur.estPremierJoueurAFinir()){
             joueur.setNbPoint(4);
             affichage.afficherDetails("\u001B[1m" + "\u001B[32m" +joueur.getNom() + "\u001B[21m" + "\u001B[0m" + " est le premier joueur ayant posé son huitième quartier ");
@@ -51,13 +45,20 @@ public class Arbitre {
         }
     }
 
-    void testBonusPossede5CouleursDeQuartierDifferentes(Bot joueur){
+    public void testBonusPossede5CouleursDeQuartierDifferentes(Bot joueur){
         ArrayList<CouleurCarteCitadelles> couleurs = new ArrayList<>();
         couleurs.add(CouleurCarteCitadelles.BLEU);
         couleurs.add(CouleurCarteCitadelles.JAUNE);
         couleurs.add(CouleurCarteCitadelles.VERT);
         couleurs.add(CouleurCarteCitadelles.ROUGE);
         couleurs.add(CouleurCarteCitadelles.VIOLET);
+
+
+        for(CarteCitadelles c : joueur.getVilleDuBot().getBatimentsConstruits()){
+            if(c instanceof CourDesMiracles){
+                ((CourDesMiracles) c).effectuerSpecialite((CarteCitadellesAvecPouvoir) c, joueur, null);
+            }
+        }
 
         for (CarteCitadelles batiment : joueur.getVilleDuBot().getBatimentsConstruits() ){
             for(int i=0;i<couleurs.size();i++){

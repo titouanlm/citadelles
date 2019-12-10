@@ -14,10 +14,8 @@ public class Manufacture extends CarteCitadellesAvecPouvoir {
             joueur.retirerPiece(3);
             for (int i = 0; i < 3; i++) {
                 joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
-
             }
         }
-
     }
 }
 

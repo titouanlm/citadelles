@@ -11,6 +11,5 @@ public class Bibliotheque extends CarteCitadellesAvecPouvoir {
     @Override
     public void effectuerSpecialite(CarteCitadellesAvecPouvoir carte, Bot joueur, PiocheCartesCitadelles piocheCartesCitadelles) {
 
-
     }
 }

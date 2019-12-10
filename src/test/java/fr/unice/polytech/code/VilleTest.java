@@ -1,9 +1,7 @@
 package fr.unice.polytech.code;
 
 import fr.unice.polytech.code.bots.*;
-import fr.unice.polytech.code.cartes.CarteCitadelles;
-import fr.unice.polytech.code.cartes.CarteCitadellesSansPouvoir;
-import fr.unice.polytech.code.cartes.CouleurCarteCitadelles;
+import fr.unice.polytech.code.cartes.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -34,6 +32,14 @@ public class VilleTest {
         ville.construireBatiment(cc3);
         assertTrue(ville.contient(cc3));
         assertFalse(ville.contient(cc1));
+    }
+
+    @Test
+    void contientTest2(){
+        assertFalse(ville.contient("Manufacture"));
+        ville.construireBatiment(cc3);
+        assertTrue(ville.contient("Manufacture"));
+        assertFalse(ville.contient("Donjon"));
     }
 
     @Test
@@ -117,6 +123,22 @@ public class VilleTest {
     }
 
     @Test
+    void compterNbQuartiersVioletTest(){
+        Bot bot1 = new BotAleatoire("Bot 2", "\033[35m",affichage);
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m",affichage);
+
+        bot1.getVilleDuBot().construireBatiment(new CourDesMiracles(55,CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2 ));
+        bot1.getVilleDuBot().construireBatiment(new Donjon(56,CouleurCarteCitadelles.VIOLET, "Donjon", 3 ));
+        bot1.getVilleDuBot().construireBatiment(new Laboratoire(58,CouleurCarteCitadelles.VIOLET, "Laboratoire", 5 ));
+        bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(39,CouleurCarteCitadelles.VERT, "Port", 4 ));
+        bot2.getVilleDuBot().construireBatiment(new Donjon(57,CouleurCarteCitadelles.VIOLET, "Donjon", 3 ));
+        bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(53, CouleurCarteCitadelles.ROUGE, "Forteresse", 5));
+
+        assertEquals(3, bot1.getVilleDuBot().compterNbQuartiersViolet());
+        assertEquals(1, bot2.getVilleDuBot().compterNbQuartiersViolet());
+    }
+
+    @Test
     void quartiersVilleToStringTest(){
 
         Bot bot1 = new BotAleatoire("Bot 1", "\033[35m",affichage);
@@ -155,7 +177,6 @@ public class VilleTest {
         bot1.getVilleDuBot().detruireQuartier(bot1.getVilleDuBot().getBatimentsConstruits().get(0));
         bot1.getVilleDuBot().detruireQuartier(bot1.getVilleDuBot().getBatimentsConstruits().get(1));
         bot2.getVilleDuBot().detruireQuartier(bot2.getVilleDuBot().getBatimentsConstruits().get(0));
-
 
         assertEquals(7, bot1.getVilleDuBot().getNbTotalPoint());
         assertEquals(6, bot2.getVilleDuBot().getNbTotalPoint());
