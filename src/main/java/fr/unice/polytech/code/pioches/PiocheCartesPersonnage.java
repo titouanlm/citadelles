@@ -1,6 +1,5 @@
 package fr.unice.polytech.code.pioches;
 
-import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.bots.Bot;
 import fr.unice.polytech.code.personnages.Personnage;
 import fr.unice.polytech.code.personnages.*;
@@ -10,11 +9,9 @@ import java.util.Collections;
 
 public class PiocheCartesPersonnage {
     private ArrayList<Personnage> piocheCP;
-    private Affichage affichage;
 
-    public PiocheCartesPersonnage(Affichage affichage) {
+    public PiocheCartesPersonnage() {
         this.piocheCP = new ArrayList<>();
-        this.affichage = affichage;
     }
 
     public ArrayList<Personnage> getPiocheCP() {
@@ -93,14 +90,14 @@ public class PiocheCartesPersonnage {
 
     public void implementerCartesPersonnage() {
         Personnage[] cp = new Personnage[8];
-        cp[0] = new Assassin(this.affichage);
-        cp[1] = new Voleur(this.affichage);
-        cp[2] = new Magicien(this.affichage);
-        cp[3] = new Roi(this.affichage);
-        cp[4] = new Eveque(this.affichage);
-        cp[5] = new Marchand(this.affichage);
-        cp[6] = new Architecte(this.affichage);
-        cp[7] = new Condottiere(this.affichage);
+        cp[0] = new Assassin();
+        cp[1] = new Voleur();
+        cp[2] = new Magicien();
+        cp[3] = new Roi();
+        cp[4] = new Eveque();
+        cp[5] = new Marchand();
+        cp[6] = new Architecte();
+        cp[7] = new Condottiere();
 
         for (int i = 0; i < 8; i++) {
             this.ajouterCartePersonnage(cp[i]);

@@ -7,8 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 public class PiocheCartesPersonnageTest {
-    private Affichage affichage =new Affichage(1);
-    private PiocheCartesPersonnage piocheCartesPersonnage = new PiocheCartesPersonnage(affichage);
+    private PiocheCartesPersonnage piocheCartesPersonnage = new PiocheCartesPersonnage();
 
     @Test
     void implementerCartesPersonnageTest(){

@@ -8,24 +8,14 @@ import java.util.*;
 public class Main {
 
     public static void main(String... args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("(a) Afficher 1 partie ou (b) Afficher des statistiques sur 1000 parties ?");
-        String reponse = sc.nextLine();
-        Affichage affichage;
-
-        if(reponse.equals("a")){
-            affichage  = new Affichage(1);
-            affichage.setModeDetails(true);
-        }else{
-            affichage = new Affichage(1000);
-        }
-
-        for(int i=0 ; i<affichage.getNbParties(); i++){
-            Bot bot1 = new BotTricheur("Bot 1", "\033[35m",affichage);
-            Bot bot2 = new BotFairPlay("Bot 2", "\033[34m",affichage);
-            Bot bot3 = new BotAleatoire("Bot 3", "\033[36m",affichage);
-            Bot bot4 = new BotAleatoire("Bot 4", "\033[33m",affichage);
-            Bot bot5 = new BotAleatoire("Bot 5", "\033[32m",affichage);
+        System.out.println("Meilleur bot (Bot 1) contre 4 versions du second (Bot 2, Bot 3, Bot 4, Bot 5) :");
+        Affichage affichage1 = new Affichage(1000);
+        for(int i=0 ; i<affichage1.getNbParties(); i++){
+            Bot bot1 = new BotFairPlay("Bot 1", "\033[35m");
+            Bot bot2 = new BotAleatoire("Bot 2", "\033[34m");
+            Bot bot3 = new BotAleatoire("Bot 3", "\033[36m");
+            Bot bot4 = new BotAleatoire("Bot 4", "\033[33m");
+            Bot bot5 = new BotAleatoire("Bot 5", "\033[32m");
 
             ArrayList<Bot> listeJoueurs = new ArrayList<>();
             listeJoueurs.add(bot1);
@@ -35,16 +25,44 @@ public class Main {
             listeJoueurs.add(bot5);
 
             Collections.shuffle(listeJoueurs);
-            Moteur moteurJeu = new Moteur(listeJoueurs,affichage);
+            Moteur moteurJeu = new Moteur(listeJoueurs);
             moteurJeu.lancerUnePartie();
 
-            Arbitre arbitre = new Arbitre(affichage);
+            Arbitre arbitre = new Arbitre();
             arbitre.compteLesPoints(listeJoueurs);
             arbitre.determineJoueurGagnant(listeJoueurs);
-            affichage.incrementerNbPointsDesBotsEnMoyenne(listeJoueurs);
-            affichage.incrementerNbVictoireDuBot(arbitre.getJoueurGagnant());
+            affichage1.incrementerNbPointsDesBotsEnMoyenne(listeJoueurs);
+            affichage1.incrementerNbVictoireDuBot(arbitre.getJoueurGagnant());
         }
+        affichage1.afficherResultats();
 
-        affichage.afficherResultats();
+        System.out.println("\n\nMeilleur bot (BotFairPlay) contre 4 versions de lui même : ");
+        Affichage affichage2 = new Affichage(1000);
+        for(int i=0 ; i<affichage2.getNbParties(); i++){
+            Bot bot1 = new BotFairPlay("Bot 1", "\033[35m");
+            Bot bot2 = new BotFairPlay("Bot 2", "\033[34m");
+            Bot bot3 = new BotFairPlay("Bot 3", "\033[36m");
+            Bot bot4 = new BotFairPlay("Bot 4", "\033[33m");
+            Bot bot5 = new BotFairPlay("Bot 5", "\033[32m");
+
+            ArrayList<Bot> listeJoueurs = new ArrayList<>();
+            listeJoueurs.add(bot1);
+            listeJoueurs.add(bot2);
+            listeJoueurs.add(bot3);
+            listeJoueurs.add(bot4);
+            listeJoueurs.add(bot5);
+
+            Collections.shuffle(listeJoueurs);
+            Moteur moteurJeu = new Moteur(listeJoueurs);
+            moteurJeu.lancerUnePartie();
+
+            Arbitre arbitre = new Arbitre();
+            arbitre.compteLesPoints(listeJoueurs);
+            arbitre.determineJoueurGagnant(listeJoueurs);
+            affichage2.incrementerNbPointsDesBotsEnMoyenne(listeJoueurs);
+            affichage2.incrementerNbVictoireDuBot(arbitre.getJoueurGagnant());
+        }
+        affichage2.afficherResultats();
+
     }
 }

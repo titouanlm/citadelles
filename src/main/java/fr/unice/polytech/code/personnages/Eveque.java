@@ -8,8 +8,7 @@ import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 public class Eveque extends Personnage {
 
-    public Eveque(Affichage affichage){
-        super(affichage);
+    public Eveque(){
         this.numero =5;
         this.nom = "Evèque";
     }
@@ -22,6 +21,5 @@ public class Eveque extends Personnage {
                 nbPieceGagnee++;
             }
         }
-        affichage.afficherDetails("Récupère "  + nbPieceGagnee + " pièces bonus grâce aux quartiers religieux.");
     }
 }

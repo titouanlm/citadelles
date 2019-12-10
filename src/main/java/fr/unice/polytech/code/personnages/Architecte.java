@@ -12,8 +12,7 @@ import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 public class Architecte extends Personnage {
 
-    public Architecte(Affichage affichage){
-        super(affichage);
+    public Architecte(){
         this.numero = 7;
         this.nom = "Architecte";
     }

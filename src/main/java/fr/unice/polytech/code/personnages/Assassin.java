@@ -13,21 +13,16 @@ import java.util.ArrayList;
 
 public class Assassin extends Personnage {
 
-    public Assassin(Affichage affichage){
-        super(affichage);
+    public Assassin(){
         this.numero =1;
         this.nom = "Assassin";
     }
 
     public void effectuerSpecialiteAssassin(Personnage personnageAAssassiner, ArrayList<Bot> listeJoueurs) {
         if(!(personnageAAssassiner instanceof Assassin) && personnageAAssassiner!=null){
-            affichage.afficherDetails("Assassine le personnage " + personnageAAssassiner.getNom());
             Bot joueurAAssassiner= this.botQuiPossede(personnageAAssassiner, listeJoueurs);
-            if(joueurAAssassiner!=null){
+            if(joueurAAssassiner!=null) {
                 joueurAAssassiner.setPersonnageACeTour(null);
-                affichage.afficherDetails("Le " + joueurAAssassiner.getNom() + " ne pourra donc pas joueur ce tour-ci.");
-            }else{
-                affichage.afficherDetails("Personne ne possède ce personnage.");
             }
         }
     }

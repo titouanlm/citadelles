@@ -17,10 +17,9 @@ public class Tour {
     private PiocheCartesCitadelles piocheCartesCitadelles;
     private PiocheCartesPersonnage piocheCartesPersonnage;
     private ArrayList<Bot> listeJoueurs;
-    private Affichage affichage;
 
 
-    public Tour(int numero, PiocheCartesCitadelles piocheCartesCitadelles, PiocheCartesPersonnage piocheCartesPersonnage, ArrayList<Bot> listeJoueurs,Affichage affichage) {
+    public Tour(int numero, PiocheCartesCitadelles piocheCartesCitadelles, PiocheCartesPersonnage piocheCartesPersonnage, ArrayList<Bot> listeJoueurs) {
         this.numero = numero;
         this.piocheCartesCitadelles = piocheCartesCitadelles;
         this.piocheCartesPersonnage = piocheCartesPersonnage;
@@ -28,7 +27,6 @@ public class Tour {
         this.indiceJoueurPossedantCouronne = 0;
         this.personnageDefausseVisible = null;
         this.joueurAyantLeRoi = null;
-        this.affichage = affichage;
     }
 
     public int getNumero() {
@@ -83,20 +81,14 @@ public class Tour {
             for (Bot joueur : listeJoueurs) {
                 if (joueur.getPersonnageACeTour() != null) {
                     if (joueur.getPersonnageACeTour().getNumero() == numeroAppele) {
-                        affichage.afficherDetails("\n" +joueur.getCouleur()+joueur.getNom());
-                        affichage.afficherDetails(("Personnage à ce tour : " + joueur.getPersonnageACeTour().getNom()));
-                        if (numeroAppele == 4) { //Roi
+                       if (numeroAppele == 4) { //Roi
                             this.setJoueurAyantLeRoi(joueur);
                         } else if (numeroAppele == 6) { //Marchand
                             joueur.ajouterPiece(1);
-                            affichage.afficherDetails("+1 pièce car il est le Marchand ce tour-ci!");
                         }else if(numeroAppele == 7){ //Architecte
                             joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
                             joueur.ajouterCartesCitadellesDansMain(piocheCartesCitadelles.piocher());
-                            affichage.afficherDetails("Pioche 2 cartes car il est l'Architecte ce tour-ci!");
                         }
-                        affichage.afficherDetails("Possède " + joueur.getNbPiece() + " pièces.\n" + "Cartes dans sa main : \n"+ joueur.cartesEnMainToString() +  "\u001B[0m"+ joueur.getCouleur());
-
                         joueur.choisirPiocherOuPrendrePiece(piocheCartesCitadelles);
                         this.strategieManufacture(joueur);
                         this.strategieLaboratoire(joueur);
@@ -105,10 +97,6 @@ public class Tour {
                         this.strategieEcoleDeMagie(joueur);
                         this.strategieEffectuerSpecialite(joueur);
                         this.estJoueurAyantFinisEnPremier(joueur);
-
-                        affichage.afficherDetails(joueur.getCouleur() + "Quartiers construits dans sa ville : ");
-                        affichage.afficherDetails(joueur.getVilleDuBot().quartiersVilleToString());
-                        affichage.afficherDetails(joueur.getCouleur() +"Possède " + joueur.getNbPiece() + " pièces.\n" + "\u001B[0m");
                         break;
                     }
                 }
@@ -156,8 +144,6 @@ public class Tour {
             listeJoueurs.get(indiceJoueurPossedantCouronne).setPossedeCouronne(true);
         }
         this.indiceJoueurPossedantCouronne = indiceJoueurPossedantCouronne;
-        affichage.afficherDetails(listeJoueurs.get(indiceJoueurPossedantCouronne).getCouleur() + listeJoueurs.get(indiceJoueurPossedantCouronne).getNom() + " possède la carte couronne. \n" );
-
     }
 
     public void defausserCartesPersonnagePourLeTour() {
@@ -168,18 +154,14 @@ public class Tour {
             personnageDefausseVisible = piocheCartesPersonnage.piocherPersonnageAleatoirement();
         }
         this.setPersonnageDefausseVisible(personnageDefausseVisible);
-        affichage.afficherDetails("\u001B[1m" + personnageDefausseVisible.getNom()+ "\u001B[0m"+ " ne peut pas être choisi pour ce tour.");
     }
 
     public void attributionPersonnageAChaqueJoueur() {
         for (int i = this.indiceJoueurPossedantCouronne; i < listeJoueurs.size(); i++) {
             listeJoueurs.get(i).choixDuPersonnagePourLeTour(piocheCartesPersonnage, personnageDefausseVisible);
-
-            affichage.afficherDetails(listeJoueurs.get(i).getCouleur() +  listeJoueurs.get(i).getNom() + " a choisi le personnage " + "\u001B[1m" +listeJoueurs.get(i).getPersonnageACeTour().getNom() + ".\u001B[0m");
         }
         for (int i = 0; i < this.indiceJoueurPossedantCouronne; i++) {
             listeJoueurs.get(i).choixDuPersonnagePourLeTour(piocheCartesPersonnage, personnageDefausseVisible);
-            affichage.afficherDetails(listeJoueurs.get(i).getCouleur() +  listeJoueurs.get(i).getNom() + " a choisi le personnage " + "\u001B[1m" +listeJoueurs.get(i).getPersonnageACeTour().getNom()  +".\u001B[0m");
         }
     }
 
@@ -199,9 +181,6 @@ public class Tour {
     public boolean verifierFinPartie() {
         for (Bot joueur : listeJoueurs) {
             if (joueur.getVilleDuBot().getNbBatimentsConstruits() == 8) {
-                affichage.afficherDetails("--------------------------------------------------");
-                affichage.afficherDetails("\u001B[1m" + "\u001B[31m"  + "\t\t\t La partie est terminée" + "\u001B[0m" );
-                affichage.afficherDetails("--------------------------------------------------");
                 return true;
             }
         }
@@ -215,7 +194,6 @@ public class Tour {
             joueur.strategieVoleur(listeJoueurs, personnageDefausseVisible);
         }else if (joueur.getPersonnageACeTour() instanceof Magicien) {
             joueur.strategieMagicien(listeJoueurs, piocheCartesCitadelles);
-            affichage.afficherDetails("Cartes dans sa main : \n"+ joueur.cartesEnMainToString() +  "\u001B[0m"+ joueur.getCouleur());
         }else if (joueur.getPersonnageACeTour() instanceof Roi) {
             joueur.strategieRoi();
         }else if (joueur.getPersonnageACeTour() instanceof Eveque) {

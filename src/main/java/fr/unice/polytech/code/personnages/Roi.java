@@ -13,8 +13,7 @@ import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 public class Roi extends Personnage {
 
-    public Roi(Affichage affichage){
-        super(affichage);
+    public Roi(){
         this.numero =4;
         this.nom = "Roi";
     }
@@ -27,6 +26,5 @@ public class Roi extends Personnage {
                 nbPieceGagnee++;
             }
         }
-        affichage.afficherDetails("Récupère " + nbPieceGagnee + " pièces bonus grâce aux quartiers nobles.");
     }
 }

@@ -16,10 +16,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CondottiereTest {
 
-    Affichage affichage  = new Affichage(1);
     PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
-    Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", affichage);
-    Bot bot2 = new BotAleatoire("Bot 2","\033[33m", affichage);
+    Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+    Bot bot2 = new BotAleatoire("Bot 2","\033[33m" );
     ArrayList<Bot> listeJoueurs = new ArrayList<>();
 
     @BeforeEach
@@ -31,8 +30,8 @@ class CondottiereTest {
     @Test
     void effectuerSpecialiteCondottiereTest(){
 
-        bot1.setPersonnageACeTour(new Condottiere(affichage));
-        bot2.setPersonnageACeTour(new Condottiere(affichage));
+        bot1.setPersonnageACeTour(new Condottiere());
+        bot2.setPersonnageACeTour(new Condottiere());
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44, CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));
@@ -54,8 +53,8 @@ class CondottiereTest {
 
     @Test
     void detruirePlusGrosQuartierEnemieTest(){
-        bot1.setPersonnageACeTour(new Condottiere(affichage));
-        bot2.setPersonnageACeTour(new Marchand(affichage));
+        bot1.setPersonnageACeTour(new Condottiere());
+        bot2.setPersonnageACeTour(new Marchand());
 
         bot1.ajouterPiece(5);
 
@@ -102,8 +101,8 @@ class CondottiereTest {
 
     @Test
     void detruirePlusGrosQuartierEnemieEvequeTest(){
-        bot1.setPersonnageACeTour(new Condottiere(affichage));
-        bot2.setPersonnageACeTour(new Eveque(affichage));
+        bot1.setPersonnageACeTour(new Condottiere());
+        bot2.setPersonnageACeTour(new Eveque());
 
         bot1.ajouterPiece(5);
 
@@ -127,8 +126,8 @@ class CondottiereTest {
 
     @Test
     void detruireQuartierAleatoireEnemieTest(){
-        bot1.setPersonnageACeTour(new Condottiere(affichage));
-        bot2.setPersonnageACeTour(new Marchand(affichage));
+        bot1.setPersonnageACeTour(new Condottiere());
+        bot2.setPersonnageACeTour(new Marchand());
 
         bot1.ajouterPiece(5);
 
@@ -150,8 +149,8 @@ class CondottiereTest {
 
     @Test
     void detruirePlusPetitQuartierEnemieTest(){
-        bot1.setPersonnageACeTour(new Condottiere(affichage));
-        bot2.setPersonnageACeTour(new Marchand(affichage));
+        bot1.setPersonnageACeTour(new Condottiere());
+        bot2.setPersonnageACeTour(new Marchand());
 
         bot1.ajouterPiece(5);
 
@@ -181,9 +180,9 @@ class CondottiereTest {
         bot2.ajouterPiece(2);
         bot1.getVilleDuBot().construireBatiment(new Cimitiere(61,CouleurCarteCitadelles.VIOLET, "Cimetière", 5 ));
         bot2.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
-        bot1.setPersonnageACeTour(new Eveque(affichage));
-        bot2.setPersonnageACeTour(new Marchand(affichage));
-        Condottiere c = new Condottiere(affichage);
+        bot1.setPersonnageACeTour(new Eveque());
+        bot2.setPersonnageACeTour(new Marchand());
+        Condottiere c = new Condottiere();
         CarteCitadelles quartierDetruit = new CarteCitadellesSansPouvoir(50,CouleurCarteCitadelles.ROUGE, "Caserne", 3 );
 
         assertTrue(c.recupereQuartierDetruit(listeJoueurs, quartierDetruit));

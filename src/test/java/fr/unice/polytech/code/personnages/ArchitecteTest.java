@@ -12,14 +12,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ArchitecteTest {
 
-    Affichage affichage  = new Affichage(1);
     PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
 
     @Test
     void effectuerSpecialiteArchitecteTest(){
-        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m", affichage);
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m");
 
-        bot1.setPersonnageACeTour(new Architecte(affichage));
+        bot1.setPersonnageACeTour(new Architecte());
         bot1.ajouterPiece(12);
 
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));

@@ -18,10 +18,9 @@ import static org.mockito.Mockito.when;
 public class BotTricheurTest {
 
     PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
-    Affichage affichage  = new Affichage(1);
-    Bot bot1 = new BotTricheur("Bot 1", "\033[35m",affichage);
-    Bot bot2 = new BotFairPlay("Bot 2", "\033[34m",affichage);
-    Bot bot3 = new BotAleatoire("Bot 3", "\033[36m",affichage);
+    Bot bot1 = new BotTricheur("Bot 1", "\033[35m");
+    Bot bot2 = new BotFairPlay("Bot 2", "\033[34m");
+    Bot bot3 = new BotAleatoire("Bot 3", "\033[36m");
     Bot bot4 = mock(BotTricheur.class);
     ArrayList<Bot> listeJoueurs = new ArrayList<>();
 
@@ -55,10 +54,10 @@ public class BotTricheurTest {
         bot1.ajouterPiece(10);
         bot2.ajouterPiece(30);
         bot3.ajouterPiece(40);
-        bot1.setPersonnageACeTour(new Voleur(affichage));
-        bot2.setPersonnageACeTour(new Condottiere(affichage));
-        bot3.setPersonnageACeTour(new Marchand(affichage));
-        when(bot4.getPersonnageACeTour()).thenReturn(new Assassin(affichage));
+        bot1.setPersonnageACeTour(new Voleur());
+        bot2.setPersonnageACeTour(new Condottiere());
+        bot3.setPersonnageACeTour(new Marchand());
+        when(bot4.getPersonnageACeTour()).thenReturn(new Assassin());
         bot1.strategieVoleur(listeJoueurs,null);
         assertEquals(50, bot1.getNbPiece());
         assertEquals(30, bot2.getNbPiece());
@@ -70,9 +69,9 @@ public class BotTricheurTest {
         bot1.setNbPoint(10);
         bot2.setNbPoint(20);
         bot3.setNbPoint(30);
-        bot1.setPersonnageACeTour(new Assassin(affichage));
-        bot2.setPersonnageACeTour(new Condottiere(affichage));
-        bot3.setPersonnageACeTour(new Architecte(affichage));
+        bot1.setPersonnageACeTour(new Assassin());
+        bot2.setPersonnageACeTour(new Condottiere());
+        bot3.setPersonnageACeTour(new Architecte());
         bot1.strategieAssassin(listeJoueurs,null);
         assertEquals(bot3.getPersonnageACeTour(),null);
         assertSame("Condottiere", bot2.getPersonnageACeTour().getNom());
@@ -82,7 +81,7 @@ public class BotTricheurTest {
     public void strategieMagicien(){
         piocheCartesCitadelles.ajouterCarteCitadelles(new CarteCitadelles(63, CouleurCarteCitadelles.VIOLET, "École de magie", 6));
         piocheCartesCitadelles.ajouterCarteCitadelles(new CarteCitadelles(63, CouleurCarteCitadelles.VIOLET, "École de magie", 6));
-        bot1.setPersonnageACeTour(new Magicien(affichage));
+        bot1.setPersonnageACeTour(new Magicien());
         bot2.ajouterCartesCitadellesDansMain(new CarteCitadelles(43, CouleurCarteCitadelles.VERT, "Hôtel de ville", 5));
         bot2.ajouterCartesCitadellesDansMain(new CarteCitadelles(65, CouleurCarteCitadelles.VIOLET, "Dracopert", 8));
         bot2.ajouterCartesCitadellesDansMain(new CarteCitadelles(64, CouleurCarteCitadelles.VIOLET, "Universitè", 8));
@@ -97,7 +96,7 @@ public class BotTricheurTest {
 
     @Test
     public void strategieRoi(){
-        bot1.setPersonnageACeTour(new Roi(affichage));
+        bot1.setPersonnageACeTour(new Roi());
         bot1.villeDuBot.construireBatiment(new CarteCitadelles(13, CouleurCarteCitadelles.JAUNE, "Manoir", 3));
         bot1.villeDuBot.construireBatiment(new CarteCitadelles(21, CouleurCarteCitadelles.JAUNE, "Château", 4));
         bot1.villeDuBot.construireBatiment(new CarteCitadelles(22, CouleurCarteCitadelles.JAUNE, "Palais", 5));
@@ -107,14 +106,14 @@ public class BotTricheurTest {
 
     @Test
     public void strategieEveque() {
-        bot1.setPersonnageACeTour(new Eveque(affichage));
+        bot1.setPersonnageACeTour(new Eveque());
         bot1.villeDuBot.construireBatiment(new CarteCitadelles(7, CouleurCarteCitadelles.BLEU, "Eglise", 2));
         bot1.villeDuBot.construireBatiment(new CarteCitadelles(10, CouleurCarteCitadelles.BLEU, "Monastère", 3));
         bot1.villeDuBot.construireBatiment(new CarteCitadelles(11, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
         bot1.strategieEveque();
         bot2.ajouterPiece(50);
-        bot2.setPersonnageACeTour(new Condottiere(affichage));
-        bot3.setPersonnageACeTour(new Architecte(affichage));
+        bot2.setPersonnageACeTour(new Condottiere());
+        bot3.setPersonnageACeTour(new Architecte());
         bot2.strategieCondottiere(listeJoueurs, piocheCartesCitadelles);
         assertEquals(3, bot1.getNbPiece());
         assertEquals(3, bot1.getVilleDuBot().getNbBatimentsConstruits());
@@ -122,7 +121,7 @@ public class BotTricheurTest {
 
     @Test
     public void strategieMarchand() {
-        bot1.setPersonnageACeTour(new Marchand(affichage));
+        bot1.setPersonnageACeTour(new Marchand());
         bot1.villeDuBot.construireBatiment(new CarteCitadelles(38, CouleurCarteCitadelles.VERT, "Comptoir", 3));
         bot1.villeDuBot.construireBatiment(new CarteCitadelles(39, CouleurCarteCitadelles.VERT, "Port", 4));
         bot1.villeDuBot.construireBatiment(new CarteCitadelles(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
@@ -133,7 +132,7 @@ public class BotTricheurTest {
     @Test
     public void strategieArchitecte() {
         bot1.ajouterPiece(30);
-        bot1.setPersonnageACeTour(new Architecte(affichage));
+        bot1.setPersonnageACeTour(new Architecte());
         bot1.cartesCitadellesEnMain.add(new CarteCitadelles(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
         bot1.cartesCitadellesEnMain.add(new CarteCitadelles(63, CouleurCarteCitadelles.VIOLET, "École de magie", 6));
         bot1.cartesCitadellesEnMain.add(new CarteCitadelles(64, CouleurCarteCitadelles.VIOLET, "Universitè", 8));
@@ -145,7 +144,7 @@ public class BotTricheurTest {
 
     @Test
     public void strategieCondottiere() {
-        bot1.setPersonnageACeTour(new Condottiere(affichage));
+        bot1.setPersonnageACeTour(new Condottiere());
         bot1.ajouterPiece(30);
         bot2.villeDuBot.construireBatiment(new CarteCitadelles(41, CouleurCarteCitadelles.VERT, "Port", 4));
         bot2.villeDuBot.construireBatiment(new CarteCitadelles(42, CouleurCarteCitadelles.VERT, "Hôtel de ville", 5));

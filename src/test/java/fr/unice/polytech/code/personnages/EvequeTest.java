@@ -11,15 +11,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EvequeTest {
 
-    Affichage affichage  = new Affichage(1);
 
     @Test
     void effectuerSpecialiteEvequeTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", null);
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m", null);
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
 
-        bot1.setPersonnageACeTour(new Eveque(affichage));
-        bot2.setPersonnageACeTour(new Eveque(affichage));
+        bot1.setPersonnageACeTour(new Eveque());
+        bot2.setPersonnageACeTour(new Eveque());
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(12, CouleurCarteCitadelles.BLEU, "Cathédrale", 5));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));

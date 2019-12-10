@@ -12,8 +12,8 @@ import java.util.ArrayList;
  */
 public class BotAleatoire extends Bot {
 
-    public BotAleatoire(String nom, String couleur, Affichage affichage) {
-        super(nom, couleur, affichage);
+    public BotAleatoire(String nom, String couleur) {
+        super(nom, couleur);
     }
 
     @Override
@@ -23,7 +23,6 @@ public class BotAleatoire extends Bot {
                 retirerPiece(carteEnMain.getPoint()); //on retire les pieces
                 villeDuBot.construireBatiment(carteEnMain); //on ajoute la carte dans la ville
                 cartesCitadellesEnMain.remove(carteEnMain); //on retire la carte de la main
-                affichage.afficherDetails(this.getCouleur() + "Construit le quartier " + carteEnMain.getCouleur() + carteEnMain.getNom() + "\u001B[0m" + this.getCouleur() + " dans sa ville.");
                 break;
             }
         }
@@ -39,7 +38,6 @@ public class BotAleatoire extends Bot {
     public void choisirPiocherOuPrendrePiece(PiocheCartesCitadelles piocheCartesCitadelles) {
         if (this.determinerChoixPiocherOuPiece(piocheCartesCitadelles) == 1) {
             this.ajouterPiece(2);
-            affichage.afficherDetails("Choisit de prendre 2 pièces.");
         } else {
             CarteCitadelles cartePiochee1 = piocheCartesCitadelles.piocher();
             CarteCitadelles cartePiochee2 = piocheCartesCitadelles.piocher();
@@ -51,9 +49,6 @@ public class BotAleatoire extends Bot {
             }else{
                 CarteCitadelles carteChoisie =  this.choixCartesPiochees(piocheCartesCitadelles, cartePiochee1, cartePiochee2);
                 this.ajouterCartesCitadellesDansMain(carteChoisie);
-                if(carteChoisie!=null){
-                    affichage.afficherDetails("Choisit de prendre : " + carteChoisie.getNom());
-                }
             }
         }
     }
@@ -62,7 +57,6 @@ public class BotAleatoire extends Bot {
     public CarteCitadelles choixCartesPiochees(PiocheCartesCitadelles piocheCartesCitadelles, CarteCitadelles cartePiochee1,CarteCitadelles cartePiochee2) {
         CarteCitadelles carteChoisie;
         if(cartePiochee2!=null){
-            affichage.afficherDetails("Pioche 2 cartes : " + cartePiochee1.getNom() + " et " + cartePiochee2.getNom());
             int choix = (int) (Math.random() * 2);
             if(this.getVilleDuBot().contient("Bibliothèque")) {
                 this.ajouterCartesCitadellesDansMain(cartePiochee1);

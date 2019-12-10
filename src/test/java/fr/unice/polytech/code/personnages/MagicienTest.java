@@ -17,15 +17,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class MagicienTest {
     PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
 
-    Affichage affichage  = new Affichage(1);
 
     @Test
     void echangerCartesAvecUnPersonnageTest() {
-        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m",null);
-        Bot bot2 = new BotFairPlay("Bot 2","\033[33m",null);
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m");
+        Bot bot2 = new BotFairPlay("Bot 2","\033[33m");
 
-        bot1.setPersonnageACeTour(new Eveque(affichage));
-        bot2.setPersonnageACeTour(new Magicien(affichage));
+        bot1.setPersonnageACeTour(new Eveque());
+        bot2.setPersonnageACeTour(new Magicien());
 
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
@@ -46,9 +45,9 @@ class MagicienTest {
 
     @Test
     void echangerCartesAvecPiocheTest() {
-        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m",null);
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m");
 
-        bot1.setPersonnageACeTour(new Magicien(affichage));
+        bot1.setPersonnageACeTour(new Magicien());
 
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Taverne", 1));
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));

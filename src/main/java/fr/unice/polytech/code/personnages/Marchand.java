@@ -14,8 +14,7 @@ import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 public class Marchand extends Personnage {
 
-    public Marchand(Affichage affichage){
-        super(affichage);
+    public Marchand(){
         this.numero =6;
         this.nom = "Marchand";
     }
@@ -28,6 +27,5 @@ public class Marchand extends Personnage {
                 nbPieceGagnee++;
             }
         }
-        affichage.afficherDetails("Récupère "  + nbPieceGagnee + " pièces bonus grâce aux quartiers marchands.");
     }
 }

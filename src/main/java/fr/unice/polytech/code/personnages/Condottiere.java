@@ -12,8 +12,7 @@ import java.util.Iterator;
 
 public class Condottiere extends Personnage {
 
-    public Condottiere(Affichage affichage){
-        super(affichage);
+    public Condottiere(){
         this.numero =8;
         this.nom = "Condottiere";
     }
@@ -26,7 +25,6 @@ public class Condottiere extends Personnage {
                 nbPieceGagnee++;
             }
         }
-        affichage.afficherDetails("Récupère " + nbPieceGagnee + " pièces bonus grâce aux quartiers militaires.");
     }
 
     public void detruirePlusGrosQuartierEnemie(Bot joueurQuiEffectueAction, Bot joueurQuiSubitAction, PiocheCartesCitadelles piocheCartesCitadelles, ArrayList<Bot> listeJoueurs){
@@ -47,7 +45,6 @@ public class Condottiere extends Personnage {
                 if(!recupereQuartierDetruit(listeJoueurs, quartierADetruire)){
                     piocheCartesCitadelles.ajouterCarteCitadelles(quartierADetruire);
                 }
-                affichage.afficherDetails("Détruit le quartier " + quartierADetruire.getNom() + " de " + joueurQuiSubitAction.getNom() + " pour " + coutDestruction + " pièces.");
             }
         }
     }
@@ -65,7 +62,6 @@ public class Condottiere extends Personnage {
                     if(!recupereQuartierDetruit(listeJoueurs, quartierADetruire)){
                         piocheCartesCitadelles.ajouterCarteCitadelles(quartierADetruire);
                     }
-                    affichage.afficherDetails("Détruit le quartier " + quartierADetruire.getNom() + " de " + joueurQuiSubitAction.getNom() + " pour " + coutDestruction + " pièces.");
                 }
             }
         }
@@ -88,7 +84,6 @@ public class Condottiere extends Personnage {
                 if(!recupereQuartierDetruit(listeJoueurs, quartierADetruire)){
                     piocheCartesCitadelles.ajouterCarteCitadelles(quartierADetruire);
                 }
-                affichage.afficherDetails("Détruit le quartier " + quartierADetruire.getNom() + " de " + joueurQuiSubitAction.getNom() + " pour " + coutDestruction + " pièces.");
             }
         }
     }

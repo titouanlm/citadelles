@@ -12,10 +12,6 @@ public abstract class Personnage {
     protected String nom;
     Affichage affichage;
 
-    Personnage(Affichage affichage){
-        this.affichage = affichage;
-    }
-
     public int getNumero() {
         return numero;
     }

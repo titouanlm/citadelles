@@ -24,11 +24,10 @@ import static junit.framework.TestCase.assertTrue;
 
 public class CarteCitadellesAvecPouvoirTest {
     private PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
-    private Affichage affichage  = new Affichage(1);
 
     @Test
     void carteUniversiteTest(){
-        Ville ville = new Ville(affichage);
+        Ville ville = new Ville();
         CarteCitadellesAvecPouvoir univ = new Universite(64,CouleurCarteCitadelles.VIOLET, "Université", 6 );
 
         ville.construireBatiment(univ);
@@ -39,7 +38,7 @@ public class CarteCitadellesAvecPouvoirTest {
 
     @Test
     void carteDracopertTest(){
-        Ville ville = new Ville(affichage);
+        Ville ville = new Ville();
         CarteCitadellesAvecPouvoir draco = new Dracopert(65,CouleurCarteCitadelles.VIOLET, "Dracopert", 6);
 
         ville.construireBatiment(draco);
@@ -50,8 +49,8 @@ public class CarteCitadellesAvecPouvoirTest {
 
     @Test
     void carteCourDesMiraclesTest(){
-        Bot bot1 = new BotAleatoire("Bot1","\033[36m",affichage);
-        Arbitre arbitre = new Arbitre(affichage);
+        Bot bot1 = new BotAleatoire("Bot1","\033[36m");
+        Arbitre arbitre = new Arbitre();
 
         bot1.getVilleDuBot().construireBatiment(new CourDesMiracles(55,CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
@@ -70,8 +69,8 @@ public class CarteCitadellesAvecPouvoirTest {
 
     @Test
     void carteCourDesMiraclesTest2(){
-        Bot bot1 = new BotAleatoire("Bot1","\033[36m",affichage);
-        Arbitre arbitre = new Arbitre(affichage);
+        Bot bot1 = new BotAleatoire("Bot1","\033[36m");
+        Arbitre arbitre = new Arbitre();
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(17,CouleurCarteCitadelles.JAUNE, "Manoir", 3 ));
@@ -89,12 +88,12 @@ public class CarteCitadellesAvecPouvoirTest {
 
     @Test
     void carteDonjonTest(){
-        Bot bot1 = new BotAleatoire("Bot1","\033[36m",affichage);
-        Bot bot2 = new BotFairPlay("Bot2","\033[35m",affichage);
+        Bot bot1 = new BotAleatoire("Bot1","\033[36m");
+        Bot bot2 = new BotFairPlay("Bot2","\033[35m");
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
         listeJoueurs.add(bot1);
         listeJoueurs.add(bot2);
-        bot2.setPersonnageACeTour(new Condottiere(affichage));
+        bot2.setPersonnageACeTour(new Condottiere());
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
         bot1.getVilleDuBot().construireBatiment(new CourDesMiracles(55,CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2 ));
@@ -102,7 +101,7 @@ public class CarteCitadellesAvecPouvoirTest {
 
         assertEquals(3, bot1.getVilleDuBot().getNbBatimentsConstruits());
 
-        Condottiere c =new Condottiere(affichage);
+        Condottiere c =new Condottiere();
         c.detruirePlusGrosQuartierEnemie(bot2, bot1, piocheCartesCitadelles, listeJoueurs);
         assertEquals(2, bot1.getVilleDuBot().getNbBatimentsConstruits());
         assertTrue(bot1.getVilleDuBot().contient(new Donjon(56,CouleurCarteCitadelles.VIOLET, "Donjon", 3 )));
@@ -111,8 +110,8 @@ public class CarteCitadellesAvecPouvoirTest {
     @Test
     void carteLaboratoireTest(){
         PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
-        Bot bot1 = new BotAleatoire("Bot1","\033[36m",affichage);
-        Tour t = new Tour(1,piocheCartesCitadelles,null,null,affichage );
+        Bot bot1 = new BotAleatoire("Bot1","\033[36m");
+        Tour t = new Tour(1,piocheCartesCitadelles,null,null);
 
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
         bot1.ajouterCartesCitadellesDansMain(new CourDesMiracles(55,CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2 ));
@@ -132,8 +131,8 @@ public class CarteCitadellesAvecPouvoirTest {
     @Test
     void carteLaboratoireTest2(){
         PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
-        Bot bot1 = new BotAleatoire("Bot1","\033[36m",affichage);
-        Tour t = new Tour(1,piocheCartesCitadelles,null,null,affichage);
+        Bot bot1 = new BotAleatoire("Bot1","\033[36m");
+        Tour t = new Tour(1,piocheCartesCitadelles,null,null);
 
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(6,CouleurCarteCitadelles.BLEU, "Eglise", 2 ));
         bot1.ajouterCartesCitadellesDansMain(new CourDesMiracles(55,CouleurCarteCitadelles.VIOLET, "Cour des miracles", 2 ));
@@ -154,8 +153,8 @@ public class CarteCitadellesAvecPouvoirTest {
         PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
         piocheCartesCitadelles.implementerCartesCitadelles();
 
-        Bot bot1 = new BotAleatoire("Bot1","\033[36m",affichage);
-        Tour t = new Tour(1,piocheCartesCitadelles,null,null,affichage);
+        Bot bot1 = new BotAleatoire("Bot1","\033[36m");
+        Tour t = new Tour(1,piocheCartesCitadelles,null,null);
         bot1.ajouterPiece(3);
 
         bot1.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(6,CouleurCarteCitadelles.BLEU, "Eglise", 2));
@@ -170,9 +169,9 @@ public class CarteCitadellesAvecPouvoirTest {
 
     @Test
     void carteEcoleDeMagieTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m",affichage);
-        bot1.setPersonnageACeTour(new Roi(affichage));
-        Tour t = new Tour(1,piocheCartesCitadelles,null,null,affichage);
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        bot1.setPersonnageACeTour(new Roi());
+        Tour t = new Tour(1,piocheCartesCitadelles,null,null);
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(44,CouleurCarteCitadelles.ROUGE, "Tour de guet", 1 ));
         bot1.getVilleDuBot().construireBatiment(new EcoleDeMagie(63,CouleurCarteCitadelles.VIOLET, "École de magie", 6 ));
@@ -187,7 +186,7 @@ public class CarteCitadellesAvecPouvoirTest {
 
     @Test
     void carteBibliothequeTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m",affichage);
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
         piocheCartesCitadelles.ajouterCarteCitadelles(new CarteCitadellesSansPouvoir(1, CouleurCarteCitadelles.BLEU, "Temple", 1 ));
         piocheCartesCitadelles.ajouterCarteCitadelles(new CarteCitadellesSansPouvoir(4,CouleurCarteCitadelles.BLEU, "Eglise", 2 ));
 
@@ -208,9 +207,9 @@ public class CarteCitadellesAvecPouvoirTest {
 
     @Test
     void carteCimetiereTest(){
-        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m", affichage);
-        Bot bot2 = new BotFairPlay("Bot 2", "\033[32m", affichage);
-        Bot bot3 = new BotFairPlay("Bot 3", "\033[32m", affichage);
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m");
+        Bot bot2 = new BotFairPlay("Bot 2", "\033[32m");
+        Bot bot3 = new BotFairPlay("Bot 3", "\033[32m");
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
         listeJoueurs.add(bot1);
         listeJoueurs.add(bot2);
@@ -220,7 +219,7 @@ public class CarteCitadellesAvecPouvoirTest {
         bot1.getVilleDuBot().construireBatiment(new Cimitiere(61,CouleurCarteCitadelles.VIOLET, "Cimetière", 5 ));
 
         bot2.ajouterPiece(20);
-        bot2.setPersonnageACeTour(new Condottiere(affichage));
+        bot2.setPersonnageACeTour(new Condottiere());
 
         bot3.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 6));
         bot3.getVilleDuBot().construireBatiment(new Manufacture(59,CouleurCarteCitadelles.VIOLET, "Manufacture", 5 ));
@@ -241,7 +240,7 @@ public class CarteCitadellesAvecPouvoirTest {
 
     @Test
     void carteObservatoireTest(){
-        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m", affichage);
+        Bot bot1 = new BotFairPlay("Bot 1", "\033[32m");
         bot1.ajouterPiece(50);
         bot1.getVilleDuBot().construireBatiment(new Observatoire(60,CouleurCarteCitadelles.VIOLET, "Observatoire", 5));
 

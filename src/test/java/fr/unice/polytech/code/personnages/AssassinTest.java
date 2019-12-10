@@ -16,17 +16,17 @@ class AssassinTest {
     void effectuerSpecialiteAssassin() {
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
         Affichage affichage  = new Affichage(1);
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", affichage);
-        Bot bot2 = new BotFairPlay("Bot 2","\033[33m", affichage);
-        Bot bot3 = new BotFairPlay("Bot 3","\033[33m", affichage);
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        Bot bot2 = new BotFairPlay("Bot 2","\033[33m");
+        Bot bot3 = new BotFairPlay("Bot 3","\033[33m");
 
         listeJoueurs.add(bot1);
         listeJoueurs.add(bot2);
         listeJoueurs.add(bot3);
 
-        bot1.setPersonnageACeTour(new Assassin(affichage));
-        bot2.setPersonnageACeTour(new Magicien(affichage));
-        bot3.setPersonnageACeTour(new Voleur(affichage));
+        bot1.setPersonnageACeTour(new Assassin());
+        bot2.setPersonnageACeTour(new Magicien());
+        bot3.setPersonnageACeTour(new Voleur());
 
         assertNotNull(bot1.getPersonnageACeTour());
         assertNotNull(bot2.getPersonnageACeTour());
@@ -34,7 +34,7 @@ class AssassinTest {
 
         if(bot1.getPersonnageACeTour() instanceof Assassin){
             ((Assassin) bot1.getPersonnageACeTour()).effectuerSpecialiteAssassin(bot1.getPersonnageACeTour(), listeJoueurs);
-            ((Assassin) bot1.getPersonnageACeTour()).effectuerSpecialiteAssassin(new Magicien(affichage), listeJoueurs);
+            ((Assassin) bot1.getPersonnageACeTour()).effectuerSpecialiteAssassin(new Magicien(), listeJoueurs);
             ((Assassin) bot1.getPersonnageACeTour()).effectuerSpecialiteAssassin(null, listeJoueurs);
         }
 

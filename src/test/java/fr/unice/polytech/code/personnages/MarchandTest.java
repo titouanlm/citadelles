@@ -10,15 +10,14 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class MarchandTest {
-    Affichage affichage  = new Affichage(1);
 
     @Test
     void effectuerSpecialiteMarchandTest(){
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m", null);
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m", null);
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
 
-        bot1.setPersonnageACeTour(new Marchand(affichage));
-        bot2.setPersonnageACeTour(new Marchand(affichage));
+        bot1.setPersonnageACeTour(new Marchand());
+        bot2.setPersonnageACeTour(new Marchand());
 
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(24, CouleurCarteCitadelles.VERT, "Echoppe", 2));
         bot1.getVilleDuBot().construireBatiment(new CarteCitadellesSansPouvoir(13, CouleurCarteCitadelles.JAUNE, "Château", 4));

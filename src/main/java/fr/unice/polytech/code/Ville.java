@@ -12,12 +12,10 @@ public class Ville {
     public ArrayList<CarteCitadelles> batimentsConstruits = new ArrayList<>();
     private int nbBatimentsConstruits;
     private int nbTotalPoint;
-    private Affichage affichage;
 
-    public Ville(Affichage affichage){
+    public Ville(){
         nbBatimentsConstruits = 0;
         nbTotalPoint=0;
-        this.affichage = affichage;
     }
 
     public ArrayList<CarteCitadelles> getBatimentsConstruits() {

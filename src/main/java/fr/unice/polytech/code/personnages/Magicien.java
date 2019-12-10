@@ -17,8 +17,7 @@ import fr.unice.polytech.code.pioches.PiocheCartesCitadelles;
 
 public class Magicien extends Personnage {
 
-    public Magicien(Affichage affichage){
-        super(affichage);
+    public Magicien(){
         this.numero = 3;
         this.nom = "Magicien";
     }
@@ -35,19 +34,11 @@ public class Magicien extends Personnage {
             joueurQuiEffectueAction.getCartesCitadellesEnMain().clear();
             //Ajoute les cartes du bot victime dans le deck du bot ayant le magicien
             joueurQuiEffectueAction.getCartesCitadellesEnMain().addAll(carteEnMainDeVictime);
-
-            affichage.afficherDetails("Echange son deck avec le deck de " + joueurQuiSubitAction.getNom());
         }
     }
 
     public void echangerCartesAvecPioche(Bot joueurQuiEffectueAction, PiocheCartesCitadelles piocheCartesCitadelles, ArrayList<CarteCitadelles> cartesAEchanger) {
         int nbCartesAPiocher = cartesAEchanger.size();
-        if(nbCartesAPiocher>0){
-            affichage.afficherDetails("Echange avec la pioche les cartes : ");
-            for (CarteCitadelles c : cartesAEchanger){
-                affichage.afficherDetails(c.getNom()+", ");
-            }
-        }
         if(joueurQuiEffectueAction.getPersonnageACeTour() instanceof Magicien && piocheCartesCitadelles.nbCartesRestantes()>= nbCartesAPiocher) {
             //On rajoute en fin de pioche les cartes qu'on a retiré
             for(CarteCitadelles c : cartesAEchanger){

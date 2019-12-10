@@ -17,12 +17,9 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BotTest {
-
-    PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
-    Affichage affichage  = new Affichage(1);
-    Bot bot1 = new BotTricheur("Bot 1", "\033[35m",affichage);
-    Bot bot2 = new BotFairPlay("Bot 2", "\033[34m",affichage);
-    Bot bot3 = new BotAleatoire("Bot 3", "\033[36m",affichage);
+    Bot bot1 = new BotTricheur("Bot 1", "\033[35m");
+    Bot bot2 = new BotFairPlay("Bot 2", "\033[34m");
+    Bot bot3 = new BotAleatoire("Bot 3", "\033[36m");
     ArrayList<Bot> listeJoueurs = new ArrayList<>();
 
     @BeforeEach

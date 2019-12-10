@@ -21,10 +21,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TourTest {
-    Affichage affichage  = new Affichage(1);
-    private Bot bot1 = new BotTricheur("Bot 1", "\033[32m",affichage);
-    private Bot bot2 = new BotFairPlay("Bot 2","\033[33m",affichage);
-    private Bot bot3 = new BotAleatoire("Bot 3","\033[35m",affichage);
+    private Bot bot1 = new BotTricheur("Bot 1", "\033[32m");
+    private Bot bot2 = new BotFairPlay("Bot 2","\033[33m");
+    private Bot bot3 = new BotAleatoire("Bot 3","\033[35m");
 
 
     @Test
@@ -35,11 +34,11 @@ public class TourTest {
         listeJoueurs.add(bot3);
         PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
         piocheCartesCitadelles.implementerCartesCitadelles();
-        PiocheCartesPersonnage piocheCartesPersonnage = new PiocheCartesPersonnage(affichage);
+        PiocheCartesPersonnage piocheCartesPersonnage = new PiocheCartesPersonnage();
         bot1.setPersonnageACeTour(piocheCartesPersonnage.prendre("Assassin"));
         bot2.setPersonnageACeTour(piocheCartesPersonnage.prendre("Voleur"));
         bot2.setNbPoint(20);
-        Tour tour = new Tour(2,piocheCartesCitadelles, piocheCartesPersonnage, listeJoueurs,affichage);
+        Tour tour = new Tour(2,piocheCartesCitadelles, piocheCartesPersonnage, listeJoueurs);
         tour.appelerJoueursDansLOrdre();
         assertNull(bot2.getPersonnageACeTour());
         assertEquals(0,bot1.getCartesCitadellesEnMain().size());
@@ -53,8 +52,8 @@ public class TourTest {
         listeJoueurs.add(bot2);
         listeJoueurs.add(bot3);
 
-        Moteur moteurJeu = new Moteur(listeJoueurs,affichage);
-        Tour tour = new Tour(1, moteurJeu.getPiocheCartesCitadelles(), moteurJeu.getPiocheCartesPersonnage(),listeJoueurs,affichage);
+        Moteur moteurJeu = new Moteur(listeJoueurs);
+        Tour tour = new Tour(1, moteurJeu.getPiocheCartesCitadelles(), moteurJeu.getPiocheCartesPersonnage(),listeJoueurs);
 
         tour.setIndiceJoueurPossedantCourrone();
         tour.setJoueurAyantLeRoi(listeJoueurs.get(1));
@@ -79,8 +78,8 @@ public class TourTest {
         listeJoueurs.add(bot2);
         listeJoueurs.add(bot3);
 
-        Moteur moteurJeu = new Moteur(listeJoueurs,affichage);
-        Tour tour = new Tour(1, moteurJeu.getPiocheCartesCitadelles(), moteurJeu.getPiocheCartesPersonnage(),listeJoueurs,affichage);
+        Moteur moteurJeu = new Moteur(listeJoueurs);
+        Tour tour = new Tour(1, moteurJeu.getPiocheCartesCitadelles(), moteurJeu.getPiocheCartesPersonnage(),listeJoueurs);
         listeJoueurs.get(1).setPossedeCouronne(true);
         tour.setIndiceJoueurPossedantCourrone();
         assertEquals(1,tour.getIndiceJoueurPossedantCouronne());
@@ -92,8 +91,8 @@ public class TourTest {
         listeJoueurs.add(bot1);
         listeJoueurs.add(bot2);
         listeJoueurs.add(bot3);
-        Moteur moteurJeu = new Moteur(listeJoueurs,affichage);
-        Tour tour = new Tour(1,  moteurJeu.getPiocheCartesCitadelles(), moteurJeu.getPiocheCartesPersonnage(),listeJoueurs,affichage);
+        Moteur moteurJeu = new Moteur(listeJoueurs);
+        Tour tour = new Tour(1,  moteurJeu.getPiocheCartesCitadelles(), moteurJeu.getPiocheCartesPersonnage(),listeJoueurs);
         tour.defausserCartesPersonnagePourLeTour();
         assertNotEquals(4, tour.getPersonnageDefausseVisible());
         assertEquals(6,moteurJeu.getPiocheCartesPersonnage().getPiocheCP().size());
@@ -105,8 +104,8 @@ public class TourTest {
         listeJoueurs.add(bot1);
         listeJoueurs.add(bot2);
         listeJoueurs.add(bot3);
-        Moteur moteurJeu = new Moteur(listeJoueurs,affichage);
-        Tour tour = new Tour(1,  moteurJeu.getPiocheCartesCitadelles(), moteurJeu.getPiocheCartesPersonnage(),listeJoueurs,affichage);
+        Moteur moteurJeu = new Moteur(listeJoueurs);
+        Tour tour = new Tour(1,  moteurJeu.getPiocheCartesCitadelles(), moteurJeu.getPiocheCartesPersonnage(),listeJoueurs);
 
         for(int i=0; i<65; i++){
             moteurJeu.getPiocheCartesCitadelles().piocher();
@@ -123,8 +122,8 @@ public class TourTest {
         listeJoueurs.add(bot2);
         listeJoueurs.add(bot3);
 
-        Moteur moteurJeu = new Moteur(listeJoueurs,affichage);
-        Tour tour = new Tour(1,  moteurJeu.getPiocheCartesCitadelles(), moteurJeu.getPiocheCartesPersonnage(),listeJoueurs,affichage);
+        Moteur moteurJeu = new Moteur(listeJoueurs);
+        Tour tour = new Tour(1,  moteurJeu.getPiocheCartesCitadelles(), moteurJeu.getPiocheCartesPersonnage(),listeJoueurs);
 
         for(Bot j : listeJoueurs){
             assertNull(j.getPersonnageACeTour());
@@ -141,8 +140,8 @@ public class TourTest {
         listeJoueurs.add(bot1);
         listeJoueurs.add(bot2);
 
-        Moteur moteurJeu = new Moteur(listeJoueurs,affichage);
-        Tour tour = new Tour(1,  moteurJeu.getPiocheCartesCitadelles(), moteurJeu.getPiocheCartesPersonnage(),listeJoueurs,affichage);
+        Moteur moteurJeu = new Moteur(listeJoueurs);
+        Tour tour = new Tour(1,  moteurJeu.getPiocheCartesCitadelles(), moteurJeu.getPiocheCartesPersonnage(),listeJoueurs);
 
         assertFalse(tour.estJoueurAyantFinisEnPremier(listeJoueurs.get(0)));
         listeJoueurs.get(0).getVilleDuBot().setNbBatimentsConstruits(8);
@@ -157,8 +156,8 @@ public class TourTest {
         listeJoueurs.add(bot1);
         listeJoueurs.add(bot2);
 
-        Moteur moteurJeu = new Moteur(listeJoueurs,affichage);
-        Tour tour = new Tour(1,  moteurJeu.getPiocheCartesCitadelles(), moteurJeu.getPiocheCartesPersonnage(),listeJoueurs,affichage);
+        Moteur moteurJeu = new Moteur(listeJoueurs);
+        Tour tour = new Tour(1,  moteurJeu.getPiocheCartesCitadelles(), moteurJeu.getPiocheCartesPersonnage(),listeJoueurs);
 
         assertFalse(tour.verifierFinPartie());
         listeJoueurs.get(0).getVilleDuBot().setNbBatimentsConstruits(8);
@@ -173,9 +172,9 @@ public class TourTest {
         listeJoueurs.add(bot3);
         PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
         piocheCartesCitadelles.implementerCartesCitadelles();
-        PiocheCartesPersonnage piocheCartesPersonnage = new PiocheCartesPersonnage(affichage);
+        PiocheCartesPersonnage piocheCartesPersonnage = new PiocheCartesPersonnage();
         bot1.setPersonnageACeTour(piocheCartesPersonnage.prendre("Assassin"));
-        Tour tour = new Tour(2,piocheCartesCitadelles, piocheCartesPersonnage, listeJoueurs,affichage);
+        Tour tour = new Tour(2,piocheCartesCitadelles, piocheCartesPersonnage, listeJoueurs);
         piocheCartesCitadelles.piocher();
         tour.finDuTour();
         assertTrue(piocheCartesPersonnage.contient("Assassin"));
@@ -195,13 +194,13 @@ public class TourTest {
         bot2.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(49,CouleurCarteCitadelles.ROUGE, "Prison", 2 ));
         PiocheCartesCitadelles piocheCartesCitadelles = new PiocheCartesCitadelles();
         piocheCartesCitadelles.implementerCartesCitadelles();
-        PiocheCartesPersonnage piocheCartesPersonnage = new PiocheCartesPersonnage(affichage);
-        Tour tour = new Tour(2,piocheCartesCitadelles, piocheCartesPersonnage, listeJoueurs,affichage);
-        bot1.setPersonnageACeTour(new Assassin(affichage));
+        PiocheCartesPersonnage piocheCartesPersonnage = new PiocheCartesPersonnage();
+        Tour tour = new Tour(2,piocheCartesCitadelles, piocheCartesPersonnage, listeJoueurs);
+        bot1.setPersonnageACeTour(new Assassin());
         piocheCartesPersonnage.prendre("Assassin");
-        bot2.setPersonnageACeTour(new Architecte(affichage));
+        bot2.setPersonnageACeTour(new Architecte());
         piocheCartesPersonnage.prendre("Architecte");
-        bot3.setPersonnageACeTour(new Roi(affichage));
+        bot3.setPersonnageACeTour(new Roi());
         piocheCartesPersonnage.prendre("Roi");
         bot3.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(17,CouleurCarteCitadelles.JAUNE, "Manoir", 3 ));
         bot3.ajouterCartesCitadellesDansMain(new CarteCitadellesSansPouvoir(21,CouleurCarteCitadelles.JAUNE, "Château", 4 ));

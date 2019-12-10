@@ -14,8 +14,7 @@ import java.util.ArrayList;
 
 public class Voleur extends Personnage {
 
-    public Voleur(Affichage affichage){
-        super(affichage);
+    public Voleur(){
         this.numero =2;
         this.nom = "Voleur";
     }
@@ -24,14 +23,10 @@ public class Voleur extends Personnage {
 
         if(!(personnageAVoler instanceof Assassin) && !(personnageAVoler instanceof Voleur)
                 && personnageAVoler!=null){
-            affichage.afficherDetails("Vole le personnage " + personnageAVoler.getNom());
             Bot joueurAVoler = this.botQuiPossede(personnageAVoler, listeJoueurs);
             if(joueurAVoler!=null){
-                affichage.afficherDetails(joueurAVoler.getNom() + " perd donc " + joueurAVoler.getNbPiece() + " pièces." );
                 joueurQuiEffectueAction.ajouterPiece(joueurAVoler.getNbPiece());
                 joueurAVoler.retirerPiece(joueurAVoler.getNbPiece());
-            }else{
-                affichage.afficherDetails("Personne ne possède ce personnage.");
             }
         }
     }

@@ -15,11 +15,11 @@ public class AffichageTest {
 
         Affichage affichage=new Affichage(1);
 
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m",affichage);
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m",affichage);
-        Bot bot3 = new BotAleatoire("Bot 3","\033[35m",affichage);
-        Bot bot4 = new BotAleatoire("Bot 4","\033[35m",affichage);
-        Bot bot5 = new BotAleatoire("Bot 5","\033[35m",affichage);
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot3 = new BotAleatoire("Bot 3","\033[35m");
+        Bot bot4 = new BotAleatoire("Bot 4","\033[35m");
+        Bot bot5 = new BotAleatoire("Bot 5","\033[35m");
 
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
         listeJoueurs.add(bot1);
@@ -54,10 +54,10 @@ public class AffichageTest {
 
         Affichage affichage=new Affichage(1);
 
-        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m",affichage);
-        Bot bot2 = new BotAleatoire("Bot 2","\033[33m",affichage);
-        Bot bot3 = new BotAleatoire("Bot 3","\033[35m",affichage);
-        Bot bot4 = new BotAleatoire("Bot 4","\033[35m",affichage);
+        Bot bot1 = new BotAleatoire("Bot 1", "\033[32m");
+        Bot bot2 = new BotAleatoire("Bot 2","\033[33m");
+        Bot bot3 = new BotAleatoire("Bot 3","\033[35m");
+        Bot bot4 = new BotAleatoire("Bot 4","\033[35m");
 
         ArrayList<Bot> listeJoueurs = new ArrayList<>();
         listeJoueurs.add(bot1);
@@ -70,7 +70,7 @@ public class AffichageTest {
         bot3.setNbPoint(5);
         bot4.setNbPoint(6);
 
-        Arbitre arbitre= new Arbitre(affichage);
+        Arbitre arbitre= new Arbitre();
         arbitre.determineJoueurGagnant(listeJoueurs);
         arbitre.determineJoueurGagnant(listeJoueurs);
         affichage.incrementerNbVictoireDuBot(arbitre.getJoueurGagnant());

@@ -1,6 +1,5 @@
 package fr.unice.polytech.code.bots;
 
-import fr.unice.polytech.code.Affichage;
 import fr.unice.polytech.code.cartes.CarteCitadelles;
 import fr.unice.polytech.code.Ville;
 import fr.unice.polytech.code.personnages.*;
@@ -19,19 +18,17 @@ public abstract class Bot {
     boolean possedeCouronne;
     int nbPoint;
     boolean premierJoueurAFinir;
-    protected Affichage affichage;
 
-    public Bot(String nom, String couleur,Affichage affichage) {
+    public Bot(String nom, String couleur) {
         this.nom = nom;
         this.nbPiece = 0;
         this.cartesCitadellesEnMain = new ArrayList<>();
-        this.villeDuBot = new Ville(affichage);
+        this.villeDuBot = new Ville();
         this.personnageACeTour = null;
         this.possedeCouronne = false;
         this.nbPoint = 0;
         this.premierJoueurAFinir= false;
         this.couleur = couleur;
-        this.affichage =affichage;
     }
 
     public String getNom() {
@@ -146,28 +143,28 @@ public abstract class Bot {
 
     Personnage listePersonnages(int chiffre){
         if(chiffre == 0){
-            return new Assassin(affichage);
+            return new Assassin();
         }
         if(chiffre == 1){
-            return new Voleur(affichage);
+            return new Voleur();
         }
         if(chiffre == 2){
-            return new Magicien(affichage);
+            return new Magicien();
         }
         if(chiffre == 3){
-            return new Roi(affichage);
+            return new Roi();
         }
         if(chiffre == 4){
-            return new Eveque(affichage);
+            return new Eveque();
         }
         if(chiffre == 5){
-            return new Marchand(affichage);
+            return new Marchand();
         }
         if(chiffre == 6){
-            return new Architecte(affichage);
+            return new Architecte();
         }
         if(chiffre == 7){
-            return new Condottiere(affichage);
+            return new Condottiere();
         }
         return null;
     }
